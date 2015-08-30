@@ -1,0 +1,77 @@
+#include <Core/ItemComboBox.h>
+
+using namespace LibPkmGC;
+using namespace LibPkmGC::Localization;
+
+ItemComboBox::ItemComboBox(unsigned int inFlags, bool isXD, QWidget* parent) : QComboBox(parent), _flags(inFlags), _isXD(isXD){
+	_indices = new ItemIndex[336]; //  245 + 91
+	_reverseIndices = new int[594];
+	resetItemList();
+}
+
+ItemComboBox::~ItemComboBox(void){
+	delete[] _indices;
+	delete[] _reverseIndices;
+}
+
+void ItemComboBox::resetItemList(void){
+	this->clear();
+	LanguageIndex lg = generateDumpedNamesLanguage();
+	int j = 0;
+	_flags = (_flags == EMPTY_ITEM_FORBIDDEN) ? 0 : _flags;
+	unsigned int fl = _flags;
+	if ((_flags & EMPTY_ITEM_FORBIDDEN) == 0) {
+		this->addItem(getItemName(lg, NoItem, _isXD));
+		_reverseIndices[0] = 0;
+		_indices[j++] = NoItem;
+	}
+	else {
+		_reverseIndices[0] = -1;
+	}
+	fl &= ~1; // since (1 << (getItemCategory(<invalid item index>) )) == 1 ...
+
+	for (int i = 1; i <= (int)BattleCD60; ++i) { // 593 
+		unsigned int ctgFlg = (1U << (int)getItemCategory((ItemIndex)i, _isXD));
+		if ((fl & ctgFlg) != 0) {
+			this->addItem(getItemName(lg, (ItemIndex)i, _isXD));
+			_reverseIndices[i] = j;
+			_indices[j++] = (ItemIndex)i;
+		}
+		else {
+			_reverseIndices[i] = -1;
+		}
+	}
+}
+
+ItemIndex ItemComboBox::currentItemIndex(void) const{
+	return _indices[this->currentIndex()];
+}
+
+void ItemComboBox::setCurrentItemIndex(ItemIndex index){
+	if ((index > BattleCD60) || (_reverseIndices[(size_t)index] == -1)) this->setCurrentIndex(0);
+	else this->setCurrentIndex(_reverseIndices[(size_t)index]);
+}
+
+unsigned int ItemComboBox::flags(void) const{
+	return _flags;
+}
+
+void ItemComboBox::setFlags(unsigned int inFlags){
+	_flags = inFlags;
+	resetItemList();
+}
+
+bool ItemComboBox::version(void) const{
+	return _isXD;
+}
+
+void ItemComboBox::setVersion(bool isXD){
+	_isXD = isXD;
+	resetItemList();
+}
+
+void ItemComboBox::set(unsigned int inFlags, bool isXD){
+	_flags = inFlags;
+	_isXD = isXD;
+	resetItemList();
+}
