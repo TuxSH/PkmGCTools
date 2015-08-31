@@ -979,12 +979,6 @@ LIBPKMGC_DECL PokemonSpeciesData getSpeciesData(PokemonSpeciesIndex index);
 LIBPKMGC_DECL PokemonNatureAffinity getNatureStatAffinity(PokemonNatureIndex nature, size_t stat);
 LIBPKMGC_DECL u8 getBaseMoveMaxPPs(PokemonMoveIndex move);
 
-/*
-LIBPKMGC_DECL extern const u32 expTables[6][101];
-LIBPKMGC_DECL extern  const PokemonSpeciesData speciesData[0x19f];
-LIBPKMGC_DECL extern const PokemonNatureAffinity natureStatAffinities[25][5];
-LIBPKMGC_DECL extern const u8 baseMoveMaxPPs[355];*/
-
 LIBPKMGC_DECL u16 getPokedexIndexOf(PokemonSpeciesIndex speciesIndex);
 LIBPKMGC_DECL PokemonSpeciesIndex getSpeciesIndexOf(u16 pokedexIndex);
 

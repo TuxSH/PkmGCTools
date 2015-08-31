@@ -823,7 +823,7 @@ const u8 baseMoveMaxPPs[355] = {
 	5
 };
 
-LIBPKMGC_DECL const  u32 expTables[6][101] = {
+const u32 expTables[6][101] = {
 	{
 		0,
 		1,
@@ -1472,7 +1472,7 @@ const PokemonNatureAffinity natureStatAffinities[25][5] = {
 	{Neutral, Neutral, Neutral, Neutral, Neutral},
 };
 
-LIBPKMGC_DECL const PokemonSpeciesData speciesData[0x19f]= {
+const PokemonSpeciesData speciesData[0x19f]= {
 	{
 		// NoAbility
 		false,

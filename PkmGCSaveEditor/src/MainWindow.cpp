@@ -60,6 +60,7 @@ void MWCentralWidget::currentSaveSlotChangeHandler(void) {
 void MWCentralWidget::open##cls(void){\
 cls dlg(obj, this); \
 dlg.exec();\
+if(changesMade) ((QWidget*)parent())->setWindowTitle("PkmGCSaveEditor - " + currentSaveFileName + "*");\
 }
 
 GEN_GCUI_SLT(GameConfigUI, currentSaveSlot)
@@ -426,6 +427,7 @@ void MainWindow::saveSaveFileAs(void) {
 	}
 	else {
 		lastSaveDirectory = QFileInfo(currentSaveFileName).canonicalPath();
+		this->setWindowTitle("PkmGCSaveEditor - " + currentSaveFileName);
 	}
 
 }

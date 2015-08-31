@@ -564,7 +564,7 @@ QString PokemonUI::getShortPkmAttributeText(void){
 		tt = tr("Invalid version info");
 	if (isXD && invalidPokemonCheckBox->isChecked()) {
 		if (!tt.isEmpty()) tt += "\n";
-		tt += tr("Bit 5 set on byte at offset 0x1d");
+		tt += tr("\"Invalid Pok\xc3\xa9mon\" flag set");
 	}
 
 	attributesFld->setToolTip(tt);
@@ -588,7 +588,7 @@ QString PokemonUI::getLongPkmAttributeText(void){
 		tt = tr("Invalid version info");
 	if (isXD && invalidPokemonCheckBox->isChecked()) {
 		if (!tt.isEmpty()) tt += "\n";
-		tt += tr("Bit 5 set on byte at offset 0x1d");
+		tt += tr("\"Invalid Pok\xc3\xa9mon\" flag set");
 	}
 
 	attributesFld->setToolTip(tt);

@@ -17,7 +17,6 @@ void ItemPocketEditor::initWidget(void) {
 	tbl = new QTableWidget(0, 2);
 	actionLayout = new QHBoxLayout;
 	tbl->setHorizontalHeaderLabels(QStringList(tr("Item")) << tr("Quantity"));
-	//tbl->horizontalHeader()->setStretchLastSection(true);
 	
 	tbl->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	tbl->verticalHeader()->hide();
@@ -26,7 +25,7 @@ void ItemPocketEditor::initWidget(void) {
 	tbl->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
 	itemNameFld = new ItemComboBox;
-	quantityFld = new UnsignedSpinbox<8>;
+	quantityFld = new UnsignedSpinbox<16>;
 	modifyButton = new QPushButton(tr("Modify"));
 	deleteButton = new QPushButton(tr("Delete"));
 
@@ -64,7 +63,6 @@ void ItemPocketEditor::setItemAt(int i) {
 void ItemPocketEditor::parseData(void) {
 	if (pocket == NULL) return;
 	flags &= ~EMPTY_ITEM_FORBIDDEN;
-	blockSignals(true);
 	tbl->clearContents();
 	
 	delete[] items;
@@ -75,8 +73,7 @@ void ItemPocketEditor::parseData(void) {
 	for (size_t i = 0; i < pocketMaxSize; ++i)
 		setItemAt((int)i);
 	itemNameFld->set(flags, isXD);
-	/*quantityFld->setRange(0, 0);*/ quantityFld->setDisabled(true); // (None)
-	blockSignals(false);
+	quantityFld->setDisabled(true);
 }
 
 void ItemPocketEditor::saveChanges(void) {
@@ -84,7 +81,7 @@ void ItemPocketEditor::saveChanges(void) {
 }
 
 LibPkmGC::Item ItemPocketEditor::editedItem(void) const{
-	Item item_ = { itemNameFld->currentItemIndex(), (u8) quantityFld->value() };
+	Item item_ = { itemNameFld->currentItemIndex(), quantityFld->value() };
 	return item_;
 }
 
@@ -94,11 +91,11 @@ void ItemPocketEditor::setEditedItem(LibPkmGC::Item const & val){
 }
 
 void ItemPocketEditor::updateMaxQuantity(void) {
-	const int maxqty[] = { 99, 99, 99, 99, 99, 99, 99, 99 };
+	const int maxqty[] = { 0, 99, 99, 99, 99, 1, 99, 1 };
+	const int maxqtyPC[] = { 0, 999, 999, 999, 999, 1, 999, 1 };
 
-	//const int maxqty[] = { 0, 99, 99, 99, 99, 1, 99, 1 };
 	ItemCategoryIndex ctgy = getItemCategory(itemNameFld->currentItemIndex(), isXD);
-	//quantityFld->setRange(0, maxqty[(size_t)ctgy]);
+	quantityFld->setRange(0, (flags == GIVABLE_ITEMS_ALLOWED) ? maxqtyPC[(size_t)ctgy] : maxqty[(size_t)ctgy]);
 	quantityFld->setDisabled(maxqty[(size_t)ctgy] == 0);
 }
 void ItemPocketEditor::displayItem(void) {

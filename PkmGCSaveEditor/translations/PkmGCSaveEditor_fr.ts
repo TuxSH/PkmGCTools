@@ -218,8 +218,8 @@
     </message>
     <message>
         <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="86"/>
-        <source>Bit 5 set on byte at offset 0x1d</source>
-        <translation>Bit 5 de l&apos;octet à l&apos;adresse 0x1d valant 1</translation>
+        <source>&quot;Invalid Pokémon&quot; flag set</source>
+        <translation>Drapeau &quot;Pokémon invalide&quot; activé</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="95"/>
@@ -294,8 +294,8 @@
 <context>
     <name>GCUIs::PokemonMoveLayout</name>
     <message numerus="yes">
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="16"/>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="56"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="13"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="53"/>
         <source>(max. %n)</source>
         <translation>
             <numerusform>(max. %n)</numerusform>
@@ -303,7 +303,7 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="18"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="15"/>
         <source>PP Up(s) used</source>
         <translation>PP Up(s) utilisés</translation>
     </message>
@@ -311,417 +311,447 @@
 <context>
     <name>GCUIs::PokemonUI</name>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="7"/>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="86"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="83"/>
         <source>None</source>
         <comment>Status</comment>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="86"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="83"/>
         <source>Poisoned</source>
         <translation>Empoisonné</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="86"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="83"/>
         <source>Badly poisoned</source>
         <translation>Gravement empoisonné</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="87"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="84"/>
         <source>Paralyzed</source>
         <translation>Paralysé</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="87"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="84"/>
         <source>Burnt</source>
         <translation>Brûlé</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="87"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="84"/>
         <source>Frozen</source>
         <translation>Gelé</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="87"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="84"/>
         <source>Asleep</source>
         <translation>Endormi</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="91"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="88"/>
         <source>Coolness</source>
         <translation>Sang-froid</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="91"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="88"/>
         <source>Beauty</source>
         <translation>Beauté</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="91"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="88"/>
         <source>Cuteness</source>
         <translation>Grâce</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="92"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="89"/>
         <source>Cleverness</source>
         <translation>Intelligence</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="92"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="89"/>
         <source>Toughness</source>
         <translation>Robustesse</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="94"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="91"/>
         <source>None</source>
         <comment>Contest</comment>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="94"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="91"/>
         <source>Normal</source>
         <comment>Contest</comment>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="95"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="92"/>
         <source>Super</source>
         <comment>Contest</comment>
         <translation>Super</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="95"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="92"/>
         <source>Hyper</source>
         <comment>Contest</comment>
         <translation>Hyper</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="96"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="93"/>
         <source>Master</source>
         <comment>Contest</comment>
         <translation>Master</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="98"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="95"/>
         <source>HP</source>
         <translation>PV</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="98"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="95"/>
         <source>Attack</source>
         <translation>Attaque</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="98"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="95"/>
         <source>Defense</source>
         <translation>Défense</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="99"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="96"/>
         <source>S. Attack</source>
         <translation>Attaque Spé.</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="99"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="96"/>
         <source>S. Defense</source>
         <translation>Défense spé.</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="99"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="96"/>
         <source>Speed</source>
         <translation>Vitesse</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="101"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="98"/>
         <source>Champion</source>
         <translation>Maître</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="101"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="98"/>
         <source>Winning</source>
         <translation>Victoire 1</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="101"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="98"/>
         <source>Victory</source>
         <translation>Victoire 2</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="101"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="98"/>
         <source>Artist</source>
         <translation>Artiste</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="102"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="99"/>
         <source>Effort</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="102"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="99"/>
         <source>Marine</source>
         <translation>Marin</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="102"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="99"/>
         <source>Land</source>
         <translation>Terrestre</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="102"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="99"/>
         <source>Sky</source>
         <translation>Céleste</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="103"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="100"/>
         <source>Country</source>
         <translation>Régional</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="103"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="100"/>
         <source>National</source>
         <translation>National</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="103"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="100"/>
         <source>Earth</source>
         <translation>Terre</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="103"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="100"/>
         <source>World</source>
         <translation>Monde</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="127"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="124"/>
         <source>Reset</source>
         <translation>RaZ</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="173"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="164"/>
+        <source>Egg</source>
+        <translation>Œuf</translation>
+    </message>
+    <message>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="164"/>
+        <source>Second ability</source>
+        <translation>Second talent</translation>
+    </message>
+    <message>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="165"/>
+        <source>Invalid Pokémon</source>
+        <translation>Pokémon invalide</translation>
+    </message>
+    <message>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="166"/>
+        <source>Not tradable in-game</source>
+        <translation>Non échangeable en interne</translation>
+    </message>
+    <message>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="166"/>
+        <source>Unknown</source>
+        <translation>Inconnu</translation>
+    </message>
+    <message>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="167"/>
+        <source>Caught</source>
+        <translation>Capturé</translation>
+    </message>
+    <message>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="192"/>
         <source>Species</source>
         <translation>Espèce</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="174"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="193"/>
         <source>Name or nickname</source>
         <translation>Nom ou surnom</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="175"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="194"/>
         <source>PID</source>
         <translation>PID</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="176"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="195"/>
         <source>Attributes</source>
         <translation>Caractéristiques</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="177"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="196"/>
         <source>Ability</source>
         <translation>Talent</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="178"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="197"/>
         <source>Experience and level</source>
         <translation>Expérience et niveau</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="179"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="198"/>
         <source>Held item</source>
         <translation>Objet tenu</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="180"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="199"/>
         <source>Happiness</source>
         <translation>Bonheur</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="181"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="200"/>
         <source>Pokérus</source>
         <translation>Pokérus</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="182"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="201"/>
         <source>Status</source>
         <translation>Statut</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="183"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="202"/>
+        <source>Flags</source>
+        <translation>Drapeaux</translation>
+    </message>
+    <message>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="203"/>
         <source>Markings</source>
         <translation>Marques</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="191"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="211"/>
         <source>Core information</source>
         <translation>Informations essentielles</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="192"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="212"/>
         <source>Original trainer</source>
         <translation>Dresseur d&apos;origine</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="193"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="213"/>
         <source>Game version</source>
         <translation>Version du jeu</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="203"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="223"/>
         <source>Copy info from save</source>
         <translation>Recopier les infos à partir de la sauvegarde</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="204"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="224"/>
         <source>Generate shiny IDs</source>
         <translation>Générer des IDs rendant ce Pokémon shiny</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="206"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="226"/>
         <source>Ball caught with</source>
         <translation>Pokéball utilisée</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="207"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="227"/>
         <source>Location caught</source>
         <translation>Lieu de capture</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="236"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="256"/>
         <source>IV</source>
         <translation>IV</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="237"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="257"/>
         <source>EV</source>
         <translation>EV</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="238"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="258"/>
         <source>Stat</source>
         <translation>Statistique</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="241"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="261"/>
         <source>Current HP</source>
         <translation>PVs actuels</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="249"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="268"/>
         <source>Update stats automatically</source>
         <translation>Mettre à jour les statistiques automatiquement</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="261"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="280"/>
         <source>Luster</source>
         <translation>Lustre</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="268"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="287"/>
         <source>Main stats</source>
         <translation>Statistiques principales</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="269"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="288"/>
         <source>Contest stats</source>
         <translation>Statistiques de concours</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="288"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="307"/>
         <source>Contest ribbons</source>
         <translation>Rubans de concours</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="301"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="320"/>
         <source>Contest type</source>
         <translation>Type de concours</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="302"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="321"/>
         <source>Achievement</source>
         <translation>Avancement</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="306"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="325"/>
         <source>Special ribbons</source>
         <translation>Rubans spéciaux</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="332"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="351"/>
         <source>General</source>
         <translation>Général</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="333"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="352"/>
         <source>Met/OT</source>
         <translation>Infos de rencontre/D.O</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="334"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="353"/>
         <source>Stats</source>
         <translation>Statistiques</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="335"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="354"/>
         <source>Moves</source>
         <translation>Attaques</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="336"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="355"/>
         <source>Ribbons</source>
         <translation>Rubans</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="490"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="531"/>
         <source>Genderless</source>
         <translation>Asexué</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="506"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="547"/>
         <source>Unown form: </source>
         <translation>Forme Zarbi : </translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="511"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="552"/>
         <source>will evolve into: </source>
         <translation>évoluera en : </translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="523"/>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="547"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="564"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="588"/>
         <source>Invalid version info</source>
         <translation>Infos de version invalides</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="526"/>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="550"/>
-        <source>Bit 5 set on byte at offset 0x1d</source>
-        <translation>Bit 5 de l&apos;octet à l&apos;adresse 0x1d valant 1</translation>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="567"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="591"/>
+        <source>&quot;Invalid Pokémon&quot; flag set</source>
+        <translation>Drapeau &quot;Pokémon invalide&quot; activé</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="651"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="710"/>
         <source>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(Generation_III)&apos;&gt;here&lt;/a&gt;)</source>
         <translation>Lieu de capture (cf. &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(Generation_III)&apos;&gt;Bulbapedia&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="653"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="712"/>
         <source>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(GCN)&apos;&gt;here&lt;/a&gt;)</source>
         <translation>Lieu de capture (cf. &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(GCN)&apos;&gt;Bulbapedia&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="658"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="717"/>
         <source>Warning</source>
         <translation>Avertissement</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="658"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="717"/>
         <source>The version info you specified is invalid. The game will therefore consider this Pokémon invalid.</source>
         <translation>Les informations sur la version du jeu  que vous avez entrées sont invalides. Le jeu considérera de ce fait ce Pokémon invalide.</translation>
-    </message>
-    <message>
-        <source>The version info you specified is invalid. The game will therefore consider the Pokémon invalid.</source>
-        <translation type="vanished">Les informations sur la version du jeu  que vous avez entrées sont invalides. Le jeu considérera de ce fait ce Pokémon invalide.</translation>
     </message>
 </context>
 <context>
@@ -732,32 +762,32 @@
         <translation>(géneré aléatoirement)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="47"/>
-        <source>Generate shiny PID</source>
-        <translation>Générer un PID rendant le Pokémon shiny</translation>
+        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="46"/>
+        <source>Generate shiny IDs</source>
+        <translation>Générer des IDs rendant ce Pokémon shiny</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="55"/>
+        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="54"/>
         <source>Species</source>
         <translation>Espèce</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="56"/>
+        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="55"/>
         <source>First TID</source>
         <translation>Premier TID</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="57"/>
+        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="56"/>
         <source>First SID</source>
         <translation>Premier SID</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="58"/>
+        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="57"/>
         <source>First PID</source>
         <translation>Premier PID</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="59"/>
+        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="58"/>
         <source>Partial information</source>
         <translation>Informations partielles</translation>
     </message>
@@ -985,10 +1015,6 @@
         </translation>
     </message>
     <message>
-        <source>%1 save file (save count: %2)</source>
-        <translation type="vanished">%1 (%2 sauvegardes)</translation>
-    </message>
-    <message>
         <location filename="../src/MainWindow.cpp" line="384"/>
         <source>Colosseum</source>
         <translation>Colosseum</translation>
@@ -1017,246 +1043,6 @@
         <location filename="../src/MainWindow.cpp" line="422"/>
         <source>Save save file</source>
         <translation>Sauvegarder fichier de sauvegarde</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>GCI save files (*.gci)</source>
-        <translation type="vanished">Fichiers de sauvegarde GCI (*.gci)</translation>
-    </message>
-    <message>
-        <source>Raw save files (*.bin)</source>
-        <translation type="vanished">Fichiers de sauvegarde bruts (*.bin)</translation>
-    </message>
-    <message>
-        <source>Coolness</source>
-        <translation type="vanished">Sang-froid</translation>
-    </message>
-    <message>
-        <source>Beauty</source>
-        <translation type="vanished">Beauté</translation>
-    </message>
-    <message>
-        <source>Cuteness</source>
-        <translation type="vanished">Grâce</translation>
-    </message>
-    <message>
-        <source>Cleverness</source>
-        <translation type="vanished">Intelligence</translation>
-    </message>
-    <message>
-        <source>Toughness</source>
-        <translation type="vanished">Robustesse</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <comment>Contest</comment>
-        <translation type="vanished">Aucun</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <comment>Contest</comment>
-        <translation type="vanished">Normal</translation>
-    </message>
-    <message>
-        <source>Super</source>
-        <comment>Contest</comment>
-        <translation type="vanished">Super</translation>
-    </message>
-    <message>
-        <source>Hyper</source>
-        <comment>Contest</comment>
-        <translation type="vanished">Hyper</translation>
-    </message>
-    <message>
-        <source>Master</source>
-        <comment>Contest</comment>
-        <translation type="vanished">Master</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <comment>Status</comment>
-        <translation type="vanished">Aucun</translation>
-    </message>
-    <message>
-        <source>Poisoned</source>
-        <translation type="vanished">Empoisonné</translation>
-    </message>
-    <message>
-        <source>Badly poisoned</source>
-        <translation type="vanished">Gravement empoisonné</translation>
-    </message>
-    <message>
-        <source>Paralyzed</source>
-        <translation type="vanished">Paralysé</translation>
-    </message>
-    <message>
-        <source>Burnt</source>
-        <translation type="vanished">Brûlé</translation>
-    </message>
-    <message>
-        <source>Frozen</source>
-        <translation type="vanished">Gelé</translation>
-    </message>
-    <message>
-        <source>Asleep</source>
-        <translation type="vanished">Endormi</translation>
-    </message>
-    <message>
-        <source>HP</source>
-        <translation type="vanished">PV</translation>
-    </message>
-    <message>
-        <source>Attack</source>
-        <translation type="vanished">Attaque</translation>
-    </message>
-    <message>
-        <source>Defense</source>
-        <translation type="vanished">Défense</translation>
-    </message>
-    <message>
-        <source>S. Attack</source>
-        <translation type="vanished">Attaque Spé.</translation>
-    </message>
-    <message>
-        <source>S. Defense</source>
-        <translation type="vanished">Défense spé.</translation>
-    </message>
-    <message>
-        <source>Speed</source>
-        <translation type="vanished">Vitesse</translation>
-    </message>
-    <message>
-        <source>Champion</source>
-        <translation type="vanished">Maître</translation>
-    </message>
-    <message>
-        <source>Winning</source>
-        <translation type="vanished">Victoire 1</translation>
-    </message>
-    <message>
-        <source>Victory</source>
-        <translation type="vanished">Victoire 2</translation>
-    </message>
-    <message>
-        <source>Artist</source>
-        <translation type="vanished">Artiste</translation>
-    </message>
-    <message>
-        <source>Marine</source>
-        <translation type="vanished">Marin</translation>
-    </message>
-    <message>
-        <source>Land</source>
-        <translation type="vanished">Terrestre</translation>
-    </message>
-    <message>
-        <source>Sky</source>
-        <translation type="vanished">Céleste</translation>
-    </message>
-    <message>
-        <source>Country</source>
-        <translation type="vanished">Régional</translation>
-    </message>
-    <message>
-        <source>National</source>
-        <translation type="vanished">National</translation>
-    </message>
-    <message>
-        <source>Earth</source>
-        <translation type="vanished">Terre</translation>
-    </message>
-    <message>
-        <source>World</source>
-        <translation type="vanished">Monde</translation>
-    </message>
-    <message>
-        <source>Colosseum Pokémon files (*.colopkm)</source>
-        <translation type="vanished">Fichiers Pokémon de Colosseum (*.colopkm)</translation>
-    </message>
-    <message>
-        <source>XD Pokémon files (*.xdpkm)</source>
-        <translation type="vanished">Fichier Pokémon d&apos;XD (*.xdpkm)</translation>
-    </message>
-    <message>
-        <source>All files (*)</source>
-        <translation type="vanished">Tous les fichiers (*)</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <comment>Game name</comment>
-        <translation type="vanished">Aucun</translation>
-    </message>
-    <message>
-        <source>Fire Red</source>
-        <translation type="vanished">Rouge Feu</translation>
-    </message>
-    <message>
-        <source>Leaf Green</source>
-        <translation type="vanished">Vert Feuille</translation>
-    </message>
-    <message>
-        <source>Ruby</source>
-        <translation type="vanished">Rubis</translation>
-    </message>
-    <message>
-        <source>Sapphire</source>
-        <translation type="vanished">Saphir</translation>
-    </message>
-    <message>
-        <source>Emerald</source>
-        <translation type="vanished">Emeraude</translation>
-    </message>
-    <message>
-        <source>Colosseum/XD</source>
-        <translation type="vanished">Colosseum/XD</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <comment>Region name</comment>
-        <translation type="vanished">Aucun</translation>
-    </message>
-    <message>
-        <source>NTSC-J</source>
-        <translation type="vanished">NTSC-J</translation>
-    </message>
-    <message>
-        <source>NTSC-U</source>
-        <translation type="vanished">NTSC-U</translation>
-    </message>
-    <message>
-        <source>PAL</source>
-        <translation type="vanished">PAL</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <comment>Language name</comment>
-        <translation type="vanished">Aucune</translation>
-    </message>
-    <message>
-        <source>Japanese</source>
-        <translation type="vanished">Japonais</translation>
-    </message>
-    <message>
-        <source>English</source>
-        <translation type="vanished">Anglais</translation>
-    </message>
-    <message>
-        <source>German</source>
-        <translation type="vanished">Allemand</translation>
-    </message>
-    <message>
-        <source>French</source>
-        <translation type="vanished">Français</translation>
-    </message>
-    <message>
-        <source>Italian</source>
-        <translation type="vanished">Italien</translation>
-    </message>
-    <message>
-        <source>Spanish</source>
-        <translation type="vanished">Espagnol</translation>
     </message>
 </context>
 <context>

@@ -44,7 +44,7 @@ private:
 
 	QHBoxLayout* actionLayout;
 	ItemComboBox *itemNameFld;
-	UnsignedSpinbox<8> *quantityFld;
+	UnsignedSpinbox<16> *quantityFld;
 	QPushButton *modifyButton, *deleteButton;
 };
 
