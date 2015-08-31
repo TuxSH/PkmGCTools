@@ -109,6 +109,11 @@ private:
 
 	QComboBox* statusFld;
 
+	QGridLayout *flagsLayout;
+	QButtonGroup *flagsButtonGroup;
+	QCheckBox *eggFlagCheckBox, *secondAbilityFlagCheckBox, *invalidPokemonCheckBox;
+	QCheckBox *notTradableInGameFlagCheckBox, *unknownFlagCheckBox, *caughtFlagCheckBox;
+
 	QHBoxLayout* markingsLayout;
 	QButtonGroup* markingsButtonGroup;
 	QCheckBox *circleMarkingCheckBox, *squareMarkingCheckBox, *triangleMarkingCheckBox, *heartMarkingCheckBox;
@@ -174,6 +179,10 @@ public slots:
 	void updateLevelFromExperience(void);
 	void speciesChangeHandler(void);
 	void PIDChangeHandler(void);
+
+	void updateFlags(void);
+	void flagsStateChangeHandler(void);
+
 	void autoUpdateStatsStateChangeHanler(void);
 
 	void versionChangeHandler(void);

@@ -24,11 +24,10 @@ void StrategyMemoEntryWidget::updatePIDText(void) {
 	}
 }
 
-void StrategyMemoEntryWidget::generateShinyPID(void) {
+void StrategyMemoEntryWidget::generateShinyIDs(void) {
 	u32 PID = firstPIDFld->unsignedValue();
-	PID &= 0xffff0000;
-	PID |= (PID >> 16) ^ firstSIDFld->unsignedValue() ^ firstTIDFld->unsignedValue();
-	firstPIDFld->setUnsignedValue(PID);
+	firstTIDFld->setUnsignedValue(PID >> 16);
+	firstSIDFld->setUnsignedValue(PID & 0xffff);
 }
 
 void StrategyMemoEntryWidget::initWidget(void) {
@@ -44,7 +43,7 @@ void StrategyMemoEntryWidget::initWidget(void) {
 	PIDLayout = new QVBoxLayout;
 	firstPIDFld = new UnsignedSpinbox<32>;
 	PIDText = new QLabel;
-	generateShinyPIDButton = new QPushButton(tr("Generate shiny PID"));
+	generateShinyIDsButton = new QPushButton(tr("Generate shiny IDs"));
 
 	for (size_t i = 0; i <= 386; ++i)
 		speciesSelector->addItem(getPokemonSpeciesNameByPkdxIndex(lg, (u16)i));
@@ -58,7 +57,7 @@ void StrategyMemoEntryWidget::initWidget(void) {
 	mainLayout2->addRow(tr("First PID"), PIDLayout);
 	mainLayout2->addRow(tr("Partial information"), partialInfoCheckBox);
 	mainLayout->addLayout(mainLayout2);
-	mainLayout->addWidget(generateShinyPIDButton);
+	mainLayout->addWidget(generateShinyIDsButton);
 
 	mainLayout2->setHorizontalSpacing(20);
 	this->setLayout(mainLayout);
@@ -66,7 +65,9 @@ void StrategyMemoEntryWidget::initWidget(void) {
 
 	connect(speciesSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(speciesChangeHandler(int)));
 	connect(firstPIDFld, SIGNAL(valueChanged(int)), this, SLOT(updatePIDText()));
-	connect(generateShinyPIDButton, SIGNAL(clicked()), this, SLOT(generateShinyPID()));
+	connect(firstTIDFld, SIGNAL(valueChanged(int)), this, SLOT(updatePIDText()));
+	connect(firstSIDFld, SIGNAL(valueChanged(int)), this, SLOT(updatePIDText()));
+	connect(generateShinyIDsButton, SIGNAL(clicked()), this, SLOT(generateShinyIDs()));
 }
 
 StrategyMemoEntryWidget::~StrategyMemoEntryWidget(void) {
@@ -76,7 +77,7 @@ void StrategyMemoEntryWidget::parseData(void) {
 	if (entry == NULL) return;
 	isXD = LIBPKMGC_IS_XD(StrategyMemoEntry, entry);
 
-	generateShinyPIDButton->setVisible(!isXD);
+	generateShinyIDsButton->setVisible(!isXD);
 	partialInfoCheckBox->setChecked(entry->isInfoPartial());
 	partialInfoCheckBox->setDisabled(isXD);
 
@@ -98,7 +99,7 @@ void StrategyMemoEntryWidget::saveChanges(void) {
 
 
 void StrategyMemoEntryWidget::speciesChangeHandler(int nameIndex) {
-	generateShinyPIDButton->setDisabled(nameIndex == 0);
+	generateShinyIDsButton->setDisabled(nameIndex == 0);
 	updatePIDText();
 	emit speciesChanged(entryIndex, nameIndex);
 }

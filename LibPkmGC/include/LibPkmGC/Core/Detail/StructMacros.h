@@ -27,6 +27,8 @@
 #define LD_ARRAY(type,ar,sz,off) SM_H_TMP_NS()::toArrayOfIntegers<u8*,type*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz))
 #define LD_ARRAY_E(type,ar,sz,off,etype) SM_H_TMP_NS()::toArrayOfEnumIntegers<type,u8*,etype*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz))
 #define LD_ARRAY_B(type,ar,sz,off) SM_H_TMP_NS()::toArrayOfBoolIntegers<type,u8*,bool*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz))
+#define LD_BIT_ARRAY2(type,ar,sz,off,st) type ar##_tmp; LD_FIELD(type, ar##_tmp, off); for(int i__ = 0; i__ < sz; ++i__) ar[i__] = (ar##_tmp & (1U << (8*sizeof(type) - 1 - st - i__))) != 0;
+#define LD_BIT_ARRAY(type, ar, sz, off)  LD_BIT_ARRAY2(type,ar,sz,off,0)
 
 #define SV_FIELD(type,fld,off) SM_H_TMP_NS()::fromInteger<type, u8*>(BUFFER_NAME+off, fld)
 #define SV_FIELD_E(type,fld,off,etype) SM_H_TMP_NS()::fromEnumInteger<type, etype, u8*>(BUFFER_NAME+off, fld)
@@ -34,6 +36,10 @@
 #define SV_ARRAY(type,ar,sz,off) SM_H_TMP_NS()::fromArrayOfIntegers<type*, u8*>(BUFFER_NAME+off, ar, ar+sz)
 #define SV_ARRAY_E(type,ar,sz,off,etype) SM_H_TMP_NS()::fromArrayOfEnumIntegers<type,etype*, u8*>(BUFFER_NAME+off, ar, ar+sz)
 #define SV_ARRAY_B(type,ar,sz,off) SM_H_TMP_NS()::toArrayOfBoolIntegers<type, bool*, u8*>(BUFFER_NAME+off, ar, ar+sz)
+#define SV_BIT_ARRAY2(type, ar, sz, off, st) type ar##_tmp; LD_FIELD(type, ar##_tmp, off); ar##_tmp &= ~(((1U << sz) - 1) << (8*sizeof(type) - 1 - st - sz));\
+for(int i__ = 0; i__ < sz; ++i__) ar##_tmp |= ((ar[i__]) ? 1U : 0U) << (8*sizeof(type) - 1 - st - i__); SV_FIELD(type, ar##_tmp, off); 
+#define SV_BIT_ARRAY(type, ar, sz, off)  SV_BIT_ARRAY2(type,ar,sz,off,0)
+
 
 #define LD_SUBSTRUCTURE(type, fld, off) fld = new type(data + off)
 #define LD_SUBSTRUCTURE_ARRAY(type, ar, sz, off) for(size_t i__ = 0; i__ < sz; ++i__) LD_SUBSTRUCTURE(type, ar[i__], off+type::size*i__);
@@ -42,7 +48,6 @@
 #define SV_SUBSTRUCTURE(type, fld, off) fld->save(); std::copy(fld->data, fld->data + type::size, data + off);
 #define SV_SUBSTRUCTURE2(type, fld, off) fld->save(); std::copy(fld->data, fld->data + fld->getSize(), data + off);
 #define SV_SUBSTRUCTURE_ARRAY(type, ar, sz, off) for(size_t i__ = 0; i__ < sz; ++i__) { SV_SUBSTRUCTURE(type, ar[i__], off+type::size*i__); }
-//#define SV_SUBSTRUCTURE_ARRAY2(type, ar, sz, off) for(size_t i__ = 0; i__ < sz; ++i__) { SV_SUBSTRUCTURE2(type, ar[i__], off+ar[i__]->getSize()*i__); }
 
 
 

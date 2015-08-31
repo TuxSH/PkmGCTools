@@ -3,6 +3,11 @@
 #include <LibPkmGC/Base/Pokemon.h>
 #include <LibPkmGC/GC/Common/PokemonString.h>
 
+
+#define LIBPKMGC_GC_EGG_FLAG 0
+#define LIBPKMGC_GC_SECOND_ABILITY_FLAG 1
+#define LIBPKMGC_GC_INVALID_POKEMON_FLAG 2
+
 namespace LibPkmGC {
 namespace GC {
 class LIBPKMGC_DECL Pokemon :
@@ -15,10 +20,12 @@ public:
 
 	virtual void swap(Pokemon& other);
 	virtual Pokemon& operator=(Pokemon const& other);
-	virtual bool hasSpecialAbility(void) const = 0;
-	virtual void setSpecialAbilityStatus(bool status) = 0;
+	/*bool hasSecondAbility(void) const;
+	void setSpecialAbilityStatus(bool status);*/
 	virtual PokemonAbilityIndex getAbility(void) const;
+	
 	u16 shadowPkmID;
+	bool pkmFlags[3];
 
 	virtual void swap(Base::Pokemon& other);
 	virtual Pokemon& operator=(Base::Pokemon const& other);

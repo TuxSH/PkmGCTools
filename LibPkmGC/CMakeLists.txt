@@ -16,7 +16,7 @@ set(LIBPKMGC_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
 
 include_directories(${LIBPKMGC_INCLUDE_DIRS})
 
-option(LIBPKMGC_DYN_LIB ON)
+option(LIBPKMGC_DYN_LIB "Build LibPkmGC as a shared library" ON)
 
 message("LIBPKMGC_DYN_LIB:\t${LIBPKMGC_DYN_LIB}")
 

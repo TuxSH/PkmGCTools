@@ -6,8 +6,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
-find_package(Qt5Widgets)
-find_package(Qt5LinguistTools OPTIONAL)
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5LinguistTools)
 			
 file(GLOB_RECURSE source_files src/*)
 
@@ -28,14 +28,14 @@ if(Qt5LinguistTools_FOUND)
 			list(APPEND QT5_TRANSLATION_QM ${QT5_QM_DIR}/qt_${language}.qm)
 		elseif(EXISTS translations/qt/qt_${language}.qm)
 			list(APPEND QT5_TRANSLATION_QM translations/qt/qt_${language}.qm)
-		endif()
+		endif(EXISTS ${QT5_QM_DIR}/qt_${language}.qm)
 		
 		if(EXISTS ${QT5_QM_DIR}/qtbase_${language}.qm)
 			list(APPEND QT5_TRANSLATION_QM ${QT5_QM_DIR}/qtbase_${language}.qm) # Required for Qt > 5.3
 		elseif(EXISTS translations/qt/qtbase_${language}.qm)
 			list(APPEND QT5_TRANSLATION_QM translations/qt/qtbase_${language}.qm)
-		endif()
-	endforeach()
+		endif(EXISTS ${QT5_QM_DIR}/qtbase_${language}.qm)
+	endforeach(language)
 	list(REMOVE_DUPLICATES QT5_TRANSLATION_QM)
 	set(QT5_TRANSLATION_QM ${QT5_TRANSLATION_QM} CACHE INTERNAL "Qt5 *.qm")
 	
@@ -48,7 +48,9 @@ if(Qt5LinguistTools_FOUND)
 
 	install(FILES ${TRANSLATION_QM} DESTINATION Debug/bin/languages CONFIGURATIONS Debug)
 	install(FILES ${TRANSLATION_QM} DESTINATION Release/bin/languages CONFIGURATIONS Release RelWithDebInfo MinSizeRel)
-endif()
+else(Qt5LinguistTools_FOUND)
+	message("Qt5LinguistTools was NOT found. The translation files will not be able to be updated.") 
+endif(Qt5LinguistTools_FOUND)
 
 
 # DLL hell

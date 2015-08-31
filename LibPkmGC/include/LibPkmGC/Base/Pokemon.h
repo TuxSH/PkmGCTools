@@ -51,7 +51,7 @@ public:
 	PokemonSpeciesIndex getWurmpleEvolution(void) const;
 	char getUnownForm(void) const;
 
-	bool isSpecialAbilityDefined(void) const;
+	bool isSecondAbilityDefined(void) const;
 	virtual PokemonAbilityIndex getAbility(void) const = 0;
 	virtual bool isEmptyOrInvalid(void) const;
 
@@ -78,7 +78,7 @@ public:
 //	u8 encounterType;
 	VersionInfo version;
 
-	bool specialRibbons[12]; //special ribbons #7 only exists in XD/Col
+	bool specialRibbons[12];
 	//u32 statusFlags;
 
 

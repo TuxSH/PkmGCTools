@@ -31,7 +31,7 @@ signals:
 	void TIDorSIDChanged(void);
 
 public slots:
-	void TIDorSIDChangedEmmiter(void);
+	void TIDorSIDChangedEmitter(void);
 private:
 	QHBoxLayout* genderLayout;
 	QButtonGroup* genderButtonGroup;

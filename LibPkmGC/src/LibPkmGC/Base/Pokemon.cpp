@@ -136,7 +136,7 @@ bool Pokemon::isEmptyOrInvalid(void) const {
 	return (species > 0x19e) || (species == 0) || !getSpeciesData(species).isValid || version.isIncomplete();
 }
 
-bool Pokemon::isSpecialAbilityDefined(void) const{
+bool Pokemon::isSecondAbilityDefined(void) const{
 	return (getSpeciesData(species).possibleAbilities[1] != NoAbility);
 }
 void Pokemon::swap(Pokemon& other) {

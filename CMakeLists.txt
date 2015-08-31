@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.12)
 project(PkmGCTools)
 
 set(CMAKE_INSTALL_PREFIX installdir)
-option(BUILD_PKMGCSAVEEDITOR ON)
+option(BUILD_PKMGCSAVEEDITOR "Build PkmGCSaveEditor" ON)
 
 add_subdirectory(LibPkmGC)
 add_definitions(${LIBPKMGC_DEFINITIONS})

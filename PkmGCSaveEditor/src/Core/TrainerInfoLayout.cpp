@@ -23,6 +23,9 @@ QFormLayout(){
 	this->addRow(tr("Name"), nameFld);
 	this->addRow(tr("TID/SID"), TIDSIDLayout);
 	set(inName, inSID, inTID, inGender);
+	connect(TIDFld, SIGNAL(valueChanged(int)), this, SLOT(TIDorSIDChangedEmitter()));
+	connect(SIDFld, SIGNAL(valueChanged(int)), this, SLOT(TIDorSIDChangedEmitter()));
+	emit TIDorSIDChanged();
 }
 
 void TrainerInfoLayout::trainerName(LibPkmGC::Base::PokemonString * outName) {
@@ -65,6 +68,6 @@ void TrainerInfoLayout::set(LibPkmGC::Base::PokemonString * inName, LibPkmGC::u1
 	setTrainerGender(inGender);
 }
 
-void TrainerInfoLayout::TIDorSIDChangedEmmiter(void) {
+void TrainerInfoLayout::TIDorSIDChangedEmitter(void) {
 	emit TIDorSIDChanged();
 }

@@ -32,7 +32,7 @@ signals:
 	public slots:
 	void speciesChangeHandler(int nameIndex);
 	void updatePIDText(void);
-	void generateShinyPID(void);
+	void generateShinyIDs(void);
 protected:
 	void initWidget(void);
 
@@ -48,7 +48,7 @@ private:
 	QVBoxLayout* PIDLayout;
 	UnsignedSpinbox<32> *firstPIDFld;
 	QLabel* PIDText;
-	QPushButton* generateShinyPIDButton;
+	QPushButton* generateShinyIDsButton;
 };
 
 

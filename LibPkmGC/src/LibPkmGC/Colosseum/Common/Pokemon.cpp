@@ -12,14 +12,17 @@ Pokemon::Pokemon(void) : GC::Pokemon(0x138) { initWithEmptyData(); }
 Pokemon::~Pokemon(void) {
 }
 
-Pokemon::Pokemon(Pokemon const& other) : GC::Pokemon(other), specialAbilityStatus(other.specialAbilityStatus){}
+Pokemon::Pokemon(Pokemon const& other) : GC::Pokemon(other){}
 
 Pokemon* Pokemon::clone(void) const { return new Pokemon(*this); }
 Pokemon* Pokemon::create(void) const { return new Pokemon; }
 
 void Pokemon::swap(Pokemon& other) {
 	GC::Pokemon::swap(other);
-	SW(specialAbilityStatus);
+}
+
+bool Pokemon::isEmptyOrInvalid(void) const {
+	return GC::Pokemon::isEmptyOrInvalid() && species == Bonsly;
 }
 
 void Pokemon::loadFields(void) {
@@ -70,7 +73,7 @@ void Pokemon::loadFields(void) {
 	LD_ARRAY_B(u8, specialRibbons, 12, 0xbd);
 
 	LD_FIELD(u8, pkrsStatus, 0xca);
-	LD_FIELD_B(u8, specialAbilityStatus, 0xcc);
+	LD_ARRAY_B(u8, pkmFlags, 3, 0xcb);
 	
 	LD_FIELD(u8, marksTmp, 0xcf);
 
@@ -80,9 +83,13 @@ void Pokemon::loadFields(void) {
 	markings.load(marksTmp);
 	for (size_t i = 0; i < 4; ++i)
 		moves[i].load(data + 0x78 + 4 * i);
+	pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG] = isSecondAbilityDefined() && pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG];
+
 }
 
 void Pokemon::save(void) {
+	pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG] = isSecondAbilityDefined() && pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG];
+
 	SV_FIELD_E(u16, species, 0x00, PokemonSpeciesIndex);
 	SV_FIELD(u32, PID, 0x04);
 	version.save(data + 0x08);
@@ -119,7 +126,7 @@ void Pokemon::save(void) {
 	SV_ARRAY_B(u8, specialRibbons, 12, 0xbd);
 
 	SV_FIELD(u8, pkrsStatus, 0xca);
-	SV_FIELD_B(u8, specialAbilityStatus, 0xcc);
+	LD_ARRAY_B(u8, pkmFlags, 3, 0xcb);
 
 	SV_FIELD(u8, markings.save(), 0xcf);
 
@@ -134,19 +141,12 @@ void Pokemon::save(void) {
 Pokemon& Pokemon::operator=(Pokemon const& other) {
 	if (this != &other) {
 		GC::Pokemon::operator=(other);
-		CP(specialAbilityStatus);
 	}
 	return *this;
 }
 
 LIBPKMGC_GC_GEN_COL_VTF(Pokemon)
-bool Pokemon::hasSpecialAbility(void) const {
-	return isSpecialAbilityDefined() && specialAbilityStatus;
-}
 
-void Pokemon::setSpecialAbilityStatus(bool status) {
-	specialAbilityStatus = isSpecialAbilityDefined() && status;
-}
 
 }
 }

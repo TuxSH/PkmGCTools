@@ -4,9 +4,6 @@
 using namespace LibPkmGC; using namespace Localization; using namespace Base;
 
 
-static QString s1[] = QT_TRANSLATE_NOOP3("GCUIs::PokemonUI", "None", "Status");
-
-
 namespace GCUIs {
 
 PokemonMoveLayout::PokemonMoveLayout(PokemonMove const& inMove) : QHBoxLayout(){
@@ -138,6 +135,11 @@ void PokemonUI::initWidget(void){
 	happinessFld = new UnsignedSpinbox<8>;
 	pkrsStatusFld = new UnsignedSpinbox<8>;
 	statusFld = new QComboBox;
+	flagsLayout = new QGridLayout;
+	flagsButtonGroup = new QButtonGroup;
+	markingsLayout = new QHBoxLayout;
+	markingsButtonGroup = new QButtonGroup;
+
 	statusFld->addItems(statusNames());
 
 	for (size_t i = 0; i < 387; ++i)
@@ -159,16 +161,33 @@ void PokemonUI::initWidget(void){
 	levelAndSyncLayout->setAlignment(Qt::AlignRight);
 	experienceLevelAndSyncLayout->addLayout(levelAndSyncLayout);
 
-	markingsLayout = new QHBoxLayout;
-	markingsButtonGroup = new QButtonGroup;
+	eggFlagCheckBox = new QCheckBox(tr("Egg")); secondAbilityFlagCheckBox = new QCheckBox(tr("Second ability")); 
+	invalidPokemonCheckBox = new QCheckBox(tr("Invalid Pok\xc3\xa9mon"));
+	notTradableInGameFlagCheckBox = new QCheckBox(tr("Not tradable in-game")); unknownFlagCheckBox = new QCheckBox(tr("Unknown"));
+	caughtFlagCheckBox = new QCheckBox(tr("Caught"));
+
+	QCheckBox* g1[] = { eggFlagCheckBox, secondAbilityFlagCheckBox, invalidPokemonCheckBox,
+						notTradableInGameFlagCheckBox, unknownFlagCheckBox, caughtFlagCheckBox };
+
+	flagsButtonGroup->setExclusive(false);
+	for (int i = 0; i < 6; ++i) {
+		flagsButtonGroup->addButton(g1[i], i);
+		flagsLayout->addWidget(g1[i], i / 3, i % 3);
+		connect(g1[i], SIGNAL(stateChanged(int)), this, SLOT(flagsStateChangeHandler()));
+	}
+
+
 	circleMarkingCheckBox = new QCheckBox("\xe2\x97\x8f"); squareMarkingCheckBox = new QCheckBox("\xe2\x96\xa0");
 	triangleMarkingCheckBox = new QCheckBox("\xe2\x96\xb2"); heartMarkingCheckBox = new QCheckBox("\xe2\x99\xa5");
 
+	QCheckBox* g2[] = { circleMarkingCheckBox, squareMarkingCheckBox, triangleMarkingCheckBox, heartMarkingCheckBox };
+
 	markingsButtonGroup->setExclusive(false);
-	markingsButtonGroup->addButton(circleMarkingCheckBox); markingsButtonGroup->addButton(squareMarkingCheckBox);
-	markingsButtonGroup->addButton(triangleMarkingCheckBox); markingsButtonGroup->addButton(heartMarkingCheckBox);
-	markingsLayout->addWidget(circleMarkingCheckBox); markingsLayout->addWidget(squareMarkingCheckBox);
-	markingsLayout->addWidget(triangleMarkingCheckBox); markingsLayout->addWidget(heartMarkingCheckBox);
+
+	for (int i = 0; i < 4; ++i) {
+		markingsButtonGroup->addButton(g2[i], i);
+		markingsLayout->addWidget(g2[i]);
+	}
 
 	generalTabLayout->addRow(tr("Species"), speciesFld);
 	generalTabLayout->addRow(tr("Name or nickname"), nameLayout);
@@ -180,6 +199,7 @@ void PokemonUI::initWidget(void){
 	generalTabLayout->addRow(tr("Happiness"), happinessFld);
 	generalTabLayout->addRow(tr("Pok\xc3\xa9rus"), pkrsStatusFld);
 	generalTabLayout->addRow(tr("Status"), statusFld);
+	generalTabLayout->addRow(tr("Flags"), flagsLayout);
 	generalTabLayout->addRow(tr("Markings"), markingsLayout);
 
 	
@@ -245,7 +265,6 @@ void PokemonUI::initWidget(void){
 		mainStatsFormLayout->addRow(statNames[i], mainStatsFlds[i]);
 		connect(mainStatsFlds[i], SIGNAL(IVOrEVChanged()), this, SLOT(updateMainStats()));
 	}
-
 	autoUpdateMainStatsCheckBox = new QCheckBox(tr("Update stats automatically"));
 	autoUpdateMainStatsCheckBox->setChecked(true);
 
@@ -341,6 +360,7 @@ void PokemonUI::initWidget(void){
 	connect(speciesFld, SIGNAL(currentIndexChanged(int)), this, SLOT(speciesChangeHandler()));
 	connect(resetNameButton, SIGNAL(clicked()), this, SLOT(resetName()));
 	connect(PIDFld, SIGNAL(valueChanged(int)), this, SLOT(PIDChangeHandler()));
+	connect(abilityFld, SIGNAL(currentIndexChanged(int)), this, SLOT(updateFlags()));
 	connect(experienceFld, SIGNAL(valueChanged(int)), this, SLOT(updateLevelFromExperience()));
 	connect(levelFld, SIGNAL(valueChanged(int)), this, SLOT(updateExperienceFromLevel()));
 	connect(OTField, SIGNAL(TIDorSIDChanged()), this, SLOT(updatePkmAttributes()));
@@ -374,6 +394,7 @@ void PokemonUI::parseData(void){
 	nameFld->setText(pkm->name->toUTF8());
 
 	speciesFld->setCurrentIndex((int)Localization::pkmSpeciesIndexToNameIndex(pkm->species));
+	if (pkm->species == Bonsly && !isXD) speciesFld->setCurrentIndex(0);
 	PIDFld->setUnsignedValue(pkm->PID);
 
 
@@ -389,6 +410,16 @@ void PokemonUI::parseData(void){
 	pkrsStatusFld->setUnsignedValue(pkm->pkrsStatus);
 	statusFld->setCurrentIndex((pkm->partyData.status == NoStatus) ? 0 : (int)pkm->partyData.status - 2);
 
+	QCheckBox* g1[] = { eggFlagCheckBox, secondAbilityFlagCheckBox, invalidPokemonCheckBox,
+						notTradableInGameFlagCheckBox, unknownFlagCheckBox, caughtFlagCheckBox };
+
+	for (size_t i = 0; i < 3; ++i) {
+		g1[i]->setChecked(pkm->pkmFlags[i]);
+		g1[3 + i]->setVisible(isXD);
+		if (isXD)
+			g1[3 + i]->setChecked(static_cast<XD::Pokemon*>(pkm)->XDPkmFlags[i]);
+	}
+
 	circleMarkingCheckBox->setChecked(pkm->markings.circle);
 	squareMarkingCheckBox->setChecked(pkm->markings.square);
 	triangleMarkingCheckBox->setChecked(pkm->markings.triangle);
@@ -402,7 +433,7 @@ void PokemonUI::parseData(void){
 	versionFld->setInfo(pkm->version);
 	connect(versionFld, SIGNAL(versionChanged()), this, SLOT(versionChangeHandler()));
 
-
+	currentHPFld->setUnsignedValue(pkm->partyData.currentHP);
 	for (size_t i = 0; i < 6; ++i) {
 		PokemonStatLayout* l = mainStatsFlds[i];
 		l->IVFld->setUnsignedValue(pkm->IVs[i]);
@@ -422,7 +453,7 @@ void PokemonUI::parseData(void){
 	autoUpdateMainStatsCheckBox->setChecked(true);
 	versionChangeHandler();
 
-	abilityFld->setCurrentIndex(pkm->hasSpecialAbility());
+	abilityFld->setCurrentIndex((pkm->pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG]) ? 1 : 0);
 
 }
 
@@ -431,7 +462,7 @@ void PokemonUI::saveChanges(void){
 	pkm->name->fromUTF8(nameFld->text().toUtf8().data());
 	pkm->PID = PIDFld->unsignedValue();
 
-	pkm->setSpecialAbilityStatus(abilityFld->currentIndex() != 0);
+	pkm->pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG] = (abilityFld->currentIndex() != 0);
 	pkm->experience = experienceFld->unsignedValue();
 	pkm->partyData.level = (u8)levelFld->unsignedValue();
 
@@ -439,6 +470,15 @@ void PokemonUI::saveChanges(void){
 	pkm->happiness = (u8)happinessFld->unsignedValue();
 	pkm->pkrsStatus = (u8)pkrsStatusFld->unsignedValue();
 	pkm->partyData.status = (statusFld->currentIndex() == 0) ? NoStatus : (PokemonStatus)(2 + statusFld->currentIndex());
+
+	QCheckBox* g1[] = { eggFlagCheckBox, secondAbilityFlagCheckBox, invalidPokemonCheckBox,
+						notTradableInGameFlagCheckBox, unknownFlagCheckBox, caughtFlagCheckBox };
+
+	for (size_t i = 0; i < 3; ++i) {
+		pkm->pkmFlags[i] = g1[i]->isChecked();
+		if (isXD)
+			static_cast<XD::Pokemon*>(pkm)->XDPkmFlags[i] = g1[3 + i]->isChecked();
+	}
 
 	pkm->markings.circle = circleMarkingCheckBox->isChecked();
 	pkm->markings.square = squareMarkingCheckBox->isChecked();
@@ -455,6 +495,7 @@ void PokemonUI::saveChanges(void){
 	
 	pkm->version = versionFld->info();
 
+	pkm->partyData.currentHP = currentHPFld->unsignedValue();
 	for (size_t i = 0; i < 6; ++i) {
 		PokemonStatLayout* l = mainStatsFlds[i];
 		pkm->IVs[i] = (u8)l->IVFld->unsignedValue();
@@ -484,9 +525,9 @@ QString PokemonUI::getShortPkmAttributeText(LibPkmGC::PokemonSpeciesIndex specie
 	else if (Base::Pokemon::getGender(species, PID) == Female)
 		ret += "<span style='color:magenta;'>\xe2\x99\x80</span>";
 	else {
-		if (!ret.isEmpty()) ret += ", ";
+		if (!ret.isEmpty()) ret += ",";
 
-		ret += "<span style='color:green;'>";
+		ret += " <span style='color:green;'>";
 		ret += tr("Genderless");
 		ret += "</span>";
 	}
@@ -521,7 +562,7 @@ QString PokemonUI::getShortPkmAttributeText(void){
 	
 	if (versionFld->info().isIncomplete())
 		tt = tr("Invalid version info");
-	if (isXD && (static_cast<XD::Pokemon*>(pkm)->pkmFlags & 0x20) != 0) {
+	if (isXD && invalidPokemonCheckBox->isChecked()) {
 		if (!tt.isEmpty()) tt += "\n";
 		tt += tr("Bit 5 set on byte at offset 0x1d");
 	}
@@ -545,7 +586,7 @@ QString PokemonUI::getLongPkmAttributeText(void){
 
 	if (versionFld->info().isIncomplete())
 		tt = tr("Invalid version info");
-	if (isXD && (static_cast<XD::Pokemon*>(pkm)->pkmFlags & 0x20) != 0) {
+	if (isXD && invalidPokemonCheckBox->isChecked()) {
 		if (!tt.isEmpty()) tt += "\n";
 		tt += tr("Bit 5 set on byte at offset 0x1d");
 	}
@@ -571,9 +612,10 @@ void PokemonUI::updateMainStats(void) {
 			PokemonNatureIndex natureIndex = (PokemonNatureIndex)((u32)PIDFld->value() % 25);
 			u16 stat = Base::Pokemon::calculateStat(i, id, natureIndex, 
 														     (u8) levelFld->value(), (u8) l->IVFld->value(), (u8) l->EVFld->value());
-			l->statFld->setValue((int)stat);
+			l->statFld->setUnsignedValue(stat);
 		}
-		currentHPFld->setValue(mainStatsFlds[0]->statFld->value());
+		//currentHPFld->setUnsignedMaximum(mainStatsFlds[0]->statFld->value());
+		currentHPFld->setUnsignedValue(mainStatsFlds[0]->statFld->value());
 	}
 }
 
@@ -585,18 +627,25 @@ void PokemonUI::updateAbilityList(void) {
 	LanguageIndex lg = generateDumpedNamesLanguage();
 	PokemonSpeciesIndex id = Localization::nameIndexToPkmSpeciesIndex((size_t)speciesFld->currentIndex());
 	const PokemonAbilityIndex* ab = getSpeciesData(id).possibleAbilities;
+	bool sec = abilityFld->currentIndex() == 1;
+
+	disconnect(abilityFld, SIGNAL(currentIndexChanged(int)));
+	disconnect(secondAbilityFlagCheckBox, SIGNAL(stateChanged(int)));
 
 	abilityFld->clear();
 	abilityFld->addItem(Localization::getPokemonAbilityName(lg, ab[0]));
 	if (ab[1] != NoAbility) {
 		abilityFld->addItem(Localization::getPokemonAbilityName(lg, ab[1]));
 		abilityFld->setDisabled(false);
-		return;
+		abilityFld->setCurrentIndex((sec) ? 1 : 0);
 	}
 	else {
 		abilityFld->setDisabled(true);
-		return;
 	}
+
+	updateFlags();
+	connect(abilityFld, SIGNAL(currentIndexChanged(int)), this, SLOT(updateFlags()));
+	connect(secondAbilityFlagCheckBox, SIGNAL(stateChanged(int)), this, SLOT(flagsStateChangeHandler()));
 }
 
 
@@ -634,6 +683,16 @@ void PokemonUI::speciesChangeHandler(void) {
 void PokemonUI::PIDChangeHandler(void) {
 	updatePkmAttributes();
 	updateMainStats();
+}
+
+void PokemonUI::updateFlags(void) {
+	secondAbilityFlagCheckBox->setDisabled(abilityFld->count() == 1);
+	secondAbilityFlagCheckBox->setChecked(abilityFld->currentIndex() == 1);
+}
+
+void PokemonUI::flagsStateChangeHandler(void) {
+	abilityFld->setCurrentIndex((secondAbilityFlagCheckBox->isChecked() && abilityFld->count() == 2) ? 1 : 0);
+	updatePkmAttributes();
 }
 
 void PokemonUI::autoUpdateStatsStateChangeHanler(void) {

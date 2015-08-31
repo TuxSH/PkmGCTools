@@ -74,16 +74,16 @@ void PokemonDisplayWidget::updatePkmNameAndSummary(void) {
 	nameFld->setText(pkm->name->toUTF8());
 
 	s = "(";
-	if (!getSpeciesData(pkm->species).isValid) {
+	if (!getSpeciesData(pkm->species).isValid || (pkm->species == Bonsly && !LIBPKMGC_IS_XD(Pokemon,pkm))) {
 		tt = tr("Invalid species");
 	}
 	if (pkm->version.isIncomplete()) {
 		if (!tt.isEmpty()) tt += "\n";
 		tt = tr("Invalid version info");
 	}
-	if (LIBPKMGC_IS_XD(Pokemon, pkm) && (static_cast<XD::Pokemon*>(pkm)->pkmFlags & 0x20) != 0) {
+	if (pkm->pkmFlags[LIBPKMGC_GC_INVALID_POKEMON_FLAG]) {
 		if (!tt.isEmpty()) tt += "\n";
-		tt += tr("Bit 5 set on byte at offset 0x1d");
+		tt += tr("\"Invalid Pok\xc3\xa9mon\" flag set");
 	}
 
 	summary->setToolTip(tt);

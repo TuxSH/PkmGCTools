@@ -28,8 +28,9 @@ namespace XD {
 		bit 7: egg flag
 		bit 6: special (second) ability flag. Pokémon XD's catchable Pkms have a 50% chance to have their special ability
 		bit 5: invalidity flag. MUST **NOT** BE SET for the Pokémon to be considered as valid ("not empty")
-		bit 4: "not traded" flag ??
-		bit 2: "caught" flag ??
+		bit 4: "not tradable in game" flag
+		bit 3: ?
+		bit 2: "caught" flag
 	0x1e 0x1f : ??
 	0x20: u32 experience
 	0x24: u16 SID
@@ -73,15 +74,11 @@ public:
 	void swap(Pokemon& other);
 	Pokemon& operator=(Pokemon const& other);
 
-	bool hasSpecialAbility(void) const;
-	void setSpecialAbilityStatus(bool status);
-
-	u8 pkmFlags;
-
-	bool isEmptyOrInvalid(void) const;
 	Pokemon(Colosseum::Pokemon const& other);
 	Pokemon& operator=(GC::Pokemon const& other);
 	void swap(GC::Pokemon & other);
+
+	bool XDPkmFlags[3];
 private:
 	void loadFields(void);
 

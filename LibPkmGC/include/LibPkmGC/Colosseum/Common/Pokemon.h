@@ -43,9 +43,7 @@ pkm
 	0xbd : u8 specialRibbons[12]
 	0xc9 : u8 unused ?
 	0xca : u8 pkrsStatus
-	0xcb : u8 ?
-	0xcc : u8 abilityUsed
-	0xcd : u16 ? ?
+	0xcb : u8 flags[3] : egg, special ability, invalid pkm
 	0xcf : u8 marks
 	// shadow pkm data ?
 	0xd0--0xd7 : ? ?
@@ -68,14 +66,12 @@ public:
 	Pokemon* clone(void) const;
 	Pokemon* create(void) const;
 
+	bool isEmptyOrInvalid(void) const;
+
 	void save(void);
 
 	void swap(Pokemon& other);
 	Pokemon& operator=(Pokemon const& other);
-
-	bool hasSpecialAbility(void) const;
-	void setSpecialAbilityStatus(bool status);
-	bool specialAbilityStatus;
 
 	Pokemon(XD::Pokemon const& other);
 	Pokemon& operator=(GC::Pokemon const& other);
