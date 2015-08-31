@@ -4,37 +4,37 @@
 <context>
     <name>GCUIs::BagEditor</name>
     <message>
-        <location filename="../src/GCUIs/BagEditor.cpp" line="30"/>
+        <location filename="../src/GCUIs/BagEditor.cpp" line="48"/>
         <source>Regular items</source>
         <translation>Regular items</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/BagEditor.cpp" line="31"/>
+        <location filename="../src/GCUIs/BagEditor.cpp" line="49"/>
         <source>Key items</source>
         <translation>Key items</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/BagEditor.cpp" line="32"/>
+        <location filename="../src/GCUIs/BagEditor.cpp" line="50"/>
         <source>Pokúlls</source>
         <translation>Pokéballs</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/BagEditor.cpp" line="33"/>
+        <location filename="../src/GCUIs/BagEditor.cpp" line="51"/>
         <source>TMs</source>
         <translation>TMs</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/BagEditor.cpp" line="34"/>
+        <location filename="../src/GCUIs/BagEditor.cpp" line="52"/>
         <source>Berries</source>
         <translation>Berries</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/BagEditor.cpp" line="35"/>
+        <location filename="../src/GCUIs/BagEditor.cpp" line="53"/>
         <source>Colognes</source>
         <translation>Colognes</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/BagEditor.cpp" line="53"/>
+        <location filename="../src/GCUIs/BagEditor.cpp" line="71"/>
         <source>Battle CDs</source>
         <translation>Battle CDs</translation>
     </message>
@@ -42,32 +42,32 @@
 <context>
     <name>GCUIs::DaycareUI</name>
     <message>
-        <location filename="../src/GCUIs/DaycareUI.cpp" line="15"/>
+        <location filename="../src/GCUIs/DaycareUI.cpp" line="33"/>
         <source>Not visited yet</source>
         <translation>Not visited yet</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/DaycareUI.cpp" line="16"/>
+        <location filename="../src/GCUIs/DaycareUI.cpp" line="34"/>
         <source>Empty</source>
         <translation>Empty</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/DaycareUI.cpp" line="17"/>
+        <location filename="../src/GCUIs/DaycareUI.cpp" line="35"/>
         <source>Pokémon deposited</source>
         <translation>Pokémon deposited</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/DaycareUI.cpp" line="33"/>
+        <location filename="../src/GCUIs/DaycareUI.cpp" line="51"/>
         <source>Daycare status</source>
         <translation>Daycare status</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/DaycareUI.cpp" line="34"/>
+        <location filename="../src/GCUIs/DaycareUI.cpp" line="52"/>
         <source>Initial Pokémon level</source>
         <translation>Initial Pokémon level</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/DaycareUI.cpp" line="35"/>
+        <location filename="../src/GCUIs/DaycareUI.cpp" line="53"/>
         <source>Initial Pokémon purification counter</source>
         <translation>Initial Pokémon purification counter</translation>
     </message>
@@ -75,42 +75,42 @@
 <context>
     <name>GCUIs::GameConfigUI</name>
     <message>
-        <location filename="../src/GCUIs/GameConfigUI.cpp" line="13"/>
+        <location filename="../src/GCUIs/GameConfigUI.cpp" line="31"/>
         <source>Game version</source>
         <translation>Game version</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/GameConfigUI.cpp" line="16"/>
+        <location filename="../src/GCUIs/GameConfigUI.cpp" line="34"/>
         <source>Title screen options</source>
         <translation>Title screen options</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/GameConfigUI.cpp" line="21"/>
+        <location filename="../src/GCUIs/GameConfigUI.cpp" line="39"/>
         <source>Miscellaneous</source>
         <translation>Miscellaneous</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/GameConfigUI.cpp" line="29"/>
+        <location filename="../src/GCUIs/GameConfigUI.cpp" line="47"/>
         <source>Rumble function disabled</source>
         <translation>Rumble function disabled</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/GameConfigUI.cpp" line="30"/>
+        <location filename="../src/GCUIs/GameConfigUI.cpp" line="48"/>
         <source>Language</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/GameConfigUI.cpp" line="33"/>
+        <location filename="../src/GCUIs/GameConfigUI.cpp" line="51"/>
         <source>Story mode save count</source>
         <translation>Story mode save count</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/GameConfigUI.cpp" line="80"/>
+        <location filename="../src/GCUIs/GameConfigUI.cpp" line="98"/>
         <source>Warning</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/GameConfigUI.cpp" line="80"/>
+        <location filename="../src/GCUIs/GameConfigUI.cpp" line="98"/>
         <source>The version info you specified is invalid, and will make the game unplayable.</source>
         <translation>The version info you specified is invalid, and will make the game unplayable.</translation>
     </message>
@@ -118,17 +118,17 @@
 <context>
     <name>GCUIs::PCUI</name>
     <message>
-        <location filename="../src/GCUIs/PCUI.cpp" line="23"/>
+        <location filename="../src/GCUIs/PCUI.cpp" line="41"/>
         <source>Selected box</source>
         <translation>Selected box</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PCUI.cpp" line="28"/>
+        <location filename="../src/GCUIs/PCUI.cpp" line="46"/>
         <source>Pokémon</source>
         <translation>Pokémon</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PCUI.cpp" line="29"/>
+        <location filename="../src/GCUIs/PCUI.cpp" line="47"/>
         <source>Items</source>
         <translation>Items</translation>
     </message>
@@ -136,37 +136,37 @@
 <context>
     <name>GCUIs::PlayerUI</name>
     <message>
-        <location filename="../src/GCUIs/PlayerUI.cpp" line="16"/>
+        <location filename="../src/GCUIs/PlayerUI.cpp" line="34"/>
         <source>Trainer information</source>
         <translation>Trainer information</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PlayerUI.cpp" line="21"/>
+        <location filename="../src/GCUIs/PlayerUI.cpp" line="39"/>
         <source>Currencies</source>
         <translation>Currencies</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PlayerUI.cpp" line="26"/>
+        <location filename="../src/GCUIs/PlayerUI.cpp" line="44"/>
         <source>Money</source>
         <translation>Money</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PlayerUI.cpp" line="27"/>
+        <location filename="../src/GCUIs/PlayerUI.cpp" line="45"/>
         <source>PokÜoupons</source>
         <translation>Pokécoupons</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PlayerUI.cpp" line="49"/>
+        <location filename="../src/GCUIs/PlayerUI.cpp" line="67"/>
         <source>General</source>
         <translation>General</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PlayerUI.cpp" line="50"/>
+        <location filename="../src/GCUIs/PlayerUI.cpp" line="68"/>
         <source>Bag</source>
         <translation>Bag</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PlayerUI.cpp" line="51"/>
+        <location filename="../src/GCUIs/PlayerUI.cpp" line="69"/>
         <source>Party</source>
         <translation>Party</translation>
     </message>
@@ -174,12 +174,12 @@
 <context>
     <name>GCUIs::PokemonBoxEditor</name>
     <message>
-        <location filename="../src/GCUIs/PokemonBoxEditor.cpp" line="20"/>
+        <location filename="../src/GCUIs/PokemonBoxEditor.cpp" line="38"/>
         <source>%1 to %2</source>
         <translation>%1 to %2</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonBoxEditor.cpp" line="33"/>
+        <location filename="../src/GCUIs/PokemonBoxEditor.cpp" line="51"/>
         <source>Box name</source>
         <translation>Box name</translation>
     </message>
@@ -187,42 +187,42 @@
 <context>
     <name>GCUIs::PokemonDisplayWidget</name>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="27"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="45"/>
         <source>Edit</source>
         <translation>Edit</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="28"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="46"/>
         <source>Delete</source>
         <translation>Delete</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="29"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="47"/>
         <source>Import</source>
         <translation>Import</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="30"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="48"/>
         <source>Export</source>
         <translation>Export</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="78"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="96"/>
         <source>Invalid species</source>
         <translation>Invalid species</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="82"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="100"/>
         <source>Invalid version info</source>
         <translation>Invalid version info</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="86"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="104"/>
         <source>&quot;Invalid Pokémon&quot; flag set</source>
         <translation>&quot;Invalid Pokémon&quot; flag set</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="95"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="113"/>
         <source>Lv. %n </source>
         <translation>
             <numerusform>Lv. %n </numerusform>
@@ -230,63 +230,63 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="122"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="140"/>
         <source>Colosseum Pokémon files (*.colopkm)</source>
         <translation>Colosseum Pokémon files (*.colopkm)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="123"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="141"/>
         <source>XD Pokémon files (*.xdpkm)</source>
         <translation>XD Pokémon files (*.xdpkm)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="124"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="142"/>
         <source>All files (*)</source>
         <translation>All files (*)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="131"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="149"/>
         <source>Could not open file.</source>
         <translation>Could not open file.</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="132"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="150"/>
         <source>An error occured while reading the specified Pokémon file.</source>
         <translation>An error occured while reading the specified Pokémon file.</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="134"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="152"/>
         <source>Open Pokémon file</source>
         <translation>Open Pokémon file</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="142"/>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="148"/>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="161"/>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="167"/>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="178"/>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="191"/>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="213"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="160"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="166"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="179"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="185"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="196"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="209"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="231"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="178"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="196"/>
         <source>Invalid file size.</source>
         <translation>Invalid file size.</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="183"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="201"/>
         <source>Could not write to file.</source>
         <translation>Could not write to file.</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="184"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="202"/>
         <source>An error occured while writing to the specified Pokémon file.</source>
         <translation>An error occured while writing to the specified Pokémon file.</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="186"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="204"/>
         <source>Save Pokémon file</source>
         <translation>Save Pokémon file</translation>
     </message>
@@ -757,37 +757,37 @@
 <context>
     <name>GCUIs::StrategyMemoEntryWidget</name>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="15"/>
+        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="34"/>
         <source>(randomly generated)</source>
         <translation>(randomly generated)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="46"/>
+        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="65"/>
         <source>Generate shiny IDs</source>
         <translation>Generate shiny IDs</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="54"/>
+        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="73"/>
         <source>Species</source>
         <translation>Species</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="55"/>
+        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="74"/>
         <source>First TID</source>
         <translation>First TID</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="56"/>
+        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="75"/>
         <source>First SID</source>
         <translation>First SID</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="57"/>
+        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="76"/>
         <source>First PID</source>
         <translation>First PID</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="58"/>
+        <location filename="../src/GCUIs/StrategyMemoEntryWidget.cpp" line="77"/>
         <source>Partial information</source>
         <translation>Partial information</translation>
     </message>
@@ -795,18 +795,18 @@
 <context>
     <name>GCUIs::StrategyMemoUI</name>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoUI.cpp" line="26"/>
-        <location filename="../src/GCUIs/StrategyMemoUI.cpp" line="44"/>
+        <location filename="../src/GCUIs/StrategyMemoUI.cpp" line="45"/>
+        <location filename="../src/GCUIs/StrategyMemoUI.cpp" line="63"/>
         <source>#%1: %2</source>
         <translation>#%1: %2</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoUI.cpp" line="31"/>
+        <location filename="../src/GCUIs/StrategyMemoUI.cpp" line="50"/>
         <source>Number of entries</source>
         <translation>Number of entries</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/StrategyMemoUI.cpp" line="32"/>
+        <location filename="../src/GCUIs/StrategyMemoUI.cpp" line="51"/>
         <source>Entry</source>
         <translation>Entry</translation>
     </message>
@@ -815,23 +815,23 @@
     <name>ItemPocketEditor</name>
     <message>
         <location filename="../src/Core/ItemPocketEditor.cpp" line="19"/>
-        <location filename="../src/Core/ItemPocketEditor.cpp" line="33"/>
+        <location filename="../src/Core/ItemPocketEditor.cpp" line="32"/>
         <source>Item</source>
         <translation>Item</translation>
     </message>
     <message>
         <location filename="../src/Core/ItemPocketEditor.cpp" line="19"/>
-        <location filename="../src/Core/ItemPocketEditor.cpp" line="35"/>
+        <location filename="../src/Core/ItemPocketEditor.cpp" line="34"/>
         <source>Quantity</source>
         <translation>Quantity</translation>
     </message>
     <message>
-        <location filename="../src/Core/ItemPocketEditor.cpp" line="30"/>
+        <location filename="../src/Core/ItemPocketEditor.cpp" line="29"/>
         <source>Modify</source>
         <translation>Modify</translation>
     </message>
     <message>
-        <location filename="../src/Core/ItemPocketEditor.cpp" line="31"/>
+        <location filename="../src/Core/ItemPocketEditor.cpp" line="30"/>
         <source>Delete</source>
         <translation>Delete</translation>
     </message>
@@ -872,142 +872,142 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/MainWindow.cpp" line="79"/>
-        <location filename="../src/MainWindow.cpp" line="182"/>
+        <location filename="../src/MainWindow.cpp" line="80"/>
+        <location filename="../src/MainWindow.cpp" line="183"/>
         <source>&amp;File</source>
         <translation>&amp;File</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="96"/>
-        <location filename="../src/MainWindow.cpp" line="189"/>
+        <location filename="../src/MainWindow.cpp" line="97"/>
+        <location filename="../src/MainWindow.cpp" line="190"/>
         <source>&amp;Options</source>
         <translation>&amp;Options</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="97"/>
-        <location filename="../src/MainWindow.cpp" line="190"/>
+        <location filename="../src/MainWindow.cpp" line="98"/>
+        <location filename="../src/MainWindow.cpp" line="191"/>
         <source>&amp;Interface language</source>
         <translation>&amp;Interface language</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="98"/>
-        <location filename="../src/MainWindow.cpp" line="191"/>
+        <location filename="../src/MainWindow.cpp" line="99"/>
+        <location filename="../src/MainWindow.cpp" line="192"/>
         <source>&amp;Dumped names language</source>
         <translation>&amp;Dumped names language</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="184"/>
+        <location filename="../src/MainWindow.cpp" line="185"/>
         <source>&amp;Open...</source>
         <translation>&amp;Open...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="185"/>
+        <location filename="../src/MainWindow.cpp" line="186"/>
         <source>&amp;Save</source>
         <translation>&amp;Save</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="186"/>
+        <location filename="../src/MainWindow.cpp" line="187"/>
         <source>Save &amp;as...</source>
         <translation>Save &amp;as...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="187"/>
+        <location filename="../src/MainWindow.cpp" line="188"/>
         <source>&amp;Exit</source>
         <translation>&amp;Exit</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="195"/>
         <location filename="../src/MainWindow.cpp" line="196"/>
+        <location filename="../src/MainWindow.cpp" line="197"/>
         <source>Select &amp;automatically</source>
         <translation>Select &amp;automatically</translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="278"/>
-        <location filename="../src/MainWindow.cpp" line="304"/>
-        <location filename="../src/MainWindow.cpp" line="417"/>
-        <source>GCI save files (*.gci)</source>
-        <translation>GCI save files (*.gci)</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="279"/>
         <location filename="../src/MainWindow.cpp" line="305"/>
         <location filename="../src/MainWindow.cpp" line="418"/>
+        <source>GCI save files (*.gci)</source>
+        <translation>GCI save files (*.gci)</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="280"/>
+        <location filename="../src/MainWindow.cpp" line="306"/>
+        <location filename="../src/MainWindow.cpp" line="419"/>
         <source>Raw save files (*.bin)</source>
         <translation>Raw save files (*.bin)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="281"/>
+        <location filename="../src/MainWindow.cpp" line="282"/>
         <source>The save file has been modified.</source>
         <translation>The save file has been modified.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="282"/>
+        <location filename="../src/MainWindow.cpp" line="283"/>
         <source>Do you want to save your changes?</source>
         <translation>Do you want to save your changes?</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="307"/>
+        <location filename="../src/MainWindow.cpp" line="308"/>
         <source>Could not open file.</source>
         <translation>Could not open file.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="308"/>
+        <location filename="../src/MainWindow.cpp" line="309"/>
         <source>An error occured while reading the specified save file.</source>
         <translation>An error occured while reading the specified save file.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="311"/>
+        <location filename="../src/MainWindow.cpp" line="312"/>
         <source>Open save file</source>
         <translation>Open save file</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="311"/>
+        <location filename="../src/MainWindow.cpp" line="312"/>
         <source>All Files (*)</source>
         <translation>All Files (*)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="327"/>
-        <location filename="../src/MainWindow.cpp" line="333"/>
-        <location filename="../src/MainWindow.cpp" line="338"/>
-        <location filename="../src/MainWindow.cpp" line="362"/>
-        <location filename="../src/MainWindow.cpp" line="397"/>
-        <location filename="../src/MainWindow.cpp" line="408"/>
+        <location filename="../src/MainWindow.cpp" line="328"/>
+        <location filename="../src/MainWindow.cpp" line="334"/>
+        <location filename="../src/MainWindow.cpp" line="339"/>
+        <location filename="../src/MainWindow.cpp" line="363"/>
+        <location filename="../src/MainWindow.cpp" line="398"/>
+        <location filename="../src/MainWindow.cpp" line="409"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="327"/>
+        <location filename="../src/MainWindow.cpp" line="328"/>
         <source>Invalid file size.</source>
         <translation>Invalid file size.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="357"/>
-        <location filename="../src/MainWindow.cpp" line="359"/>
+        <location filename="../src/MainWindow.cpp" line="358"/>
+        <location filename="../src/MainWindow.cpp" line="360"/>
         <source>Warning</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="357"/>
+        <location filename="../src/MainWindow.cpp" line="358"/>
         <source>The backup save slot was loaded because the most recent save slot is corrupt.</source>
         <translation>The backup save slot was loaded because the most recent save slot is corrupt.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="359"/>
+        <location filename="../src/MainWindow.cpp" line="360"/>
         <source>The second backup save slot was loaded because the other ones are corrupt.</source>
         <translation>The second backup save slot was loaded because the other ones are corrupt.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="362"/>
+        <location filename="../src/MainWindow.cpp" line="363"/>
         <source>All save slots are corrupt.</source>
         <translation>All save slots are corrupt.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="380"/>
+        <location filename="../src/MainWindow.cpp" line="381"/>
         <source>No save file loaded</source>
         <translation>No save file loaded</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/MainWindow.cpp" line="383"/>
+        <location filename="../src/MainWindow.cpp" line="384"/>
         <source>%1, %n save(s)</source>
         <translation>
             <numerusform>%1, %n save</numerusform>
@@ -1015,32 +1015,32 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="384"/>
+        <location filename="../src/MainWindow.cpp" line="385"/>
         <source>Colosseum</source>
         <translation>Colosseum</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="384"/>
+        <location filename="../src/MainWindow.cpp" line="385"/>
         <source>XD</source>
         <translation>XD</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="389"/>
+        <location filename="../src/MainWindow.cpp" line="390"/>
         <source>Could not write to file.</source>
         <translation>Could not write to file.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="390"/>
+        <location filename="../src/MainWindow.cpp" line="391"/>
         <source>An error occured while writing to the specified save file.</source>
         <translation>An error occured while writing to the specified save file.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="421"/>
+        <location filename="../src/MainWindow.cpp" line="422"/>
         <source>All files (*)</source>
         <translation>All files (*)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="422"/>
+        <location filename="../src/MainWindow.cpp" line="423"/>
         <source>Save save file</source>
         <translation>Save save file</translation>
     </message>
@@ -1048,30 +1048,30 @@
 <context>
     <name>TrainerInfoLayout</name>
     <message>
-        <location filename="../src/Core/TrainerInfoLayout.cpp" line="9"/>
+        <location filename="../src/Core/TrainerInfoLayout.cpp" line="27"/>
         <source>Male</source>
         <comment>Trainer</comment>
         <translation>Male</translation>
     </message>
     <message>
-        <location filename="../src/Core/TrainerInfoLayout.cpp" line="9"/>
+        <location filename="../src/Core/TrainerInfoLayout.cpp" line="27"/>
         <source>Female</source>
         <comment>Trainer</comment>
         <translation>Female</translation>
     </message>
     <message>
-        <location filename="../src/Core/TrainerInfoLayout.cpp" line="22"/>
+        <location filename="../src/Core/TrainerInfoLayout.cpp" line="40"/>
         <source>Gender</source>
         <comment>Trainer</comment>
         <translation>Gender</translation>
     </message>
     <message>
-        <location filename="../src/Core/TrainerInfoLayout.cpp" line="23"/>
+        <location filename="../src/Core/TrainerInfoLayout.cpp" line="41"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../src/Core/TrainerInfoLayout.cpp" line="24"/>
+        <location filename="../src/Core/TrainerInfoLayout.cpp" line="42"/>
         <source>TID/SID</source>
         <translation>TID/SID</translation>
     </message>
@@ -1079,115 +1079,115 @@
 <context>
     <name>VersionInfoLayout</name>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="10"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="28"/>
         <source>None</source>
         <comment>Language name</comment>
         <translation>None</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="10"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="28"/>
         <source>Japanese</source>
         <translation>Japanese</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="10"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="28"/>
         <source>English</source>
         <translation>English</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="10"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="28"/>
         <source>French</source>
         <translation>French</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="10"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="28"/>
         <source>Italian</source>
         <translation>Italian</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="10"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="28"/>
         <source>Spanish</source>
         <translation>Spanish</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="10"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="28"/>
         <source>German</source>
         <translation>German</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="18"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="36"/>
         <source>None</source>
         <comment>Game name</comment>
         <translation>None</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="18"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="36"/>
         <source>Fire Red</source>
         <translation>Fire Red</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="18"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="36"/>
         <source>Leaf Green</source>
         <translation>Leaf Green</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="19"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="37"/>
         <source>Ruby</source>
         <translation>Ruby</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="19"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="37"/>
         <source>Sapphire</source>
         <translation>Sapphire</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="19"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="37"/>
         <source>Emerald</source>
         <translation>Emerald</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="19"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="37"/>
         <source>Colosseum/XD</source>
         <translation>Colosseum/XD</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="21"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="39"/>
         <source>None</source>
         <comment>Region name</comment>
         <translation>None</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="21"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="39"/>
         <source>NTSC-J</source>
         <translation>NTSC-J</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="21"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="39"/>
         <source>NTSC-U</source>
         <translation>NTSC-U</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="21"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="39"/>
         <source>PAL</source>
         <translation>PAL</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="34"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="52"/>
         <source>Game</source>
         <translation>Game</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="35"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="53"/>
         <source>Current region</source>
         <translation>Current region</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="36"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="54"/>
         <source>Original region</source>
         <translation>Original region</translation>
     </message>
     <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="37"/>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="55"/>
         <source>Language</source>
         <translation>Language</translation>
     </message>
@@ -1195,7 +1195,7 @@
 <context>
     <name>XDUIs::PurifierUI</name>
     <message numerus="yes">
-        <location filename="../src/XDUIs/PurifierUI.cpp" line="60"/>
+        <location filename="../src/XDUIs/PurifierUI.cpp" line="78"/>
         <source>Chamber %n</source>
         <comment>Purifier</comment>
         <translation>
