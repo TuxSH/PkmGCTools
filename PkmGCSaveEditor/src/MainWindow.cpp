@@ -113,6 +113,9 @@ MainWindow::MainWindow() : QMainWindow(), centralWidget(new MWCentralWidget) {
 	dumpedNamesLanguageChanged(dumpedNamesLangGroup->actions()[(size_t)dumpedNamesLanguage]);
 
 	updateStatusBar();
+
+	saveFileAction->setDisabled(true);
+	saveFileAsAction->setDisabled(true);
 }
 
 void MainWindow::createDumpedNamesLanguageMenu(void) {
@@ -367,9 +370,13 @@ void MainWindow::openSaveFile(void) {
 	if (currentSaveSlot == NULL) {
 		currentSaveFileName = "";
 		this->setWindowTitle("PkmGCSaveEditor");
+		saveFileAction->setDisabled(true);
+		saveFileAsAction->setDisabled(true);
 	}
 	else {
 		this->setWindowTitle("PkmGCSaveEditor - " + currentSaveFileName);
+		saveFileAction->setDisabled(false);
+		saveFileAsAction->setDisabled(false);
 	}
 
 	centralWidget->currentSaveSlotChangeHandler();
@@ -420,7 +427,7 @@ void MainWindow::saveSaveFileAs(void) {
 	QString previousFileName = currentSaveFileName;
 
 	QString filters = ((saveFile->hasGCIData) ? gcifilter + ";;" : "") + rawfilter + ";;" + tr("All files (*)");
-	currentSaveFileName = QFileDialog::getSaveFileName(this, tr("Save save file"), lastPkmDirectory, filters);
+	currentSaveFileName = QFileDialog::getSaveFileName(this, tr("Save save file"), lastSaveDirectory, filters);
 
 	if (!saveSaveFile()) {
 		currentSaveFileName = previousFileName;

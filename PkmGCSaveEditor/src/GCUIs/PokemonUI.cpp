@@ -101,6 +101,7 @@ void PokemonUI::initWidget(void){
 
 	LanguageIndex lg = generateDumpedNamesLanguage();
 
+	oldSpecies = (PokemonSpeciesIndex)-1; // invalid
 	mainLayout = new QVBoxLayout;
 	tabs = new QTabWidget;
 
@@ -455,6 +456,7 @@ void PokemonUI::parseData(void){
 
 	abilityFld->setCurrentIndex((pkm->pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG]) ? 1 : 0);
 
+	oldSpecies = pkm->species;
 }
 
 void PokemonUI::saveChanges(void){
@@ -649,12 +651,18 @@ void PokemonUI::updateAbilityList(void) {
 }
 
 
-void PokemonUI::updateExperienceFromLevel(void) {
+void PokemonUI::updateExperienceFromLevel(bool proportionally) {
+	proportionally = false; // not working a.t.m
 	if (syncLevelAndExpFldsCheckBox->isChecked()) {
-		u8 lvl = Pokemon::calculateLevelFromExp(nameIndexToPkmSpeciesIndex((size_t)speciesFld->currentIndex()), (u32)experienceFld->value());
-		if (lvl == levelFld->unsignedValue()) return;
-		u32 experience = Pokemon::calculateExpFromLevel(nameIndexToPkmSpeciesIndex((size_t)speciesFld->currentIndex()), (u8)levelFld->value());
-		
+		u32 experience = 0;
+		if (!proportionally) {
+			u8 lvl = Base::Pokemon::calculateLevelFromExp(nameIndexToPkmSpeciesIndex((size_t)speciesFld->currentIndex()), (u32)experienceFld->value());
+			if (lvl == levelFld->unsignedValue()) return;
+			experience = Base::Pokemon::calculateExpFromLevel(nameIndexToPkmSpeciesIndex((size_t)speciesFld->currentIndex()), (u8)levelFld->value());
+		}
+		else {
+			experience = Base::Pokemon::fixExperienceProportionally(oldSpecies, experienceFld->unsignedValue(), nameIndexToPkmSpeciesIndex(speciesFld->currentIndex()));
+		}
 		experienceFld->disconnect(SIGNAL(valueChanged(int)));
 		experienceFld->setValue((int)experience);
 		connect(experienceFld, SIGNAL(valueChanged(int)), this, SLOT(updateLevelFromExperience()));
@@ -677,7 +685,8 @@ void PokemonUI::speciesChangeHandler(void) {
 	updateAbilityList();
 	u32 maxExperience = Pokemon::calculateExpFromLevel(nameIndexToPkmSpeciesIndex((size_t)speciesFld->currentIndex()), 100);
 	experienceFld->setUnsignedRange(0, maxExperience);
-	updateExperienceFromLevel();
+	updateExperienceFromLevel(oldSpecies != (PokemonSpeciesIndex)-1);
+	if (oldSpecies != (PokemonSpeciesIndex)-1) oldSpecies = nameIndexToPkmSpeciesIndex(speciesFld->currentIndex());
 }
 
 void PokemonUI::PIDChangeHandler(void) {

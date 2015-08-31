@@ -60,6 +60,15 @@ u32 Pokemon::calculateExpFromLevel(PokemonSpeciesIndex species, u8 level) {
 	return expTable[level];
 }
 
+u32 Pokemon::fixExperienceProportionally(PokemonSpeciesIndex oldSpecies, u32 oldExp, PokemonSpeciesIndex newSpecies) {
+	// Rule of 3
+	u8 l = calculateLevelFromExp(oldSpecies, oldExp);
+	const u32 *oldT = LibPkmGC::getSpeciesExpTable(oldSpecies), *newT = LibPkmGC::getSpeciesExpTable(newSpecies);
+	if (l == 100) return newT[100];
+	return newT[l] + (newT[l + 1] - newT[l])*(oldExp - oldT[l]) / (oldT[l + 1] - oldT[l]);
+
+}
+
 Pokemon::Pokemon(size_t inSize, const u8* inData) : DataStruct(inSize, inData) {
 }
 
@@ -79,6 +88,18 @@ u32 Pokemon::calculateExpFromLevel(u8 lvl) const {
 }
 
 void Pokemon::updateExpFromLevel(u8 lvl) { experience = calculateExpFromLevel(lvl); }
+
+u32 Pokemon::fixExperienceProportionally(PokemonSpeciesIndex newSpecies){
+	return fixExperienceProportionally(species, experience, newSpecies);
+}
+
+PokemonSpeciesData Pokemon::getThisSpeciesData(void) const {
+	return LibPkmGC::getSpeciesData(species);
+}
+
+const u32 * Pokemon::getExpTable(void) const {
+	return LibPkmGC::getSpeciesExpTable(species);
+}
 
 void Pokemon::calculateStats(u16 outStats[6]) const {
 	calculateStats(species, (PokemonNatureIndex)(PID % 25), calculateLevelFromExp(), IVs, EVs, outStats);

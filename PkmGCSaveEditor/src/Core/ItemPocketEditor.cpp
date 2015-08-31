@@ -81,7 +81,7 @@ void ItemPocketEditor::saveChanges(void) {
 }
 
 LibPkmGC::Item ItemPocketEditor::editedItem(void) const{
-	Item item_ = { itemNameFld->currentItemIndex(), quantityFld->value() };
+	Item item_ = { itemNameFld->currentItemIndex(), (u16) quantityFld->value() };
 	return item_;
 }
 

@@ -492,264 +492,264 @@
         <translation>World</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="124"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="125"/>
         <source>Reset</source>
         <translation>Reset</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="164"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="165"/>
         <source>Egg</source>
         <translation>Egg</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="164"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="165"/>
         <source>Second ability</source>
         <translation>Second ability</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="165"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="166"/>
         <source>Invalid Pokémon</source>
         <translation>Invalid Pokémon</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="166"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="167"/>
         <source>Not tradable in-game</source>
         <translation>Not tradable in-game</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="166"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="167"/>
         <source>Unknown</source>
         <translation>Unknown</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="167"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="168"/>
         <source>Caught</source>
         <translation>Caught</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="192"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="193"/>
         <source>Species</source>
         <translation>Species</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="193"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="194"/>
         <source>Name or nickname</source>
         <translation>Name or nickname</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="194"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="195"/>
         <source>PID</source>
         <translation>PID</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="195"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="196"/>
         <source>Attributes</source>
         <translation>Attributes</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="196"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="197"/>
         <source>Ability</source>
         <translation>Ability</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="197"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="198"/>
         <source>Experience and level</source>
         <translation>Experience and level</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="198"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="199"/>
         <source>Held item</source>
         <translation>Held item</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="199"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="200"/>
         <source>Happiness</source>
         <translation>Happiness</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="200"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="201"/>
         <source>Pokérus</source>
         <translation>Pokérus</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="201"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="202"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="202"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="203"/>
         <source>Flags</source>
         <translation>Flags</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="203"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="204"/>
         <source>Markings</source>
         <translation>Markings</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="211"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="212"/>
         <source>Core information</source>
         <translation>Core information</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="212"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="213"/>
         <source>Original trainer</source>
         <translation>Original trainer</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="213"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="214"/>
         <source>Game version</source>
         <translation>Game version</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="223"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="224"/>
         <source>Copy info from save</source>
         <translation>Copy info from save</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="224"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="225"/>
         <source>Generate shiny IDs</source>
         <translation>Generate shiny IDs</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="226"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="227"/>
         <source>Ball caught with</source>
         <translation>Ball caught with</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="227"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="228"/>
         <source>Location caught</source>
         <translation>Location caught</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="256"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="257"/>
         <source>IV</source>
         <translation>IV</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="257"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="258"/>
         <source>EV</source>
         <translation>EV</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="258"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="259"/>
         <source>Stat</source>
         <translation>Stat</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="261"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="262"/>
         <source>Current HP</source>
         <translation>Current HP</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="268"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="269"/>
         <source>Update stats automatically</source>
         <translation>Update stats automatically</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="280"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="281"/>
         <source>Luster</source>
         <translation>Luster</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="287"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="288"/>
         <source>Main stats</source>
         <translation>Main stats</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="288"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="289"/>
         <source>Contest stats</source>
         <translation>Contest stats</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="307"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="308"/>
         <source>Contest ribbons</source>
         <translation>Contest ribbons</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="320"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="321"/>
         <source>Contest type</source>
         <translation>Contest type</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="321"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="322"/>
         <source>Achievement</source>
         <translation>Achievement</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="325"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="326"/>
         <source>Special ribbons</source>
         <translation>Special ribbons</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="351"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="352"/>
         <source>General</source>
         <translation>General</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="352"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="353"/>
         <source>Met/OT</source>
         <translation>Met/OT</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="353"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="354"/>
         <source>Stats</source>
         <translation>Stats</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="354"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="355"/>
         <source>Moves</source>
         <translation>Moves</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="355"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="356"/>
         <source>Ribbons</source>
         <translation>Ribbons</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="531"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="533"/>
         <source>Genderless</source>
         <translation>Genderless</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="547"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="549"/>
         <source>Unown form: </source>
         <translation>Unown form: </translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="552"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="554"/>
         <source>will evolve into: </source>
         <translation>will evolve into: </translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="564"/>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="588"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="566"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="590"/>
         <source>Invalid version info</source>
         <translation>Invalid version info</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="567"/>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="591"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="569"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="593"/>
         <source>&quot;Invalid Pokémon&quot; flag set</source>
         <translation>&quot;Invalid Pokémon&quot; flag set</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="710"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="719"/>
         <source>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(Generation_III)&apos;&gt;here&lt;/a&gt;)</source>
         <translation>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(Generation_III)&apos;&gt;here&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="712"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="721"/>
         <source>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(GCN)&apos;&gt;here&lt;/a&gt;)</source>
         <translation>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(GCN)&apos;&gt;here&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="717"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="726"/>
         <source>Warning</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="717"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="726"/>
         <source>The version info you specified is invalid. The game will therefore consider this Pokémon invalid.</source>
         <translation>The version info you specified is invalid. The game will therefore consider this Pokémon invalid.</translation>
     </message>
@@ -873,141 +873,141 @@
     <name>MainWindow</name>
     <message>
         <location filename="../src/MainWindow.cpp" line="80"/>
-        <location filename="../src/MainWindow.cpp" line="183"/>
+        <location filename="../src/MainWindow.cpp" line="186"/>
         <source>&amp;File</source>
         <translation>&amp;File</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="97"/>
-        <location filename="../src/MainWindow.cpp" line="190"/>
+        <location filename="../src/MainWindow.cpp" line="193"/>
         <source>&amp;Options</source>
         <translation>&amp;Options</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="98"/>
-        <location filename="../src/MainWindow.cpp" line="191"/>
+        <location filename="../src/MainWindow.cpp" line="194"/>
         <source>&amp;Interface language</source>
         <translation>&amp;Interface language</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="99"/>
-        <location filename="../src/MainWindow.cpp" line="192"/>
+        <location filename="../src/MainWindow.cpp" line="195"/>
         <source>&amp;Dumped names language</source>
         <translation>&amp;Dumped names language</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="185"/>
+        <location filename="../src/MainWindow.cpp" line="188"/>
         <source>&amp;Open...</source>
         <translation>&amp;Open...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="186"/>
+        <location filename="../src/MainWindow.cpp" line="189"/>
         <source>&amp;Save</source>
         <translation>&amp;Save</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="187"/>
+        <location filename="../src/MainWindow.cpp" line="190"/>
         <source>Save &amp;as...</source>
         <translation>Save &amp;as...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="188"/>
+        <location filename="../src/MainWindow.cpp" line="191"/>
         <source>&amp;Exit</source>
         <translation>&amp;Exit</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="196"/>
-        <location filename="../src/MainWindow.cpp" line="197"/>
+        <location filename="../src/MainWindow.cpp" line="199"/>
+        <location filename="../src/MainWindow.cpp" line="200"/>
         <source>Select &amp;automatically</source>
         <translation>Select &amp;automatically</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="279"/>
-        <location filename="../src/MainWindow.cpp" line="305"/>
-        <location filename="../src/MainWindow.cpp" line="418"/>
+        <location filename="../src/MainWindow.cpp" line="282"/>
+        <location filename="../src/MainWindow.cpp" line="308"/>
+        <location filename="../src/MainWindow.cpp" line="425"/>
         <source>GCI save files (*.gci)</source>
         <translation>GCI save files (*.gci)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="280"/>
-        <location filename="../src/MainWindow.cpp" line="306"/>
-        <location filename="../src/MainWindow.cpp" line="419"/>
+        <location filename="../src/MainWindow.cpp" line="283"/>
+        <location filename="../src/MainWindow.cpp" line="309"/>
+        <location filename="../src/MainWindow.cpp" line="426"/>
         <source>Raw save files (*.bin)</source>
         <translation>Raw save files (*.bin)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="282"/>
+        <location filename="../src/MainWindow.cpp" line="285"/>
         <source>The save file has been modified.</source>
         <translation>The save file has been modified.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="283"/>
+        <location filename="../src/MainWindow.cpp" line="286"/>
         <source>Do you want to save your changes?</source>
         <translation>Do you want to save your changes?</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="308"/>
+        <location filename="../src/MainWindow.cpp" line="311"/>
         <source>Could not open file.</source>
         <translation>Could not open file.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="309"/>
+        <location filename="../src/MainWindow.cpp" line="312"/>
         <source>An error occured while reading the specified save file.</source>
         <translation>An error occured while reading the specified save file.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="312"/>
+        <location filename="../src/MainWindow.cpp" line="315"/>
         <source>Open save file</source>
         <translation>Open save file</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="312"/>
+        <location filename="../src/MainWindow.cpp" line="315"/>
         <source>All Files (*)</source>
         <translation>All Files (*)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="328"/>
-        <location filename="../src/MainWindow.cpp" line="334"/>
-        <location filename="../src/MainWindow.cpp" line="339"/>
-        <location filename="../src/MainWindow.cpp" line="363"/>
-        <location filename="../src/MainWindow.cpp" line="398"/>
-        <location filename="../src/MainWindow.cpp" line="409"/>
+        <location filename="../src/MainWindow.cpp" line="331"/>
+        <location filename="../src/MainWindow.cpp" line="337"/>
+        <location filename="../src/MainWindow.cpp" line="342"/>
+        <location filename="../src/MainWindow.cpp" line="366"/>
+        <location filename="../src/MainWindow.cpp" line="405"/>
+        <location filename="../src/MainWindow.cpp" line="416"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="328"/>
+        <location filename="../src/MainWindow.cpp" line="331"/>
         <source>Invalid file size.</source>
         <translation>Invalid file size.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="358"/>
-        <location filename="../src/MainWindow.cpp" line="360"/>
+        <location filename="../src/MainWindow.cpp" line="361"/>
+        <location filename="../src/MainWindow.cpp" line="363"/>
         <source>Warning</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="358"/>
+        <location filename="../src/MainWindow.cpp" line="361"/>
         <source>The backup save slot was loaded because the most recent save slot is corrupt.</source>
         <translation>The backup save slot was loaded because the most recent save slot is corrupt.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="360"/>
+        <location filename="../src/MainWindow.cpp" line="363"/>
         <source>The second backup save slot was loaded because the other ones are corrupt.</source>
         <translation>The second backup save slot was loaded because the other ones are corrupt.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="363"/>
+        <location filename="../src/MainWindow.cpp" line="366"/>
         <source>All save slots are corrupt.</source>
         <translation>All save slots are corrupt.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="381"/>
+        <location filename="../src/MainWindow.cpp" line="388"/>
         <source>No save file loaded</source>
         <translation>No save file loaded</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/MainWindow.cpp" line="384"/>
+        <location filename="../src/MainWindow.cpp" line="391"/>
         <source>%1, %n save(s)</source>
         <translation>
             <numerusform>%1, %n save</numerusform>
@@ -1015,32 +1015,32 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="385"/>
+        <location filename="../src/MainWindow.cpp" line="392"/>
         <source>Colosseum</source>
         <translation>Colosseum</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="385"/>
+        <location filename="../src/MainWindow.cpp" line="392"/>
         <source>XD</source>
         <translation>XD</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="390"/>
+        <location filename="../src/MainWindow.cpp" line="397"/>
         <source>Could not write to file.</source>
         <translation>Could not write to file.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="391"/>
+        <location filename="../src/MainWindow.cpp" line="398"/>
         <source>An error occured while writing to the specified save file.</source>
         <translation>An error occured while writing to the specified save file.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="422"/>
+        <location filename="../src/MainWindow.cpp" line="429"/>
         <source>All files (*)</source>
         <translation>All files (*)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="423"/>
+        <location filename="../src/MainWindow.cpp" line="430"/>
         <source>Save save file</source>
         <translation>Save save file</translation>
     </message>

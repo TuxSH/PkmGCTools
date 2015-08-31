@@ -48,6 +48,11 @@ public:
 	static u8 calculateLevelFromExp(PokemonSpeciesIndex species, u32 experience);
 	static u32 calculateExpFromLevel(PokemonSpeciesIndex species, u8 level);
 
+	static u32 fixExperienceProportionally(PokemonSpeciesIndex oldSpecies, u32 oldExp, PokemonSpeciesIndex newSpecies);
+
+	u32 fixExperienceProportionally(PokemonSpeciesIndex newSpecies);
+	PokemonSpeciesData getThisSpeciesData(void) const;
+	const u32* getExpTable(void) const;
 	void calculateStats(u16 outStats[6]) const;
 	u8 calculateLevelFromExp(void) const;
 	u32 calculateExpFromLevel(u8 lvl) const;

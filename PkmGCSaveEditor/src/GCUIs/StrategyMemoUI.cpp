@@ -99,7 +99,7 @@ void StrategyMemoUI::setCurrentEntry(int index) {
 void StrategyMemoUI::updateEntryNameAndNbEntries(int index, size_t nameIndex) {
 	updateEntryName(index, nameIndex);
 	strategyMemo->entries[index]->species = nameIndexToPkmSpeciesIndex(nameIndex);
-	strategyMemo->nbEntries = strategyMemo->recount();
+	strategyMemo->nbEntries = (u16) strategyMemo->recount();
 	nbEntriesFld->setUnsignedValue(strategyMemo->nbEntries);
 }
 

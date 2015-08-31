@@ -42,7 +42,7 @@ void Pokemon::swap(Pokemon& other) {
 
 
 PokemonAbilityIndex Pokemon::getAbility(void) const {
-	const PokemonSpeciesData dt = getSpeciesData(species);
+	const PokemonSpeciesData dt = getThisSpeciesData();
 	return (pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG]) ? dt.possibleAbilities[1] : dt.possibleAbilities[0];
 }
 
@@ -54,15 +54,6 @@ Pokemon& Pokemon::operator=(Pokemon const& other) {
 	}
 	return *this;
 }
-
-/*
-bool Pokemon::hasSecondAbility(void) const {
-	return isSecondAbilityDefined() && pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG];
-}
-
-void Pokemon::setSpecialAbilityStatus(bool status) {
-	pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG] = status;
-}*/
 
 void Pokemon::swap(Base::Pokemon & other) {
 	return swap((Pokemon&)other);

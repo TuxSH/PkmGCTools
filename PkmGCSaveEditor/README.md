@@ -17,10 +17,6 @@ Editing your Mailbox and your Battle Mode data.
 * Interface: English, French
 * Dumped names (thanks [Tiddlywinks](http://projectpokemon.org/forums/showthread.php?46253-Stars-Pokemon-colosseum-and-XD-hacking-tutorial-part-2-Text-editing&p=205271&viewfull=1#post205271)!): English, French, German, Spanish, Italian, Japanese
 
-##Download links:
-* PkmGCSaveEditor v1.0.0 Win32 binaries:
-* Source: https://github.com/TuxSH/PkmGCTools . You will need CMake ≥ 2.8.12, Qt ≥ 5.2, Boost ≥ 1.55 to compile this project.
-
 ##Special thanks to:
 Ralf (for his "offset tables"), StarsMMD, Tiddlywinks.
 

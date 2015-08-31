@@ -188,12 +188,12 @@ private:
 	QButtonGroup *specialRibbonsFldGroup;
 	QCheckBox *specialRibbonsFlds[12];
 
-
+	LibPkmGC::PokemonSpeciesIndex oldSpecies;
 public slots:
 	void updateMainStats(void);
 	void updatePkmAttributes(void);
 	void updateAbilityList(void);
-	void updateExperienceFromLevel(void);
+	void updateExperienceFromLevel(bool proportionally = false);
 	void updateLevelFromExperience(void);
 	void speciesChangeHandler(void);
 	void PIDChangeHandler(void);
