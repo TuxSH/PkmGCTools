@@ -89,3 +89,7 @@ endif()
 
 install(PROGRAMS $<TARGET_FILE:PkmGCSaveEditor> DESTINATION Debug/bin CONFIGURATIONS Debug)
 install(PROGRAMS $<TARGET_FILE:PkmGCSaveEditor> DESTINATION Release/bin CONFIGURATIONS Release RelWithDebInfo MinSizeRel)
+
+install(FILES "README.md" "LICENSE" DESTINATION Debug/bin CONFIGURATIONS Debug)
+install(FILES "README.md" "LICENSE" DESTINATION Release/bin CONFIGURATIONS Release RelWithDebInfo MinSizeRel)
+

@@ -20,7 +20,13 @@
 #define _LIBPKMGC_STRUCT_MACROS_H
 
 #include <LibPkmGC/Core/IntegerManip.h>
-#include <boost/core/enable_if.hpp>
+
+#include <boost/version.hpp>
+#if BOOST_VERSION < 105600 
+#	include <boost/utility/enable_if.hpp> // < 1.56
+#else
+#	include <boost/core/enable_if.hpp>
+#endif
 
 #ifdef LIBPKMGC_SOURCE
 #	define LIBPKMGC_DEFINE_IMPL_HELPER_MACROS

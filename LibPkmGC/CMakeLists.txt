@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(LibPkmGC)
 
+option(LIBPKMGC_DYN_LIB "Build LibPkmGC as a shared library" ON)
+message("LIBPKMGC_DYN_LIB:\t${LIBPKMGC_DYN_LIB}")
 
 include(FindBoost)
 find_package(Boost 1.55.0 REQUIRED)
@@ -16,9 +18,7 @@ set(LIBPKMGC_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
 
 include_directories(${LIBPKMGC_INCLUDE_DIRS})
 
-option(LIBPKMGC_DYN_LIB "Build LibPkmGC as a shared library" ON)
 
-message("LIBPKMGC_DYN_LIB:\t${LIBPKMGC_DYN_LIB}")
 
 add_definitions(-DLIBPKMGC_SOURCE)
 unset(LIBPKMGC_RUNTIME CACHE)
@@ -30,12 +30,16 @@ if(LIBPKMGC_DYN_LIB)
 	set(LIBPKMGC_RUNTIME $<TARGET_FILE:LibPkmGC> CACHE INTERNAL "Runtime dependencies for projects linking against this library" FORCE)
 	install(FILES $<TARGET_FILE:LibPkmGC> $<TARGET_LINKER_FILE:LibPkmGC> DESTINATION Release/lib/shared CONFIGURATIONS Release RelWithDebInfo MinSizeRel)
 	install(FILES $<TARGET_FILE:LibPkmGC> $<TARGET_LINKER_FILE:LibPkmGC> DESTINATION Debug/lib/shared CONFIGURATIONS Debug)
+	install(FILES "README.md" "LICENSE" DESTINATION Debug/lib/shared CONFIGURATIONS Debug)
+	install(FILES "README.md" "LICENSE" DESTINATION Release/lib/shared CONFIGURATIONS Release RelWithDebInfo MinSizeRel)
 else()
 	set(LIBPKMGC_DEFINITIONS -DLIBPKMGC_STATIC_LIB CACHE INTERNAL "LibPkmGC's definitions" FORCE)
 	add_definitions(-DLIBPKMGC_STATIC_LIB)
 	add_library(LibPkmGC STATIC ${all_files})
 	install(FILES $<TARGET_FILE:LibPkmGC> DESTINATION Release/lib/static CONFIGURATIONS Release RelWithDebInfo MinSizeRel)
 	install(FILES $<TARGET_FILE:LibPkmGC> DESTINATION Debug/lib/static CONFIGURATIONS Debug)
+	install(FILES "README.md" "LICENSE" DESTINATION Debug/lib/static CONFIGURATIONS Debug)
+	install(FILES "README.md" "LICENSE" DESTINATION Release/lib/static CONFIGURATIONS Release RelWithDebInfo MinSizeRel)
 endif()
 
 set_target_properties(LibPkmGC PROPERTIES PREFIX "" IMPORT_PREFIX "") 
