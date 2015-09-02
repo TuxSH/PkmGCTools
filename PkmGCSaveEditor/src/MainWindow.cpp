@@ -157,7 +157,7 @@ void MainWindow::createInterfaceLanguageMenu(void) {
 	connect(interfaceLangGroup, SIGNAL(triggered(QAction*)), this, SLOT(interfaceLanguageChanged(QAction*)));
 
 
-	langPath = QApplication::applicationDirPath().append("/languages/");
+	langPath = QApplication::applicationDirPath().append("/translations/");
 	QStringList fileNames = QDir(langPath).entryList(QStringList("PkmGCSaveEditor_*.qm"));
 
 	QAction *actionToCheck = select_auto;
@@ -221,7 +221,7 @@ QString MainWindow::loadInterfaceLanguage(QString const& language) {
 	QString sys_language = QLocale::system().name();
 	sys_language.truncate(sys_language.lastIndexOf('_'));
 
-	QString langPath = QApplication::applicationDirPath().append("/languages/");
+	QString langPath = QApplication::applicationDirPath().append("/translations/");
 	QString lg = (language == "auto") ? sys_language : language;
 	QString fileName = langPath +QString("PkmGCSaveEditor_%1.qm").arg(lg);
 	if (!QFile(fileName).exists()) {
