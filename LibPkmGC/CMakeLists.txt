@@ -43,7 +43,7 @@ else()
 endif()
 
 install(DIRECTORY "include/LibPkmGC" DESTINATION "Release/include" CONFIGURATIONS Release RelWithDebInfo MinSizeRel COMPONENT Headers)
-install(DIRECTORY "include/LibPkmGC" DESTINATION "Debug/include" CONFIGURATIONS Release RelWithDebInfo MinSizeRel COMPONENT Headers)
+install(DIRECTORY "include/LibPkmGC" DESTINATION "Debug/include" CONFIGURATIONS Debug COMPONENT Headers)
 
 install(FILES "README.md" "LICENSE" DESTINATION "Debug/include" CONFIGURATIONS Debug COMPONENT Headers)
 install(FILES "README.md" "LICENSE" DESTINATION "Release/include" CONFIGURATIONS Release RelWithDebInfo MinSizeRel COMPONENT Headers)
