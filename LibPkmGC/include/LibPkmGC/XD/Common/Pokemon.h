@@ -54,7 +54,8 @@ namespace XD {
 	0x24: u16 SID
 	0x26: u16 TID
 	0x28: u32 PID
-	0x2c -- 0x32 : ?? (0 on shadow pkm)
+	0x2c: u32 12_status_bits appended at the most significant positions ... 
+	0x32 : ?? (0 on shadow pkm)
 	0x33: u8 encounterType
 	0x34 -- 0x37 : Version info (actual region, original region, original language)
 	0x38: GC::PokemonString OTName (10+1 chars = 22 bytes)
