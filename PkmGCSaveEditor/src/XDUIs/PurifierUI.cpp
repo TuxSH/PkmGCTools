@@ -30,7 +30,7 @@ chamber(inChamber), chamberIndex(inChamberIndex) {
 void PurificationChamberWidget::initWidget(void) {
 	mainLayout = new QVBoxLayout;
 
-	for (size_t i = 0; i < 3; ++i) {
+	for (size_t i = 0; i < 4; ++i) {
 		normalPkmFlds[i] = new GCUIs::PokemonDisplayWidget;
 		mainLayout->addWidget(normalPkmFlds[i]);
 	}
@@ -48,7 +48,7 @@ void PurificationChamberWidget::parseData(void) {
 	shadowPkmFld->pkm = chamber->shadowPkm;
 	shadowPkmFld->location = loc;
 	shadowPkmFld->parseData();
-	for (size_t i = 0; i < 3; ++i) {
+	for (size_t i = 0; i < 4; ++i) {
 		++(loc.subIndex);
 		normalPkmFlds[i]->pkm = chamber->normalPkm[i];
 		normalPkmFlds[i]->location = loc;
@@ -57,12 +57,12 @@ void PurificationChamberWidget::parseData(void) {
 }
 
 void PurificationChamberWidget::saveChanges(void) {
-	for (size_t i = 0; i < 3; ++i) normalPkmFlds[i]->saveChanges();
+	for (size_t i = 0; i < 4; ++i) normalPkmFlds[i]->saveChanges();
 	shadowPkmFld->saveChanges();
 }
 
 void PurificationChamberWidget::cancelChanges(void) {
-	for (size_t i = 0; i < 3; ++i) normalPkmFlds[i]->cancelChanges();
+	for (size_t i = 0; i < 4; ++i) normalPkmFlds[i]->cancelChanges();
 	shadowPkmFld->cancelChanges();
 }
 

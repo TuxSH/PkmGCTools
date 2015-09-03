@@ -41,7 +41,7 @@ protected:
 private:
 	QVBoxLayout* mainLayout;
 	
-	GCUIs::PokemonDisplayWidget* normalPkmFlds[3];
+	GCUIs::PokemonDisplayWidget* normalPkmFlds[4];
 
 	GCUIs::PokemonDisplayWidget* shadowPkmFld;
 
