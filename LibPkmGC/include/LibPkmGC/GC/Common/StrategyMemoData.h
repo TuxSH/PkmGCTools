@@ -51,8 +51,8 @@ public:
 
 	virtual void save(void);
 
-	virtual bool registerSpecies(PokemonSpeciesIndex index, u32 PID, u16 SID = 0, u16 TID = 0);
-	virtual bool registerSpecies(Pokemon* pkm);
+	virtual size_t registerSpecies(PokemonSpeciesIndex index, u32 PID, u16 SID = 0, u16 TID = 0);
+	virtual size_t registerSpecies(Pokemon* pkm);
 	void deleteEntry(size_t index);
 
 	size_t recount(void) const;

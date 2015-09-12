@@ -136,72 +136,45 @@ void PokemonDisplayWidget::deletePkm(void) {
 
 
 
-QString PokemonDisplayWidget::selectFilters(void) {
+QString PokemonDisplayWidget::selectFilters(bool op) {
+	const QString allsupportedfilesfilter = tr("All supported files (*.colopkm *.xdpkm *.pkm *.3gpkm)");
 	const QString colofilter = tr("Colosseum Pok\xc3\xa9mon files (*.colopkm)");
 	const QString xdfilter = tr("XD Pok\xc3\xa9mon files (*.xdpkm)");
+	const QString gbafilter = tr("GBA Pok\xc3\xa9mon files (*.pkm *.3gpkm)");
+	const QString gbaencfilter = tr("Encrypted GBA Pok\xc3\xa9mon files (*.pkm *.3gpkm)");
 	const QString allfilesfilter = tr("All files (*)");
-	return ((pkm == NULL || LIBPKMGC_IS_COLOSSEUM(Pokemon, pkm)) ?
-		colofilter + ";;" + xdfilter + ";;" + allfilesfilter :
-		xdfilter + ";;" + colofilter + ";;" + allfilesfilter);
+	QString F[] = { colofilter, xdfilter, gbafilter };
+	if (pkm != NULL) {
+		if (LIBPKMGC_IS_GBA(Pokemon, pkm)) std::swap(F[0], F[2]);
+		else if (LIBPKMGC_IS_XD(Pokemon, pkm)) std::swap(F[0], F[1]);
+	}
+	return (op) ? (allsupportedfilesfilter + ";;" + F[0] + ";;" + F[1] + ";;" + F[2]) :
+		(F[0] + ";;" + F[1] + ";;" + F[2] + ";;" + gbaencfilter);
 }
- 
-void PokemonDisplayWidget::openImportPkmDialog(void) {
-	const QString errmsg = tr("Could not open file.");
-	const QString errmsg2 = tr("An error occured while reading the specified Pok\xc3\xa9mon file.");
 
-	QString fileName = QFileDialog::getOpenFileName(this, tr("Open Pok\xc3\xa9mon file"), lastPkmDirectory, selectFilters());
+void PokemonDisplayWidget::openImportPkmDialog(void) {
+	QString fileName = QFileDialog::getOpenFileName(this, tr("Open Pok\xc3\xa9mon file"), lastPkmDirectory, selectFilters(true));
 	if (fileName.isEmpty()) return;
 
 	QFileInfo fileInfo(fileName);
 	size_t fileSize = (size_t) fileInfo.size();
-	if (fileSize == 0x138) { // Colosseum Pokémon
-		QFile file(fileName);
-		if (!file.open(QIODevice::ReadOnly)) {
-			QMessageBox::critical(this, tr("Error"), errmsg);
-			return;
-		}
-		
-		QByteArray ba = file.readAll();
-		if (ba.size() != 0x138) {
-			QMessageBox::critical(this, tr("Error"), errmsg2);
-			return;
-		}
 
-		Colosseum::Pokemon importedPkm((u8*)ba.data());
-		if (pkm == NULL) pkm = importedPkm.clone();
-		else { *pkm = importedPkm; }
-		parseData();
-		lastPkmDirectory = fileInfo.canonicalPath();
+	switch (fileSize) {
+	case 0x138: readExpected<Colosseum::Pokemon>(fileName); break;
+	case 0xc4: readExpected<XD::Pokemon>(fileName); break;
+	case 100: case 80: readExpected<GBA::Pokemon>(fileName, fileSize); break;
+	default: QMessageBox::critical(this, tr("Error"), tr("Invalid file size.")); break;
 	}
-	else if (fileSize == 0xc4) {
-		QFile file(fileName);
-		if (!file.open(QIODevice::ReadOnly)) {
-			QMessageBox::critical(this, tr("Error"), errmsg);
-			return;
-		}
-		
-		QByteArray ba = file.readAll();
-		if (ba.size() != 0xc4) {
-			QMessageBox::critical(this, tr("Error"), errmsg2);
-			return;
-		}
 
-		XD::Pokemon importedPkm((const u8*)ba.data());
-		if (pkm == NULL) pkm = importedPkm.clone();
-		else { *pkm = importedPkm; }
-		parseData();
-		lastPkmDirectory = fileInfo.canonicalPath();
-	}
-	else {
-		QMessageBox::critical(this, tr("Error"), tr("Invalid file size."));
-	}
 }
 
 void PokemonDisplayWidget::openExportPkmDialog(void) {
 	const QString errmsg = tr("Could not write to file.");
 	const QString errmsg2 = tr("An error occured while writing to the specified Pok\xc3\xa9mon file.");
+	const QString gbaencfilter = tr("Encrypted GBA Pok\xc3\xa9mon files (*.pkm *.3gpkm)");
 
-	QString fileName = QFileDialog::getSaveFileName(this, tr("Save Pok\xc3\xa9mon file"), lastPkmDirectory, selectFilters());
+	QString selectedFilter;
+	QString fileName = QFileDialog::getSaveFileName(this, tr("Save Pok\xc3\xa9mon file"), lastPkmDirectory, selectFilters(false), &selectedFilter);
 	if (fileName.isEmpty()) return;
 	
 	QFile file(fileName);
@@ -213,7 +186,7 @@ void PokemonDisplayWidget::openExportPkmDialog(void) {
 	QString selectedExt = fileName.section(".", -1);
 
 	
-	GC::Pokemon* exportedPkm = pkm;
+	Base::Pokemon* exportedPkm = pkm;
 	bool created = false;
 	
 	if ((selectedExt == "colopkm") && !LIBPKMGC_IS_COLOSSEUM(Pokemon, pkm)) {
@@ -224,10 +197,22 @@ void PokemonDisplayWidget::openExportPkmDialog(void) {
 		exportedPkm = new XD::Pokemon(*(Colosseum::Pokemon*)pkm);
 		created = true;
 	}
+	else if ((selectedExt == "3gpkm" || selectedExt == "pkm") && !LIBPKMGC_IS_GBA(Pokemon, pkm)) {
+		exportedPkm = new GBA::Pokemon(*pkm);
+		created = true;
+	}
 
 	exportedPkm->save();
 
-	if (file.write((const char*)exportedPkm->data, exportedPkm->fixedSize) != (qint64)exportedPkm->fixedSize)
+	char* dta = (char*)exportedPkm->data;
+	QByteArray dt(100, 0);
+
+	if (selectedFilter == gbaencfilter) {
+		static_cast<GBA::Pokemon*>(exportedPkm)->saveEncrypted((u8*)dt.data());
+		dta = dt.data();
+	}
+
+	if (file.write(dta, exportedPkm->fixedSize) != (qint64)exportedPkm->fixedSize)
 		QMessageBox::critical(this, tr("Error"), errmsg2);
 	else
 		lastPkmDirectory = QFileInfo(fileName).canonicalPath();

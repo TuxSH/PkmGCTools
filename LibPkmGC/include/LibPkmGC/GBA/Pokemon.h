@@ -16,42 +16,57 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _LIBPKMGC_GC_POKEMON_H
-#define _LIBPKMGC_GC_POKEMON_H
+#ifndef _LIBPKMGC_GBA_POKEMON_H
+#define _LIBPKMGC_GBA_POKEMON_H
 #include <LibPkmGC/Base/Pokemon.h>
-#include <LibPkmGC/GC/Common/PokemonString.h>
+#include <LibPkmGC/GBA/PokemonString.h>
 
-
-#define LIBPKMGC_GC_EGG_FLAG 0
-#define LIBPKMGC_GC_SECOND_ABILITY_FLAG 1
-#define LIBPKMGC_GC_INVALID_POKEMON_FLAG 2
 
 namespace LibPkmGC {
-namespace GC {
+namespace GBA {
 class LIBPKMGC_DECL Pokemon :
 	public Base::Pokemon {
 public:
-	Pokemon(size_t inSize, const u8* inData = NULL);
-	virtual ~Pokemon(void);
-	virtual Pokemon* clone(void) const = 0;
-	virtual Pokemon* create(void) const = 0;
+	static const size_t size = 100;
+	Pokemon(const u8* inData, u32 flags = 0);
+	static Pokemon* load80(const u8* inData, u32 flags = 0);
+	Pokemon(void);
+	Pokemon(Pokemon const& other);
+	~Pokemon(void);
+	Pokemon* clone(void) const;
+	Pokemon* create(void) const;
 
-	virtual void swap(Pokemon& other);
-	virtual Pokemon& operator=(Pokemon const& other);
+	bool checkChecksum(bool fix = false);
+	bool isEmptyOrInvalid(void) const;
+	void save(void);
+	void saveEncrypted(u8* outData);
+
+	void swap(Pokemon& other);
+	Pokemon& operator=(Pokemon const& other);
 	bool hasSecondAbility(void) const;
 	void setSecondAbilityFlag(bool status);
 	bool isEgg(void) const;
 	void setEggFlag(bool status);
-	
-	u8 GCUnk;
-	u16 shadowPkmID;
-	bool pkmFlags[3];
 
 	void swap(Base::Pokemon& other);
 	Pokemon& operator=(Base::Pokemon const& other);
+	Pokemon(GC::Pokemon const& other);
+
+	void reload(const u8* data = NULL, u32 inFlags = 0);
+
+	u16 checksum;
+	u8 GCFlags;
 
 protected:
-	Pokemon(Pokemon const& other);
+	void load(u32 flags = 0);
+	void loadData(u32 flags = 0);
+	void loadFields(void);
+
+private:
+	u32 _flags;
+	bool _egg, _secondAbility;
+
+	void decryptOrEncrypt(u8* outData);
 };
 
 }

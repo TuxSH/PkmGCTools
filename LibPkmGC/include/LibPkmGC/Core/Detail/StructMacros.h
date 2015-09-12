@@ -37,29 +37,52 @@
 #ifndef BUFFER_NAME
 #define BUFFER_NAME data
 #endif
-
+/*
 #ifndef TARGET_ENDIANNESS
 #define TARGET_ENDINANNESS BE
 #endif
+*/
 
-#define SM_H_TMP_NS_EVAL() TARGET_ENDINANNESS
-#define SM_H_TMP_NS() LibPkmGC::IntegerManip::SM_H_TMP_NS_EVAL()
+using namespace LibPkmGC::IntegerManip;
+#if !defined(TARGET_ENDIANNESS_LE) 
+using namespace BE;
+#else
+using namespace LE;
+#endif
 
-#define LD_FIELD(type,fld,off) fld = SM_H_TMP_NS()::toInteger<type, u8*>(BUFFER_NAME+off)
-#define LD_FIELD_E(type,fld,off,etype) fld = SM_H_TMP_NS()::toEnumInteger<type, etype, u8*>(BUFFER_NAME+off)
-#define LD_FIELD_B(type,fld,off) fld = SM_H_TMP_NS()::toBoolInteger<type,u8*>(BUFFER_NAME+off)
-#define LD_ARRAY(type,ar,sz,off) SM_H_TMP_NS()::toArrayOfIntegers<u8*,type*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz))
-#define LD_ARRAY_E(type,ar,sz,off,etype) SM_H_TMP_NS()::toArrayOfEnumIntegers<type,u8*,etype*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz))
-#define LD_ARRAY_B(type,ar,sz,off) SM_H_TMP_NS()::toArrayOfBoolIntegers<type,u8*,bool*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz))
+#define LD_FIELD(type,fld,off) fld = toInteger<type, u8*>(BUFFER_NAME+off)
+#define LD_FIELD_MAX(type,fld,off,mx) fld = toInteger<type, u8*>(BUFFER_NAME+off); fld = (fld > mx) ? mx : fld
+#define LD_FIELD_CONV(type,fld,off,type2) type fld##_tmp; LD_FIELD_MAX(type,fld##_tmp,off,(type2)-1); fld = (type2) fld##_tmp;
+#define LD_FIELD_E(type,fld,off,etype) fld = toEnumInteger<type, etype, u8*>(BUFFER_NAME+off)
+#define LD_FIELD_E_MAX(type,fld,off,etype,mx) fld = toEnumInteger<type, etype, u8*>(BUFFER_NAME+off); fld = ((u32)fld > (u32)mx) ? (etype)0 : fld
+#define LD_FIELD_B(type,fld,off) fld = toBoolInteger<type,u8*>(BUFFER_NAME+off)
+#define LD_ARRAY(type,ar,sz,off) toArrayOfIntegers<u8*,type*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz))
+#define LD_ARRAY_MAX(type,ar,sz,off,mx) toArrayOfIntegers<u8*,type*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz));\
+for(size_t i__ = 0; i__ < sz; ++i__) ar[i__] = (ar[i__] > mx) ? mx : ar[i__];
+#define LD_ARRAY_CONV(type,ar,sz,off,type2) type ar##_tmp[sz]; toArrayOfIntegers<u8*,type*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz));\
+for(size_t i__ = 0; i__ < sz; ++i__) ar[i__] = (ar##_tmp[i__] > mx) ? mx : ar##_tmp[i__];
+#define LD_ARRAY_E(type,ar,sz,off,etype) toArrayOfEnumIntegers<type,u8*,etype*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz))
+#define LD_ARRAY_E_MAX(type,ar,sz,off,etype,mx) toArrayOfEnumIntegers<type,u8*,etype*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz));\
+for(size_t i__ = 0; i__ < sz; ++i__) ar[i__] = ((u32)ar[i__] > (u32)mx) ? (etype)0 : ar[i__];
+#define LD_ARRAY_B(type,ar,sz,off) toArrayOfBoolIntegers<type,u8*,bool*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz))
 #define LD_BIT_ARRAY2(type,ar,sz,off,st) type ar##_tmp; LD_FIELD(type, ar##_tmp, off); for(int i__ = 0; i__ < sz; ++i__) ar[i__] = (ar##_tmp & (1U << (8*sizeof(type) - 1 - st - i__))) != 0;
 #define LD_BIT_ARRAY(type, ar, sz, off)  LD_BIT_ARRAY2(type,ar,sz,off,0)
 
-#define SV_FIELD(type,fld,off) SM_H_TMP_NS()::fromInteger<type, u8*>(BUFFER_NAME+off, fld)
-#define SV_FIELD_E(type,fld,off,etype) SM_H_TMP_NS()::fromEnumInteger<type, etype, u8*>(BUFFER_NAME+off, fld)
-#define SV_FIELD_B(type,fld,off) SM_H_TMP_NS()::fromBoolInteger<type,u8*>(BUFFER_NAME+off, fld)
-#define SV_ARRAY(type,ar,sz,off) SM_H_TMP_NS()::fromArrayOfIntegers<type*, u8*>(BUFFER_NAME+off, ar, ar+sz)
-#define SV_ARRAY_E(type,ar,sz,off,etype) SM_H_TMP_NS()::fromArrayOfEnumIntegers<type,etype*, u8*>(BUFFER_NAME+off, ar, ar+sz)
-#define SV_ARRAY_B(type,ar,sz,off) SM_H_TMP_NS()::toArrayOfBoolIntegers<type, bool*, u8*>(BUFFER_NAME+off, ar, ar+sz)
+#define SV_FIELD(type,fld,off) fromInteger<type, u8*>(BUFFER_NAME+off, fld)
+#define SV_FIELD_MAX(type,fld,off,mx) fld = (fld > mx) ? mx : fld; fromInteger<type, u8*>(BUFFER_NAME+off, fld)
+#define SV_FIELD_CONV(type,fld,off,type2) fld = (fld > (type2)-1) ? (type2)-1 : fld; fromInteger<type, u8*>(BUFFER_NAME+off, (type)fld)
+#define SV_FIELD_E(type,fld,off,etype) fromEnumInteger<type, etype, u8*>(BUFFER_NAME+off, fld)
+#define SV_FIELD_E_MAX(type,fld,off,etype,mx) fld = ((u32)fld > (u32)mx) ? (etype)0 : fld; fromEnumInteger<type, etype, u8*>(BUFFER_NAME+off, fld)
+#define SV_FIELD_B(type,fld,off) fromBoolInteger<type,u8*>(BUFFER_NAME+off, fld)
+#define SV_ARRAY(type,ar,sz,off) fromArrayOfIntegers<type*, u8*>(BUFFER_NAME+off, ar, ar+sz)
+#define SV_ARRAY_MAX(type,ar,sz,off,mx) for(size_t i__ = 0; i__ < sz; ++i__) ar[i__] = (ar[i__] > mx) ? mx : ar[i__];\
+fromArrayOfIntegers<type*, u8*>(BUFFER_NAME+off, ar, ar+sz)
+#define SV_ARRAY_CONV(type,ar,sz,off,type2) type ar##_tmp[sz]; for(size_t i__=0;i__<sz;++i__) ar##_tmp[i__] = (ar[i__] > mx) ? mx : (type) ar[i__];\
+fromArrayOfIntegers<type*, u8*>(BUFFER_NAME+off, ar, ar+sz)
+#define SV_ARRAY_E(type,ar,sz,off,etype) fromArrayOfEnumIntegers<type,etype*, u8*>(BUFFER_NAME+off, ar, ar+sz)
+#define SV_ARRAY_E_MAX(type,ar,sz,off,etype,mx) for(size_t i__ = 0; i__ < sz; ++i__) ar[i__] = ((u32)ar[i__] > (u32)mx) ? (etype)0 : ar[i__];\
+fromArrayOfEnumIntegers<type,etype*, u8*>(BUFFER_NAME+off, ar, ar+sz)
+#define SV_ARRAY_B(type,ar,sz,off) toArrayOfBoolIntegers<type, bool*, u8*>(BUFFER_NAME+off, ar, ar+sz)
 #define SV_BIT_ARRAY2(type, ar, sz, off, st) type ar##_tmp; LD_FIELD(type, ar##_tmp, off); ar##_tmp &= ~(((1U << sz) - 1) << (8*sizeof(type) - 1 - st - sz));\
 for(int i__ = 0; i__ < sz; ++i__) ar##_tmp |= ((ar[i__]) ? 1U : 0U) << (8*sizeof(type) - 1 - st - i__); SV_FIELD(type, ar##_tmp, off); 
 #define SV_BIT_ARRAY(type, ar, sz, off)  SV_BIT_ARRAY2(type,ar,sz,off,0)
@@ -99,18 +122,20 @@ XD::cls::cls(Colosseum::cls const& other) : GC::cls(XD::cls::size){\
 
 #define LIBPKMGC_GEN_CONVERTER_CTOR(cls) LIBPKMGC_GEN_CONVERTER_CTOR2(cls, 0)
 
-#define LIBPKMGC_GEN_UNIMPLEMENTED_CONVERTER_CTOR(cls)\
-Colosseum::cls::cls(XD::cls const& other) : GC::cls(Colosseum::cls::size, 0){}\
-XD::cls::cls(Colosseum::cls const& other) : GC::cls(XD::cls::size, 0){}
-
-#define LIBPKMGC_GEN_UNIMPLEMENTED_SAVE_EDITING_CONVERTER_CTOR(cls)\
-Colosseum::SaveEditing::cls::cls(XD::SaveEditing::cls const& other) : GC::SaveEditing::cls(Colosseum::SaveEditing::cls::size, 0){}\
-XD::SaveEditing::cls::cls(Colosseum::SaveEditing::cls const& other) : GC::SaveEditing::cls(XD::SaveEditing::cls::size, 0){}
+#define LIBPKMGC_GEN_CONVERTER_CTOR_W_GBA(cls) LIBPKMGC_GEN_CONVERTER_CTOR(cls)\
+XD::cls::cls(GBA::cls const& other) : GC::cls(XD::cls::size){\
+	initWithEmptyData(0);\
+	GC::cls::operator=(other);\
+}\
+Colosseum::cls::cls(GBA::cls const& other) : GC::cls(XD::cls::size){\
+	initWithEmptyData(0);\
+	GC::cls::operator=(other);\
+}
 
 #define LIBPKMGC_GC_GEN_XD_VTF2(cls, flgs) \
 cls& cls::operator=(GC::cls const& other){\
 if(LIBPKMGC_IS_XD(cls,&other)) return (cls&) operator=((cls const&)other);\
-else { deleteFields(); initWithEmptyData(flgs); return (cls&) GC::cls::operator=(other); }\
+else { 	if (this == &other) return *this; deleteFields(); initWithEmptyData(flgs); return (cls&) GC::cls::operator=(other); }\
 }\
 void cls::swap(GC::cls & other){\
 if(LIBPKMGC_IS_XD(cls,&other)) swap((cls&)other);\
@@ -120,7 +145,7 @@ else {cls obj((Colosseum::cls&)other); swap(obj); other.swap(obj);}\
 #define LIBPKMGC_GC_GEN_COL_VTF2(cls, flgs) \
 cls& cls::operator=(GC::cls const& other){\
 if(LIBPKMGC_IS_COLOSSEUM(cls,&other)) return operator=((cls const&)other);\
-else { deleteFields(); initWithEmptyData(flgs); return (cls&) GC::cls::operator=(other); }\
+else { 		if (this == &other) return *this; deleteFields(); initWithEmptyData(flgs); return (cls&) GC::cls::operator=(other); }\
 }\
 void cls::swap(GC::cls & other){\
 if(LIBPKMGC_IS_COLOSSEUM(cls,&other)) swap((cls&)other);\
@@ -169,7 +194,7 @@ template<typename T> bool test_isXD_or_true(T* obj, typename boost::enable_if<De
 
 #define LIBPKMGC_IS_XD(cls, obj) ((obj)->fixedSize == LibPkmGC::XD::cls::size && LibPkmGC::Detail::test_isXD_or_true(obj))
 #define LIBPKMGC_IS_COLOSSEUM(cls, obj) ((obj)->fixedSize == LibPkmGC::Colosseum::cls::size && LibPkmGC::Detail::test_isXD_or_true(obj))
-
+#define LIBPKMGC_IS_GBA(cls, obj) ((obj)->fixedSize == LibPkmGC::GBA::cls::size) 
 
 #endif
 

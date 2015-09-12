@@ -25,7 +25,6 @@ namespace LibPkmGC {
 namespace Colosseum {
 
 /*
-pkm
 	0x00: u16 index
 	0x02 : u16 ? ? ? ? (0 on shadow pkm)
 	0x04 : u32 PID
@@ -44,10 +43,11 @@ pkm
 	0x5c : u32 experience
 	0x60 : u8 currentLevel
 	0x61 --  0x64 : ? ?
-	0x65 : u16 status (u8 on XD)
-	0x65 -- 0x67 : ? ?
-	0x68 : u32 ? ?
-	0x6c--0x78 ? ?
+	0x65 -- 0x77: status info
+	0x65 : u16 status
+	0x69 : s8 turnsOfSleepRemaining
+	0x6b : s8 turnsOfBadPoison
+	0x74 : u32 = pokemonStatusToBitField(status, 0, turnsOfSleepRemaining)
 	0x78 : moves info
 	0x88 : u16 itemHeld
 	0x8a : u16 currentHP
@@ -59,21 +59,27 @@ pkm
 	0xb7 : u8 contestsRibbons[5]
 	0xbc : u8 contestLuster
 	0xbd : u8 specialRibbons[12]
-	0xc9 : u8 unused ?
+	0xc9 : u8 unimplentedRibbons (max. 15)
 	0xca : u8 pkrsStatus
 	0xcb : u8 flags[3] : egg, special ability, invalid pkm
+	0xce : u8 GCUnk
 	0xcf : u8 marks
 	// shadow pkm data ?
-	0xd0--0xd7 : ? ?
+	0xd0: s8 pkrsRemainingDays
+	0xd1--0xd7 : ? ?
+	0xd2: u16 unk2
+	0xd4: u16 unk1
 	0xd8 : u16 shadowPkmID
 	0xda--0xdb : padding ?
 	0xdc : s32 purificationCounter
 	0xe0 : u32 expStored
 	0xe4 : u16 ? ?
 	0xe6 : u16 ? ?
+	0xf8: u8 obedient
 	0xfb : u8 encounterType
 	0xfc--0x138 : ? ? ? ? ? ? ? ? ? ?
 */
+
 class LIBPKMGC_DECL Pokemon : public GC::Pokemon {
 public:
 	static const size_t size = 0x138;
@@ -84,14 +90,13 @@ public:
 	Pokemon* clone(void) const;
 	Pokemon* create(void) const;
 
-	bool isEmptyOrInvalid(void) const;
-
 	void save(void);
 
 	void swap(Pokemon& other);
 	Pokemon& operator=(Pokemon const& other);
 
 	Pokemon(XD::Pokemon const& other);
+	Pokemon(GBA::Pokemon const& other);
 	Pokemon& operator=(GC::Pokemon const& other);
 	void swap(GC::Pokemon & other);
 protected:

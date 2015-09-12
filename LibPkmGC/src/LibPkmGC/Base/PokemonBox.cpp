@@ -26,6 +26,7 @@ PokemonBox::PokemonBox(size_t inSize, const u8* inData) : DataStruct(inSize, inD
 }
 
 void PokemonBox::deleteFields(void) {
+	delete name;
 	for (size_t i = 0; i < 30; ++i)
 		delete pkm[i];
 }

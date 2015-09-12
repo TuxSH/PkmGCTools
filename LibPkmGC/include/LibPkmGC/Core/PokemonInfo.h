@@ -31,8 +31,9 @@ struct LIBPKMGC_DECL VersionInfo {
 	LanguageIndex language;
 
 	void load(u8* data);
-
+	void load(u8 lg, u8 gm); // GBA
 	void save(u8* data);
+	void save(u8& lg, u8& gm); // GBA
 
 	bool isIncomplete(void) const;
 
@@ -964,6 +965,9 @@ enum PokemonStatus {
 	NoStatus = 0, Poisoned = 3, BadlyPoisoned = 4, Paralyzed = 5, Burnt = 6, Frozen = 7, Asleep = 8
 };
 
+LIBPKMGC_DECL u16 pokemonStatusToBitField(PokemonStatus status, s8 turnsOfBadPoison = 0, s8 turnsOfSleepRemaining = 0);
+LIBPKMGC_DECL PokemonStatus pokemonStatusFromBitField(u16 status, s8* turnsOfBadPoison = NULL, s8* turnsOfSleepRemaining = NULL);
+
 struct LIBPKMGC_DECL PokemonSpeciesData {
 	bool isValid;
 	PokemonSpeciesExpGrowthType expGrowthType;
@@ -983,7 +987,7 @@ LIBPKMGC_DECL u16 getPokedexIndexOf(PokemonSpeciesIndex speciesIndex);
 LIBPKMGC_DECL PokemonSpeciesIndex getSpeciesIndexOf(u16 pokedexIndex);
 
 struct LIBPKMGC_DECL PokemonMove {
-	PokemonMoveIndex moveIndex;
+	PokemonMoveIndex move;
 	u8 currentPPs;
 	u8 nbPPUpsUsed;
 

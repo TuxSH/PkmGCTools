@@ -100,11 +100,17 @@ protected:
 private:
 	QTabWidget* tabs;
 
-	QWidget *generalTab, *metTab;
-	QFormLayout *generalTabLayout;
+	QWidget *generalTab;
+	QWidget *metTab;
 	QVBoxLayout *metTabLayout;
 
 	// "General" tab:
+	QVBoxLayout *generalTabLayout;
+	QTabWidget *generalSubTabs;
+
+	QWidget *generalCoreSubTab, *generalStatusSubTab;
+	QFormLayout *generalCoreSubTabLayout, *generalStatusSubTabLayout;
+
 	QComboBox *speciesFld;
 	QHBoxLayout* nameLayout;
 	QLineEdit* nameFld;
@@ -123,9 +129,15 @@ private:
 
 	ItemComboBox* heldItemFld;
 	UnsignedSpinbox<8>* happinessFld;
-	UnsignedSpinbox<8>* pkrsStatusFld;
+	QHBoxLayout* pkrsStatusLayout;
+	UnsignedSpinbox<3>* pkrsDaysRemainingFld;
+	UnsignedSpinbox<4>* pkrsStrainFld;
 
 	QComboBox* statusFld;
+	QSpinBox* turnsOfBadPoisonFld;
+	QSpinBox* turnsOfSleepRemainingFld;
+	QSpinBox* partyPrksDaysRemainingFld;
+
 
 	QGridLayout *flagsLayout;
 	QButtonGroup *flagsButtonGroup;
@@ -140,8 +152,10 @@ private:
 	// "Met" tab:
 	QGroupBox* coreCaptureInfoBox;
 	QFormLayout* coreCaptureInfoLayout;
-	ItemComboBox* ballCaughtWithFld;
 	UnsignedSpinbox<8>* locationCaughtFld;
+	ItemComboBox* ballCaughtWithFld;
+	UnsignedSpinbox<7>* levelMetFld;
+	QCheckBox* obedientFld;
 
 	QGroupBox* OTBox;
 	TrainerInfoLayout* OTField;
@@ -172,7 +186,6 @@ private:
 	// "Moves" tab:
 	QWidget* movesTab;
 	QVBoxLayout* movesTabLayout;
-	//QHBoxLayout* movesTitleLayout;
 	PokemonMoveLayout* moveLayouts[4];
 
 	// "Ribbons" tab:
@@ -197,6 +210,8 @@ public slots:
 	void updateLevelFromExperience(void);
 	void speciesChangeHandler(void);
 	void PIDChangeHandler(void);
+	void updatePkrsDaysRemaining(void);
+	void statusChangeHandler(void);
 
 	void updateFlags(void);
 	void flagsStateChangeHandler(void);

@@ -64,7 +64,7 @@ void GameConfigUI::parseData(void) {
 	SaveSlot* sl = saveSlot_;
 	isXD = LIBPKMGC_IS_XD(SaveEditing::SaveSlot, sl);
 
-	versionFld->disconnect(SIGNAL(versionChanged()));
+	versionFld->disconnect(SIGNAL(versionChanged()), this);
 	versionFld->setInfo(sl->version);
 	connect(versionFld, SIGNAL(versionChanged()), this, SLOT(versionChangeHandler()));
 

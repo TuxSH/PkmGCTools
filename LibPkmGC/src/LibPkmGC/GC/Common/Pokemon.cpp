@@ -23,7 +23,6 @@ namespace LibPkmGC {
 namespace GC {
 
 Pokemon::Pokemon(size_t inSize, const u8* inData) : Base::Pokemon(inSize, inData) {
-	usesPartyData = true;
 }
 
 
@@ -31,35 +30,45 @@ Pokemon::~Pokemon(void)
 {
 }
 
-Pokemon::Pokemon(Pokemon const& other) : Base::Pokemon(other), shadowPkmID(other.shadowPkmID) {
+Pokemon::Pokemon(Pokemon const& other) : Base::Pokemon(other), shadowPkmID(other.shadowPkmID), GCUnk(other.GCUnk) {
+	CL(OTName);
+	CL(name);
 	CP_ARRAY(pkmFlags, 3);
+	setEggFlag(other.isEgg());
+	setSecondAbilityFlag(other.hasSecondAbility());
 }
 void Pokemon::swap(Pokemon& other) { 
-	Base::Pokemon::swap(other); 
-	SW(shadowPkmID); 
+	Base::Pokemon::swap(other);
+	SW(GCUnk);
+	if (other.fixedSize == fixedSize) SW(shadowPkmID);
 	SW_ARRAY(pkmFlags, 3);
-}
-
-
-PokemonAbilityIndex Pokemon::getAbility(void) const {
-	const PokemonSpeciesData dt = getThisSpeciesData();
-	return (pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG]) ? dt.possibleAbilities[1] : dt.possibleAbilities[0];
 }
 
 Pokemon& Pokemon::operator=(Pokemon const& other) {
 	if (this != &other) {
 		Base::Pokemon::operator=(other);
-		CP(shadowPkmID);
+		CP(GCUnk);
+		if(other.fixedSize == fixedSize) CP(shadowPkmID);
+		else shadowPkmID = 0;
 		CP_ARRAY(pkmFlags, 3);
 	}
 	return *this;
 }
 
-void Pokemon::swap(Base::Pokemon & other) {
-	return swap((Pokemon&)other);
+bool Pokemon::hasSecondAbility(void) const {
+	return pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG];
 }
-Pokemon& Pokemon::operator=(Base::Pokemon const& other) {
-	return operator=((Pokemon const&)other);
+
+void Pokemon::setSecondAbilityFlag(bool status) {
+	pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG] = status;
+}
+
+bool Pokemon::isEgg(void) const {
+	return pkmFlags[LIBPKMGC_GC_EGG_FLAG];
+}
+
+void Pokemon::setEggFlag(bool status) {
+	pkmFlags[LIBPKMGC_GC_EGG_FLAG] = status;
 }
 
 }

@@ -49,6 +49,10 @@ void StrategyMemoEntryWidget::generateShinyIDs(void) {
 	firstSIDFld->setUnsignedValue(PID & 0xffff);
 }
 
+void StrategyMemoEntryWidget::truncateMemoFromHere(void) {
+	speciesSelector->setCurrentIndex(0);
+}
+
 void StrategyMemoEntryWidget::initWidget(void) {
 	LanguageIndex lg = generateDumpedNamesLanguage();
 	mainLayout = new QVBoxLayout;
@@ -63,6 +67,7 @@ void StrategyMemoEntryWidget::initWidget(void) {
 	firstPIDFld = new UnsignedSpinbox<32>;
 	PIDText = new QLabel;
 	generateShinyIDsButton = new QPushButton(tr("Generate shiny IDs"));
+	truncateMemoFromHereButton = new QPushButton(tr("Truncate memo from here"));
 
 	for (size_t i = 0; i <= 386; ++i)
 		speciesSelector->addItem(getPokemonSpeciesNameByPkdxIndex(lg, (u16)i));
@@ -77,6 +82,7 @@ void StrategyMemoEntryWidget::initWidget(void) {
 	mainLayout2->addRow(tr("Partial information"), partialInfoCheckBox);
 	mainLayout->addLayout(mainLayout2);
 	mainLayout->addWidget(generateShinyIDsButton);
+	mainLayout->addWidget(truncateMemoFromHereButton);
 
 	mainLayout2->setHorizontalSpacing(20);
 	this->setLayout(mainLayout);
@@ -87,6 +93,7 @@ void StrategyMemoEntryWidget::initWidget(void) {
 	connect(firstTIDFld, SIGNAL(valueChanged(int)), this, SLOT(updatePIDText()));
 	connect(firstSIDFld, SIGNAL(valueChanged(int)), this, SLOT(updatePIDText()));
 	connect(generateShinyIDsButton, SIGNAL(clicked()), this, SLOT(generateShinyIDs()));
+	connect(truncateMemoFromHereButton, SIGNAL(clicked()), this, SLOT(truncateMemoFromHere()));
 }
 
 StrategyMemoEntryWidget::~StrategyMemoEntryWidget(void) {

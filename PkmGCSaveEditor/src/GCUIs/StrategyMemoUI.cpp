@@ -39,6 +39,7 @@ void StrategyMemoUI::initWidget(void) {
 	entrySelector = new QComboBox;
 
 	nbEntriesFld = new UnsignedSpinbox<16>;
+	nbEntriesFld->setDisabled(true);
 	currentEntry = new StrategyMemoEntryWidget;
 	connect(currentEntry, SIGNAL(speciesChanged(int, size_t)), this, SLOT(updateEntryNameAndNbEntries(int, size_t)));
 

@@ -60,13 +60,15 @@ void StrategyMemoData::save(void) {
 	SV_FIELD(u16, nbEntries, 0);
 }
 
-bool StrategyMemoData::registerSpecies(PokemonSpeciesIndex index, u32 PID, u16 SID, u16 TID) {
+size_t StrategyMemoData::registerSpecies(PokemonSpeciesIndex index, u32 PID, u16 SID, u16 TID) {
 	u16 i = 0;
 
-	while ((i < nbEntries) && (index != entries[i++]->species));
-	if ((i == nbEntries) || (nbEntries == 0x1f4)) return false;
+	if (!getSpeciesData(index).isValid) return 501;
+	while (i < nbEntries && index != NoSpecies && index != entries[i++]->species);
+	if (i == nbEntries || nbEntries == 500) return 501;
 
-	StrategyMemoEntry* entry = entries[++nbEntries - 1];
+	i = ++nbEntries - 1;
+	StrategyMemoEntry* entry = entries[i];
 
 	entry->setInfoCompleteness(true);
 	entry->species = index;
@@ -74,10 +76,10 @@ bool StrategyMemoData::registerSpecies(PokemonSpeciesIndex index, u32 PID, u16 S
 	entry->firstTID = TID;
 	entry->firstPID = PID;
 
-	return true;
+	return i;
 }
 
-bool StrategyMemoData::registerSpecies(Pokemon * pkm) {
+size_t StrategyMemoData::registerSpecies(Pokemon * pkm) {
 	return registerSpecies(pkm->species, pkm->PID, pkm->SID, pkm->TID);
 }
 
@@ -95,7 +97,7 @@ void StrategyMemoData::deleteEntry(size_t index) {
 
 size_t StrategyMemoData::recount(void) const {
 	size_t i = 0;
-	while (i < 500 && getSpeciesData(entries[i++]->species).isValid);
+	while (i < 500 && getSpeciesData(entries[i]->species).isValid) ++i;
 	return i;
 }
 

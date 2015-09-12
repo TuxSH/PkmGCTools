@@ -22,7 +22,40 @@
 #include <LibPkmGC/Core/IntegerTypes.h>
 #include <algorithm>
 
+#if defined(LIBPKMGC_SOURCE) && !defined(RET_ILSEQ)
+/* Return code if invalid. (xxx_mbtowc) */
+# define RET_ILSEQ      -1
+/* Return code if no bytes were read. (xxx_mbtowc) */
+//# define RET_TOOFEW     -2
+# define RET_TOOFEW(c)     -2
+
+/* Return code if invalid. (xxx_wctomb) */
+# define RET_ILUNI      -1
+/* Return code if output buffer is too small. (xxx_wctomb, xxx_reset) */
+# define RET_TOOSMALL   -2
+
+#endif
+
+
 namespace LibPkmGC {
+
+namespace Detail {
+
+typedef void* conv_t;
+typedef u32 ucs4_t;
+int ucs2be_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, int n);
+int ucs2be_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, int n);
+int utf8_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char *s, int n);
+int utf8_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, int n);
+
+int pkmgba_mbtowc(conv_t conv, ucs4_t *pwc, const unsigned char* s, int n, bool jap = false);
+int pkmgba_wctomb(conv_t conv, unsigned char *r, ucs4_t wc, int n, bool jap = false);
+
+}
+
+
+namespace GC { class PokemonString; } namespace GBA { class PokemonString;  }
+
 namespace Base {
 
 // Commands (scroll, color etc...) are NOT supported
@@ -45,8 +78,12 @@ public:
 	virtual void load(u8* data, size_t nb) = 0; // nb: number of characters, not counting NULL
 	virtual void save(u8* data, size_t nb) const = 0;
 
+	virtual bool isGBA(void) const = 0;
 
+	bool usesJapaneseCharset(void) const;
+	void setCharset(bool jap);
 protected:
+	bool _japanese;
 	PokemonString(PokemonString const& other);
 
 	
@@ -55,6 +92,13 @@ protected:
 	mutable size_t strSz, strCapacity;
 
 	void resizeStr(void) const;
+
+	u8* _data;
+
+	size_t dataSz;
+	size_t dataCapacity;
+
+	void resizeData(void);
 };
 
 }

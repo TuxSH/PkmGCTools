@@ -16,21 +16,22 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _LIBPKMGC_GC_POKEMON_STRING_H
-#define _LIBPKMGC_GC_POKEMON_STRING_H
+#ifndef _LIBPKMGC_GBA_POKEMON_STRING_H
+#define _LIBPKMGC_GBA_POKEMON_STRING_H
 
 #include <LibPkmGC/Base/PokemonString.h>
 
 namespace LibPkmGC {
-namespace GC {
+namespace GBA {
 
 class LIBPKMGC_DECL PokemonString : public Base::PokemonString {
 public:
-	PokemonString(const char* str = NULL);
-	PokemonString(u8* data, size_t nb);
+	PokemonString(const char* str = NULL, bool jap = false);
+	PokemonString(u8* data, size_t nb, bool jap = false);
 	PokemonString(PokemonString const& other);
 	~PokemonString(void);
 	
+	bool isGBA(void) const;
 	PokemonString* clone(void) const;
 	PokemonString* create(void) const;
 
@@ -44,9 +45,7 @@ public:
 	void load(u8* data, size_t nb);
 	void save(u8* data, size_t nb) const;
 
-	bool isGBA(void) const;
-
-	PokemonString(GBA::PokemonString const& other);
+	PokemonString(GC::PokemonString const& other);
 
 };
 

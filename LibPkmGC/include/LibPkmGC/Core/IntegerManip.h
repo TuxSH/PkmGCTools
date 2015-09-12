@@ -47,7 +47,7 @@ I toInteger(IteratorType const& _bufferIterator, size_t _integerSize = sizeof(I)
 	size_t shift = 0;
 	IteratorType it(_bufferIterator);
 	for (; shift <= 8 * _integerSize - 8; ++it) {
-		ret |= (I(*it) << shift);
+		ret |= (I((u8)*it) << shift);
 		shift += 8;
 	}
 	return ret;
@@ -80,7 +80,7 @@ I toInteger(IteratorType const& _bufferIterator, size_t _integerSize = sizeof(I)
 	IteratorType it(_bufferIterator);
 	size_t shift = 8 * _integerSize - 8;
 	for (;; ++it) {
-		ret |= (I(*it) << shift);
+		ret |= (I((u8)*it) << shift);
 		if (shift == 0) break;
 		else shift -= 8;
 	}

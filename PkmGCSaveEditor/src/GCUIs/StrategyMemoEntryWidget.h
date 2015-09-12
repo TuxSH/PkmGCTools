@@ -47,10 +47,11 @@ public:
 
 signals:
 	void speciesChanged(int index, size_t nameIndex);
-	public slots:
+public slots:
 	void speciesChangeHandler(int nameIndex);
 	void updatePIDText(void);
 	void generateShinyIDs(void);
+	void truncateMemoFromHere(void);
 protected:
 	void initWidget(void);
 
@@ -67,6 +68,7 @@ private:
 	UnsignedSpinbox<32> *firstPIDFld;
 	QLabel* PIDText;
 	QPushButton* generateShinyIDsButton;
+	QPushButton* truncateMemoFromHereButton;
 };
 
 

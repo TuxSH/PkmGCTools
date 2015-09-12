@@ -25,12 +25,15 @@ namespace LibPkmGC {
 namespace XD {
 
 /*
-	0x00: u16 species
-	0x02: u16 itemHeld
+XD::Pokemon
+	0x00: u16 species (cf PokemonInfo.h)
+	0x03: u8 itemHeld (ItemInfo.h)
 	0x04: u16 currentHP
 	0x06: u16 happiness
 	0x08: u16 locationCaught
 	// 0x09 -- 0xd :: ??
+	0x0a: u16 unk1
+	0x0c: u16 unk2
 	0x0e: u8  levelMet
 	0x0f: u8  ballCaughtWith
 	0x10: u8  OTGender (00 male 01 female 02 genderless=none)
@@ -38,11 +41,12 @@ namespace XD {
 	0x12: u8  Contest Luster
 	0x13: u8  pkrsStatus
 	0x14: u8  marks (bitfield)
-	0x15: 0xff ?
+	0x15: s8 pkrsRemainingDays
 	0x16: u16 status (3 psn, 4 psn (toxic ?), 5 par, 6 brn, 7 frzn, 8 slp)
-	0x17: ?
-	0x18 -- 0x1b : ? (0x50)
-	0x1d: u8 pkmFlags
+	0x17: s8 turnsOfBadPoison (max 15.)
+	0x18: s8 turnsOfSleepRemaining (max. 8)
+	0x19 -- 0x1b : ? (0x50)
+	0x1d: u8 pkmFlags | XDPkmFlags
 		bit 7: egg flag
 		bit 6: special (second) ability flag. Pokémon XD's catchable Pkms have a 50% chance to have their special ability
 		bit 5: invalidity flag. MUST **NOT** BE SET for the Pokémon to be considered as valid ("not empty")
@@ -54,15 +58,16 @@ namespace XD {
 	0x24: u16 SID
 	0x26: u16 TID
 	0x28: u32 PID
-	0x2c: u32 12_status_bits appended at the most significant positions ... 
-	0x32 : ?? (0 on shadow pkm)
+	0x2c: u32 = pokemonStatusToBitField(status, 0, turnsOfSleepRemaining)
+	0x30: u8 obedient
+	0x31, 0x32: ??
 	0x33: u8 encounterType
 	0x34 -- 0x37 : Version info (actual region, original region, original language)
 	0x38: GC::PokemonString OTName (10+1 chars = 22 bytes)
 	0x4e: GC::PokemonString name (10+1 chars)
 	0x64: pkm name backup
 	0x7a -- 0x7b: ??
-	0x7c: u16 specialRibbons
+	0x7c: u16 specialRibbons | unimplementedRibbons
 	0x7e -- 0x7f: ??
 	0x80: moves[4]{u16 moveID, u8 basePP (?), u8 nbPPUps}
 	0x90: u16 stats[6]
@@ -74,8 +79,7 @@ namespace XD {
 	0xb8 : u16 ??
 	0xba: shadow pkm id
 	0xbc -- 0xbf : ??? ????
-	0xc0 -- 0xc1 : unused ?
-	0xc2: party identify (lead = 00, 01 otherwise)
+	0xc0 -- 0xc4 : unused ?
 */
 
 class LIBPKMGC_DECL Pokemon : public GC::Pokemon {
@@ -87,18 +91,19 @@ public:
 	~Pokemon(void);
 	Pokemon* clone(void) const;
 	Pokemon* create(void) const;
-
+	bool isEmptyOrInvalid(void) const;
 	void save(void);
 
 	void swap(Pokemon& other);
 	Pokemon& operator=(Pokemon const& other);
 
 	Pokemon(Colosseum::Pokemon const& other);
+	Pokemon(GBA::Pokemon const& other);
 	Pokemon& operator=(GC::Pokemon const& other);
 	void swap(GC::Pokemon & other);
 
 	bool XDPkmFlags[3];
-private:
+protected:
 	void loadFields(void);
 
 };

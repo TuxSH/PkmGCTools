@@ -29,11 +29,11 @@ GroupBattleRule::GroupBattleRule(GroupBattleRule const& other) : Base::DataStruc
 	*this = other;
 }
 void GroupBattleRule::deleteFields(void) {
-	delete bannedItems;
+	delete[] bannedItems;
 }
 
 GroupBattleRule::~GroupBattleRule(void) {
-	delete bannedItems;
+	GroupBattleRule::deleteFields();
 }
 
 void GroupBattleRule::swap(GroupBattleRule & other) {

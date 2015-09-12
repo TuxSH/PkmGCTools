@@ -27,7 +27,8 @@
 namespace LibPkmGC {
 
 LIBPKMGC_FWD_DECL_GC_CLS(Pokemon)
-
+namespace GC { class Pokemon;  }
+namespace GBA { class Pokemon;  }
 
 namespace Base {
 
@@ -75,7 +76,7 @@ public:
 	char getUnownForm(void) const;
 
 	bool isSecondAbilityDefined(void) const;
-	virtual PokemonAbilityIndex getAbility(void) const = 0;
+	PokemonAbilityIndex getAbility(void) const;
 	virtual bool isEmptyOrInvalid(void) const;
 
 	PokemonSpeciesIndex species; //u16
@@ -98,10 +99,12 @@ public:
 	u16 TID;
 	u32 PID;
 
-//	u8 encounterType;
+	u8 encounterType;
 	VersionInfo version;
 
+	bool obedient;
 	bool specialRibbons[12];
+	u8 unimplementedRibbons;
 	//u32 statusFlags;
 
 
@@ -112,20 +115,36 @@ public:
 	u8 contestStats[5];
 	ContestAchievementLevel contestAchievements[5];
 
-	bool usesPartyData; // we will avoid using ptrs here
+	u16 unk1;
+	u16 unk2;
+
+	virtual bool isEgg(void) const = 0;
+	virtual bool hasSecondAbility(void) const = 0;
+	virtual void setEggFlag(bool flag) = 0;
+	virtual void setSecondAbilityFlag(bool flag) = 0;
+	
 
 	struct PokemonComputedPartyData {
+		s8 pkrsDaysRemaining;
 		u16 currentHP;
 		u8  level;
 		PokemonStatus status;
+		s8 turnsOfBadPoison, turnsOfSleepRemaining;
 		u16 stats[6];
 	};
 
 	PokemonComputedPartyData partyData;
+
+	void normalizePkrs(void);
+	void normalizeStatus(void);
+
 	void resetPartyData(void);
 protected:
 	Pokemon(Pokemon const& other);
 	virtual void deleteFields(void);
+private:
+	void copyNonVirtual(Pokemon const& other);
+
 };
 
 }

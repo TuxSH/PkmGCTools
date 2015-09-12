@@ -17,6 +17,7 @@
 */
 
 #include <LibPkmGC/Base/Pokemon.h>
+#include <string>
 
 namespace LibPkmGC {
 
@@ -69,11 +70,11 @@ u32 Pokemon::fixExperienceProportionally(PokemonSpeciesIndex oldSpecies, u32 old
 
 }
 
-Pokemon::Pokemon(size_t inSize, const u8* inData) : DataStruct(inSize, inData) {
+Pokemon::Pokemon(size_t inSize, const u8* inData) : DataStruct(inSize, inData)  {
 }
 
 Pokemon::~Pokemon(void) {
-
+	Pokemon::deleteFields();
 }
 
 
@@ -154,25 +155,52 @@ char Pokemon::getUnownForm(void) const {
 	return getUnownForm(PID);
 }
 
+void Pokemon::normalizePkrs(void) {
+	u8 st = pkrsStatus & 0xf, dr = pkrsStatus >> 4;
+	if (st == 0) {
+		dr = 0;
+		partyData.pkrsDaysRemaining = -1;
+	}
+	else {
+		u8 mx = 1 + (st & 0x3);
+		dr = (dr > mx) ? mx : dr;
+		partyData.pkrsDaysRemaining = (partyData.pkrsDaysRemaining > mx) ? mx : partyData.pkrsDaysRemaining;
+	}
+
+	pkrsStatus = (dr << 4) | st;
+}
+
+void Pokemon::normalizeStatus(void) {
+	partyData.status = (partyData.status != NoStatus && partyData.status < Poisoned && partyData.status > Asleep) ? NoStatus : partyData.status;
+	if (partyData.status != Asleep) partyData.turnsOfSleepRemaining = 0;
+	if (partyData.status != BadlyPoisoned) partyData.turnsOfBadPoison = 0;
+	partyData.turnsOfSleepRemaining = ((u8)partyData.turnsOfSleepRemaining > 7) ? 7 : partyData.turnsOfSleepRemaining;
+	partyData.turnsOfBadPoison = ((u8)partyData.turnsOfBadPoison > 15) ? 15 : partyData.turnsOfBadPoison;
+}
+
 void Pokemon::resetPartyData(void) {
 	updateStats();
 	updateLevelFromExp();
 	partyData.status = NoStatus;
 	partyData.currentHP = partyData.stats[0];
+	partyData.pkrsDaysRemaining = ((pkrsStatus & 0xf0) != 0) ? pkrsStatus & 0xf : -1;
 }
-Pokemon::Pokemon(Pokemon const & other) : Base::DataStruct(other.fixedSize, NULL, true){
-	data = new u8[other.fixedSize];
-	Pokemon::operator=(other);
+Pokemon::Pokemon(Pokemon const & other) : Base::DataStruct(other), OTName(NULL), name(NULL){
+	copyNonVirtual(other);
 }
 void Pokemon::deleteFields(void){
+	delete OTName;
+	delete name;
 }
-/*
-void Pokemon::calculateSpindaSpotsPosition(std::pair<u8,u8>[4]) const{
-	u32 PID_2 = PID;
-}*/
+
+
+PokemonAbilityIndex Pokemon::getAbility(void) const {
+	const PokemonSpeciesData dt = getThisSpeciesData();
+	return (hasSecondAbility()) ? dt.possibleAbilities[1] : dt.possibleAbilities[0];
+}
 
 bool Pokemon::isEmptyOrInvalid(void) const {
-	return (species > 0x19e) || (species == 0) || !getSpeciesData(species).isValid || version.isIncomplete();
+	return (species >= Bonsly) || (species == NoSpecies) || !getSpeciesData(species).isValid || version.isIncomplete();
 }
 
 bool Pokemon::isSecondAbilityDefined(void) const{
@@ -188,8 +216,20 @@ void Pokemon::swap(Pokemon& other) {
 	SW(ballCaughtWith);
 	SW(levelMet);
 	SW(OTGender);
-	SW(OTName);
-	SW(name);
+	if (OTName->isGBA() == other.OTName->isGBA())
+		SW(OTName);
+	else {
+		std::string s1(OTName->toUTF8());
+		OTName->fromUTF8(other.OTName->toUTF8());
+		other.OTName->fromUTF8(s1.c_str());
+	}
+	if (name->isGBA() == other.name->isGBA())
+		SW(name);
+	else {
+		std::string s1(name->toUTF8());
+		name->fromUTF8(other.name->toUTF8());
+		other.name->fromUTF8(s1.c_str());
+	}
 	SW(contestLuster);
 	SW(pkrsStatus);
 	SW(markings);
@@ -199,13 +239,14 @@ void Pokemon::swap(Pokemon& other) {
 	SW(TID);
 	SW(PID);
 
-//	SW(encounterType);
+	if(fixedSize == other.fixedSize) SW(encounterType);
 	SW(version);
 
-	SW(usesPartyData);
 	SW(partyData);
 
-	SW_ARRAY(specialRibbons, 12)
+	SW_ARRAY(specialRibbons, 12);
+	SW(unimplementedRibbons);
+
 	SW_ARRAY(moves, 4);
 	SW_ARRAY(EVs, 6);
 	SW_ARRAY(IVs, 6);
@@ -213,43 +254,63 @@ void Pokemon::swap(Pokemon& other) {
 	SW_ARRAY(contestStats, 5);
 	SW_ARRAY(contestAchievements, 5);
 
+	SW(obedient);
+	SW(unk1);
+	SW(unk2);
+
+	bool e1 = isEgg(), e2 = other.isEgg();
+	setEggFlag(e2); other.setEggFlag(e1);
+
+	bool a1 = hasSecondAbility(), a2 = other.hasSecondAbility();
+	setSecondAbilityFlag(a2); setSecondAbilityFlag(a1);
+}
+
+void Pokemon::copyNonVirtual(Pokemon const& other) {
+	//Pokemon::deleteFields(); nope, don't do that
+	CP(species);
+	CP(heldItem);
+
+	CP(happiness);
+	CP(locationCaught);
+	CP(ballCaughtWith);
+	CP(levelMet);
+	CP(OTGender);
+	CP(contestLuster);
+	CP(pkrsStatus);
+	CP(markings);
+
+	CP(experience);
+	CP(SID);
+	CP(TID);
+	CP(PID);
+
+	if (fixedSize == other.fixedSize) CP(encounterType);
+	CP(version);
+
+	CP_ARRAY(specialRibbons, 12);
+	CP(unimplementedRibbons);
+
+	CP_ARRAY(moves, 4);
+	CP_ARRAY(EVs, 6);
+	CP_ARRAY(IVs, 6);
+
+	CP(partyData);
+	CP_ARRAY(contestStats, 5);
+	CP_ARRAY(contestAchievements, 5);
+
+	CP(obedient);
+	CP(unk1);
+	CP(unk2);
 }
 
 Pokemon & Pokemon::operator=(Pokemon const & other){
 	if (this != &other) {
 		Base::DataStruct::operator=(other);
-		CP(species);
-		CP(heldItem);
-
-		CP(happiness);
-		CP(locationCaught);
-		CP(ballCaughtWith);
-		CP(levelMet);
-		CP(OTGender);
-		CL(OTName)
-		CL(name);
-		CP(contestLuster);
-		CP(pkrsStatus);
-		CP(markings);
-
-		CP(experience);
-		CP(SID);
-		CP(TID);
-		CP(PID);
-
-		//	CP(encounterType);
-		CP(version);
-
-		CP_ARRAY(specialRibbons, 12);
-		CP(usesPartyData);
-		CP(partyData);
-
-		CP_ARRAY(moves, 4);
-		CP_ARRAY(EVs, 6);
-		CP_ARRAY(IVs, 6);
-
-		CP_ARRAY(contestStats, 5);
-		CP_ARRAY(contestAchievements, 5);
+		copyNonVirtual(other);
+		*OTName = *(other.OTName);
+		*name = *(other.name);
+		setEggFlag(other.isEgg());
+		setSecondAbilityFlag(other.hasSecondAbility());
 	}
 	return *this;
 }

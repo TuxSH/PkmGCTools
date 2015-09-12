@@ -4,17 +4,45 @@
 namespace LibPkmGC{
 
 void VersionInfo::load(u8 * data) {
-	LD_FIELD_E(u8, game, 0, GameIndex);
-	LD_FIELD_E(u8, currentRegion, 1, RegionIndex);
-	LD_FIELD_E(u8, originalRegion, 2, RegionIndex);
-	LD_FIELD_E(u8, language, 3, LanguageIndex);
+	LD_FIELD_E_MAX(u8, game, 0, GameIndex, Colosseum_XD);
+	LD_FIELD_E_MAX(u8, currentRegion, 1, RegionIndex, PAL);
+	LD_FIELD_E_MAX(u8, originalRegion, 2, RegionIndex, PAL);
+	LD_FIELD_E_MAX(u8, language, 3, LanguageIndex, Spanish);
+}
+
+void VersionInfo::load(u8 lg, u8 gm) {
+	const LanguageIndex L[] = { NoLanguage, Japanese, English, French, Italian, German, NoLanguage, Spanish };
+	GameIndex G[16] = { NoGame, Sapphire, Ruby, Emerald, FireRed, LeafGreen }; G[15] = Colosseum_XD;
+
+	game = G[(gm > 7) ? 0 : gm];
+	language = L[(lg > 15) ? 0 : lg];
+
+	switch (language){
+	case Japanese: originalRegion = NTSC_J; break;
+	case English: originalRegion = NTSC_U; break;
+	case NoLanguage: originalRegion = NoRegion; break;
+	default: originalRegion = PAL; break;
+	}
+	currentRegion = originalRegion;
+
+}
+
+void VersionInfo::save(u8& lg, u8& gm) {
+	const u8 L[] = { 0, 1, 2, 5, 3, 4, 7 };
+	u8 G[12] = { 0, 4, 5, 1, 2, 3 }; G[11] = 15;
+
+	game = (game > Colosseum_XD) ? NoGame : game;
+	language = (language > Spanish) ? NoLanguage : language;
+
+	gm = G[game];
+	lg = L[language];
 }
 
 void VersionInfo::save(u8 * data) {
-	SV_FIELD_E(u8, game, 0, GameIndex);
-	SV_FIELD_E(u8, currentRegion, 1, RegionIndex);
-	SV_FIELD_E(u8, originalRegion, 2, RegionIndex);
-	SV_FIELD_E(u8, language, 3, LanguageIndex);
+	SV_FIELD_E_MAX(u8, game, 0, GameIndex, Colosseum_XD);
+	SV_FIELD_E_MAX(u8, currentRegion, 1, RegionIndex, PAL);
+	SV_FIELD_E_MAX(u8, originalRegion, 2, RegionIndex, PAL);
+	SV_FIELD_E_MAX(u8, language, 3, LanguageIndex, Spanish);
 }
 
 bool VersionInfo::isIncomplete(void) const {
@@ -22,19 +50,19 @@ bool VersionInfo::isIncomplete(void) const {
 }
 
 void PokemonMove::load(u8 * data) {
-	LD_FIELD_E(u16, moveIndex, 0, PokemonMoveIndex);
+	LD_FIELD_E_MAX(u16, move, 0, PokemonMoveIndex, PsychoBoost);
 	LD_FIELD(u8, currentPPs, 2);
-	LD_FIELD(u8, nbPPUpsUsed, 3);
+	LD_FIELD_MAX(u8, nbPPUpsUsed, 3, 3);
 }
 
 void PokemonMove::save(u8 * data) {
-	SV_FIELD_E(u16, moveIndex, 0, PokemonMoveIndex);
+	SV_FIELD_E_MAX(u16, move, 0, PokemonMoveIndex, PsychoBoost);
 	SV_FIELD(u8, currentPPs, 2);
-	SV_FIELD(u8, nbPPUpsUsed, 3);
+	SV_FIELD_MAX(u8, nbPPUpsUsed, 3, 3);
 }
 
 u8 PokemonMove::calculateMaxPP(void) const {
-	u32 baseMaxPP = (moveIndex > PsychoBoost) ? 0 : (u32)getBaseMoveMaxPPs(moveIndex);
+	u32 baseMaxPP = (move > PsychoBoost) ? 0 : (u32)getBaseMoveMaxPPs(move);
 	return (u8)(baseMaxPP*(100 + (u32)nbPPUpsUsed * 20) / 100);
 }
 
@@ -49,6 +77,40 @@ u8 PokemonMarkings::save(void) const {
 	u8 m = (u8)(((heart) ? 1 : 0) << 3) | (((triangle) ? 1 : 0) << 2);
 	m |= (u8)(((square) ? 1 : 0) << 1) | ((circle) ? 1 : 0);
 	return m;
+}
+
+u16 pokemonStatusToBitField(PokemonStatus status, s8 turnsOfBadPoison, s8 turnsOfSleepRemaining) {
+	static const u8 reverseStatuses[] = { 3, 7, 6, 4, 5 };
+
+	u16 st;
+	status = (status != NoStatus && status < Poisoned && status > Asleep) ? NoStatus : status;
+	if (status == Asleep) st = turnsOfSleepRemaining;
+	else if (status != NoStatus) st = reverseStatuses[status - 3];
+
+	return st;
+}
+
+PokemonStatus pokemonStatusFromBitField(u16 status, s8 * turnsOfBadPoison, s8 * turnsOfSleepRemaining)
+{
+	static const PokemonStatus statuses[] = { Poisoned, Burnt, Frozen, Paralyzed, BadlyPoisoned };
+
+	PokemonStatus ret;
+	s8 tobp = 0, tosr = 0;
+	tosr = (s8)(status & 7);
+	tobp = (s8)((status >> 8) & 0xf);
+	if (tobp != 0) ret = Asleep;
+
+	status >>= 3;
+	for (size_t i = 0; i < 5 && ret == NoStatus; ++i) {
+		if ((status & 1) != 0) status = statuses[i];
+		status >>= 1;
+	}
+
+	if (ret != BadlyPoisoned) tobp = 0;
+
+	if (turnsOfBadPoison != NULL) *turnsOfBadPoison = tobp;
+	if (turnsOfSleepRemaining != NULL) *turnsOfSleepRemaining = tosr;
+	return ret;
 }
 
 u16 getPokedexIndexOf(PokemonSpeciesIndex speciesIndex) {
@@ -5608,8 +5670,9 @@ PokemonSpeciesData getSpeciesData(PokemonSpeciesIndex index) {
 	return speciesData[(size_t)index];
 }
 
+
 const u32* getSpeciesExpTable(PokemonSpeciesIndex index) {
-	if (index > Munchlax) return NULL;
+	if (index > Munchlax) return getSpeciesExpTable(NoSpecies);
 	return expTables[(size_t)getSpeciesData(index).expGrowthType];
 }
 
