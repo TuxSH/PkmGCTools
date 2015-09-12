@@ -30,14 +30,4 @@ u8 UCS4ToGBA(u32 val, bool jp = false, u8 deflt = 0xac);
 }
 }
 
-// We want to tell Git this file is not a rename
-
-/*
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam lobortis gravida nibh, eu euismod magna finibus vel. 
-	In sit amet gravida est. Ut pretium ligula quis dolor tristique, eget malesuada quam dictum. Ut ut tempus sapien. 
-	Morbi ac commodo sapien, ut luctus nisi. Nunc maximus aliquet ullamcorper. Cras laoreet condimentum facilisis. 
-	Sed sit amet justo imperdiet risus fermentum condimentum. Nullam purus justo, lacinia sed nibh non, convallis sollicitudin felis. 
-	Aliquam dignissim, leo ut varius vulputate, ante magna aliquet felis, congue tincidunt risus ante quis magna. Etiam at convallis mauris. 
-	Nunc quis sodales mi.
-*/
 #endif
