@@ -42,8 +42,10 @@ public:
 	void setSecondAbilityFlag(bool status);
 	bool isEgg(void) const;
 	void setEggFlag(bool status);
+	bool isMarkedAsInvalid(void) const;
+	void setInvalidPokemonFlag(bool flag);
 	
-	u8 GCUnk;
+	u8 encounterType;
 	u16 shadowPkmID;
 	bool pkmFlags[3];
 

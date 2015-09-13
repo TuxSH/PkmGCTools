@@ -164,7 +164,6 @@ void PokemonString::fromUTF8(const char * str) {
 		if (s < 0) break;
 		dataSz += s;
 	}
-	assert(dataSz % 2 == 0);
 	_data[dataSz++] = 0;
 	_data[dataSz++] = 0;
 	hasChanged = true;
@@ -172,7 +171,6 @@ void PokemonString::fromUTF8(const char * str) {
 
 const char * PokemonString::toUTF8(void) const {
 	if (!hasChanged) return _str;
-	assert(dataSz % 2 == 0);
 
 	strSz = 3 * (dataSz / 2);
 	resizeStr();
@@ -183,8 +181,6 @@ const char * PokemonString::toUTF8(void) const {
 	size_t offset = 0;
 
 	while (offset < dataSz) {
-		assert(strSz < 3 * (dataSz / 2));
-
 		u32 c;
 		s = ucs2be_mbtowc(NULL, &c, (const unsigned char*)_data + offset, 2);
 		if (s < 0) break;

@@ -47,6 +47,12 @@ public:
 	void setSecondAbilityFlag(bool status);
 	bool isEgg(void) const;
 	void setEggFlag(bool status);
+	bool isMarkedAsInvalid(void) const;
+	void setInvalidPokemonFlag(bool flag);
+
+	bool isTradedFromGC(void) const;
+	void setTradedFromGCFlag(bool flag);
+
 
 	void swap(Base::Pokemon& other);
 	Pokemon& operator=(Base::Pokemon const& other);
@@ -64,7 +70,7 @@ protected:
 
 private:
 	u32 _flags;
-	bool _egg, _secondAbility;
+	bool _egg, _secondAbility, _invalid, _tradedFromGC;
 
 	void decryptOrEncrypt(u8* outData);
 };

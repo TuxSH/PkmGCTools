@@ -10,6 +10,7 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5LinguistTools)
 			
 file(GLOB_RECURSE source_files src/*)
+LIST(APPEND source_files resources/PkmGCSaveEditor.rc)
 
 include_directories(${LIBPKMGC_INCLUDE_DIRS} src/)
 

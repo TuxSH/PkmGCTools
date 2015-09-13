@@ -99,7 +99,8 @@ public:
 	u16 TID;
 	u32 PID;
 
-	u8 encounterType;
+	u8 GCUnk;
+
 	VersionInfo version;
 
 	bool obedient;
@@ -122,7 +123,8 @@ public:
 	virtual bool hasSecondAbility(void) const = 0;
 	virtual void setEggFlag(bool flag) = 0;
 	virtual void setSecondAbilityFlag(bool flag) = 0;
-	
+	virtual bool isMarkedAsInvalid(void) const = 0;
+	virtual void setInvalidPokemonFlag(bool flag) = 0;
 
 	struct PokemonComputedPartyData {
 		s8 pkrsDaysRemaining;

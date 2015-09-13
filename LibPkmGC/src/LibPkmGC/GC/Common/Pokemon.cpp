@@ -30,26 +30,36 @@ Pokemon::~Pokemon(void)
 {
 }
 
-Pokemon::Pokemon(Pokemon const& other) : Base::Pokemon(other), shadowPkmID(other.shadowPkmID), GCUnk(other.GCUnk) {
+Pokemon::Pokemon(Pokemon const& other) : Base::Pokemon(other), shadowPkmID(other.shadowPkmID), encounterType(other.encounterType) {
 	CL(OTName);
 	CL(name);
 	CP_ARRAY(pkmFlags, 3);
-	setEggFlag(other.isEgg());
-	setSecondAbilityFlag(other.hasSecondAbility());
 }
+
 void Pokemon::swap(Pokemon& other) { 
 	Base::Pokemon::swap(other);
-	SW(GCUnk);
-	if (other.fixedSize == fixedSize) SW(shadowPkmID);
+	if (fixedSize == other.fixedSize) {
+		SW(encounterType);
+		SW(shadowPkmID);
+	}
+	else {
+		other.encounterType = encounterType = 0;
+		other.shadowPkmID = shadowPkmID = 0;
+	}
 	SW_ARRAY(pkmFlags, 3);
 }
 
 Pokemon& Pokemon::operator=(Pokemon const& other) {
 	if (this != &other) {
 		Base::Pokemon::operator=(other);
-		CP(GCUnk);
-		if(other.fixedSize == fixedSize) CP(shadowPkmID);
-		else shadowPkmID = 0;
+		if (other.fixedSize == fixedSize) {
+			CP(encounterType);
+			CP(shadowPkmID);
+		}
+		else {
+			encounterType = 0;
+			shadowPkmID = 0;
+		}
 		CP_ARRAY(pkmFlags, 3);
 	}
 	return *this;
@@ -69,6 +79,14 @@ bool Pokemon::isEgg(void) const {
 
 void Pokemon::setEggFlag(bool status) {
 	pkmFlags[LIBPKMGC_GC_EGG_FLAG] = status;
+}
+
+bool Pokemon::isMarkedAsInvalid(void) const {
+	return pkmFlags[LIBPKMGC_GC_INVALID_POKEMON_FLAG];
+}
+
+void Pokemon::setInvalidPokemonFlag(bool status) {
+	pkmFlags[LIBPKMGC_GC_INVALID_POKEMON_FLAG] = status;
 }
 
 }

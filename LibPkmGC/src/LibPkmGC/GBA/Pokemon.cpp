@@ -52,6 +52,7 @@ Pokemon::Pokemon(Pokemon const& other) : Base::Pokemon(other) {
 	CL(name);
 	setEggFlag(other.isEgg());
 	setSecondAbilityFlag(other.hasSecondAbility());
+	setInvalidPokemonFlag(other.isMarkedAsInvalid());
 }
 void Pokemon::swap(Pokemon& other) {
 	Base::Pokemon::swap(other);
@@ -96,9 +97,29 @@ bool Pokemon::isEgg(void) const {
 
 void Pokemon::setEggFlag(bool status) {
 	_egg = status;
+	GCFlags &= ~4;
+	GCFlags |= ((_egg) ? 1 : 0) << 2;
 }
 
+bool Pokemon::isMarkedAsInvalid(void) const {
+	return _invalid;
+}
 
+void Pokemon::setInvalidPokemonFlag(bool flag) {
+	_invalid = flag;
+	GCFlags &= ~1;
+	GCFlags |= ((_invalid) ? 1 : 0);
+}
+
+bool Pokemon::isTradedFromGC(void) const {
+	return _tradedFromGC;
+}
+
+void Pokemon::setTradedFromGCFlag(bool flag) {
+	_tradedFromGC = flag;
+	GCFlags &= ~2;
+	GCFlags |= ((_tradedFromGC) ? 1 : 0) << 1;
+}
 
 void Pokemon::reload(const u8 * data, u32 inFlags) {
 	if (data == NULL) return;
@@ -182,6 +203,10 @@ void Pokemon::loadFields(void) {
 	markings.load(data[27]);
 
 	LD_FIELD(u8, GCFlags, 19);
+	_invalid = (GCFlags & 1) != 0;
+	_tradedFromGC = (GCFlags & 2) != 0;
+	GCUnk = GCFlags >> 3;
+
 	LD_FIELD(u16, checksum, 28);
 	LD_FIELD(u16, unk1, 30);
 	LD_FIELD_E(u16, species, 32, PokemonSpeciesIndex);
@@ -200,7 +225,8 @@ void Pokemon::loadFields(void) {
 	u16 origins;
 	LD_FIELD(u16, origins, 70);
 
-	encounterType = (u8)(origins & 0x7f);
+	levelMet = (u8)(origins & 0x7f);
+	if (levelMet > 100) levelMet = 100;
 	origins >>= 7;
 	u8 gm = (u8)(origins & 0xf);
 	origins >>= 4;
@@ -268,6 +294,8 @@ void Pokemon::loadFields(void) {
 
 	normalizePkrs();
 	normalizeStatus();
+
+	if (!checkChecksum(false)) setInvalidPokemonFlag(true);
 }
 
 
@@ -283,7 +311,7 @@ bool Pokemon::checkChecksum(bool fix) {
 }
 
 bool Pokemon::isEmptyOrInvalid(void) const {
-	return Base::Pokemon::isEmptyOrInvalid() || !const_cast<Pokemon*>(this)->checkChecksum(false);
+	return Base::Pokemon::isEmptyOrInvalid() || !const_cast<Pokemon*>(this)->checkChecksum(false) || (GCFlags & 2) == 0;
 }
 
 void Pokemon::save(void) {
@@ -302,6 +330,12 @@ void Pokemon::save(void) {
 	SV_FIELD(u16, TID, 4);
 	SV_FIELD(u16, SID, 6);
 
+	setTradedFromGCFlag(_tradedFromGC);
+	setInvalidPokemonFlag(_invalid);
+	setEggFlag(_egg);
+	GCFlags &= 7;
+	if (GCUnk > 31) GCUnk = 31;
+	GCFlags |= GCUnk << 3;
 	SV_FIELD(u8, GCFlags, 19);
 	SV_FIELD(u16, unk1, 30);
 	SV_FIELD_E(u16, species, 32, PokemonSpeciesIndex);
@@ -318,8 +352,8 @@ void Pokemon::save(void) {
 	SV_FIELD(u8, locationCaught, 69);
 
 	u16 origins = 0;
-	if (encounterType > 0x7f) encounterType = 0x7f;
-	origins |= encounterType;
+	if (levelMet > 100) levelMet = 100;
+	origins |= levelMet;
 	origins |= (u16) gm << 7;
 	if (ballCaughtWith == 0 || ballCaughtWith > PremierBall) ballCaughtWith = PokeBall;
 	origins |= (u16)ballCaughtWith << 11;

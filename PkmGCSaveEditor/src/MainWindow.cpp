@@ -10,6 +10,9 @@
 #include <QApplication>
 #include <QDir>
 
+
+const QString appName = QString("PkmGCSaveEditor v%1.%2").arg(PKMGCSAVEEDITOR_VERSION_MAJOR).arg(PKMGCSAVEEDITOR_VERSION_MINOR);
+
 using namespace GCUIs;
 using namespace XDUIs;
 using namespace LibPkmGC;
@@ -77,6 +80,8 @@ void MWCentralWidget::openPurifierUI(void) {
 
 
 MainWindow::MainWindow() : QMainWindow(), centralWidget(new MWCentralWidget) {
+	this->setWindowTitle(appName);
+	this->setWindowIcon(QIcon(":/PkmGCSaveEditor.ico"));
 	fileMenu = menuBar()->addMenu(tr("&File"));
 
 	openFileAction = new QAction(this);
@@ -369,12 +374,12 @@ void MainWindow::openSaveFile(void) {
 
 	if (currentSaveSlot == NULL) {
 		currentSaveFileName = "";
-		this->setWindowTitle("PkmGCSaveEditor");
+		this->setWindowTitle(appName);
 		saveFileAction->setDisabled(true);
 		saveFileAsAction->setDisabled(true);
 	}
 	else {
-		this->setWindowTitle("PkmGCSaveEditor - " + currentSaveFileName);
+		this->setWindowTitle(appName + " - " + currentSaveFileName);
 		saveFileAction->setDisabled(false);
 		saveFileAsAction->setDisabled(false);
 	}
@@ -434,7 +439,7 @@ void MainWindow::saveSaveFileAs(void) {
 	}
 	else {
 		lastSaveDirectory = QFileInfo(currentSaveFileName).canonicalPath();
-		this->setWindowTitle("PkmGCSaveEditor - " + currentSaveFileName);
+		this->setWindowTitle(appName + " - " + currentSaveFileName);
 	}
 
 }

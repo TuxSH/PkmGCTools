@@ -17,8 +17,10 @@
 */
 
 #include <LibPkmGC/Core/Crypto.h>
+#include <boost/predef.h>
 #include <cstring>
 using namespace LibPkmGC;
+
 
 #define os_memcpy memcpy
 #define os_memset memset

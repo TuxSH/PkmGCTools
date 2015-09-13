@@ -82,7 +82,7 @@ u8 PokemonMarkings::save(void) const {
 u16 pokemonStatusToBitField(PokemonStatus status, s8 turnsOfBadPoison, s8 turnsOfSleepRemaining) {
 	static const u8 reverseStatuses[] = { 3, 7, 6, 4, 5 };
 
-	u16 st;
+	u16 st = 0;
 	status = (status != NoStatus && status < Poisoned && status > Asleep) ? NoStatus : status;
 	if (status == Asleep) st = turnsOfSleepRemaining;
 	else if (status != NoStatus) st = reverseStatuses[status - 3];
@@ -94,7 +94,7 @@ PokemonStatus pokemonStatusFromBitField(u16 status, s8 * turnsOfBadPoison, s8 * 
 {
 	static const PokemonStatus statuses[] = { Poisoned, Burnt, Frozen, Paralyzed, BadlyPoisoned };
 
-	PokemonStatus ret;
+	PokemonStatus ret = NoStatus;
 	s8 tobp = 0, tosr = 0;
 	tosr = (s8)(status & 7);
 	tobp = (s8)((status >> 8) & 0xf);
@@ -102,7 +102,7 @@ PokemonStatus pokemonStatusFromBitField(u16 status, s8 * turnsOfBadPoison, s8 * 
 
 	status >>= 3;
 	for (size_t i = 0; i < 5 && ret == NoStatus; ++i) {
-		if ((status & 1) != 0) status = statuses[i];
+		if ((status & 1) != 0) ret = statuses[i];
 		status >>= 1;
 	}
 

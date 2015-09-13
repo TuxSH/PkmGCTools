@@ -239,7 +239,7 @@ void Pokemon::swap(Pokemon& other) {
 	SW(TID);
 	SW(PID);
 
-	if(fixedSize == other.fixedSize) SW(encounterType);
+	SW(GCUnk);
 	SW(version);
 
 	SW(partyData);
@@ -263,6 +263,9 @@ void Pokemon::swap(Pokemon& other) {
 
 	bool a1 = hasSecondAbility(), a2 = other.hasSecondAbility();
 	setSecondAbilityFlag(a2); setSecondAbilityFlag(a1);
+
+	bool i1 = isMarkedAsInvalid(), i2 = other.isMarkedAsInvalid();
+	setInvalidPokemonFlag(i2); setInvalidPokemonFlag(i1);
 }
 
 void Pokemon::copyNonVirtual(Pokemon const& other) {
@@ -284,7 +287,7 @@ void Pokemon::copyNonVirtual(Pokemon const& other) {
 	CP(TID);
 	CP(PID);
 
-	if (fixedSize == other.fixedSize) CP(encounterType);
+	CP(GCUnk);
 	CP(version);
 
 	CP_ARRAY(specialRibbons, 12);
@@ -311,6 +314,7 @@ Pokemon & Pokemon::operator=(Pokemon const & other){
 		*name = *(other.name);
 		setEggFlag(other.isEgg());
 		setSecondAbilityFlag(other.hasSecondAbility());
+		setInvalidPokemonFlag(other.isMarkedAsInvalid());
 	}
 	return *this;
 }

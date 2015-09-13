@@ -37,18 +37,11 @@ void Pokemon::swap(Base::Pokemon & other) {
 	if (LIBPKMGC_IS_GBA(Pokemon, &other)) swap((Pokemon&)other);
 	else {
 		GC::Pokemon& gco = static_cast<GC::Pokemon&>(other);
-		//bool inval = (GCFlags & 1) != 0; by default always true until the Pkm is traded to Colo/XD
-		bool inval = !checkChecksum(false);
-		u8 GCUnk = GCFlags >> 3;
 		Base::Pokemon::swap(other);
-		std::swap(GCUnk, gco.GCUnk);
-		std::swap(inval, gco.pkmFlags[LIBPKMGC_GC_INVALID_POKEMON_FLAG]);
-		bool tradedFromColoXD = true;
-		bool flgs[] = { _egg, inval, tradedFromColoXD };
+		setTradedFromGCFlag(true);
+		GCFlags &= 7;
 		if (GCUnk > 31) GCUnk = 31;
-		GCFlags = GCUnk << 3;
-		for (size_t i = 0; i < 3; ++i)
-			GCFlags |= flgs[i] << (2 - i);
+		GCFlags |= GCUnk << 3;
 	}
 }
 
@@ -61,13 +54,10 @@ Pokemon& Pokemon::operator=(Base::Pokemon const& other) {
 		initWithEmptyData(1);
 		Base::Pokemon::operator=(other);
 
-		GC::Pokemon const& gco = static_cast<GC::Pokemon const&>(other);
-		bool tradedFromColoXD = true;
-		bool flgs[] = { _egg, gco.pkmFlags[LIBPKMGC_GC_INVALID_POKEMON_FLAG], tradedFromColoXD };
-		
-		GCFlags = gco.GCUnk << 3;
-		for (size_t i = 0; i < 3; ++i)
-			GCFlags |= flgs[i] << (2 - i);
+		setTradedFromGCFlag(true);
+		GCFlags &= 7;
+		if (GCUnk > 31) GCUnk = 31;
+		GCFlags |= GCUnk << 3;
 		return *this;
 	}
 }
@@ -91,9 +81,7 @@ Pokemon& Pokemon::operator=(Base::Pokemon const& other) {
 		deleteFields();
 		initWithEmptyData();
 		Base::Pokemon::operator=(other);
-		GBA::Pokemon const& gbao = static_cast<GBA::Pokemon const&>(other);
-		GCUnk = gbao.GCFlags >> 3;
-		pkmFlags[LIBPKMGC_GC_INVALID_POKEMON_FLAG] = !(((GBA::Pokemon&)(other)).checkChecksum(false));
+		if (GCUnk > 31) GCUnk = 31;
 		return *this;
 	}
 	else return operator=((Pokemon const&)other);

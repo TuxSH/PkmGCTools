@@ -477,18 +477,6 @@ void PokemonUI::parseData(void){
 	partyPrksDaysRemainingFld->setValue(pkm->pkrsStatus >> 4);
 	updatePkrsDaysRemaining();
 
-	/*if ((pkm->pkrsStatus & 0xf) == 0) {
-		pkrsDaysRemainingFld->setValue(0);
-		pkrsDaysRemainingFld->setDisabled(true);
-		partyPrksDaysRemainingFld->setValue(-1);
-		partyPrksDaysRemainingFld->setDisabled(true);
-	}
-	else {
-		pkrsDaysRemainingFld->setUnsignedRange(0, (pkm->pkrsStatus & 0x3) + 1);
-		partyPrksDaysRemainingFld->setRange(0, (pkm->pkrsStatus & 0x3) + 1);
-		pkrsDaysRemainingFld->setUnsignedValue(pkm->pkrsStatus >> 4);
-		partyPrksDaysRemainingFld->setValue(pkm->pkrsStatus >> 4);
-	}*/
 	connect(pkrsStrainFld, SIGNAL(valueChanged(int)), this, SLOT(updatePkrsDaysRemaining()));
 
 
@@ -556,7 +544,10 @@ void PokemonUI::saveChanges(void){
 	pkm->happiness = (u8)happinessFld->unsignedValue();
 	pkm->pkrsStatus = (u8)((pkrsDaysRemainingFld->unsignedValue() << 4) | pkrsStrainFld->unsignedValue());
 	pkm->partyData.pkrsDaysRemaining = (s8)(partyPrksDaysRemainingFld->value());
+
 	pkm->partyData.status = (statusFld->currentIndex() == 0) ? NoStatus : (PokemonStatus)(2 + statusFld->currentIndex());
+	pkm->partyData.turnsOfBadPoison = (s8)turnsOfBadPoisonFld->value();
+	pkm->partyData.turnsOfSleepRemaining = (s8)turnsOfSleepRemainingFld->value();
 
 	QCheckBox* g1[] = { eggFlagCheckBox, secondAbilityFlagCheckBox, invalidPokemonCheckBox,
 						notTradableInGameFlagCheckBox, unknownFlagCheckBox, caughtFlagCheckBox };

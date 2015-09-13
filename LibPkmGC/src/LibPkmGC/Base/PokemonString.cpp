@@ -54,7 +54,6 @@ PokemonString::~PokemonString(void) {
 
 PokemonString & PokemonString::operator=(PokemonString const & other) {
 	if (this != &other) {
-		assert(isGBA() == other.isGBA());
 		hasChanged = true;
 		strSz = other.strSz;
 		_japanese = other._japanese;
