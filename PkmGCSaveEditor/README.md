@@ -2,9 +2,13 @@
 PkmGCSaveEditor is a cross-platform, open source (GPLv3) Pokémon Colosseum and Pokémon XD **save file editor**. It comes with its backend library, LibPkmGC (LPGLv3) (not documented yet).
 
 ##Current features:
-* You can edit all of your Pokémon. You can import and export them as well, including from Colosseum to XD and vice-versa. You can edit the information specific to Shadow Pokémon, though.
+* You can edit all of your Pokémon, import and export them. You can NOT edit the information specific to Shadow Pokémon, though.
+	* GBA Pokémon are **fully** supported as well.
+	* As a consequence conversion between Colosseum, XD and GBA Pokémon is **fully** supported. 
+		* It is done (almost) exactly like it is in Colosseum/XD during a GC<->GBA trade (meaning, for example, that the data specific to shadow Pokémon is lost).
+		* Please note that A-Save discards all party-related information (e.g status alteration). The Devil is in the detail...
 * You can edit your game configuration. In particular, you can change your save language.
-* You can edit your trainer info (name, IDs, gender (!), money and Pokécoupons), your bag and your Party.
+* You can edit your trainer info (name, IDs, gender (yes, you can edit it even though it will have no graphical effect :p), money and Pokécoupons), your bag and your Party.
 * You can edit your PC (both Pokémon and items).
 * You can edit your Daycare.
 * You can edit your Strategy Memo.
