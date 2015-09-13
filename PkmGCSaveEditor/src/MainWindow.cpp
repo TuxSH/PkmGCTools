@@ -364,7 +364,7 @@ void MainWindow::openSaveFile(void) {
 		currentSaveSlot = saveFile->getMostRecentValidSlot(0, &slIndex);
 		if (slIndex == 1)
 			QMessageBox::warning(this, tr("Warning"), tr("The backup save slot was loaded because the most recent save slot is corrupt."));
-		else if (slIndex == 2) // Colosseum only
+		else if (slIndex == 2) // Can only happen for Colosseum
 			QMessageBox::warning(this, tr("Warning"), tr("The second backup save slot was loaded because the other ones are corrupt."));
 
 		if (currentSaveSlot == NULL)
