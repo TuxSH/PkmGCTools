@@ -73,6 +73,7 @@ public slots:
 	void interfaceLanguageChanged(QAction* action);
 	void dumpedNamesLanguageChanged(QAction* action);
 
+	void changeIgnoreDataCorruptionStatus(void);
 
 
 protected:
@@ -92,11 +93,11 @@ private:
 	QAction *openFileAction, *saveFileAction, *saveFileAsAction, *exitAction;
 
 	QMenu *optionsMenu;
-	QAction* ignoreDataCorruptionAction;
 	QMenu* interfaceLangSubMenu;
 	QActionGroup *interfaceLangGroup;
 	QMenu* dumpedNamesLangSubMenu;
 	QActionGroup *dumpedNamesLangGroup;
+	QAction* ignoreDataCorruptionAction;
 	QSettings *settings;
 
 	QTranslator translator, translatorQt;

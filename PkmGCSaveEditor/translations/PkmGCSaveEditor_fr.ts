@@ -757,49 +757,49 @@
         <translation>Rubans</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="620"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="611"/>
         <source>Genderless</source>
         <translation>Asexué</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="636"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="627"/>
         <source>Unown form: </source>
         <translation>Forme Zarbi : </translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="641"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="632"/>
         <source>will evolve into: </source>
         <translation>évoluera en : </translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="653"/>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="677"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="644"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="668"/>
         <source>Invalid version info</source>
         <translation>Infos de version invalides</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="656"/>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="680"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="647"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="671"/>
         <source>&quot;Invalid Pokémon&quot; flag set</source>
         <translation>Drapeau &quot;Pokémon invalide&quot; activé</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="841"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="832"/>
         <source>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(Generation_III)&apos;&gt;here&lt;/a&gt;)</source>
         <translation>Lieu de capture (cf. &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(Generation_III)&apos;&gt;Bulbapedia&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="843"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="834"/>
         <source>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(GCN)&apos;&gt;here&lt;/a&gt;)</source>
         <translation>Lieu de capture (cf. &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(GCN)&apos;&gt;Bulbapedia&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="848"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="839"/>
         <source>Warning</source>
         <translation>Avertissement</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="848"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="839"/>
         <source>The version info you specified is invalid. The game will therefore consider this Pokémon invalid.</source>
         <translation>Les informations sur la version du jeu  que vous avez entrées sont invalides. Le jeu considérera de ce fait ce Pokémon invalide.</translation>
     </message>
@@ -894,32 +894,32 @@
 <context>
     <name>MWCentralWidget</name>
     <message>
-        <location filename="../src/MainWindow.cpp" line="44"/>
+        <location filename="../src/MainWindow.cpp" line="47"/>
         <source>Game configuration</source>
         <translation>Configuration du jeu</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="45"/>
+        <location filename="../src/MainWindow.cpp" line="48"/>
         <source>Trainer info, Party and Bag</source>
         <translation>Infos dresseur, Equipe et Sac</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="46"/>
+        <location filename="../src/MainWindow.cpp" line="49"/>
         <source>PC</source>
         <translation>PC</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="47"/>
+        <location filename="../src/MainWindow.cpp" line="50"/>
         <source>Daycare</source>
         <translation>Pension</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="48"/>
+        <location filename="../src/MainWindow.cpp" line="51"/>
         <source>Strategy memo</source>
         <translation>Mémo</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="49"/>
+        <location filename="../src/MainWindow.cpp" line="52"/>
         <source>Purifier</source>
         <translation>Purificateur</translation>
     </message>
@@ -927,142 +927,147 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/MainWindow.cpp" line="80"/>
-        <location filename="../src/MainWindow.cpp" line="186"/>
+        <location filename="../src/MainWindow.cpp" line="85"/>
+        <location filename="../src/MainWindow.cpp" line="197"/>
         <source>&amp;File</source>
         <translation>&amp;Fichier</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="97"/>
-        <location filename="../src/MainWindow.cpp" line="193"/>
+        <location filename="../src/MainWindow.cpp" line="102"/>
+        <location filename="../src/MainWindow.cpp" line="204"/>
         <source>&amp;Options</source>
         <translation>&amp;Options</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="98"/>
-        <location filename="../src/MainWindow.cpp" line="194"/>
+        <location filename="../src/MainWindow.cpp" line="103"/>
+        <location filename="../src/MainWindow.cpp" line="205"/>
         <source>&amp;Interface language</source>
         <translation>Langue de l&apos;&amp;interface</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="99"/>
-        <location filename="../src/MainWindow.cpp" line="195"/>
+        <location filename="../src/MainWindow.cpp" line="104"/>
+        <location filename="../src/MainWindow.cpp" line="206"/>
         <source>&amp;Dumped names language</source>
         <translation>Langue des noms &amp;extraits</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="188"/>
+        <location filename="../src/MainWindow.cpp" line="199"/>
         <source>&amp;Open...</source>
         <translation>&amp;Ouvrir...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="189"/>
+        <location filename="../src/MainWindow.cpp" line="200"/>
         <source>&amp;Save</source>
         <translation>&amp;Enregistrer</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="190"/>
+        <location filename="../src/MainWindow.cpp" line="201"/>
         <source>Save &amp;as...</source>
         <translation>Enregistrer &amp;sous...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="191"/>
+        <location filename="../src/MainWindow.cpp" line="202"/>
         <source>&amp;Exit</source>
         <translation>&amp;Quitter</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="199"/>
-        <location filename="../src/MainWindow.cpp" line="200"/>
+        <location filename="../src/MainWindow.cpp" line="210"/>
+        <location filename="../src/MainWindow.cpp" line="211"/>
         <source>Select &amp;automatically</source>
         <translation>Sélectionner &amp;automatiquement</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="282"/>
-        <location filename="../src/MainWindow.cpp" line="308"/>
-        <location filename="../src/MainWindow.cpp" line="425"/>
+        <location filename="../src/MainWindow.cpp" line="219"/>
+        <source>Ignore data corruption</source>
+        <translation>Ignorer la corruption des données</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="298"/>
+        <location filename="../src/MainWindow.cpp" line="324"/>
+        <location filename="../src/MainWindow.cpp" line="441"/>
         <source>GCI save files (*.gci)</source>
         <translation>Fichiers de sauvegarde GCI (*.gci)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="283"/>
-        <location filename="../src/MainWindow.cpp" line="309"/>
-        <location filename="../src/MainWindow.cpp" line="426"/>
+        <location filename="../src/MainWindow.cpp" line="299"/>
+        <location filename="../src/MainWindow.cpp" line="325"/>
+        <location filename="../src/MainWindow.cpp" line="442"/>
         <source>Raw save files (*.bin)</source>
         <translation>Fichiers de sauvegarde bruts (*.bin)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="285"/>
+        <location filename="../src/MainWindow.cpp" line="301"/>
         <source>The save file has been modified.</source>
         <translation>Le fichier de sauvegarde a été modifié.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="286"/>
+        <location filename="../src/MainWindow.cpp" line="302"/>
         <source>Do you want to save your changes?</source>
         <translation>Voulez-vous enregistrer vos modifications ?</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="311"/>
+        <location filename="../src/MainWindow.cpp" line="327"/>
         <source>Could not open file.</source>
         <translation>Impossible d&apos;ouvrir le fichier.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="312"/>
+        <location filename="../src/MainWindow.cpp" line="328"/>
         <source>An error occured while reading the specified save file.</source>
         <translation>Une erreur s&apos;est produite durant la lecture du fichier de sauvegarde.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="315"/>
+        <location filename="../src/MainWindow.cpp" line="331"/>
         <source>Open save file</source>
         <translation>Ouvrir fichier de sauvegarde</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="315"/>
+        <location filename="../src/MainWindow.cpp" line="331"/>
         <source>All Files (*)</source>
         <translation>Tous les fichiers (*)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="331"/>
-        <location filename="../src/MainWindow.cpp" line="337"/>
-        <location filename="../src/MainWindow.cpp" line="342"/>
-        <location filename="../src/MainWindow.cpp" line="366"/>
-        <location filename="../src/MainWindow.cpp" line="405"/>
-        <location filename="../src/MainWindow.cpp" line="416"/>
+        <location filename="../src/MainWindow.cpp" line="347"/>
+        <location filename="../src/MainWindow.cpp" line="353"/>
+        <location filename="../src/MainWindow.cpp" line="358"/>
+        <location filename="../src/MainWindow.cpp" line="382"/>
+        <location filename="../src/MainWindow.cpp" line="421"/>
+        <location filename="../src/MainWindow.cpp" line="432"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="331"/>
+        <location filename="../src/MainWindow.cpp" line="347"/>
         <source>Invalid file size.</source>
         <translation>Taille de fichier invalide</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="361"/>
-        <location filename="../src/MainWindow.cpp" line="363"/>
+        <location filename="../src/MainWindow.cpp" line="377"/>
+        <location filename="../src/MainWindow.cpp" line="379"/>
         <source>Warning</source>
         <translation>Avertissement</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="361"/>
+        <location filename="../src/MainWindow.cpp" line="377"/>
         <source>The backup save slot was loaded because the most recent save slot is corrupt.</source>
         <translation>L&apos;emplacement de sauvegarde de secours a été chargé car l&apos;emplacement le plus récent est corrompu</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="363"/>
+        <location filename="../src/MainWindow.cpp" line="379"/>
         <source>The second backup save slot was loaded because the other ones are corrupt.</source>
         <translation>Le deuxième emplacement de sauvegarde de secours a été chargé car l&apos;emplacement le plus récent est corrompu</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="366"/>
+        <location filename="../src/MainWindow.cpp" line="382"/>
         <source>All save slots are corrupt.</source>
         <translation>Tous les emplacements de sauvegarde sont corrompus.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="388"/>
+        <location filename="../src/MainWindow.cpp" line="404"/>
         <source>No save file loaded</source>
         <translation>Aucune sauvegarde chargée</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/MainWindow.cpp" line="391"/>
+        <location filename="../src/MainWindow.cpp" line="407"/>
         <source>%1, %n save(s)</source>
         <translation>
             <numerusform>%1, %n sauvegarde</numerusform>
@@ -1070,32 +1075,32 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="392"/>
+        <location filename="../src/MainWindow.cpp" line="408"/>
         <source>Colosseum</source>
         <translation>Colosseum</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="392"/>
+        <location filename="../src/MainWindow.cpp" line="408"/>
         <source>XD</source>
         <translation>XD</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="397"/>
+        <location filename="../src/MainWindow.cpp" line="413"/>
         <source>Could not write to file.</source>
         <translation>Impossible d&apos;écrire dans le fichier.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="398"/>
+        <location filename="../src/MainWindow.cpp" line="414"/>
         <source>An error occured while writing to the specified save file.</source>
         <translation>Une erreur s&apos;est produite pendant l&apos;écriture des données sur le fichier de sauvegarde.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="429"/>
+        <location filename="../src/MainWindow.cpp" line="445"/>
         <source>All files (*)</source>
         <translation>Tous les fichiers (*)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="430"/>
+        <location filename="../src/MainWindow.cpp" line="446"/>
         <source>Save save file</source>
         <translation>Sauvegarder fichier de sauvegarde</translation>
     </message>

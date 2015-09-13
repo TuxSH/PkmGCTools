@@ -102,16 +102,16 @@ MainWindow::MainWindow() : QMainWindow(), centralWidget(new MWCentralWidget) {
 	optionsMenu = menuBar()->addMenu(tr("&Options"));
 	interfaceLangSubMenu = optionsMenu->addMenu(tr("&Interface language"));
 	dumpedNamesLangSubMenu = optionsMenu->addMenu(tr("&Dumped names language"));
-
+	ignoreDataCorruptionAction = new QAction(this);
+	ignoreDataCorruptionAction->setCheckable(true);
+	optionsMenu->addAction(ignoreDataCorruptionAction);
 	
 	setCentralWidget(centralWidget);
 
-	connect(openFileAction, SIGNAL(triggered()), this, SLOT(openSaveFile()));
-	connect(saveFileAction, SIGNAL(triggered()), this, SLOT(saveSaveFile()));
-	connect(saveFileAsAction, SIGNAL(triggered()), this, SLOT(saveSaveFileAs()));
-	connect(exitAction, SIGNAL(triggered()), this, SLOT(close()));
+
 
 	loadSettings();
+	ignoreDataCorruptionAction->setChecked(ignoreDataCorruption);
 	createInterfaceLanguageMenu();
 	createDumpedNamesLanguageMenu();
 	interfaceLanguageChanged(interfaceLangGroup->checkedAction());
@@ -121,6 +121,12 @@ MainWindow::MainWindow() : QMainWindow(), centralWidget(new MWCentralWidget) {
 
 	saveFileAction->setDisabled(true);
 	saveFileAsAction->setDisabled(true);
+
+	connect(openFileAction, SIGNAL(triggered()), this, SLOT(openSaveFile()));
+	connect(saveFileAction, SIGNAL(triggered()), this, SLOT(saveSaveFile()));
+	connect(saveFileAsAction, SIGNAL(triggered()), this, SLOT(saveSaveFileAs()));
+	connect(exitAction, SIGNAL(triggered()), this, SLOT(close()));
+	connect(ignoreDataCorruptionAction, SIGNAL(triggered()), this, SLOT(changeIgnoreDataCorruptionStatus()));
 }
 
 void MainWindow::createDumpedNamesLanguageMenu(void) {
@@ -209,6 +215,8 @@ void MainWindow::updateText(void) {
 
 	for (QList<QAction*>::iterator it = actions2.begin() + 1; it != actions2.end(); ++it)
 		(*it)->setText(VersionInfoLayout::languageNames()[(*it)->data().toInt()]);
+
+	ignoreDataCorruptionAction->setText(tr("Ignore data corruption"));
 }
 
 
@@ -243,7 +251,6 @@ QString MainWindow::loadInterfaceLanguage(QString const& language) {
 	
 	switchTranslator(translator, fileName);
 	switchTranslator(translatorQt, langPath + QString("qt_%1.qm").arg(lg)); // Note that qt_en.qm does not exist, which is normal :)
-	switchTranslator(translatorQt, langPath + QString("qtbase_%1.qm").arg(lg)); // For Qt > 5.3
 
 
 	updateText();
@@ -256,6 +263,10 @@ void MainWindow::interfaceLanguageChanged(QAction* action) {
 
 void MainWindow::dumpedNamesLanguageChanged(QAction* action) {
 	if (action != NULL) dumpedNamesLanguage = (LanguageIndex)action->data().toInt();
+}
+
+void MainWindow::changeIgnoreDataCorruptionStatus(void) {
+	ignoreDataCorruption = ignoreDataCorruptionAction->isChecked();
 }
 
 void MainWindow::changeEvent(QEvent* ev) {
