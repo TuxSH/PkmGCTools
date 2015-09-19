@@ -180,7 +180,7 @@ void Pokemon::save(void) {
 	data[0x7d] = (data[0x7d] & 0xf0) | unimplementedRibbons;
 	SV_ARRAY(u16, partyData.stats, 6, 0x90);
 
-	u16 EVs_tmp[6]; for (size_t i = 0; i < 6; ++i) EVs_tmp[i] = (u16)EVs[i];
+	u16 EVs_tmp[6]; for (size_t i = 0; i < 6; ++i) EVs_tmp[i] = EVs[i];
 	SV_ARRAY(u16, EVs_tmp, 6, 0x9c);
 	for (size_t i = 0; i < 6; ++i) IVs[i] = (IVs[i] > 31) ? 31 : IVs[i];
 	SV_ARRAY(u8, IVs, 6, 0xa8);

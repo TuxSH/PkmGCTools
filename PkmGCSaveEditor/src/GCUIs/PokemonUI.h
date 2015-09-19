@@ -216,7 +216,7 @@ public slots:
 	void updateFlags(void);
 	void flagsStateChangeHandler(void);
 
-	void autoUpdateStatsStateChangeHanler(void);
+	void autoUpdateStatsStateChangeHandler(void);
 
 	void versionChangeHandler(void);
 

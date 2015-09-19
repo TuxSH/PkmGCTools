@@ -59,8 +59,8 @@ using namespace LE;
 #define LD_ARRAY(type,ar,sz,off) toArrayOfIntegers<u8*,type*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz))
 #define LD_ARRAY_MAX(type,ar,sz,off,mx) toArrayOfIntegers<u8*,type*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz));\
 for(size_t i__ = 0; i__ < sz; ++i__) ar[i__] = (ar[i__] > mx) ? mx : ar[i__];
-#define LD_ARRAY_CONV(type,ar,sz,off,type2) type ar##_tmp[sz]; toArrayOfIntegers<u8*,type*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz));\
-for(size_t i__ = 0; i__ < sz; ++i__) ar[i__] = (ar##_tmp[i__] > mx) ? mx : ar##_tmp[i__];
+#define LD_ARRAY_CONV(type,ar,sz,off,type2) type ar##_tmp[sz]; toArrayOfIntegers<u8*,type*>(ar##_tmp, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz));\
+for(size_t i__ = 0; i__ < sz; ++i__) ar[i__] = (type2)((ar##_tmp[i__] > (type2)-1) ? (type2)-1 : ar##_tmp[i__]);
 #define LD_ARRAY_E(type,ar,sz,off,etype) toArrayOfEnumIntegers<type,u8*,etype*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz))
 #define LD_ARRAY_E_MAX(type,ar,sz,off,etype,mx) toArrayOfEnumIntegers<type,u8*,etype*>(ar, BUFFER_NAME+off, BUFFER_NAME+off+(sizeof(type)*sz));\
 for(size_t i__ = 0; i__ < sz; ++i__) ar[i__] = ((u32)ar[i__] > (u32)mx) ? (etype)0 : ar[i__];
@@ -77,8 +77,8 @@ for(size_t i__ = 0; i__ < sz; ++i__) ar[i__] = ((u32)ar[i__] > (u32)mx) ? (etype
 #define SV_ARRAY(type,ar,sz,off) fromArrayOfIntegers<type*, u8*>(BUFFER_NAME+off, ar, ar+sz)
 #define SV_ARRAY_MAX(type,ar,sz,off,mx) for(size_t i__ = 0; i__ < sz; ++i__) ar[i__] = (ar[i__] > mx) ? mx : ar[i__];\
 fromArrayOfIntegers<type*, u8*>(BUFFER_NAME+off, ar, ar+sz)
-#define SV_ARRAY_CONV(type,ar,sz,off,type2) type ar##_tmp[sz]; for(size_t i__=0;i__<sz;++i__) ar##_tmp[i__] = (ar[i__] > mx) ? mx : (type) ar[i__];\
-fromArrayOfIntegers<type*, u8*>(BUFFER_NAME+off, ar, ar+sz)
+#define SV_ARRAY_CONV(type,ar,sz,off,type2) type ar##_tmp[sz]; for(size_t i__=0;i__<sz;++i__) ar##_tmp[i__] = ((ar[i__] > (type)-1) ? (type)-1 : (type) ar[i__]);\
+fromArrayOfIntegers<type*, u8*>(BUFFER_NAME+off, ar##_tmp, ar##_tmp+sz)
 #define SV_ARRAY_E(type,ar,sz,off,etype) fromArrayOfEnumIntegers<type,etype*, u8*>(BUFFER_NAME+off, ar, ar+sz)
 #define SV_ARRAY_E_MAX(type,ar,sz,off,etype,mx) for(size_t i__ = 0; i__ < sz; ++i__) ar[i__] = ((u32)ar[i__] > (u32)mx) ? (etype)0 : ar[i__];\
 fromArrayOfEnumIntegers<type,etype*, u8*>(BUFFER_NAME+off, ar, ar+sz)

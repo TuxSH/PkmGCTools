@@ -42,6 +42,8 @@ public:
 
 	void save(void);
 
+	void fixBugsAffectingPokemon(void);
+
 protected:
 	void loadFields(void);
 

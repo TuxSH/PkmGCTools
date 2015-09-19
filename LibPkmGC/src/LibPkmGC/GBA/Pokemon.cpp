@@ -214,7 +214,7 @@ void Pokemon::loadFields(void) {
 	LD_FIELD_MAX(u32, experience, 36, getSpeciesExpTable(species)[100]);
 	LD_FIELD(u8, happiness, 41);
 	LD_FIELD(u16, unk2, 42);
-	for (size_t i = 0; i < 6; ++i) EVs[i] = data[56 + statsOrder[i]];
+	for (size_t i = 0; i < 6; ++i) EVs[statsOrder[i]] = data[56 + i];
 
 	LD_ARRAY(u8, contestStats, 5, 62);
 	LD_FIELD(u8, contestLuster, 67);
@@ -272,7 +272,7 @@ void Pokemon::loadFields(void) {
 
 	u32 st;
 	LD_FIELD(u32, st, 80);
-	pokemonStatusFromBitField((u16)st, &(partyData.turnsOfBadPoison), &(partyData.turnsOfSleepRemaining));
+	partyData.status = pokemonStatusFromBitField((u16)st, &(partyData.turnsOfBadPoison), &(partyData.turnsOfSleepRemaining));
 
 	LD_FIELD_MAX(u8, partyData.level, 84, 100);
 	LD_FIELD_MAX(s8, partyData.pkrsDaysRemaining, 85, 4);
@@ -343,8 +343,8 @@ void Pokemon::save(void) {
 	SV_FIELD_MAX(u32, experience, 36, getSpeciesExpTable(species)[100]);
 	SV_FIELD(u8, happiness, 41);
 	SV_FIELD(u16, unk2, 42);
-	for (size_t i = 0; i < 6; ++i) data[56 + statsOrder[i]] = EVs[i];
 
+	for (size_t i = 0; i < 6; ++i) data[56 + i] = EVs[statsOrder[i]];
 	SV_ARRAY(u8, contestStats, 5, 62);
 	SV_FIELD(u8, contestLuster, 67);
 

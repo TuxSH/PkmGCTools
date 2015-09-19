@@ -14,8 +14,8 @@ void VersionInfo::load(u8 lg, u8 gm) {
 	const LanguageIndex L[] = { NoLanguage, Japanese, English, French, Italian, German, NoLanguage, Spanish };
 	GameIndex G[16] = { NoGame, Sapphire, Ruby, Emerald, FireRed, LeafGreen }; G[15] = Colosseum_XD;
 
-	game = G[(gm > 7) ? 0 : gm];
-	language = L[(lg > 15) ? 0 : lg];
+	game = G[(gm > 15) ? 0 : gm];
+	language = L[(lg > 7) ? 0 : lg];
 
 	switch (language){
 	case Japanese: originalRegion = NTSC_J; break;
@@ -29,7 +29,7 @@ void VersionInfo::load(u8 lg, u8 gm) {
 
 void VersionInfo::save(u8& lg, u8& gm) {
 	const u8 L[] = { 0, 1, 2, 5, 3, 4, 7 };
-	u8 G[12] = { 0, 4, 5, 1, 2, 3 }; G[11] = 15;
+	u8 G[12] = { 0, 4, 5, 0,0,0,0,0, 1, 2, 3 }; G[11] = 15;
 
 	game = (game > Colosseum_XD) ? NoGame : game;
 	language = (language > Spanish) ? NoLanguage : language;
@@ -98,7 +98,7 @@ PokemonStatus pokemonStatusFromBitField(u16 status, s8 * turnsOfBadPoison, s8 * 
 	s8 tobp = 0, tosr = 0;
 	tosr = (s8)(status & 7);
 	tobp = (s8)((status >> 8) & 0xf);
-	if (tobp != 0) ret = Asleep;
+	if (tosr != 0) ret = Asleep;
 
 	status >>= 3;
 	for (size_t i = 0; i < 5 && ret == NoStatus; ++i) {

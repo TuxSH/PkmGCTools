@@ -110,7 +110,7 @@ SaveSlot& SaveSlot::operator=(SaveSlot const& other) {
 
 void SaveSlot::reload(const u8* inData, u32 flags) {
 	if (inData == NULL) Base::DataStruct::reload(NULL, 1);
-	else Base::DataStruct::reload(inData, 0);
+	else Base::DataStruct::reload(inData, flags);
 }
 
 

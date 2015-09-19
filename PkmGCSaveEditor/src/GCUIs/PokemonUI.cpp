@@ -421,7 +421,8 @@ void PokemonUI::initWidget(void){
 	connect(versionFld, SIGNAL(versionChanged()), this, SLOT(versionChangeHandler()));
 	connect(copyInfoFromSaveButton, SIGNAL(clicked()), this, SLOT(copyInfoFromSave()));
 	connect(generateShinyIDsButton, SIGNAL(clicked()), this, SLOT(generateShinyIDs()));
-	connect(autoUpdateMainStatsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(autoUpdateStatsStateChangeHanler()));
+	connect(autoUpdateMainStatsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(autoUpdateStatsStateChangeHandler()));
+	connect(mainStatsFlds[0]->statFld, SIGNAL(valueChanged(int)), this, SLOT(updateMainStats()));
 	connect(contestTypeSelector, SIGNAL(currentIndexChanged(int)), contestAchievementLevelFldsStack, SLOT(setCurrentIndex(int)));
 }
 
@@ -506,13 +507,14 @@ void PokemonUI::parseData(void){
 	versionFld->setInfo(pkm->version);
 	connect(versionFld, SIGNAL(versionChanged()), this, SLOT(versionChangeHandler()));
 
-	currentHPFld->setUnsignedValue(pkm->partyData.currentHP);
 	for (size_t i = 0; i < 6; ++i) {
 		PokemonStatLayout* l = mainStatsFlds[i];
 		l->IVFld->setUnsignedValue(pkm->IVs[i]);
 		l->EVFld->setUnsignedValue(pkm->EVs[i]);
 		l->statFld->setUnsignedValue(pkm->partyData.stats[i]);
 	}
+	currentHPFld->setUnsignedValue(pkm->partyData.currentHP);
+
 
 	for (size_t i = 0; i < 5; ++i)
 		contestAchievementFlds[i]->setCurrentIndex((int)pkm->contestAchievements[i]);
@@ -524,6 +526,7 @@ void PokemonUI::parseData(void){
 		moveLayouts[i]->setMove(pkm->moves[i]);
 
 	autoUpdateMainStatsCheckBox->setChecked(true);
+	autoUpdateStatsStateChangeHandler();
 	versionChangeHandler();
 
 	abilityFld->setCurrentIndex((pkm->hasSecondAbility()) ? 1 : 0);
@@ -694,9 +697,11 @@ void PokemonUI::updateMainStats(void) {
 														     (u8) levelFld->value(), (u8) l->IVFld->value(), (u8) l->EVFld->value());
 			l->statFld->setUnsignedValue(stat);
 		}
-		//currentHPFld->setUnsignedMaximum(mainStatsFlds[0]->statFld->value());
 		currentHPFld->setUnsignedValue(mainStatsFlds[0]->statFld->value());
+
 	}
+	currentHPFld->setUnsignedMaximum(mainStatsFlds[0]->statFld->value());
+
 }
 
 void PokemonUI::updatePkmAttributes(void) {
@@ -744,6 +749,7 @@ void PokemonUI::updateExperienceFromLevel(bool proportionally) {
 		experienceFld->setValue((int)experience);
 		connect(experienceFld, SIGNAL(valueChanged(int)), this, SLOT(updateLevelFromExperience()));
 	}
+	updateMainStats();
 }
 
 void PokemonUI::updateLevelFromExperience(void) {
@@ -751,14 +757,16 @@ void PokemonUI::updateLevelFromExperience(void) {
 		u8 lvl = Pokemon::calculateLevelFromExp(nameIndexToPkmSpeciesIndex((size_t)speciesFld->currentIndex()), (u32)experienceFld->value());
 		
 		levelFld->disconnect(SIGNAL(valueChanged(int)), this);
-		levelFld->setValue((int)lvl);
+		levelFld->setUnsignedValue(lvl);
 		connect(levelFld, SIGNAL(valueChanged(int)), this, SLOT(updateExperienceFromLevel()));
 	}
+	updateMainStats();
+
 }
 
 void PokemonUI::speciesChangeHandler(void) {
 	updatePkmAttributes();
-	autoUpdateStatsStateChangeHanler(); // update stats etc...
+	autoUpdateStatsStateChangeHandler(); // update stats etc...
 	updateAbilityList();
 	u32 maxExperience = Pokemon::calculateExpFromLevel(nameIndexToPkmSpeciesIndex((size_t)speciesFld->currentIndex()), 100);
 	experienceFld->setUnsignedRange(0, maxExperience);
@@ -817,7 +825,7 @@ void PokemonUI::flagsStateChangeHandler(void) {
 	updatePkmAttributes();
 }
 
-void PokemonUI::autoUpdateStatsStateChangeHanler(void) {
+void PokemonUI::autoUpdateStatsStateChangeHandler(void) {
 	bool checked = autoUpdateMainStatsCheckBox->isChecked();
 	if (checked) updateMainStats();
 	currentHPFld->setDisabled(checked);

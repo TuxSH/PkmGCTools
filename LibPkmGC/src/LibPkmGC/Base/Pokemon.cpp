@@ -37,7 +37,7 @@ u16 Pokemon::calculateStat(size_t statIndex, PokemonSpeciesIndex species, Pokemo
 	
 	// We're applying bonuses now
 	if(i == 0) return ((outStat + 100) * level / 100) + 10; // HP
-	else return (outStat * level / 100 + 5) * n[(size_t)getNatureStatAffinity(natureIndex, i) ] / 100;
+	else return (outStat * level / 100 + 5) * n[getNatureStatAffinity(natureIndex, i)] / 100;
 
 }
 

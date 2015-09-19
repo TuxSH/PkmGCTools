@@ -91,10 +91,11 @@ void ItemPocketEditor::setEditedItem(LibPkmGC::Item const & val){
 }
 
 void ItemPocketEditor::updateMaxQuantity(void) {
-	const int maxqty[] = { 0, 999, 999, 999, 999, 1, 999, 1 };
+	const int maxqty[] = { 0, 99, 99, 99, 99, 1, 99, 1 };
+	const int maxqtyPCOrXD[] = { 0, 999, 999, 999, 999, 1, 999, 1 };
 
 	ItemCategoryIndex ctgy = getItemCategory(itemNameFld->currentItemIndex(), isXD);
-	quantityFld->setRange(0, maxqty[ctgy]);
+	quantityFld->setRange(0, (isXD || flags == GIVABLE_ITEMS_ALLOWED) ? maxqtyPCOrXD[ctgy] : maxqty[ctgy]);
 	quantityFld->setDisabled(maxqty[ctgy] == 0);
 }
 void ItemPocketEditor::displayItem(void) {

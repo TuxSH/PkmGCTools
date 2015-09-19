@@ -757,49 +757,49 @@
         <translation>Ribbons</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="611"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="614"/>
         <source>Genderless</source>
         <translation>Genderless</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="627"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="630"/>
         <source>Unown form: </source>
         <translation>Unown form: </translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="632"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="635"/>
         <source>will evolve into: </source>
         <translation>will evolve into: </translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="644"/>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="668"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="647"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="671"/>
         <source>Invalid version info</source>
         <translation>Invalid version info</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="647"/>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="671"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="650"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="674"/>
         <source>&quot;Invalid Pokémon&quot; flag set</source>
         <translation>&quot;Invalid Pokémon&quot; flag set</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="832"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="840"/>
         <source>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(Generation_III)&apos;&gt;here&lt;/a&gt;)</source>
         <translation>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(Generation_III)&apos;&gt;here&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="834"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="842"/>
         <source>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(GCN)&apos;&gt;here&lt;/a&gt;)</source>
         <translation>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(GCN)&apos;&gt;here&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="839"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="847"/>
         <source>Warning</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="839"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="847"/>
         <source>The version info you specified is invalid. The game will therefore consider this Pokémon invalid.</source>
         <translation>The version info you specified is invalid. The game will therefore consider this Pokémon invalid.</translation>
     </message>
@@ -894,32 +894,32 @@
 <context>
     <name>MWCentralWidget</name>
     <message>
-        <location filename="../src/MainWindow.cpp" line="47"/>
+        <location filename="../src/MainWindow.cpp" line="44"/>
         <source>Game configuration</source>
         <translation>Game configuration</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="48"/>
+        <location filename="../src/MainWindow.cpp" line="45"/>
         <source>Trainer info, Party and Bag</source>
         <translation>Trainer info, Party and Bag</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="49"/>
+        <location filename="../src/MainWindow.cpp" line="46"/>
         <source>PC</source>
         <translation>PC</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="50"/>
+        <location filename="../src/MainWindow.cpp" line="47"/>
         <source>Daycare</source>
         <translation>Daycare</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="51"/>
+        <location filename="../src/MainWindow.cpp" line="48"/>
         <source>Strategy memo</source>
         <translation>Strategy memo</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="52"/>
+        <location filename="../src/MainWindow.cpp" line="49"/>
         <source>Purifier</source>
         <translation>Purifier</translation>
     </message>
@@ -927,147 +927,159 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/MainWindow.cpp" line="85"/>
-        <location filename="../src/MainWindow.cpp" line="197"/>
+        <location filename="../src/MainWindow.cpp" line="82"/>
+        <location filename="../src/MainWindow.cpp" line="198"/>
         <source>&amp;File</source>
         <translation>&amp;File</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="102"/>
-        <location filename="../src/MainWindow.cpp" line="204"/>
+        <location filename="../src/MainWindow.cpp" line="99"/>
+        <location filename="../src/MainWindow.cpp" line="205"/>
         <source>&amp;Options</source>
         <translation>&amp;Options</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="103"/>
-        <location filename="../src/MainWindow.cpp" line="205"/>
+        <location filename="../src/MainWindow.cpp" line="100"/>
+        <location filename="../src/MainWindow.cpp" line="206"/>
         <source>&amp;Interface language</source>
         <translation>&amp;Interface language</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="104"/>
-        <location filename="../src/MainWindow.cpp" line="206"/>
+        <location filename="../src/MainWindow.cpp" line="101"/>
+        <location filename="../src/MainWindow.cpp" line="207"/>
         <source>&amp;Dumped names language</source>
         <translation>&amp;Dumped names language</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="199"/>
+        <location filename="../src/MainWindow.cpp" line="105"/>
+        <location filename="../src/MainWindow.cpp" line="220"/>
+        <source>&amp;Bug fixes</source>
+        <translation>&amp;Bug fixes</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="200"/>
         <source>&amp;Open...</source>
         <translation>&amp;Open...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="200"/>
+        <location filename="../src/MainWindow.cpp" line="201"/>
         <source>&amp;Save</source>
         <translation>&amp;Save</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="201"/>
+        <location filename="../src/MainWindow.cpp" line="202"/>
         <source>Save &amp;as...</source>
         <translation>Save &amp;as...</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="202"/>
+        <location filename="../src/MainWindow.cpp" line="203"/>
         <source>&amp;Exit</source>
         <translation>&amp;Exit</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="210"/>
         <location filename="../src/MainWindow.cpp" line="211"/>
+        <location filename="../src/MainWindow.cpp" line="212"/>
         <source>Select &amp;automatically</source>
         <translation>Select &amp;automatically</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="219"/>
-        <source>Ignore data corruption</source>
-        <translation>Ignore data corruption</translation>
+        <location filename="../src/MainWindow.cpp" line="221"/>
+        <source>Bugs affecting &amp;Pokémon (Colosseum, PkmGCSaveEditor ≤ 1.1.0)</source>
+        <translation>Bugs affecting &amp;Pokémon (Colosseum, PkmGCSaveEditor ≤ 1.1.0)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="298"/>
-        <location filename="../src/MainWindow.cpp" line="324"/>
-        <location filename="../src/MainWindow.cpp" line="441"/>
+        <location filename="../src/MainWindow.cpp" line="222"/>
+        <source>&amp;Ignore data corruption</source>
+        <translation>&amp;Ignore data corruption</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="306"/>
+        <location filename="../src/MainWindow.cpp" line="332"/>
+        <location filename="../src/MainWindow.cpp" line="451"/>
         <source>GCI save files (*.gci)</source>
         <translation>GCI save files (*.gci)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="299"/>
-        <location filename="../src/MainWindow.cpp" line="325"/>
-        <location filename="../src/MainWindow.cpp" line="442"/>
+        <location filename="../src/MainWindow.cpp" line="307"/>
+        <location filename="../src/MainWindow.cpp" line="333"/>
+        <location filename="../src/MainWindow.cpp" line="452"/>
         <source>Raw save files (*.bin)</source>
         <translation>Raw save files (*.bin)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="301"/>
+        <location filename="../src/MainWindow.cpp" line="309"/>
         <source>The save file has been modified.</source>
         <translation>The save file has been modified.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="302"/>
+        <location filename="../src/MainWindow.cpp" line="310"/>
         <source>Do you want to save your changes?</source>
         <translation>Do you want to save your changes?</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="327"/>
+        <location filename="../src/MainWindow.cpp" line="335"/>
         <source>Could not open file.</source>
         <translation>Could not open file.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="328"/>
+        <location filename="../src/MainWindow.cpp" line="336"/>
         <source>An error occured while reading the specified save file.</source>
         <translation>An error occured while reading the specified save file.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="331"/>
+        <location filename="../src/MainWindow.cpp" line="339"/>
         <source>Open save file</source>
         <translation>Open save file</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="331"/>
+        <location filename="../src/MainWindow.cpp" line="339"/>
         <source>All Files (*)</source>
         <translation>All Files (*)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="347"/>
-        <location filename="../src/MainWindow.cpp" line="353"/>
-        <location filename="../src/MainWindow.cpp" line="358"/>
-        <location filename="../src/MainWindow.cpp" line="382"/>
-        <location filename="../src/MainWindow.cpp" line="421"/>
-        <location filename="../src/MainWindow.cpp" line="432"/>
+        <location filename="../src/MainWindow.cpp" line="355"/>
+        <location filename="../src/MainWindow.cpp" line="361"/>
+        <location filename="../src/MainWindow.cpp" line="366"/>
+        <location filename="../src/MainWindow.cpp" line="390"/>
+        <location filename="../src/MainWindow.cpp" line="431"/>
+        <location filename="../src/MainWindow.cpp" line="442"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="347"/>
+        <location filename="../src/MainWindow.cpp" line="355"/>
         <source>Invalid file size.</source>
         <translation>Invalid file size.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="377"/>
-        <location filename="../src/MainWindow.cpp" line="379"/>
+        <location filename="../src/MainWindow.cpp" line="385"/>
+        <location filename="../src/MainWindow.cpp" line="387"/>
+        <location filename="../src/MainWindow.cpp" line="481"/>
         <source>Warning</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="377"/>
+        <location filename="../src/MainWindow.cpp" line="385"/>
         <source>The backup save slot was loaded because the most recent save slot is corrupt.</source>
         <translation>The backup save slot was loaded because the most recent save slot is corrupt.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="379"/>
+        <location filename="../src/MainWindow.cpp" line="387"/>
         <source>The second backup save slot was loaded because the other ones are corrupt.</source>
         <translation>The second backup save slot was loaded because the other ones are corrupt.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="382"/>
+        <location filename="../src/MainWindow.cpp" line="390"/>
         <source>All save slots are corrupt.</source>
         <translation>All save slots are corrupt.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="404"/>
+        <location filename="../src/MainWindow.cpp" line="414"/>
         <source>No save file loaded</source>
         <translation>No save file loaded</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/MainWindow.cpp" line="407"/>
+        <location filename="../src/MainWindow.cpp" line="417"/>
         <source>%1, %n save(s)</source>
         <translation>
             <numerusform>%1, %n save</numerusform>
@@ -1075,34 +1087,39 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="408"/>
+        <location filename="../src/MainWindow.cpp" line="418"/>
         <source>Colosseum</source>
         <translation>Colosseum</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="408"/>
+        <location filename="../src/MainWindow.cpp" line="418"/>
         <source>XD</source>
         <translation>XD</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="413"/>
+        <location filename="../src/MainWindow.cpp" line="423"/>
         <source>Could not write to file.</source>
         <translation>Could not write to file.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="414"/>
+        <location filename="../src/MainWindow.cpp" line="424"/>
         <source>An error occured while writing to the specified save file.</source>
         <translation>An error occured while writing to the specified save file.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="445"/>
+        <location filename="../src/MainWindow.cpp" line="455"/>
         <source>All files (*)</source>
         <translation>All files (*)</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="446"/>
+        <location filename="../src/MainWindow.cpp" line="456"/>
         <source>Save save file</source>
         <translation>Save save file</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="481"/>
+        <source>You have used a version of PkmGCSaveEditor older than 1.1.1.&lt;br/&gt;Please consider the following points:&lt;ul&gt;&lt;li&gt;If and &lt;b&gt;only&lt;/b&gt; if you have modified a &lt;b&gt;Colosseum&lt;/b&gt; save file with that previous version, please load this save file again, and click &quot;Bugs affecting Pokémon...&quot;(in &quot;Options&quot;, &quot;Bug fixes&quot;). &lt;b&gt;Do it only once and only once&lt;/b&gt; (for each concerned save file).&lt;/li&gt;&lt;li&gt;If you have imported or exported a Pokémon in the GBA format, please check its status alteration, its EVs, and its game of origin.&lt;/li&gt;&lt;/ul&gt;</source>
+        <translation>You have used a version of PkmGCSaveEditor older than 1.1.1.&lt;br/&gt;Please consider the following points:&lt;ul&gt;&lt;li&gt;If and &lt;b&gt;only&lt;/b&gt; if you have modified a &lt;b&gt;Colosseum&lt;/b&gt; save file with that previous version, please load this save file again, and click &quot;Bugs affecting Pokémon...&quot;(in &quot;Options&quot;, &quot;Bug fixes&quot;). &lt;b&gt;Do it only once and only once&lt;/b&gt; (for each concerned save file).&lt;/li&gt;&lt;li&gt;If you have imported or exported a Pokémon in the GBA format, please check its status alteration, its EVs, and its game of origin.&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
 </context>
 <context>

@@ -46,12 +46,9 @@ Save* Save::create(void) const {
 	0x6000: SaveSlot saveSlots[3]
 */
 void Save::loadFields(void) {
-	//	deleteFields();
-
 	saveSlots = new GC::SaveEditing::SaveSlot*[3];
 	u8* start = data + 0x6000;
-	/*delete saveSlots[0];
-	delete saveSlots[1];*/
+
 	saveSlots[0] = new SaveSlot(start, _is_decrypted);
 	saveSlots[1] = new SaveSlot(start + 0x1e000, _is_decrypted);
 	saveSlots[2] = new SaveSlot(start + 0x1e000*2, _is_decrypted);
@@ -62,6 +59,11 @@ void Save::save(void) {
 	SV_SUBSTRUCTURE_ARRAY(SaveSlot, saveSlots, 3, 0x6000);
 }
 
+void Save::fixBugsAffectingPokemon(void) {
+	for (size_t i = 0; i < 3; ++i) {
+		static_cast<SaveSlot*>(saveSlots[i])->fixBugsAffectingPokemon();
+	}
+}
 
 }
 }

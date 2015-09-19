@@ -83,7 +83,7 @@ public:
 	s32 storyModeSaveCount;
 	u8 checksum[20]; // digest
 
-
+	void fixBugsAffectingPokemon(void);
 protected:
 	void loadData(u32 flags = 0);
 	void deleteFields(void);

@@ -210,6 +210,25 @@ bool SaveSlot::isCorrupt(void) {
 }
 
 
+inline void doFixBugsAffectingPokemon(Pokemon* pkm) {
+	// LibPkmGC <= 1.1.2 : For Pokémon Colosseum, IVs were loaded/saved as u8's where they were actually u16's. obedient was always set to true, and encounterType to a random value.
+
+	std::copy(pkm->data + 0xa4, pkm->data + 0xa4 + 6, pkm->IVs);
+	pkm->obedient = pkm->species == Mew || pkm->species == Deoxys;
+	pkm->encounterType = 0;
+}
+void SaveSlot::fixBugsAffectingPokemon(void) {
+	for (size_t i = 0; i < 6; ++i) 
+		doFixBugsAffectingPokemon((Pokemon*)player->party[i]);
+
+	for (size_t i = 0; i < 3; ++i) {
+		for (size_t j = 0; j < 30; ++j)
+			doFixBugsAffectingPokemon((Pokemon*)PC->boxes[i]->pkm[j]);
+	}
+
+	doFixBugsAffectingPokemon((Pokemon*)daycare->pkm);
+}
+
 void SaveSlot::loadData(u32 flags) {
 	bool decrypted = (flags & 1) == 1;
 

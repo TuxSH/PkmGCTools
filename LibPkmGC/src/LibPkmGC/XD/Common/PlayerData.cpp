@@ -48,8 +48,8 @@ void PlayerData::loadFields(void) {
 	LD_FIELD_E(u8, trainerGender, 0x8e0, Gender);
 	if (trainerGender > Female) trainerGender = Male;
 
-	LD_FIELD(u32, money, 0x8e4);
-	LD_FIELD(u32, pkCoupons, 0x8e8);
+	LD_FIELD_MAX(u32, money, 0x8e4, 9999999);
+	LD_FIELD_MAX(u32, pkCoupons, 0x8e8, 9999999);
 
 	LD_SUBSTRUCTURE_ARRAY(Pokemon, party, 6, 0x30);
 	LD_SUBSTRUCTURE(BagData, bag, 0x4c8);
@@ -60,8 +60,8 @@ void PlayerData::save(void) {
 	if (trainerGender > Female) trainerGender = Male;
 	SV_FIELD_E(u8, trainerGender, 0x8e0, Gender);
 
-	SV_FIELD(u32, money, 0x8e4);
-	SV_FIELD(u32, pkCoupons, 0x8e8);
+	SV_FIELD_MAX(u32, money, 0x8e4, 9999999);
+	SV_FIELD_MAX(u32, pkCoupons, 0x8e8, 9999999);
 	SV_FIELD(u32, pkCoupons, 0x8ec);
 
 	SV_SUBSTRUCTURE_ARRAY(Pokemon, party, 6, 0x30);

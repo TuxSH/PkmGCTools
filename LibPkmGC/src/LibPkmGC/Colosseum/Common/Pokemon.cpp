@@ -68,6 +68,7 @@ void Pokemon::loadFields(void) {
 	LD_FIELD_E(u16, partyData.status, 0x65, PokemonStatus);
 	LD_FIELD(s8, partyData.turnsOfSleepRemaining, 0x69);
 	LD_FIELD(s8, partyData.turnsOfBadPoison, 0x6b);
+
 	u32 st = pokemonStatusToBitField(partyData.status, 0, partyData.turnsOfSleepRemaining);
 	SV_FIELD(u32, st, 0x74);
 
@@ -80,8 +81,9 @@ void Pokemon::loadFields(void) {
 	LD_ARRAY(u16, EVs_tmp, 6, 0x98);
 	for (size_t i = 0; i < 6; ++i) EVs[i] = (u8)((EVs_tmp[i] > 255) ? 255 : EVs_tmp[i]);
 
-	LD_ARRAY(u8, IVs, 6, 0xa4);
-	for (size_t i = 0; i < 6; ++i) IVs[i] = (IVs[i] > 31) ? 31 : IVs[i];
+	u16 IVs_tmp[6]; // IVs are internally stored as u16
+	LD_ARRAY(u16, IVs_tmp, 6, 0xa4);
+	for (size_t i = 0; i < 6; ++i) IVs[i] = (u8)((IVs_tmp[i] > 31) ? 31 : IVs_tmp[i]);
 	
 	LD_FIELD_CONV(u16, happiness, 0xb0, u8);
 
@@ -101,8 +103,8 @@ void Pokemon::loadFields(void) {
 	LD_FIELD(u16, unk1, 0xd4);
 	LD_FIELD(u16, shadowPkmID, 0xd8);
 
-	SV_FIELD_B(u8, obedient, 0xf8);
-	SV_FIELD(u8, encounterType, 0xfb);
+	LD_FIELD_B(u8, obedient, 0xf8);
+	LD_FIELD(u8, encounterType, 0xfb);
 	markings.load(marksTmp);
 	for (size_t i = 0; i < 4; ++i)
 		moves[i].load(data + 0x78 + 4 * i);
@@ -136,8 +138,8 @@ void Pokemon::save(void) {
 	if (partyData.level > 100) partyData.level = 100;
 	SV_FIELD(u8, partyData.level, 0x60);
 	SV_FIELD_E(u16, partyData.status, 0x65, PokemonStatus);
-	LD_FIELD(s8, partyData.turnsOfSleepRemaining, 0x69);
-	LD_FIELD(s8, partyData.turnsOfBadPoison, 0x6b);
+	SV_FIELD(s8, partyData.turnsOfSleepRemaining, 0x69);
+	SV_FIELD(s8, partyData.turnsOfBadPoison, 0x6b);
 	SV_FIELD_E(u16, heldItem, 0x88, ItemIndex);
 
 	SV_FIELD_MAX(u16, partyData.currentHP, 0x8a, partyData.stats[0]);
@@ -145,8 +147,12 @@ void Pokemon::save(void) {
 	
 	u16 EVs_tmp[6]; for (size_t i = 0; i < 6; ++i) EVs_tmp[i] = (u16)EVs[i];
 	SV_ARRAY(u16, EVs_tmp, 6, 0x98);
-	for (size_t i = 0; i < 6; ++i) IVs[i] = (IVs[i] > 31) ? 31 : IVs[i];
-	SV_ARRAY(u8, IVs, 6, 0xa4);
+	u16 IVs_tmp[6];
+	for (size_t i = 0; i < 6; ++i) {
+		IVs[i] = (IVs[i] > 31) ? 31 : IVs[i];
+		IVs_tmp[i] = IVs[i];
+	}
+	SV_ARRAY(u16, IVs_tmp, 6, 0xa4);
 	
 	SV_FIELD(u16, (u16)happiness, 0xb0);
 	SV_ARRAY(u8, contestStats, 5, 0xb2);
@@ -158,7 +164,7 @@ void Pokemon::save(void) {
 
 
 	SV_FIELD(u8, pkrsStatus, 0xca);
-	LD_ARRAY_B(u8, pkmFlags, 3, 0xcb);
+	SV_ARRAY_B(u8, pkmFlags, 3, 0xcb);
 	SV_FIELD_MAX(u8, GCUnk, 0xce, 31);
 	SV_FIELD(u8, markings.save(), 0xcf);
 	SV_FIELD_MAX(s8, partyData.pkrsDaysRemaining, 0xd0, 4);

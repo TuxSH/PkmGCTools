@@ -10,9 +10,6 @@
 #include <QApplication>
 #include <QDir>
 
-
-const QString appName = QString("PkmGCSaveEditor v%1.%2").arg(PKMGCSAVEEDITOR_VERSION_MAJOR).arg(PKMGCSAVEEDITOR_VERSION_MINOR);
-
 using namespace GCUIs;
 using namespace XDUIs;
 using namespace LibPkmGC;
@@ -105,7 +102,9 @@ MainWindow::MainWindow() : QMainWindow(), centralWidget(new MWCentralWidget) {
 	ignoreDataCorruptionAction = new QAction(this);
 	ignoreDataCorruptionAction->setCheckable(true);
 	optionsMenu->addAction(ignoreDataCorruptionAction);
-	
+	bugFixesSubMenu = optionsMenu->addMenu(tr("&Bug fixes"));
+	colosseumBugsAffectingPokemonAction = new QAction(this);
+	bugFixesSubMenu->addAction(colosseumBugsAffectingPokemonAction);
 	setCentralWidget(centralWidget);
 
 
@@ -121,11 +120,13 @@ MainWindow::MainWindow() : QMainWindow(), centralWidget(new MWCentralWidget) {
 
 	saveFileAction->setDisabled(true);
 	saveFileAsAction->setDisabled(true);
+	colosseumBugsAffectingPokemonAction->setDisabled(true);
 
 	connect(openFileAction, SIGNAL(triggered()), this, SLOT(openSaveFile()));
 	connect(saveFileAction, SIGNAL(triggered()), this, SLOT(saveSaveFile()));
 	connect(saveFileAsAction, SIGNAL(triggered()), this, SLOT(saveSaveFileAs()));
 	connect(exitAction, SIGNAL(triggered()), this, SLOT(close()));
+	connect(colosseumBugsAffectingPokemonAction, SIGNAL(triggered()), this, SLOT(fixColosseumBugsAffectingPokemon()));
 	connect(ignoreDataCorruptionAction, SIGNAL(triggered()), this, SLOT(changeIgnoreDataCorruptionStatus()));
 }
 
@@ -216,7 +217,9 @@ void MainWindow::updateText(void) {
 	for (QList<QAction*>::iterator it = actions2.begin() + 1; it != actions2.end(); ++it)
 		(*it)->setText(VersionInfoLayout::languageNames()[(*it)->data().toInt()]);
 
-	ignoreDataCorruptionAction->setText(tr("Ignore data corruption"));
+	bugFixesSubMenu->setTitle(tr("&Bug fixes"));
+	colosseumBugsAffectingPokemonAction->setText(tr("Bugs affecting &Pok\xc3\xa9mon (Colosseum, PkmGCSaveEditor \xe2\x89\xa4 1.1.0)"));
+	ignoreDataCorruptionAction->setText(tr("&Ignore data corruption"));
 }
 
 
@@ -267,6 +270,11 @@ void MainWindow::dumpedNamesLanguageChanged(QAction* action) {
 
 void MainWindow::changeIgnoreDataCorruptionStatus(void) {
 	ignoreDataCorruption = ignoreDataCorruptionAction->isChecked();
+}
+
+void MainWindow::fixColosseumBugsAffectingPokemon(void) {
+	if (currentSave != NULL) static_cast<Colosseum::SaveEditing::Save*>(currentSave)->fixBugsAffectingPokemon();
+	else if(currentSaveSlot != NULL) static_cast<Colosseum::SaveEditing::SaveSlot*>(currentSaveSlot)->fixBugsAffectingPokemon();
 }
 
 void MainWindow::changeEvent(QEvent* ev) {
@@ -388,11 +396,13 @@ void MainWindow::openSaveFile(void) {
 		this->setWindowTitle(appName);
 		saveFileAction->setDisabled(true);
 		saveFileAsAction->setDisabled(true);
+		colosseumBugsAffectingPokemonAction->setDisabled(true);
 	}
 	else {
 		this->setWindowTitle(appName + " - " + currentSaveFileName);
 		saveFileAction->setDisabled(false);
 		saveFileAsAction->setDisabled(false);
+		colosseumBugsAffectingPokemonAction->setDisabled(!LIBPKMGC_IS_COLOSSEUM(SaveEditing::SaveSlot, currentSaveSlot));
 	}
 
 	centralWidget->currentSaveSlotChangeHandler();
@@ -466,6 +476,13 @@ void MainWindow::loadSettings(void) {
 
 	if (interfaceLanguage.isEmpty()) interfaceLanguage = "auto";
 	if (dumpedNamesLanguage > Spanish) dumpedNamesLanguage = NoLanguage;
+
+	if (settings->value("LibPkmGCVersion").toInt() < 1001001 || settings->value("Version").toInt() < 1001001) {
+		QMessageBox::warning(this, tr("Warning"), tr("You have used a version of PkmGCSaveEditor older than 1.1.1.<br/>Please consider the following points:<ul>"
+			"<li>If and <b>only</b> if you have modified a <b>Colosseum</b> save file with that previous version, please load this save file again, and click \"Bugs affecting Pok\xc3\xa9mon...\""
+			"(in \"Options\", \"Bug fixes\"). <b>Do it only once and only once</b> (for each concerned save file).</li>"
+			"<li>If you have imported or exported a Pok\xc3\xa9mon in the GBA format, please check its status alteration, its EVs, and its game of origin.</li></ul>"));
+	}
 
 }
 

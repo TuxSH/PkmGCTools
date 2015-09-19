@@ -75,6 +75,8 @@ public slots:
 
 	void changeIgnoreDataCorruptionStatus(void);
 
+	void fixColosseumBugsAffectingPokemon(void);
+
 
 protected:
 	void closeEvent(QCloseEvent* ev);
@@ -97,6 +99,8 @@ private:
 	QActionGroup *interfaceLangGroup;
 	QMenu* dumpedNamesLangSubMenu;
 	QActionGroup *dumpedNamesLangGroup;
+	QMenu* bugFixesSubMenu;
+	QAction* colosseumBugsAffectingPokemonAction;
 	QAction* ignoreDataCorruptionAction;
 	QSettings *settings;
 

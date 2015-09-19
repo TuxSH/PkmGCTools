@@ -20,6 +20,7 @@
 
 DataUI::DataUI(QWidget* parent, Qt::WindowFlags f) : QDialog(parent, f), IDataUI(),  mainLayout(new QVBoxLayout),
 dialogButtonBox(new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel)) {
+	this->setWindowTitle(appName);
 	connect(dialogButtonBox, SIGNAL(accepted()), this, SLOT(accept()));
 	connect(dialogButtonBox, SIGNAL(rejected()), this, SLOT(reject()));
 }
