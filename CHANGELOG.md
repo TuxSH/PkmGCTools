@@ -1,9 +1,10 @@
 ###PkmGCTools v1.1.1:
-Fixed a lot of critical bugs (affecting IVs, etc...). Money and Pokécoupons are now limited to 9,999,999. Bag items are limited again to 99 in Pokémon Colosseum. 
+Fixed a lot of critical bugs (affecting IVs, etc...). Money and Pokécoupons are now limited to 9,999,999. Bag items are limited to 99 again in Pokémon Colosseum Fixed a lot of critical bugs (affecting IVs, etc...)
+(use the PC storage system to fix bag entries with more than 99 items).
 
 To users of previous versions:
-* If and only if you have modified a Colosseum save file with that previous version, please load this save file again, 
-and click "Bugs affecting Pokémon..."(in "Options", "Bug fixes"). Do it only once and only once (for each concerned save file).
+* If and **only** if you have modified a **Colosseum** save file with that previous version, please load this save file again, 
+and click "Bugs affecting Pokémon..."(in "Options", "Bug fixes"). **Do it only once and only once** (for each concerned save file).
 * If you have imported or exported a Pokémon in the GBA format, please check its status alteration, its EVs, and its game of origin. 
 
 ###PkmGCTools v1.1:
