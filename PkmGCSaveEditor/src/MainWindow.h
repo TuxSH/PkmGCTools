@@ -108,6 +108,7 @@ private:
 
 	QString langPath;
 
+	int oldversionMax;
 };
 
 #endif
