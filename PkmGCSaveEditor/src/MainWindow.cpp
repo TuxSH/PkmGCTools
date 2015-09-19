@@ -485,7 +485,7 @@ void MainWindow::loadSettings(void) {
 	if (dumpedNamesLanguage > Spanish) dumpedNamesLanguage = NoLanguage;
 
 	if (settings->value("LibPkmGCVersion").toInt() < 1001001 || settings->value("Version").toInt() < 1001001)
-		oldversionMax = 1001001;
+		oldversionMax = 1001000;
 
 }
 
