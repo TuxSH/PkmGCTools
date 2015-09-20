@@ -73,7 +73,7 @@ XD::Pokemon
 	0x90: u16 stats[6]
 	0x9c: u16 EVs[6]
 	0xa8: u8 IVs[6]
-	0xae: u8 contestStats[6] (0 to 255)
+	0xae: u8 contestStats[5] (0 to 255)
 	0xb3: u8 contestAchievements[5]
 	0xb7: unused
 	0xb8 : u16 ??
