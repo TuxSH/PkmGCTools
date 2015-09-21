@@ -129,7 +129,7 @@ MainWindow::MainWindow() : QMainWindow(), centralWidget(new MWCentralWidget) {
 	connect(colosseumBugsAffectingPokemonAction, SIGNAL(triggered()), this, SLOT(fixColosseumBugsAffectingPokemon()));
 	connect(ignoreDataCorruptionAction, SIGNAL(triggered()), this, SLOT(changeIgnoreDataCorruptionStatus()));
 
-	if (oldversionMax < 1001001) {
+	if (oldversionMax != 0 && oldversionMax < 1001001) {
 		QMessageBox::warning(this, tr("Warning"), tr("You have used a version of PkmGCSaveEditor older than 1.1.1.<br/>Please consider the following points:<ul>"
 			"<li>If and <b>only</b> if you have modified a <b>Colosseum</b> save file with that previous version, please load this save file again, and click \"Bugs affecting Pok\xc3\xa9mon...\""
 			"(in \"Options\", \"Bug fixes\"). <b>Do it only once and only once</b> (for each concerned save file).</li>"
@@ -484,6 +484,8 @@ void MainWindow::loadSettings(void) {
 	if (interfaceLanguage.isEmpty()) interfaceLanguage = "auto";
 	if (dumpedNamesLanguage > Spanish) dumpedNamesLanguage = NoLanguage;
 
+	if (settings->value("LibPkmGCVersion").toInt() == 0 || settings->value("Version").toInt() == 0)
+		oldversionMax = 0;
 	if (settings->value("LibPkmGCVersion").toInt() < 1001001 || settings->value("Version").toInt() < 1001001)
 		oldversionMax = 1001000;
 
