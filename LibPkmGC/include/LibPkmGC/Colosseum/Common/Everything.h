@@ -19,6 +19,7 @@
 #ifndef _LIBPKMGC_XD_COMMON_EVERYTHING_H
 #define _LIBPKMGC_XD_COMMON_EVERYTHING_H
 
+#include <LibPkmGC/Colosseum/Common/GameConfigData.h>
 #include <LibPkmGC/Colosseum/Common/PlayerData.h>
 #include <LibPkmGC/Colosseum/Common/PCData.h>
 #include <LibPkmGC/Colosseum/Common/PlayerData.h>

@@ -20,17 +20,14 @@
 #define _LIBPKMGC_XD_PLAYER_DATA_H
 
 #include <LibPkmGC/GC/Common/PlayerData.h>
-#include <LibPkmGC/XD/Common/Pokemon.h>
+#include <LibPkmGC/XD/Common/TrainerData.h>
 #include <LibPkmGC/XD/Common/BagData.h>
 
 namespace LibPkmGC {
 namespace XD {
 
 /*
-	0x00 -- 0x2b: trainer name (10+1 wide characters) + copy
-	0x2c: u16 SID
-	0x2e: u16 TID
-	0x30: Pokémon Party (6*0xc4)
+	0x00: TrainerData trainer
 
 	0x4c8: bag
 

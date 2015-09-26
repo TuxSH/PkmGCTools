@@ -16,45 +16,50 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _LIBPKMGC_GC_PLAYER_DATA_H
-#define _LIBPKMGC_GC_PLAYER_DATA_H
+#ifndef _LIBPKMGC_GC_TRAINER_DATA_H
+#define _LIBPKMGC_GC_TRAINER_DATA_H
 
-#include <LibPkmGC/GC/Common/TrainerData.h>
-#include <LibPkmGC/GC/Common/BagData.h>
+#include <LibPkmGC/GC/Common/Pokemon.h>
+
 
 namespace LibPkmGC {
 
-LIBPKMGC_FWD_DECL_GC_CLS(PlayerData)
+LIBPKMGC_FWD_DECL_GC_CLS(TrainerData)
 
 namespace GC {
 
-class LIBPKMGC_DECL PlayerData :
+/*
+For both Colosseum and XD:
+	0x00 -- 0x2b: trainer name (10+1 wide characters) + copy
+	0x2c: u16 SID
+	0x2e: u16 TID
+	0x30: Pokémon Party
+*/
+class LIBPKMGC_DECL TrainerData :
 	public Base::DataStruct
 {
 public:
-	PlayerData(size_t inSize, const u8* inData = NULL);
-	PlayerData& operator=(PlayerData const& other);
+	TrainerData(size_t inSize, const u8* inData = NULL);
+	virtual ~TrainerData(void);
 
-	virtual PlayerData* clone(void) const = 0;
-	virtual PlayerData* create(void) const = 0;
+	virtual TrainerData* clone(void) const = 0;
+	virtual TrainerData* create(void) const = 0;
 
-	virtual ~PlayerData(void);
-
-	void swap(PlayerData& other);
+	virtual void swap(TrainerData& other);
+	virtual TrainerData& operator=(TrainerData const& other);
 
 	virtual void save(void);
 
-	TrainerData* trainer;
-	BagData* bag;
+	PokemonString* trainerName;
+	u16 SID, TID;
 
-	Gender trainerGender;
-	u32 money;
-	u32 pkCoupons;
-	
+	Pokemon* party[6];
+
 protected:
-	PlayerData(PlayerData const& other);
+	TrainerData(TrainerData const& other);
 
 	virtual void deleteFields(void);
+	virtual void loadFields(void);
 };
 
 }

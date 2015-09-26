@@ -31,9 +31,9 @@ namespace GCUIs {
 class GameConfigUI : public DataUI {
 	Q_OBJECT
 public:
-	GameConfigUI(LibPkmGC::GC::SaveEditing::SaveSlot *inSaveSlot = NULL, QWidget* parent = NULL, Qt::WindowFlags f = Qt::Window);
+	GameConfigUI(LibPkmGC::GC::GameConfigData *inGameConfig = NULL, QWidget* parent = NULL, Qt::WindowFlags f = Qt::Window);
 
-	LibPkmGC::GC::SaveEditing::SaveSlot* saveSlot_; // not using ::currentSaveSlot here 
+	LibPkmGC::GC::GameConfigData* gameConfig;
 
 	void parseData(void);
 

@@ -19,6 +19,7 @@
 #ifndef _LIBPKMGC_GC_COMMON_EVERYTHING_H
 #define _LIBPKMGC_GC_COMMON_EVERYTHING_H
 
+#include <LibPkmGC/GC/Common/GameConfigData.h>
 #include <LibPkmGC/GC/Common/PlayerData.h>
 #include <LibPkmGC/GC/Common/PCData.h>
 #include <LibPkmGC/GC/Common/PlayerData.h>

@@ -79,7 +79,7 @@ void PlayerUI::parseData(void){
 	if (player == NULL) return;
 	isXD = LIBPKMGC_IS_XD(PlayerData, player);
 
-	trainerInfoFld->set(player->trainerName, player->TID, player->SID, player->trainerGender);
+	trainerInfoFld->set(player->trainer->trainerName, player->trainer->TID, player->trainer->SID, player->trainerGender);
 	moneyFld->setValue((int)player->money);
 	pkCouponsFld->setValue((int)player->pkCoupons);
 
@@ -89,16 +89,16 @@ void PlayerUI::parseData(void){
 	for (size_t i = 0; i < 6; ++i) {
 		PokemonStorageInfo loc = { StoredInParty, i, 0 };
 		pkmFlds[i]->location = loc;
-		pkmFlds[i]->pkm = player->party[i];
+		pkmFlds[i]->pkm = player->trainer->party[i];
 		pkmFlds[i]->parseData();
 	}
 
 }
 
 void PlayerUI::saveChanges(void) {
-	trainerInfoFld->trainerName(player->trainerName);
-	player->TID = trainerInfoFld->TID();
-	player->SID = trainerInfoFld->SID();
+	trainerInfoFld->trainerName(player->trainer->trainerName);
+	player->trainer->TID = trainerInfoFld->TID();
+	player->trainer->SID = trainerInfoFld->SID();
 	player->trainerGender = trainerInfoFld->trainerGender();
 	player->money = moneyFld->unsignedValue();
 	player->pkCoupons = pkCouponsFld->unsignedValue();
@@ -115,15 +115,15 @@ void PlayerUI::cancelChanges(void) {
 void PlayerUI::pkmDeletionHandler(LibPkmGC::PokemonStorageInfo const & location) {
 	size_t i = location.index;
 	GC::Pokemon *party2[6] = { NULL };
-	GC::Pokemon *deltd = player->party[i];
-	std::copy(player->party, player->party + i, party2);
-	std::copy(player->party + i + 1, player->party + 6, party2 + i);
-	std::copy(party2, party2 + 5, player->party);
-	player->party[5] = deltd;
+	GC::Pokemon *deltd = player->trainer->party[i];
+	std::copy(player->trainer->party, player->trainer->party + i, party2);
+	std::copy(player->trainer->party + i + 1, player->trainer->party + 6, party2 + i);
+	std::copy(party2, party2 + 5, player->trainer->party);
+	player->trainer->party[5] = deltd;
 	for (size_t i = 0; i < 6; ++i) {
 		PokemonStorageInfo loc = { StoredInParty, i, 0 };
 		pkmFlds[i]->location = loc;
-		pkmFlds[i]->pkm = player->party[i];
+		pkmFlds[i]->pkm = player->trainer->party[i];
 		pkmFlds[i]->parseData();
 	}
 }

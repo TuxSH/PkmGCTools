@@ -16,49 +16,44 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _LIBPKMGC_COLOSSEUM_PLAYER_DATA_H
-#define _LIBPKMGC_COLOSSEUM_PLAYER_DATA_H
+#include <LibPkmGC/Colosseum/Common/GameConfigData.h>
 
-#include <LibPkmGC/GC/Common/PlayerData.h>
-#include <LibPkmGC/Colosseum/Common/TrainerData.h>
-#include <LibPkmGC/Colosseum/Common/BagData.h>
 
 namespace LibPkmGC {
 namespace Colosseum {
 
-/*
-	0x00: TrainerData trainer
+GameConfigData::GameConfigData(void) : GC::GameConfigData(0x70) {
+	initWithEmptyData();
+}
 
-	0x780: bag
+GameConfigData::GameConfigData(const u8* inData) : GC::GameConfigData(0x70, inData) {
+	load();
+}
 
-	0xa80: u8 trainerGender
-	0xa84: u32 money
-	0xa88: u32 pkCoupons + copy
-*/
-
-class LIBPKMGC_DECL PlayerData :
-	public GC::PlayerData
-{
-public:
-	static const size_t size = 0xb18;
-	PlayerData(void);
-	PlayerData(PlayerData const& other);
-
-	PlayerData(const u8* inData);
+GameConfigData::GameConfigData(GameConfigData const& other) : GC::GameConfigData(other) {
+}
 
 
-	~PlayerData(void);
-	PlayerData* clone(void) const;
-	PlayerData* create(void) const;
+GameConfigData::~GameConfigData(void) {
+}
 
-	void save(void);
-protected:
-	void loadFields(void);
-private:
-	PlayerData(XD::PlayerData const& other);
-};
+void GameConfigData::loadFields(void) {
+	GC::GameConfigData::loadFields();
+	LD_FIELD(s32, headerChecksum, 4);
+}
+
+void GameConfigData::save(void) {
+	GC::GameConfigData::save();
+	SV_FIELD(s32, headerChecksum, 4);
+}
+
+GameConfigData* GameConfigData::clone(void) const {
+	return new GameConfigData(*this);
+}
+
+GameConfigData* GameConfigData::create(void) const {
+	return new GameConfigData;
+}
 
 }
 }
-
-#endif

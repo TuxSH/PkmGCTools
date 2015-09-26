@@ -39,7 +39,7 @@ public:
 	DaycareData* create(void) const;
 
 	DaycareData(XD::DaycareData const& other);
-private:
+protected:
 	void loadFields(void);
 };
 

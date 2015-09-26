@@ -278,7 +278,8 @@ void PokemonUI::initWidget(void){
 	coreCaptureInfoLayout->addRow(tr("Fateful encounter (obedient)"), obedientFld);
 	coreCaptureInfoLayout->addRow(tr("Ball caught with"), ballCaughtWithFld);
 
-	coreCaptureInfoLayout->labelForField(obedientFld)->setToolTip(tr("Mew and Deoxys need this field to be checked so they can obey"));
+	coreCaptureInfoLayout->labelForField(obedientFld)->setToolTip(tr("Mew and Deoxys need this field to be checked so they can obey.\n"
+		"Pok\xc3\xa9mon caught in XD always have this field checked."));
 	coreCaptureInfoBox->setLayout(coreCaptureInfoLayout);
 	OTBox->setLayout(OTField);
 	versionBox->setLayout(versionFld);
@@ -855,8 +856,8 @@ void PokemonUI::resetName(void) {
 
 void PokemonUI::copyInfoFromSave(void) {
 	GC::PlayerData* pl = currentSaveSlot->player;
-	OTField->set(pl->trainerName, pl->TID, pl->SID, pl->trainerGender);
-	versionFld->setInfo(currentSaveSlot->version);
+	OTField->set(pl->trainer->trainerName, pl->trainer->TID, pl->trainer->SID, pl->trainerGender);
+	versionFld->setInfo(currentSaveSlot->gameConfig->version);
 }
 
 void PokemonUI::generateShinyIDs(void) {

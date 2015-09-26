@@ -22,7 +22,7 @@
 #include <boost/config/warning_disable.hpp>
 #include <boost/config.hpp>
 
-#define LIBPKMGC_VERSION 1001001
+#define LIBPKMGC_VERSION 1001002
 #define LIBPKMGC_VERSION_MAJOR ((LIBPKMGC_VERSION / 1000000) % 1000)
 #define LIBPKMGC_VERSION_MINOR ((LIBPKMGC_VERSION / 1000) % 1000)
 #define LIBPKMGC_VERSION_BUILD (LIBPKMGC_VERSION % 1000)

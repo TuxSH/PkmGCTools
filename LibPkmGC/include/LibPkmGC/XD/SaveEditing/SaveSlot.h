@@ -18,7 +18,6 @@
 
 #ifndef _LIBPKMGC_XD_SAVE_EDITING_SAVE_SLOT_H
 #define _LIBPKMGC_XD_SAVE_EDITING_SAVE_SLOT_H
-
 #include <LibPkmGC/GC/SaveEditing/SaveSlot.h>
 #include <LibPkmGC/XD/Common/Everything.h>
 
@@ -44,7 +43,7 @@ namespace SaveEditing {
 
 /*
 	Substructures, in order :
-	- [0] metadata/game config, size=0x88 (for compat. w/ colosseum it is directly handled within GC::SaveSlot)
+	- [0] game config, size=0x88
 	- [1] party & player data
 	- [2] PC Storage
 	- [3] Mailbox
@@ -52,10 +51,10 @@ namespace SaveEditing {
 	- [5] Strategy memo
 	- [6] Battle mode
 	- [7] Shadow Pokémon data (in Colosseum, this is apparently a PID list; the full shadow data SEEMS to be included in the Pokémon's data)
-	- ?
-	- ?
-	- map data / script state
-	- Purifier
+	- [8] Flags (not handled here)
+	- [9] Special ribbons description (will be handled soon)
+	- [15] map data / script state
+	- [14] Purifier
 */
 
 
@@ -104,9 +103,9 @@ public:
 	u32 checksum[4];
 
 	u16 encryptionKeys[4];
-	u32 substructureSizes[16]; // there are actually 12 substructures
+	u16 substructureSizes[16]; // there are actually 12 substructures
 	u32 substructureOffsets[16]; // there are actually 12 substructures
-
+	u16 flagDataSubSizes[5];
 
 protected:
 	void loadData(u32 flags = 0);
@@ -118,6 +117,7 @@ private:
 	void _deleteFields_extension(void);
 	bool _other_corruption_flags;
 	SaveSlot(Colosseum::SaveEditing::SaveSlot const&);
+	
 };
 
 }

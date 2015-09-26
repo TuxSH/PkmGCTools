@@ -80,7 +80,7 @@ private:
 		else *pkm = *importedPkm;
 
 		if (P::size == 100 && currentSaveSlot != NULL) 
-			pkm->version.currentRegion = currentSaveSlot->version.currentRegion;
+			pkm->version.currentRegion = currentSaveSlot->gameConfig->version.currentRegion;
 
 		parseData();
 		lastPkmDirectory = QFileInfo(fileName).canonicalPath();

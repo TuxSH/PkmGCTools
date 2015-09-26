@@ -1,3 +1,7 @@
+###PkmGCTools v1.1.2:
+Fixed a bug in XD: the map+script data was being wiped out.
+Some refactoring in LibPkmGC.
+
 ###PkmGCTools v1.1.1:
 Fixed a lot of critical bugs (affecting IVs, etc...). Money and Pokécoupons are now limited to 9,999,999. Bag items are limited to 99 again in Pokémon Colosseum Fixed a lot of critical bugs (affecting IVs, etc...)
 (use the PC storage system to fix bag entries with more than 99 items).

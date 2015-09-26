@@ -39,7 +39,7 @@ public:
 	DaycareData* create(void) const;
 
 	DaycareData(Colosseum::DaycareData const& other);
-private:
+protected:
 	void loadFields(void);
 };
 

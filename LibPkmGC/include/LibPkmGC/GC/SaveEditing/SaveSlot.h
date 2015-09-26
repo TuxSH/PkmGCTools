@@ -63,20 +63,13 @@ public:
 	virtual void saveEncrypted(u8* outBuf) = 0;
 
 
-	SaveMagic magic; // 0x00 -- 0x04 (0x03 actually)
-	s32 headerChecksum; // definition and location vary across Colosseum and XD 
-
-	s32 saveCount;//, totalSaveCount;
-
-	/* A bit inconsistent across versions */
-	u32 memcardUID[2]; // u64. memcard[0:8] xor memcard[8:16] xor memcard[16:24] iirc
-	VersionInfo version;
-	LanguageIndex titleScreenLanguage;
-	bool noRumble;
+	SaveMagic magic;
+	s32 saveCount;
 
 	const size_t nbRandomBytes;
 	u8* randomBytes;
 
+	GameConfigData* gameConfig;
 	PlayerData* player;
 	PCData* PC;
 	MailboxData* mailbox;

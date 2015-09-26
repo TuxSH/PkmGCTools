@@ -44,14 +44,13 @@ PlayerData* PlayerData::create(void) const {
 }
 
 void PlayerData::loadFields(void) {
-	GC::PlayerData::loadFields();
+	LD_SUBSTRUCTURE(TrainerData, trainer, 0);
 	LD_FIELD_E(u8, trainerGender, 0x8e0, Gender);
 	if (trainerGender > Female) trainerGender = Male;
 
 	LD_FIELD_MAX(u32, money, 0x8e4, 9999999);
 	LD_FIELD_MAX(u32, pkCoupons, 0x8e8, 9999999);
 
-	LD_SUBSTRUCTURE_ARRAY(Pokemon, party, 6, 0x30);
 	LD_SUBSTRUCTURE(BagData, bag, 0x4c8);
 }
 
@@ -64,9 +63,8 @@ void PlayerData::save(void) {
 	SV_FIELD_MAX(u32, pkCoupons, 0x8e8, 9999999);
 	SV_FIELD(u32, pkCoupons, 0x8ec);
 
-	SV_SUBSTRUCTURE_ARRAY(Pokemon, party, 6, 0x30);
 	SV_SUBSTRUCTURE(BagData, bag, 0x4c8);
-
+	//0x94a: total step counter
 }
 
 }

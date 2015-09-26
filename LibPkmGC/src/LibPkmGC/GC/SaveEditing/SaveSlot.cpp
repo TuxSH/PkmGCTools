@@ -27,6 +27,7 @@ SaveSlot::SaveSlot(size_t inSize, size_t nb_random_bytes, const u8* inData) : Ba
 
 void SaveSlot::deleteFields(void) {
 	delete[] randomBytes;
+	delete gameConfig;
 	delete player;
 	delete PC;
 	delete mailbox;
@@ -39,14 +40,11 @@ SaveSlot::~SaveSlot(void) {
 	SaveSlot::deleteFields();
 }
 
-SaveSlot::SaveSlot(const SaveSlot& other) : Base::DataStruct(other),
-magic(other.magic), headerChecksum(other.headerChecksum), saveCount(other.saveCount),
-version(other.version), titleScreenLanguage(other.titleScreenLanguage), noRumble(other.noRumble), nbRandomBytes(other.nbRandomBytes){
+SaveSlot::SaveSlot(const SaveSlot& other) : Base::DataStruct(other), magic(other.magic), saveCount(other.saveCount), nbRandomBytes(other.nbRandomBytes){
 	randomBytes = new u8[nbRandomBytes];
 	std::copy(other.randomBytes, other.randomBytes + nbRandomBytes, randomBytes);
 
-	std::copy(other.memcardUID, other.memcardUID + 2, memcardUID);
-
+	CL(gameConfig);
 	CL(player);
 	CL(PC);
 	CL(mailbox);
@@ -62,14 +60,8 @@ void SaveSlot::swap(SaveSlot& other) {
 	if (nbRandomBytes != other.nbRandomBytes) throw std::invalid_argument("this->nbRandomBytes != other.nbRandomBytes");
 	Base::DataStruct::swap(other);
 	SW(magic);
-	SW(headerChecksum);
 	SW(saveCount);
-
-	SW(memcardUID[0]); SW(memcardUID[1]);
-
-	SW(version);
-	SW(titleScreenLanguage);
-	SW(noRumble);
+	SW(gameConfig);
 	SW(player);
 	SW(PC);
 	SW(mailbox);
@@ -89,15 +81,9 @@ SaveSlot& SaveSlot::operator=(SaveSlot const& other) {
 		randomBytes = new u8[nbRandomBytes];
 		CP_ARRAY(randomBytes, nbRandomBytes);
 		CP(magic);
-		CP(headerChecksum);
 		CP(saveCount);
-		CP(memcardUID[0]); CP(memcardUID[1]);
 
-		CP(version);
-		CP(titleScreenLanguage);
-		CP(noRumble);
-
-
+		CL(gameConfig);
 		CL(player);
 		CL(PC);
 		CL(mailbox);

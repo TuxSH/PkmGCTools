@@ -20,10 +20,10 @@
 #include <QMessageBox>
 
 using namespace LibPkmGC;
-using namespace GC::SaveEditing;
+using namespace GC;
 namespace GCUIs {
 
-GameConfigUI::GameConfigUI(SaveSlot * inSaveSlot, QWidget * parent, Qt::WindowFlags f) : DataUI(parent, f), saveSlot_(inSaveSlot) {
+GameConfigUI::GameConfigUI(GameConfigData * inGameConfig, QWidget * parent, Qt::WindowFlags f) : DataUI(parent, f), gameConfig(inGameConfig) {
 	init();
 }
 
@@ -60,37 +60,26 @@ void GameConfigUI::initWidget(void) {
 }
 
 void GameConfigUI::parseData(void) {
-	if (saveSlot_ == NULL) return;
-	SaveSlot* sl = saveSlot_;
-	isXD = LIBPKMGC_IS_XD(SaveEditing::SaveSlot, sl);
+	if (gameConfig == NULL) return;
+	isXD = LIBPKMGC_IS_XD(GameConfigData, gameConfig);
 
 	versionFld->disconnect(SIGNAL(versionChanged()), this);
-	versionFld->setInfo(sl->version);
+	versionFld->setInfo(gameConfig->version);
 	connect(versionFld, SIGNAL(versionChanged()), this, SLOT(versionChangeHandler()));
 
-	noRumbleFld->setChecked(sl->noRumble);
-	titleScreenLanguageFld->setCurrentIndex((int)sl->titleScreenLanguage);
+	noRumbleFld->setChecked(gameConfig->noRumble);
+	titleScreenLanguageFld->setCurrentIndex((int)gameConfig->titleScreenLanguage);
 
-	miscellaneousBox->setVisible(!isXD);
-	if (!isXD) {
-		Colosseum::SaveEditing::SaveSlot *sl_c = (Colosseum::SaveEditing::SaveSlot*) sl;
-		storyModeSaveCountFld->setUnsignedValue(sl_c->storyModeSaveCount);
-	}
+	storyModeSaveCountFld->setUnsignedValue(gameConfig->storyModeSaveCount);
 
 	versionChangeHandler();
 }
 
-void GameConfigUI::saveChanges(void) {
-	SaveSlot* sl = saveSlot_;
-	
-	sl->version = versionFld->info();
-	sl->noRumble = noRumbleFld->isChecked();
-	sl->titleScreenLanguage = (LanguageIndex)titleScreenLanguageFld->currentIndex();
-	if (!isXD) {
-		Colosseum::SaveEditing::SaveSlot *sl_c = (Colosseum::SaveEditing::SaveSlot*) sl;
-		sl_c->storyModeSaveCount = storyModeSaveCountFld->unsignedValue();
-	}
-
+void GameConfigUI::saveChanges(void) {	
+	gameConfig->version = versionFld->info();
+	gameConfig->noRumble = noRumbleFld->isChecked();
+	gameConfig->titleScreenLanguage = (LanguageIndex)titleScreenLanguageFld->currentIndex();
+	gameConfig->storyModeSaveCount = storyModeSaveCountFld->unsignedValue();
 }
 
 void GameConfigUI::versionChangeHandler(void) {

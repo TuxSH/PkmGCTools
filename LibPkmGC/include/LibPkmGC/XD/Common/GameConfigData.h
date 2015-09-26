@@ -16,46 +16,45 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _LIBPKMGC_COLOSSEUM_PLAYER_DATA_H
-#define _LIBPKMGC_COLOSSEUM_PLAYER_DATA_H
+#ifndef _LIBPKMGC_XD_GAME_CONFIG_DATA_H
+#define _LIBPKMGC_XD_GAME_CONFIG_DATA_H
 
-#include <LibPkmGC/GC/Common/PlayerData.h>
-#include <LibPkmGC/Colosseum/Common/TrainerData.h>
-#include <LibPkmGC/Colosseum/Common/BagData.h>
+#include <LibPkmGC/GC/Common/GameConfigData.h>
 
 namespace LibPkmGC {
-namespace Colosseum {
+namespace XD {
+
 
 /*
-	0x00: TrainerData trainer
-
-	0x780: bag
-
-	0xa80: u8 trainerGender
-	0xa84: u32 money
-	0xa88: u32 pkCoupons + copy
+Game configuration substructure (off 0 (total 0xa8)) :
+	0x00: VersionInfo version (game, region, language)
+	0x04--0x07: padding
+	0x08: u64 memcardUID (see GCSaveSlot.h)
+	0x10: s32 storyModeSaveCount
+	0x29: u8 noRumble
+	0x2a: u16 titleScreenLanguage
+	0x38: s32 headerChecksum
 */
 
-class LIBPKMGC_DECL PlayerData :
-	public GC::PlayerData
+class LIBPKMGC_DECL GameConfigData :
+	public GC::GameConfigData
 {
 public:
-	static const size_t size = 0xb18;
-	PlayerData(void);
-	PlayerData(PlayerData const& other);
+	static const size_t size = 0x88;
+	GameConfigData(void);
+	GameConfigData(GameConfigData const& other);
+	GameConfigData(const u8* inData);
+	~GameConfigData(void);
 
-	PlayerData(const u8* inData);
-
-
-	~PlayerData(void);
-	PlayerData* clone(void) const;
-	PlayerData* create(void) const;
+	GameConfigData* clone(void) const;
+	GameConfigData* create(void) const;
 
 	void save(void);
 protected:
 	void loadFields(void);
 private:
-	PlayerData(XD::PlayerData const& other);
+	GameConfigData(Colosseum::GameConfigData const& other);
+
 };
 
 }

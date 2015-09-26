@@ -92,7 +92,7 @@ SaveSlot::SaveSlot(const u8* inData, bool isDecrypted) : GC::SaveEditing::SaveSl
 }
 
 
-SaveSlot::SaveSlot(SaveSlot const& other) : GC::SaveEditing::SaveSlot(other), storyModeSaveCount(other.storyModeSaveCount) {
+SaveSlot::SaveSlot(SaveSlot const& other) : GC::SaveEditing::SaveSlot(other) {
 	CP_ARRAY(checksum, 20);
 }
 
@@ -115,7 +115,6 @@ SaveSlot* SaveSlot::create(void) const {
 
 void SaveSlot::swap(SaveSlot& other) {
 	GC::SaveEditing::SaveSlot::swap(other);
-	SW(storyModeSaveCount);
 	SW_ARRAY(checksum, 20);
 
 }
@@ -123,9 +122,11 @@ void SaveSlot::swap(SaveSlot& other) {
 
 bool SaveSlot::checkChecksum(bool fix){
 	u8 newDigest[20];
+	s32 hc_tmp = 0;
+	LD_FIELD(s32, hc_tmp, 12);
 	std::fill(data + 12, data + 16, 0); // headerChecksum field
 	Crypto::sha1(data, data + 0x1dfd8, newDigest);
-	SV_FIELD(s32, headerChecksum, 12);
+	SV_FIELD(s32, hc_tmp, 12);
 
 	bool ret = std::equal(checksum, checksum + 20, newDigest);
 	if (!ret && fix) std::copy(newDigest, newDigest + 20, checksum);
@@ -135,7 +136,9 @@ bool SaveSlot::checkChecksum(bool fix){
 bool SaveSlot::checkHeaderChecksum(bool fix){
 	using namespace IntegerManip::BE;
 	u8 newDigest[20]; // when computing the header's checksum, words @0x18 @0x1c are already encrypted
-	std::fill(data + 12, data + 16, 0); // headerChecksum field
+	s32 hc_tmp = 0;
+	LD_FIELD(s32, hc_tmp, 12);
+	std::fill(data + 12, data + 16, 0); 
 	Crypto::sha1(data, data + 0x1dfd8, newDigest);
 
 	u32 D[2], H[2];
@@ -157,10 +160,10 @@ bool SaveSlot::checkHeaderChecksum(bool fix){
 	newHC -= (s32)toInteger<u32,u8*>(tmpBuf);
 	newHC -= (s32)toInteger<u32, u8*>(tmpBuf + 4);
 
-	SV_FIELD(s32, headerChecksum, 12);
+	SV_FIELD(s32, hc_tmp, 12);
 
-	bool ret = (newHC == headerChecksum);
-	if (!ret && fix) headerChecksum = newHC;
+	bool ret = (newHC == gameConfig->headerChecksum);
+	if (!ret && fix) gameConfig->headerChecksum = newHC;
 	return ret;
 }
 
@@ -169,7 +172,9 @@ std::pair<bool, bool> SaveSlot::checkBothChecksums(bool fixGlobalChecksum, bool 
 	else {
 		using namespace IntegerManip::BE;
 		u8 newDigest[20]; // when computing the header's checksum, words @0x18 @0x1c are already encrypted
-		std::fill(data + 12, data + 16, 0); // headerChecksum field
+		s32 hc_tmp = 0;
+		LD_FIELD(s32, hc_tmp, 12);
+		std::fill(data + 12, data + 16, 0);
 		Crypto::sha1(data, data + 0x1dfd8, newDigest);
 
 		bool ret1 = std::equal(checksum, checksum + 20, newDigest);
@@ -194,10 +199,10 @@ std::pair<bool, bool> SaveSlot::checkBothChecksums(bool fixGlobalChecksum, bool 
 		newHC -= (s32)toInteger<u32, u8*>(tmpBuf);
 		newHC -= (s32)toInteger<u32, u8*>(tmpBuf + 4);
 
-		SV_FIELD(s32, headerChecksum, 12);
+		SV_FIELD(s32, hc_tmp, 12);
 
-		bool ret2 = (newHC == headerChecksum);
-		headerChecksum = newHC;
+		bool ret2 = (newHC == gameConfig->headerChecksum);
+		gameConfig->headerChecksum = newHC;
 
 		return std::pair<bool, bool>(ret1, ret2);
 	}
@@ -219,7 +224,7 @@ inline void doFixBugsAffectingPokemon(Pokemon* pkm) {
 }
 void SaveSlot::fixBugsAffectingPokemon(void) {
 	for (size_t i = 0; i < 6; ++i) 
-		doFixBugsAffectingPokemon((Pokemon*)player->party[i]);
+		doFixBugsAffectingPokemon((Pokemon*)player->trainer->party[i]);
 
 	for (size_t i = 0; i < 3; ++i) {
 		for (size_t j = 0; j < 30; ++j)
@@ -242,19 +247,12 @@ void SaveSlot::loadFields(void) {
 	randomBytes = new u8[20];
 	LD_FIELD_E(u32, magic, 0, SaveMagic);
 	LD_FIELD(s32, saveCount, 4);
-
-	version.load(data + 8);
-	LD_FIELD(u32, headerChecksum, 12);
-	LD_ARRAY(u32, memcardUID, 2, 16);
-	LD_FIELD(u32, storyModeSaveCount, 24);
-	
-	LD_FIELD_B(u8, noRumble, 0x31);
-	LD_FIELD_E(u16, titleScreenLanguage, 0x32, LanguageIndex);
-	size_t offset = 0x70 + 8;
+	size_t offset = 8;
 
 
 #define LD_IMPLEMENTED_SUBSTRUCTURE(type, field) LD_SUBSTRUCTURE(type, field, offset); offset += type::size;
 
+	LD_IMPLEMENTED_SUBSTRUCTURE(GameConfigData, gameConfig);
 	LD_IMPLEMENTED_SUBSTRUCTURE(PlayerData, player);
 	LD_IMPLEMENTED_SUBSTRUCTURE(PCData, PC);
 	LD_IMPLEMENTED_SUBSTRUCTURE(MailboxData, mailbox);
@@ -271,19 +269,13 @@ void SaveSlot::save(void) {
 	magic = ColosseumMagic;
 	SV_FIELD_E(u32, ColosseumMagic, 0, SaveMagic);
 	SV_FIELD(u32, saveCount, 4);
-	//deleteFields();
 
-	version.save(data + 8);
-	SV_ARRAY(u32, memcardUID, 2, 16);
-	SV_FIELD(s32, storyModeSaveCount, 24);
-	SV_FIELD_B(u8, noRumble, 0x31);
-	SV_FIELD_E(u16, titleScreenLanguage, 0x32, LanguageIndex);
-	
-	size_t offset = 0x70 + 8;
+	size_t offset = 8;
 
 
 #define SV_IMPLEMENTED_SUBSTRUCTURE(type, field) SV_SUBSTRUCTURE(type, field, offset); offset += type::size;
 
+	SV_IMPLEMENTED_SUBSTRUCTURE(GameConfigData, gameConfig);
 	SV_IMPLEMENTED_SUBSTRUCTURE(PlayerData, player);
 	SV_IMPLEMENTED_SUBSTRUCTURE(PCData, PC);
 	SV_IMPLEMENTED_SUBSTRUCTURE(MailboxData, mailbox);
@@ -295,7 +287,8 @@ void SaveSlot::save(void) {
 
 
 	checkBothChecksums(true, true); // update checksums
-	SV_FIELD(u32, headerChecksum, 12);
+	offset = 8;
+	SV_IMPLEMENTED_SUBSTRUCTURE(GameConfigData, gameConfig);
 
 	std::copy(randomBytes, randomBytes + 20, data + 0x1dfd8);
 	std::copy(checksum, checksum + 20, data + 0x1dfec);

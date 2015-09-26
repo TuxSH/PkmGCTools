@@ -63,7 +63,7 @@ dlg.exec();\
 if(changesMade) ((QWidget*)parent())->setWindowTitle("PkmGCSaveEditor - " + currentSaveFileName + "*");\
 }
 
-GEN_GCUI_SLT(GameConfigUI, currentSaveSlot)
+GEN_GCUI_SLT(GameConfigUI, currentSaveSlot->gameConfig)
 GEN_GCUI_SLT(PlayerUI, currentSaveSlot->player)
 GEN_GCUI_SLT(PCUI, currentSaveSlot->PC)
 GEN_GCUI_SLT(DaycareUI, currentSaveSlot->daycare)
@@ -486,8 +486,9 @@ void MainWindow::loadSettings(void) {
 
 	if (settings->value("LibPkmGCVersion").toInt() == 0 || settings->value("Version").toInt() == 0)
 		oldversionMax = 0;
-	if (settings->value("LibPkmGCVersion").toInt() < 1001001 || settings->value("Version").toInt() < 1001001)
+	else if (settings->value("LibPkmGCVersion").toInt() < 1001001 || settings->value("Version").toInt() < 1001001)
 		oldversionMax = 1001000;
+	else oldversionMax = 1001001;
 
 }
 

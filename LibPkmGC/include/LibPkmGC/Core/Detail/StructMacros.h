@@ -95,6 +95,7 @@ for(int i__ = 0; i__ < sz; ++i__) ar##_tmp |= ((ar[i__]) ? 1U : 0U) << (8*sizeof
 #define SV_SUBSTRUCTURE(type, fld, off) fld->save(); std::copy(fld->data, fld->data + type::size, data + off);
 #define SV_SUBSTRUCTURE2(type, fld, off) fld->save(); std::copy(fld->data, fld->data + fld->getSize(), data + off);
 #define SV_SUBSTRUCTURE_ARRAY(type, ar, sz, off) for(size_t i__ = 0; i__ < sz; ++i__) { SV_SUBSTRUCTURE(type, ar[i__], off+type::size*i__); }
+#define SV_SUBSTRUCTURE_ARRAY2(type, ar, sz, off) for(size_t i__ = 0; i__ < sz; ++i__) { SV_SUBSTRUCTURE2(type, ar[i__], off+ar[0]->getSize()*i__); }
 
 
 

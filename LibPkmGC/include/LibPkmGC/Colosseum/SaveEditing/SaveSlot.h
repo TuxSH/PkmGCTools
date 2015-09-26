@@ -31,25 +31,16 @@ namespace SaveEditing {
 	size = 0x1e000
 	0x00: u32 magic
 	0x04: u32 saveCount
-	** Metadata / game config
-	0x08: VersionInfo version
-	0x0c: u32 headerChecksum
-	0x10: u64/u32[2] memcardUID : memcard[0:8] xor memcard[8:16] xor memcard[16:24] iirc
+	0x08: **PARTIALLY UNENCRYPTED game config
 
-	0x18: **ENCRYPTED DATA**
+	0x78: game config end
 
-	0x18: u32 storyModeSaveCount // saveCount minus the number of times the rules were saved
-	0x20: u32 = 0
-	0x31: u8 noRumble
-	0x32: u16 titleScreenLanguage;
-	0x78: **END OF METADATA
+	0x78: other substructures. In Pokémon Colosseum, they are strictly contiguous with no trash bytes in between.
 
-	0x78: substructures. In Pokémon Colosseum, they are strictly contiguous with no trash bytes in between.
+	(end)-40: **END OF ENCRYPTED DATA**
 
-	(end)-60: **END OF ENCRYPTED DATA**
-
-	(end)-60: u8 checksum[20]; // sha1 digest
-	(end)-40: u8 randomBytes[40];
+	(end)-40: u8 checksum[20]; // sha1 digest
+	(end)-20: u8 randomBytes[20];
 */
 
 
@@ -80,7 +71,6 @@ public:
 
 	void saveEncrypted(u8* outBuf);
 
-	s32 storyModeSaveCount;
 	u8 checksum[20]; // digest
 
 	void fixBugsAffectingPokemon(void);

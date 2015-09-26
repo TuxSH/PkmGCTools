@@ -16,6 +16,7 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#define _SCL_SECURE_NO_WARNINGS
 #include <LibPkmGC/XD/SaveEditing/SaveSlot.h>
 
 namespace LibPkmGC {
@@ -131,7 +132,10 @@ void SaveSlot::swap(SaveSlot& other) {
 	SW_ARRAY(encryptionKeys, 4);
 	SW_ARRAY(checksum, 4);
 
+	SW_ARRAY(substructureSizes, 16);
 	SW_ARRAY(substructureOffsets, 16);
+	SW_ARRAY(flagDataSubSizes, 5);
+	
 	SW_ARRAY(unhandledSubstructures, 16);
 
 	SW(purifier);
@@ -142,7 +146,9 @@ SaveSlot& SaveSlot::operator=(SaveSlot const & other) {
 	if (this != &other) {
 		CP_ARRAY(checksum, 4);
 		CP_ARRAY(encryptionKeys, 4);
+		CP_ARRAY(substructureSizes, 16);
 		CP_ARRAY(substructureOffsets, 16);
+		CP_ARRAY(flagDataSubSizes, 5);
 		for (size_t i = 0; i < 16; ++i) {
 			if (other.unhandledSubstructures[i] != NULL) unhandledSubstructures[i] = other.unhandledSubstructures[i]->clone();
 			else unhandledSubstructures[i] = NULL;
@@ -160,6 +166,39 @@ void SaveSlot::loadData(u32 flags) {
 	if (!decrypted) decrypt_impl(data, data, encryptionKeys);
 }
 
+template<typename cls> cls* loadSubstructure(u8* data, u32 offset, u32 sz, u32 maxSize) {
+	if (offset + 0xa8 >= 0x28000) return new cls;
+
+	if (sz < maxSize) {
+		u8* dt = new u8[maxSize];
+		std::fill(dt, dt + maxSize, 0);
+		std::copy(data + 0xa8 + offset, data + 0xa8 + offset + sz, dt);
+		cls* ret = new cls(dt);
+		delete[] dt;
+		return ret;
+	}
+	else {
+		return new cls(data + 0xa8 + offset);
+	}
+}
+
+template<> Base::UnimplementedStruct* loadSubstructure<Base::UnimplementedStruct>(u8* data, u32 offset, u32 sz, u32 maxSize) {
+	typedef Base::UnimplementedStruct cls;
+
+	if (offset + 0xa8 >= 0x28000) return new cls(maxSize);
+
+	if (sz < maxSize) {
+		u8* dt = new u8[maxSize];
+		std::fill(dt, dt + maxSize, 0);
+		std::copy(data + 0xa8 + offset, data + 0xa8 + offset + sz, dt);
+		cls* ret = new cls(maxSize, dt);
+		delete[] dt;
+		return ret;
+	}
+	else {
+		return new cls(maxSize, data + 0xa8 + offset);
+	}
+}
 
 void SaveSlot::loadFields(void) {
 	randomBytes = new u8[40];
@@ -174,9 +213,11 @@ void SaveSlot::loadFields(void) {
 		checksum[i] = ((u32)checksum_tmp[2 * i] << 16) | (u32)checksum_tmp[2 * i + 1];
 
 
-	u16 substructureSizes[16], substructureOffsetsTmp[32]; // the upper 16 bits of each offset are stored AFTER the lower ones
+	u16 substructureOffsetsTmp[32]; // the upper 16 bits of each offset are stored AFTER the lower ones
 	LD_ARRAY(u16, substructureSizes, 16, 0x20);
 	LD_ARRAY(u16, substructureOffsetsTmp, 32, 0x40);
+	LD_ARRAY(u16, flagDataSubSizes, 4, 0x80);
+	LD_FIELD(u16, flagDataSubSizes[4], 0x8a);
 
 	u8* start = data + 8 + 0xa0;
 	for (size_t i = 0; i < 16; ++i)
@@ -186,25 +227,18 @@ void SaveSlot::loadFields(void) {
 	for (size_t i = 0; i < 16; ++i) {
 		s8 subscript = substructureOrder[i]; // substructure order if unshuffled
 
-		if ((subscript <= 6) || (subscript == 14)) {
+		if ((subscript != -1) && ((subscript <= 6) || (subscript == 15))) {
 			unhandledSubstructures[i] = NULL;
 			continue;
 		}
 
-		// the game uses the following condition instead : substructureSizes[n] = max(substructureSizes[n], substructureMaxSizes[n]); we won't
-#define COND(n)  substructureSizes[n] != substructureMaxSizes[n] || substructureOffsets[n] + 0xa8 >= size
+		unhandledSubstructures[i] =  loadSubstructure<Base::UnimplementedStruct>(data, substructureOffsets[i], substructureSizes[i], substructureMaxSizes[i]);
 
-		if (COND(i))
-			unhandledSubstructures[i] = new Base::UnimplementedStruct(substructureMaxSizes[i]);
-		else
-			unhandledSubstructures[i] = new Base::UnimplementedStruct(substructureMaxSizes[i], start + substructureOffsets[i]);
 	}
 
-#define LD_IMPLEMENTED_SUBSTRUCTURE(type, field, id)	if(COND(id))\
-													field = new type;\
-												else\
-													field = new type(start + substructureOffsets[id]);
+#define LD_IMPLEMENTED_SUBSTRUCTURE(type, field, id) field = loadSubstructure<type>(data, substructureOffsets[id], substructureSizes[id], substructureMaxSizes[id])
 
+	LD_IMPLEMENTED_SUBSTRUCTURE(GameConfigData, gameConfig, 0);
 	LD_IMPLEMENTED_SUBSTRUCTURE(PlayerData, player, 1);
 	LD_IMPLEMENTED_SUBSTRUCTURE(PCData, PC, 2);
 	LD_IMPLEMENTED_SUBSTRUCTURE(MailboxData, mailbox, 3);
@@ -213,12 +247,14 @@ void SaveSlot::loadFields(void) {
 	LD_IMPLEMENTED_SUBSTRUCTURE(BattleModeData, battleMode, 6);
 	LD_IMPLEMENTED_SUBSTRUCTURE(PurifierData, purifier, 14);
 
-	version.load(start);
-	LD_ARRAY(u32, memcardUID, 2, 0xa8 + 8);
-	LD_FIELD_B(u8, noRumble, 0xa8 + 0x29);
-	LD_FIELD_E(u16, titleScreenLanguage, 0xa8 + 0x2a, LanguageIndex);
-	LD_FIELD(s32, headerChecksum, 0xa8 + 0x38);
+	{ // flags
+		u16 sz = 0;
+		for (size_t i = 0; i < 5; ++i) sz += flagDataSubSizes[i];
+		if (sz <= substructureMaxSizes[8] && substructureSizes[8] == substructureMaxSizes[8])
+			std::fill(unhandledSubstructures[8]->data + sz, unhandledSubstructures[8]->data + substructureMaxSizes[8], 0);
+	}
 
+	std::copy(substructureMaxSizes, substructureMaxSizes + 16, substructureSizes);
 	std::copy(data + size - 40, data + size, randomBytes);
 }
 
@@ -251,8 +287,8 @@ bool SaveSlot::checkHeaderChecksum(bool fix) {
 	s32 new_header_checksum = 0;
 	for (size_t i = 0; i < 8; ++i) new_header_checksum += (s32)(u32)data[i];
 
-	bool ret = new_header_checksum == headerChecksum;
-	if (!ret && fix) headerChecksum = new_header_checksum;
+	bool ret = new_header_checksum == gameConfig->headerChecksum;
+	if (!ret && fix) gameConfig->headerChecksum = new_header_checksum;
 
 	return ret;
 }
@@ -261,11 +297,11 @@ std::pair<bool, bool> SaveSlot::checkBothChecksums(bool fixGlobalChecksum, bool 
 	if (!fixGlobalChecksum || !fixHeaderChecksum) return std::pair<bool, bool>(checkChecksum(fixGlobalChecksum), checkHeaderChecksum(fixHeaderChecksum));
 	else {
 		bool first, second;
-		s32 oldHC = headerChecksum;
+		s32 oldHC = gameConfig->headerChecksum;
 		first = checkHeaderChecksum(true);
-		SV_FIELD(s32, headerChecksum, 0xa8 + 0x38);
+		SV_FIELD(s32, gameConfig->headerChecksum, 0xa8 + substructureOffsets[0] + 0x38);
 		second = checkChecksum(true);
-		SV_FIELD(s32, oldHC, 0xa8 + 0x38);
+		SV_FIELD(s32, oldHC, 0xa8 + substructureOffsets[0] + 0x38);
 		return std::pair<bool, bool>(first, second);
 	}
 }
@@ -288,15 +324,26 @@ void SaveSlot::save(void) {
 	std::copy(randomBytes, randomBytes + 40, data + size - 40);
 
 
-	std::fill(start + substructureMaxSizes[0], data + size, 0); // clean the filler bytes
+	std::fill(start, data + size - 40, 0); // clean the filler bytes
+
+	std::copy(substructureMaxSizes, substructureMaxSizes + 16, substructureSizes);
+
+	{ // flags
+		u16 sz = 0;
+		for (size_t i = 0; i < 5; ++i) sz += flagDataSubSizes[i];
+		if (sz <= substructureMaxSizes[8])
+			std::fill(unhandledSubstructures[8]->data + sz, unhandledSubstructures[8]->data + substructureMaxSizes[8], 0);
+	}
 
 	for (size_t i = 0; i < 16; ++i) {
 		if (unhandledSubstructures[i] == NULL) continue;
+		else if (substructureOrder[i] == -1) std::fill(unhandledSubstructures[i]->data, unhandledSubstructures[i]->data + substructureMaxSizes[i], 0); // 100% trash data
 		std::copy(unhandledSubstructures[i]->data, unhandledSubstructures[i]->data + substructureMaxSizes[i], start + substructureOffsets[i]);
 	}
 
 #define SV_IMPLEMENTED_SUBSTRUCTURE(type, field, id) field->save(); std::copy(field->data, field->data + substructureMaxSizes[id], start + substructureOffsets[id]);
 
+	SV_IMPLEMENTED_SUBSTRUCTURE(GameConfigData, gameConfig, 0);
 	SV_IMPLEMENTED_SUBSTRUCTURE(PlayerData, player, 1);
 	SV_IMPLEMENTED_SUBSTRUCTURE(PCData, PC, 2);
 	SV_IMPLEMENTED_SUBSTRUCTURE(MailboxData, mailbox, 3);
@@ -307,7 +354,7 @@ void SaveSlot::save(void) {
 
 
 
-	u16 substructureSizes[16], substructureOffsetsTmp[32]; // the upper 16 bits of each offset are stored AFTER the lower ones
+	u16 substructureOffsetsTmp[32]; // the upper 16 bits of each offset are stored AFTER the lower ones
 	std::copy(substructureMaxSizes, substructureMaxSizes + 16, substructureSizes);
 	SV_ARRAY(u16, substructureSizes, 16, 0x20);
 	_other_corruption_flags = false;
@@ -319,17 +366,12 @@ void SaveSlot::save(void) {
 	}
 
 	SV_ARRAY(u16, substructureOffsetsTmp, 32, 0x40);
+	SV_ARRAY(u16, flagDataSubSizes, 4, 0x80);
+	SV_FIELD(u16, flagDataSubSizes[4], 0x8a);
 
 
-	version.save(start);
-	SV_ARRAY(u32, memcardUID, 2, 0xa8 + 8);
-	SV_FIELD_B(u8, noRumble, 0xa8 + 0x29);
-	SV_FIELD_E(u16, titleScreenLanguage, 0xa8 + 0x2a, LanguageIndex);
-
-	checkHeaderChecksum(true);
-	SV_FIELD(u32, headerChecksum, 0xa8 + 0x38);
-
-	checkChecksum(true);
+	checkBothChecksums(true);
+	SV_IMPLEMENTED_SUBSTRUCTURE(GameConfigData, gameConfig, 0);
 
 	u16 checksum_tmp[8];
 

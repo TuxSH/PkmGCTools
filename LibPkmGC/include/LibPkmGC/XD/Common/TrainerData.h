@@ -16,18 +16,36 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _LIBPKMGC_COLOSSEUM_COMMON_EVERYTHING_H
-#define _LIBPKMGC_COLOSSEUM_COMMON_EVERYTHING_H
+#ifndef _LIBPKMGC_XD_TRAINER_DATA_H
+#define _LIBPKMGC_XD_TRAINER_DATA_H
 
-#include <LibPkmGC/XD/Common/GameConfigData.h>
-#include <LibPkmGC/XD/Common/PlayerData.h>
-#include <LibPkmGC/XD/Common/PCData.h>
-#include <LibPkmGC/XD/Common/PlayerData.h>
-#include <LibPkmGC/XD/Common/MailboxData.h>
-#include <LibPkmGC/XD/Common/DaycareData.h>
-#include <LibPkmGC/XD/Common/StrategyMemoData.h>
-#include <LibPkmGC/XD/Common/BattleModeData.h>
+#include <LibPkmGC/GC/Common/TrainerData.h>
+#include <LibPkmGC/XD/Common/Pokemon.h>
 
-#include <LibPkmGC/XD/Common/PurifierData.h>
+namespace LibPkmGC {
+namespace XD {
+
+class LIBPKMGC_DECL TrainerData :
+	public GC::TrainerData
+{
+public:
+	static const size_t size = 0x4c8;
+	TrainerData(void);
+	TrainerData(TrainerData const& other);
+	TrainerData(const u8* inData);
+	~TrainerData(void);
+
+	TrainerData& operator=(TrainerData const& other);
+
+	TrainerData* clone(void) const;
+	TrainerData* create(void) const;
+
+	TrainerData(Colosseum::TrainerData const& other);
+protected:
+	void loadFields(void);
+};
+
+}
+}
 
 #endif
