@@ -28,7 +28,7 @@ namespace Colosseum {
 
 /*
 	??
-	0xc16c: Colosseum::GroupBattleRules rules[26]
+	0xc9dc: Colosseum::GroupBattleRules rules[6]
 	??
 */
 class LIBPKMGC_DECL BattleModeData :

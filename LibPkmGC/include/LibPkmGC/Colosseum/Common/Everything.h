@@ -16,8 +16,8 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _LIBPKMGC_XD_COMMON_EVERYTHING_H
-#define _LIBPKMGC_XD_COMMON_EVERYTHING_H
+#ifndef _LIBPKMGC_COLOSSEUM_COMMON_EVERYTHING_H
+#define _LIBPKMGC_COLOSSEUM_COMMON_EVERYTHING_H
 
 #include <LibPkmGC/Colosseum/Common/GameConfigData.h>
 #include <LibPkmGC/Colosseum/Common/PlayerData.h>
@@ -27,5 +27,7 @@
 #include <LibPkmGC/Colosseum/Common/DaycareData.h>
 #include <LibPkmGC/Colosseum/Common/StrategyMemoData.h>
 #include <LibPkmGC/Colosseum/Common/BattleModeData.h>
+
+#include <LibPkmGC/Colosseum/Common/RibbonDescriptionsData.h>
 
 #endif

@@ -225,9 +225,7 @@ void SaveSlot::loadFields(void) {
 
 	_other_corruption_flags = substructureSizes[0] != 0x88;
 	for (size_t i = 0; i < 16; ++i) {
-		s8 subscript = substructureOrder[i]; // substructure order if unshuffled
-
-		if ((subscript != -1) && ((subscript <= 6) || (subscript == 15))) {
+		if (i <= 6 || i == 9 || i == 14) {
 			unhandledSubstructures[i] = NULL;
 			continue;
 		}
@@ -245,6 +243,7 @@ void SaveSlot::loadFields(void) {
 	LD_IMPLEMENTED_SUBSTRUCTURE(DaycareData, daycare, 4);
 	LD_IMPLEMENTED_SUBSTRUCTURE(StrategyMemoData, strategyMemo, 5);
 	LD_IMPLEMENTED_SUBSTRUCTURE(BattleModeData, battleMode, 6);
+	LD_IMPLEMENTED_SUBSTRUCTURE(RibbonDescriptionsData, ribbonDescriptions, 9);
 	LD_IMPLEMENTED_SUBSTRUCTURE(PurifierData, purifier, 14);
 
 	{ // flags
@@ -350,6 +349,7 @@ void SaveSlot::save(void) {
 	SV_IMPLEMENTED_SUBSTRUCTURE(DaycareData, daycare, 4);
 	SV_IMPLEMENTED_SUBSTRUCTURE(StrategyMemoData, strategyMemo, 5);
 	SV_IMPLEMENTED_SUBSTRUCTURE(BattleModeData, battleMode, 6);
+	SV_IMPLEMENTED_SUBSTRUCTURE(RibbonDescriptionsData, ribbonDescriptions, 9);
 	SV_IMPLEMENTED_SUBSTRUCTURE(PurifierData, purifier, 14);
 
 
@@ -415,7 +415,6 @@ void SaveSlot::saveEncrypted(u8* outBuf) {
 void SaveSlot::_deleteFields_extension(void) {
 	for (size_t i = 0; i < 16; ++i) delete unhandledSubstructures[i];
 	delete purifier;
-	//delete groupBattleRules;
 }
 
 }

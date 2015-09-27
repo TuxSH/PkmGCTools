@@ -73,7 +73,7 @@ public:
 
 	u8 checksum[20]; // digest
 
-	void fixBugsAffectingPokemon(void);
+	void fixBugsAffectingPokemon(void); // LibPkmGC < 1.1.1
 protected:
 	void loadData(u32 flags = 0);
 	void deleteFields(void);

@@ -16,17 +16,31 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _LIBPKMGC_GC_COMMON_EVERYTHING_H
-#define _LIBPKMGC_GC_COMMON_EVERYTHING_H
-
-#include <LibPkmGC/GC/Common/GameConfigData.h>
-#include <LibPkmGC/GC/Common/PlayerData.h>
-#include <LibPkmGC/GC/Common/PCData.h>
-#include <LibPkmGC/GC/Common/PlayerData.h>
-#include <LibPkmGC/GC/Common/MailboxData.h>
-#include <LibPkmGC/GC/Common/DaycareData.h>
-#include <LibPkmGC/GC/Common/StrategyMemoData.h>
-#include <LibPkmGC/GC/Common/BattleModeData.h>
+#ifndef _LIBPKMGC_XD_RIBBON_DESCRIPTION_DATA_H
+#define _LIBPKMGC_XD_RIBBON_DESCRIPTION_DATA_H
 
 #include <LibPkmGC/GC/Common/RibbonDescriptionsData.h>
+
+namespace LibPkmGC {
+namespace XD {
+
+
+class LIBPKMGC_DECL RibbonDescriptionsData :
+	public GC::RibbonDescriptionsData
+{
+public:
+	static const size_t size = 11;
+	~RibbonDescriptionsData(void);
+	RibbonDescriptionsData(void);
+	RibbonDescriptionsData(const u8* inData);
+
+	bool isXD(void) const;
+	RibbonDescriptionsData* clone(void) const;
+	RibbonDescriptionsData* create(void) const;
+
+};
+
+}
+}
+
 #endif

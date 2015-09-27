@@ -16,17 +16,34 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _LIBPKMGC_GC_COMMON_EVERYTHING_H
-#define _LIBPKMGC_GC_COMMON_EVERYTHING_H
+#include <LibPkmGC/Colosseum/Common/RibbonDescriptionsData.h>
 
-#include <LibPkmGC/GC/Common/GameConfigData.h>
-#include <LibPkmGC/GC/Common/PlayerData.h>
-#include <LibPkmGC/GC/Common/PCData.h>
-#include <LibPkmGC/GC/Common/PlayerData.h>
-#include <LibPkmGC/GC/Common/MailboxData.h>
-#include <LibPkmGC/GC/Common/DaycareData.h>
-#include <LibPkmGC/GC/Common/StrategyMemoData.h>
-#include <LibPkmGC/GC/Common/BattleModeData.h>
+namespace LibPkmGC {
+namespace Colosseum {
 
-#include <LibPkmGC/GC/Common/RibbonDescriptionsData.h>
-#endif
+RibbonDescriptionsData::~RibbonDescriptionsData(void) {
+}
+
+RibbonDescriptionsData::RibbonDescriptionsData(void) : GC::RibbonDescriptionsData() {
+	initWithEmptyData();
+}
+
+RibbonDescriptionsData::RibbonDescriptionsData(const u8* inData) : GC::RibbonDescriptionsData(inData) {
+	load();
+}
+
+bool RibbonDescriptionsData::isXD(void) const {
+	return false;
+}
+
+RibbonDescriptionsData* RibbonDescriptionsData::clone(void) const {
+	return new RibbonDescriptionsData(*this);
+}
+
+RibbonDescriptionsData* RibbonDescriptionsData::create(void) const {
+	return new RibbonDescriptionsData;
+}
+
+
+}
+}

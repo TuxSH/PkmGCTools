@@ -52,7 +52,7 @@ namespace SaveEditing {
 	- [6] Battle mode
 	- [7] Shadow Pokémon data (in Colosseum, this is apparently a PID list; the full shadow data SEEMS to be included in the Pokémon's data)
 	- [8] Flags (not handled here)
-	- [9] Special ribbons description (will be handled soon)
+	- [9] Ribbon descriptions
 	- [15] map data / script state
 	- [14] Purifier
 */

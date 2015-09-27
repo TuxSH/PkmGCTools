@@ -24,7 +24,8 @@ namespace GC {
 StrategyMemoEntry::StrategyMemoEntry(const u8* inData) : Base::DataStruct(0xc, inData) {
 }
 
-void StrategyMemoEntry::deleteFields(void) {}
+void StrategyMemoEntry::deleteFields(void) {
+}
 
 
 StrategyMemoEntry::~StrategyMemoEntry(void) {

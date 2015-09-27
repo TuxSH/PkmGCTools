@@ -16,50 +16,40 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _LIBPKMGC_GC_STRATEGY_MEMO_ENTRY_H
-#define _LIBPKMGC_GC_STRATEGY_MEMO_ENTRY_H
+#ifndef _LIBPKMGC_GC_RIBBON_DESCRIPTION_DATA_H
+#define _LIBPKMGC_GC_RIBBON_DESCRIPTION_DATA_H
 
 #include <LibPkmGC/Base/DataStruct.h>
-#include <LibPkmGC/Core/PokemonInfo.h>
-
 
 namespace LibPkmGC {
 
-LIBPKMGC_FWD_DECL_GC_CLS(StrategyMemoEntry)
+LIBPKMGC_FWD_DECL_GC_CLS(RibbonDescriptionsData)
 
 namespace GC {
 
 /*
-	For both Colosseum and XD:
-	0x00: u16 pokemonIndex | flag (Colosseum: 0 : pokémon fully registered; 0x8000 : registered as seen; XD : 0x8000 if registered)
-	0x04: u16 firstSID
-	0x06: u16 firstTID
-	0x08: u32 firstPID
+	This is just an array of description IDs :
+		u8 descriptions[11];
+	Concerned ribbons: Marine, Land, Sky, Country, National, Earth, World, Unused 1,2,3,4
+
+	Please refer to Core/Detail/RibbonDescriptions.cpp
 */
 
-class LIBPKMGC_DECL StrategyMemoEntry :
+class LIBPKMGC_DECL RibbonDescriptionsData :
 	public Base::DataStruct
 {
 public:
-	StrategyMemoEntry(const u8* inData = NULL);
-	virtual ~StrategyMemoEntry(void);
+	RibbonDescriptionsData(const u8* inData = NULL);
+	virtual ~RibbonDescriptionsData(void);
 	virtual bool isXD(void) const = 0;
 	virtual void save(void);
 
-	virtual StrategyMemoEntry* clone(void) const = 0;
-	virtual StrategyMemoEntry* create(void) const = 0;
+	virtual RibbonDescriptionsData* clone(void) const = 0;
+	virtual RibbonDescriptionsData* create(void) const = 0;
 
-	void swap(StrategyMemoEntry& other);
+	void swap(RibbonDescriptionsData& other);
 
-	bool isEmpty(void) const;
-
-	virtual bool isInfoPartial(void) const = 0;
-	virtual void setInfoCompleteness(bool partial) = 0;
-
-	u16 flags;
-	PokemonSpeciesIndex species;
-	u16 firstSID, firstTID;
-	u32 firstPID;
+	u8 descriptions[11];
 
 protected:
 	virtual void deleteFields(void);

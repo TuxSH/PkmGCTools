@@ -34,6 +34,7 @@ void SaveSlot::deleteFields(void) {
 	delete daycare;
 	delete strategyMemo;
 	delete battleMode;
+	delete ribbonDescriptions;
 }
 
 SaveSlot::~SaveSlot(void) {
@@ -50,9 +51,9 @@ SaveSlot::SaveSlot(const SaveSlot& other) : Base::DataStruct(other), magic(other
 	CL(mailbox);
 	CL(daycare);
 	CL(strategyMemo);
-
 	CL(battleMode);
 
+	CL(ribbonDescriptions);
 }
 
 
@@ -68,6 +69,8 @@ void SaveSlot::swap(SaveSlot& other) {
 	SW(daycare);
 	SW(strategyMemo);
 	SW(battleMode);
+
+	SW(ribbonDescriptions);
 
 	SW(randomBytes);
 }
@@ -90,6 +93,8 @@ SaveSlot& SaveSlot::operator=(SaveSlot const& other) {
 		CL(daycare);
 		CL(strategyMemo);
 		CL(battleMode);
+
+		CL(ribbonDescriptions);
 	}
 	return *this;
 }

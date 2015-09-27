@@ -47,13 +47,11 @@ BattleModeData* BattleModeData::create(void) const
 }
 
 void BattleModeData::loadFields(void) {
-	LD_SUBSTRUCTURE_ARRAY(GroupBattleRule, rules, 6, 0xc16c);
-	//LD_FIELD_B(u8, groupBattleModeUsed, 0x360);
+	LD_SUBSTRUCTURE_ARRAY(GroupBattleRule, rules, 6, 0xc9dc);
 }
 
 void BattleModeData::save(void) {
-	SV_SUBSTRUCTURE_ARRAY(GroupBattleRule, rules, 6, 0xc16c);
-	//SV_FIELD_B(u8, groupBattleModeUsed, 0x360);
+	SV_SUBSTRUCTURE_ARRAY(GroupBattleRule, rules, 6, 0xc9dc);
 }
 
 }

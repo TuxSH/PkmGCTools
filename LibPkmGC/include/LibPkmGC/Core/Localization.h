@@ -26,6 +26,7 @@
 #include <LibPkmGC/Core/Detail/MoveNames.h>
 #include <LibPkmGC/Core/Detail/AbilityNames.h>
 #include <LibPkmGC/Core/Detail/ItemNames.h>
+#include <LibPkmGC/Core/Detail/RibbonDescriptions.h>
 
 namespace LibPkmGC {
 namespace Localization {
@@ -45,6 +46,8 @@ LIBPKMGC_DECL const char*  getPokemonAbilityName(LanguageIndex language, Pokemon
 
 LIBPKMGC_DECL const char* getItemName(LanguageIndex language, ItemIndex index, bool isXD = false);
 
+LIBPKMGC_DECL const char* getRibbonDescription(LanguageIndex language, size_t index);
+// Ribbons: Marine, Land, Sky, Country, National, Earth, World, Unused 1,2,3,4
 
 }
 }

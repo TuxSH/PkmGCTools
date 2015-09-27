@@ -16,17 +16,31 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _LIBPKMGC_GC_COMMON_EVERYTHING_H
-#define _LIBPKMGC_GC_COMMON_EVERYTHING_H
+#ifndef _LIBPKMGC_RIBBON_DESCRIPTIONS_H
+#define _LIBPKMGC_RIBBON_DESCRIPTIONS_H
 
-#include <LibPkmGC/GC/Common/GameConfigData.h>
-#include <LibPkmGC/GC/Common/PlayerData.h>
-#include <LibPkmGC/GC/Common/PCData.h>
-#include <LibPkmGC/GC/Common/PlayerData.h>
-#include <LibPkmGC/GC/Common/MailboxData.h>
-#include <LibPkmGC/GC/Common/DaycareData.h>
-#include <LibPkmGC/GC/Common/StrategyMemoData.h>
-#include <LibPkmGC/GC/Common/BattleModeData.h>
+#include <LibPkmGC/Core/Config.h>
 
-#include <LibPkmGC/GC/Common/RibbonDescriptionsData.h>
+namespace LibPkmGC {
+namespace Localization {
+namespace Detail {
+
+namespace RibbonDescriptions {
+
+#define NB_NAMES 65
+extern const char LIBPKMGC_DECL *englishNames[NB_NAMES];
+extern const char LIBPKMGC_DECL *frenchNames[NB_NAMES];
+extern const char LIBPKMGC_DECL *germanNames[NB_NAMES];
+extern const char LIBPKMGC_DECL *italianNames[NB_NAMES];
+extern const char LIBPKMGC_DECL *spanishNames[NB_NAMES];
+extern const char LIBPKMGC_DECL *japaneseNames[NB_NAMES];
+
+extern const char **names[7];
+#undef NB_NAMES
+
+}
+}
+}
+}
+
 #endif

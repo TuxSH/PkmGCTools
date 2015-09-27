@@ -76,6 +76,7 @@ public:
 	DaycareData* daycare;
 	StrategyMemoData* strategyMemo;
 	BattleModeData* battleMode;
+	RibbonDescriptionsData* ribbonDescriptions;
 
 protected:
 	virtual void deleteFields(void);

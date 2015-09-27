@@ -543,6 +543,11 @@ const char* getItemName(LanguageIndex language, ItemIndex index, bool isXD) {
 	return 0;
 }
 
+const char* getRibbonDescription(LanguageIndex language, size_t index) {
+	using namespace Detail::RibbonDescriptions;
+	LIBPKMGC_GET_LOCALIZED_NAME(language, index, 65);
+}
+
 
 }
 }

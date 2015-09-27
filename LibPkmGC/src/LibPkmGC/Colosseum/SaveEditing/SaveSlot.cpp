@@ -247,10 +247,10 @@ void SaveSlot::loadFields(void) {
 	randomBytes = new u8[20];
 	LD_FIELD_E(u32, magic, 0, SaveMagic);
 	LD_FIELD(s32, saveCount, 4);
-	size_t offset = 8;
+	size_t offset = 0;
 
 
-#define LD_IMPLEMENTED_SUBSTRUCTURE(type, field) LD_SUBSTRUCTURE(type, field, offset); offset += type::size;
+#define LD_IMPLEMENTED_SUBSTRUCTURE(type, field) LD_SUBSTRUCTURE(type, field, 8 + offset); offset += type::size;
 
 	LD_IMPLEMENTED_SUBSTRUCTURE(GameConfigData, gameConfig);
 	LD_IMPLEMENTED_SUBSTRUCTURE(PlayerData, player);
@@ -258,8 +258,12 @@ void SaveSlot::loadFields(void) {
 	LD_IMPLEMENTED_SUBSTRUCTURE(MailboxData, mailbox);
 	LD_IMPLEMENTED_SUBSTRUCTURE(DaycareData, daycare);
 	LD_IMPLEMENTED_SUBSTRUCTURE(StrategyMemoData, strategyMemo);
-	offset += 0x523c;
+	//offset += 0x523c;
+	offset = 0xe3e8;
 	LD_IMPLEMENTED_SUBSTRUCTURE(BattleModeData, battleMode);
+	//offset += 0x1448;
+	offset = 0x1c45c;
+	LD_IMPLEMENTED_SUBSTRUCTURE(RibbonDescriptionsData, ribbonDescriptions);
 	// unknown substructures following
 
 	std::copy(data + 0x1dfd8, data + 0x1dfec, randomBytes);
@@ -270,10 +274,10 @@ void SaveSlot::save(void) {
 	SV_FIELD_E(u32, ColosseumMagic, 0, SaveMagic);
 	SV_FIELD(u32, saveCount, 4);
 
-	size_t offset = 8;
+	size_t offset = 0;
 
 
-#define SV_IMPLEMENTED_SUBSTRUCTURE(type, field) SV_SUBSTRUCTURE(type, field, offset); offset += type::size;
+#define SV_IMPLEMENTED_SUBSTRUCTURE(type, field) SV_SUBSTRUCTURE(type, field, 8 + offset); offset += type::size;
 
 	SV_IMPLEMENTED_SUBSTRUCTURE(GameConfigData, gameConfig);
 	SV_IMPLEMENTED_SUBSTRUCTURE(PlayerData, player);
@@ -281,8 +285,12 @@ void SaveSlot::save(void) {
 	SV_IMPLEMENTED_SUBSTRUCTURE(MailboxData, mailbox);
 	SV_IMPLEMENTED_SUBSTRUCTURE(DaycareData, daycare);
 	SV_IMPLEMENTED_SUBSTRUCTURE(StrategyMemoData, strategyMemo);
-	offset += 0x523c;
+	//offset += 0x523c;
+	offset = 0xe3e8;
 	SV_IMPLEMENTED_SUBSTRUCTURE(BattleModeData, battleMode);
+	//offset += 0x1448;
+	offset = 0x1c45c;
+	SV_IMPLEMENTED_SUBSTRUCTURE(RibbonDescriptionsData, ribbonDescriptions);
 	// unknown substructures following
 
 

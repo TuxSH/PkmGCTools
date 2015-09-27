@@ -16,17 +16,34 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _LIBPKMGC_GC_COMMON_EVERYTHING_H
-#define _LIBPKMGC_GC_COMMON_EVERYTHING_H
-
-#include <LibPkmGC/GC/Common/GameConfigData.h>
-#include <LibPkmGC/GC/Common/PlayerData.h>
-#include <LibPkmGC/GC/Common/PCData.h>
-#include <LibPkmGC/GC/Common/PlayerData.h>
-#include <LibPkmGC/GC/Common/MailboxData.h>
-#include <LibPkmGC/GC/Common/DaycareData.h>
-#include <LibPkmGC/GC/Common/StrategyMemoData.h>
-#include <LibPkmGC/GC/Common/BattleModeData.h>
-
 #include <LibPkmGC/GC/Common/RibbonDescriptionsData.h>
-#endif
+
+namespace LibPkmGC {
+namespace GC {
+
+RibbonDescriptionsData::RibbonDescriptionsData(const u8* inData) : Base::DataStruct(0xb, inData) {
+}
+
+void RibbonDescriptionsData::deleteFields(void) {
+}
+
+
+RibbonDescriptionsData::~RibbonDescriptionsData(void) {
+	RibbonDescriptionsData::deleteFields();
+}
+
+void RibbonDescriptionsData::swap(RibbonDescriptionsData& other) {
+	Base::DataStruct::swap(other);
+	SW_ARRAY(descriptions, 11);
+}
+
+void RibbonDescriptionsData::loadFields(void) {
+	LD_ARRAY_MAX(u8, descriptions, 11, 0, 65);
+}
+
+void RibbonDescriptionsData::save(void) {
+	SV_ARRAY_MAX(u8, descriptions, 11, 0, 65);
+}
+
+}
+}
