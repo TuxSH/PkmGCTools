@@ -16,8 +16,8 @@
 * along with PkmGCSaveEditor.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _PKMGCSAVEEDITOR_PLAYER_UI
-#define _PKMGCSAVEEDITOR_PLAYER_UI
+#ifndef _PKMGCSAVEEDITOR_PLAYER_UI_H
+#define _PKMGCSAVEEDITOR_PLAYER_UI_H
 
 #include <GCUIs/BagEditor.h>
 #include <Core/TrainerInfoLayout.h>

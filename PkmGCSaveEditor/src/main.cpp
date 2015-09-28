@@ -22,8 +22,8 @@
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-	MainWindow iface;
-	iface.show();
+	MainWindow userInterface;
+	userInterface.show();
 
     return app.exec();
 }
