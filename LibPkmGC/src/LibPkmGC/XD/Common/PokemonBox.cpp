@@ -44,6 +44,12 @@ PokemonBox* PokemonBox::create(void) const {
 	return new PokemonBox;
 }
 
+PokemonBox::PokemonBox(Base::PokemonBox const& other) : GC::PokemonBox(0x170c) {
+	initWithEmptyData();
+	Base::PokemonBox::operator=(other);
+}
+
+
 void PokemonBox::loadFields(void) {
 	GC::PokemonBox::loadFields();
 	LD_SUBSTRUCTURE_ARRAY(Pokemon, pkm, 30, 0x14);

@@ -24,6 +24,7 @@
 #include <GCUIs/PCUI.h>
 #include <GCUIs/DaycareUI.h>
 #include <GCUIs/StrategyMemoUI.h>
+#include <GCUIs/RibbonDescriptionsUI.h>
 #include <XDUIs/PurifierUI.h>
 #include <QGridLayout>
 #include <QMainWindow>
@@ -32,7 +33,7 @@
 #include <QSettings>
 #include <QTranslator>
 #include <QActionGroup>
-
+#include <QNetworkReply>
 class MWCentralWidget : public QWidget {
 	Q_OBJECT
 public:
@@ -47,11 +48,12 @@ public slots:
 	void openPCUI(void);
 	void openDaycareUI(void);
 	void openStrategyMemoUI(void);
+	void openRibbonDescriptionsUI(void);
 	void openPurifierUI(void);
 
 private:
 	QVBoxLayout *mainLayout;
-	QPushButton *gameConfigButton, *playerButton, *PCButton, *daycareButton, *strategyMemoButton, *purifierButton ;
+	QPushButton *gameConfigButton, *playerButton, *PCButton, *daycareButton, *strategyMemoButton, *ribbonDescriptionsButton, *purifierButton ;
 };
 
 class MainWindow : public QMainWindow {
@@ -62,6 +64,8 @@ public:
 	void updateText(void);
 	void updateStatusBar(void);
 	int openSaveChangesPrompt(void);
+
+	void checkForUpdates(void);
 public slots:
 	void openSaveFile(void);
 	bool saveSaveFile(void);
@@ -102,6 +106,9 @@ private:
 	QMenu* bugFixesSubMenu;
 	QAction* colosseumBugsAffectingPokemonAction;
 	QAction* ignoreDataCorruptionAction;
+	QAction* checkForUpdatesAtStartupAction;
+
+
 	QSettings *settings;
 
 	QTranslator translator, translatorQt;

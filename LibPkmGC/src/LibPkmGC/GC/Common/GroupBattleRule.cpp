@@ -61,6 +61,7 @@ GroupBattleRule& GroupBattleRule::operator=(GroupBattleRule const& other) {
 	if (nbBannableItems != other.nbBannableItems) throw std::invalid_argument("this->nbBannableItems != other.nbBannableItems");
 	if (this != &other) {
 		Base::DataStruct::operator=(other);
+		deleteFields();
 		CP(minLevel);
 		CP(maxLevel);
 		CP(maxLevelSum);

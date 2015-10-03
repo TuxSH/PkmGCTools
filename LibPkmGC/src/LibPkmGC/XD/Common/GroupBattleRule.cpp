@@ -50,6 +50,20 @@ void GroupBattleRule::swap(GroupBattleRule & other) {
 	SW(customName);
 }
 
+GroupBattleRule& GroupBattleRule::operator=(GroupBattleRule const& other) {
+	if (this != &other) {
+		GC::GroupBattleRule::operator=(other);
+		CL(customName);
+		CP(nbPkm);
+		CP(isBattleOpen);
+		CP(revealDeoxysForm);
+		CP(customName);
+	}
+	return *this;
+}
+
+LIBPKMGC_GC_GEN_NON_CONVERTIBLE_XD_VTF(GroupBattleRule)
+
 GroupBattleRule* GroupBattleRule::clone(void) const {
 	return new GroupBattleRule(*this);
 }

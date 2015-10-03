@@ -17,7 +17,7 @@
 */
 
 #include <LibPkmGC/Base/PokemonBox.h>
-
+#include <string>
 namespace LibPkmGC {
 namespace Base {
 
@@ -42,7 +42,12 @@ PokemonBox::~PokemonBox(void) {
 
 void PokemonBox::swap(PokemonBox& other) {
 	DataStruct::swap(other);
-	SW(name);
+	if(name->isGBA() == other.name->isGBA()) SW(name);
+	else {
+		std::string s(name->toUTF8());
+		name->fromUTF8(other.name->toUTF8());
+		other.name->fromUTF8(s.c_str());
+	}
 	for (size_t i = 0; i < 30; ++i) pkm[i]->swap(*other.pkm[i]);
 }
 
@@ -51,7 +56,7 @@ PokemonBox& PokemonBox::operator=(PokemonBox const& other) {
 	if (this != &other) {
 		PokemonBox::deleteFields();
 		for (size_t i = 0; i < 30; ++i) *pkm[i] = *(other.pkm[i]);
-		CL(name);
+		*name = *(other.name);
 	}
 	return *this;
 }

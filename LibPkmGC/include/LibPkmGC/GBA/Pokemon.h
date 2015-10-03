@@ -57,6 +57,7 @@ public:
 	void swap(Base::Pokemon& other);
 	Pokemon& operator=(Base::Pokemon const& other);
 	Pokemon(GC::Pokemon const& other);
+	Pokemon(Base::Pokemon const& other);
 
 	void reload(const u8* data = NULL, u32 inFlags = 0);
 

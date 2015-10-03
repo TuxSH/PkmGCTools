@@ -33,14 +33,14 @@ class LIBPKMGC_DECL PlayerData :
 {
 public:
 	PlayerData(size_t inSize, const u8* inData = NULL);
-	PlayerData& operator=(PlayerData const& other);
+	virtual PlayerData& operator=(PlayerData const& other);
 
 	virtual PlayerData* clone(void) const = 0;
 	virtual PlayerData* create(void) const = 0;
 
 	virtual ~PlayerData(void);
 
-	void swap(PlayerData& other);
+	virtual void swap(PlayerData& other);
 
 	virtual void save(void);
 
@@ -48,8 +48,8 @@ public:
 	BagData* bag;
 
 	Gender trainerGender;
-	u32 money;
-	u32 pkCoupons;
+	u32 pokeDollars;
+	u32 pokeCoupons;
 	
 protected:
 	PlayerData(PlayerData const& other);

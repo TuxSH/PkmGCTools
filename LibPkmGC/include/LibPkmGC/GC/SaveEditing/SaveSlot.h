@@ -45,9 +45,9 @@ public:
 	virtual ~SaveSlot(void);
 
 
-	void swap(SaveSlot& other);
+	virtual void swap(SaveSlot& other);
 	
-	SaveSlot& operator=(SaveSlot const& other);
+	virtual SaveSlot& operator=(SaveSlot const& other);
 
 	virtual SaveSlot* clone(void) const = 0;
 	virtual SaveSlot* create(void) const = 0;

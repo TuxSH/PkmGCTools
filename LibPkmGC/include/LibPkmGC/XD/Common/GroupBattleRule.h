@@ -36,6 +36,10 @@ public:
 
 	~GroupBattleRule();
 
+
+	GroupBattleRule& operator=(GC::GroupBattleRule const& other);
+	GroupBattleRule& operator=(GroupBattleRule const& other);
+	void swap(GC::GroupBattleRule& other);
 	void swap(GroupBattleRule& other);
 	GroupBattleRule* clone(void) const;
 	GroupBattleRule* create(void) const;

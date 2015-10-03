@@ -82,7 +82,7 @@ fromArrayOfIntegers<type*, u8*>(BUFFER_NAME+off, ar##_tmp, ar##_tmp+sz)
 #define SV_ARRAY_E(type,ar,sz,off,etype) fromArrayOfEnumIntegers<type,etype*, u8*>(BUFFER_NAME+off, ar, ar+sz)
 #define SV_ARRAY_E_MAX(type,ar,sz,off,etype,mx) for(size_t i__ = 0; i__ < sz; ++i__) ar[i__] = ((u32)ar[i__] > (u32)mx) ? (etype)0 : ar[i__];\
 fromArrayOfEnumIntegers<type,etype*, u8*>(BUFFER_NAME+off, ar, ar+sz)
-#define SV_ARRAY_B(type,ar,sz,off) toArrayOfBoolIntegers<type, bool*, u8*>(BUFFER_NAME+off, ar, ar+sz)
+#define SV_ARRAY_B(type,ar,sz,off) fromArrayOfBoolIntegers<type, bool*, u8*>(BUFFER_NAME+off, ar, ar+sz)
 #define SV_BIT_ARRAY2(type, ar, sz, off, st) type ar##_tmp; LD_FIELD(type, ar##_tmp, off); ar##_tmp &= ~(((1U << sz) - 1) << (8*sizeof(type) - 1 - st - sz));\
 for(int i__ = 0; i__ < sz; ++i__) ar##_tmp |= ((ar[i__]) ? 1U : 0U) << (8*sizeof(type) - 1 - st - i__); SV_FIELD(type, ar##_tmp, off); 
 #define SV_BIT_ARRAY(type, ar, sz, off)  SV_BIT_ARRAY2(type,ar,sz,off,0)
@@ -112,25 +112,49 @@ for(int i__ = 0; i__ < sz; ++i__) ar##_tmp |= ((ar[i__]) ? 1U : 0U) << (8*sizeof
 #define CL_ARRAY(fld, sz) for(size_t i__1234 = 0; i__1234 < sz; ++i__1234) CL(fld[i__1234]);
 
 #define LIBPKMGC_GEN_CONVERTER_CTOR2(cls, flgs) \
-Colosseum::cls::cls(XD::cls const& other) : GC::cls(Colosseum::cls::size){\
+namespace Colosseum {\
+cls::cls(XD::cls const& other) : GC::cls(cls::size){\
 	initWithEmptyData(flgs);\
 	GC::cls::operator=(other);\
 }\
-XD::cls::cls(Colosseum::cls const& other) : GC::cls(XD::cls::size){\
+cls::cls(GC::cls const& other) : GC::cls(cls::size) {\
+		initWithEmptyData(flgs); \
+		GC::cls::operator=(other); \
+}\
+}\
+namespace XD {\
+ cls::cls(Colosseum::cls const& other) : GC::cls(cls::size){\
 	initWithEmptyData(flgs);\
 	GC::cls::operator=(other);\
+}\
+cls::cls(GC::cls const& other) : GC::cls(cls::size) {\
+		initWithEmptyData(flgs); \
+		GC::cls::operator=(other); \
+}\
 }
 
 #define LIBPKMGC_GEN_CONVERTER_CTOR(cls) LIBPKMGC_GEN_CONVERTER_CTOR2(cls, 0)
 
 #define LIBPKMGC_GEN_CONVERTER_CTOR_W_GBA(cls) LIBPKMGC_GEN_CONVERTER_CTOR(cls)\
-XD::cls::cls(GBA::cls const& other) : GC::cls(XD::cls::size){\
+namespace XD {\
+cls::cls(GBA::cls const& other) : GC::cls(cls::size){\
 	initWithEmptyData(0);\
 	GC::cls::operator=(other);\
 }\
-Colosseum::cls::cls(GBA::cls const& other) : GC::cls(XD::cls::size){\
+cls::cls(Base::cls const& other) : GC::cls(cls::size) {\
+		initWithEmptyData(0); \
+		GC::cls::operator=(other); \
+}\
+}\
+namespace Colosseum {\
+cls::cls(GBA::cls const& other) : GC::cls(cls::size){\
 	initWithEmptyData(0);\
 	GC::cls::operator=(other);\
+}\
+cls::cls(Base::cls const& other) : GC::cls(cls::size) {\
+		initWithEmptyData(0); \
+		GC::cls::operator=(other); \
+}\
 }
 
 #define LIBPKMGC_GC_GEN_XD_VTF2(cls, flgs) \
@@ -155,6 +179,29 @@ else {cls obj((XD::cls&)other); swap(obj); other.swap(obj);}\
 
 #define LIBPKMGC_GC_GEN_XD_VTF(cls) LIBPKMGC_GC_GEN_XD_VTF2(cls,0)
 #define LIBPKMGC_GC_GEN_COL_VTF(cls) LIBPKMGC_GC_GEN_COL_VTF2(cls, 0)
+
+#define LIBPKMGC_GC_GEN_NON_CONVERTIBLE_XD_VTF(cls) \
+cls& cls::operator=(GC::cls const& other){\
+if(LIBPKMGC_IS_XD(cls,&other)) operator=((cls const&)other);\
+else GC::cls::operator=(other);\
+return *this;\
+}\
+void cls::swap(GC::cls & other){\
+if(LIBPKMGC_IS_XD(cls,&other)) swap((cls&)other);\
+else GC::cls::swap(other);\
+}
+
+#define LIBPKMGC_GC_GEN_NON_CONVERTIBLE_COL_VTF(cls) \
+cls& cls::operator=(GC::cls const& other){\
+if(LIBPKMGC_IS_COLOSSEUM(cls,&other)) operator=((cls const&)other);\
+else GC::cls::operator=(other);\
+return *this;\
+}\
+void cls::swap(GC::cls & other){\
+if(LIBPKMGC_IS_COLOSSEUM(cls,&other)) swap((cls&)other);\
+else GC::cls::swap(other);\
+}
+
 #endif 
 
 #ifndef BOOST_NO_SFINAE

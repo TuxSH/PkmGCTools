@@ -53,8 +53,8 @@ public:
 
 	bool isEmpty(void) const;
 
-	virtual bool isInfoPartial(void) const = 0;
-	virtual void setInfoCompleteness(bool partial) = 0;
+	virtual bool isInfoIncomplete(void) const = 0;
+	virtual void setInfoCompleteness(bool incomplete) = 0;
 
 	u16 flags;
 	PokemonSpeciesIndex species;

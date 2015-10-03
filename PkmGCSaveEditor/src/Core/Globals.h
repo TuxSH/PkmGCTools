@@ -19,7 +19,7 @@
 #ifndef _PKMGCSAVEEDITOR_GLOBALS_H
 #define _PKMGCSAVEEDITOR_GLOBALS_H
 
-#define PKMGCSAVEEDITOR_VERSION 1001002
+#define PKMGCSAVEEDITOR_VERSION 1002000
 #define PKMGCSAVEEDITOR_VERSION_MAJOR ((PKMGCSAVEEDITOR_VERSION / 1000000) % 1000)
 #define PKMGCSAVEEDITOR_VERSION_MINOR ((PKMGCSAVEEDITOR_VERSION / 1000) % 1000)
 #define PKMGCSAVEEDITOR_VERSION_BUILD (PKMGCSAVEEDITOR_VERSION % 1000)
@@ -31,6 +31,7 @@
 #include <LibPkmGC/GBA/Pokemon.h>
 #include <QLocale>
 #include <QMap>
+#include <QLabel>
 
 const QString appName = QString("PkmGCSaveEditor v%1.%2.%3").arg(PKMGCSAVEEDITOR_VERSION_MAJOR).arg(PKMGCSAVEEDITOR_VERSION_MINOR).arg(PKMGCSAVEEDITOR_VERSION_BUILD);
 
@@ -47,5 +48,10 @@ extern QString lastPkmDirectory;
 extern QString lastSaveDirectory;
 
 LibPkmGC::LanguageIndex generateDumpedNamesLanguage(void);
+
+void addToolTipTo(QLabel* lbl, QString const& toolTipTxt);
+
+QString replaceSpecialNameCharsIn(QString inStr);
+QString replaceSpecialNameCharsOut(QString outStr);
 
 #endif

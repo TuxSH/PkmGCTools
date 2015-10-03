@@ -28,6 +28,12 @@
 #include <QApplication>
 #include <QDir>
 
+#include <QNetworkAccessManager>
+#include <QEventLoop>
+#include <QTimer>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
 using namespace GCUIs;
 using namespace XDUIs;
 using namespace LibPkmGC;
@@ -39,12 +45,13 @@ MWCentralWidget::MWCentralWidget(QWidget* parent, Qt::WindowFlags f) : QWidget(p
 	PCButton = new QPushButton;
 	daycareButton = new QPushButton;
 	strategyMemoButton = new QPushButton;
+	ribbonDescriptionsButton = new QPushButton;
 	purifierButton = new QPushButton;
 
 	updateText();
-	QPushButton* lst[] = { gameConfigButton, playerButton, PCButton, daycareButton, strategyMemoButton, purifierButton };
+	QPushButton* lst[] = { gameConfigButton, playerButton, PCButton, daycareButton, strategyMemoButton, ribbonDescriptionsButton, purifierButton };
 
-	for (int i = 0; i < 6; ++i)
+	for (int i = 0; i < 7; ++i)
 		mainLayout->addWidget(lst[i]);
 	
 	this->setLayout(mainLayout);
@@ -53,6 +60,7 @@ MWCentralWidget::MWCentralWidget(QWidget* parent, Qt::WindowFlags f) : QWidget(p
 	connect(PCButton, SIGNAL(clicked()), this, SLOT(openPCUI()));
 	connect(daycareButton, SIGNAL(clicked()), this, SLOT(openDaycareUI()));
 	connect(strategyMemoButton, SIGNAL(clicked()), this, SLOT(openStrategyMemoUI()));
+	connect(ribbonDescriptionsButton, SIGNAL(clicked()), this, SLOT(openRibbonDescriptionsUI()));
 	connect(purifierButton, SIGNAL(clicked()), this, SLOT(openPurifierUI()));
 	
 	currentSaveSlotChangeHandler();
@@ -64,12 +72,13 @@ void MWCentralWidget::updateText(void) {
 	PCButton->setText(tr("PC"));
 	daycareButton->setText(tr("Daycare"));
 	strategyMemoButton->setText(tr("Strategy memo"));
+	ribbonDescriptionsButton->setText(tr("Ribbon descriptions"));
 	purifierButton->setText(tr("Purifier"));
 }
 
 void MWCentralWidget::currentSaveSlotChangeHandler(void) {
-	QPushButton* lst[] = { gameConfigButton, playerButton, PCButton, daycareButton, strategyMemoButton, purifierButton };
-	for (size_t i = 0; i < 6; ++i)
+	QPushButton* lst[] = { gameConfigButton, playerButton, PCButton, daycareButton, strategyMemoButton, ribbonDescriptionsButton, purifierButton };
+	for (size_t i = 0; i < 7; ++i)
 		lst[i]->setDisabled(currentSaveSlot == NULL);
 	purifierButton->setVisible(currentSaveSlot != NULL && LIBPKMGC_IS_XD(SaveEditing::SaveSlot, currentSaveSlot));
 }
@@ -86,6 +95,7 @@ GEN_GCUI_SLT(PlayerUI, currentSaveSlot->player)
 GEN_GCUI_SLT(PCUI, currentSaveSlot->PC)
 GEN_GCUI_SLT(DaycareUI, currentSaveSlot->daycare)
 GEN_GCUI_SLT(StrategyMemoUI, currentSaveSlot->strategyMemo)
+GEN_GCUI_SLT(RibbonDescriptionsUI, currentSaveSlot->ribbonDescriptions);
 
 void MWCentralWidget::openPurifierUI(void) {
 	if (!LIBPKMGC_IS_XD(SaveEditing::SaveSlot, currentSaveSlot)) return;
@@ -93,6 +103,51 @@ void MWCentralWidget::openPurifierUI(void) {
 	dlg.exec();
 }
 
+
+void MainWindow::checkForUpdates(void) {
+	if (!checkForUpdatesAtStartupAction->isChecked()) return;
+
+	QEventLoop loop;
+	QTimer *timer = new QTimer(this);
+	timer->setSingleShot(true);
+
+	QNetworkAccessManager *networkAccessManager = new QNetworkAccessManager(this);
+	QUrl url("https://api.github.com/repos/TuxSH/PkmGCTools/releases/latest");
+	
+	connect(timer, SIGNAL(timeout()), networkAccessManager, SLOT(abort()));
+	connect(timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), &loop, SLOT(quit()));
+	timer->start(1500);
+
+	QNetworkReply *reply = NULL;
+	reply = networkAccessManager->get(QNetworkRequest(url));
+	loop.exec();
+	if (reply == NULL) return;
+
+	QJsonParseError err;
+	QByteArray result = reply->readAll();
+	QJsonDocument doc = QJsonDocument::fromJson(result, &err);
+
+	if (err.error != QJsonParseError::NoError) return;
+
+	if (doc.isObject()) {
+		QJsonObject obj = doc.object();
+		QJsonValue html_url = obj.value("html_url"), tag_name = obj.value("tag_name");
+		if (html_url.isUndefined() || tag_name.isUndefined()) return;
+		QStringList version_numbers = tag_name.toString().mid(1).split('.');
+		int ver = 0;
+		const int powersOfTen[] = { 1000000, 1000, 1 };
+		for (int i = 0; i < version_numbers.count(); ++i)
+			ver += powersOfTen[i] * (version_numbers[i].toInt() % 1000);
+
+		if (ver > LIBPKMGC_VERSION) {
+			QMessageBox::information(this, tr("New version available"),
+				tr("PkmGCTools (PkmGCSaveEditor) %1 is now available!<br/>"
+					"You can download this new version on <a href='%2'>Github</a>.")
+				.arg(tag_name.toString()).arg(html_url.toString()));
+		}
+	}
+}
 
 MainWindow::MainWindow() : QMainWindow(), centralWidget(new MWCentralWidget) {
 	this->setWindowTitle(appName);
@@ -117,12 +172,16 @@ MainWindow::MainWindow() : QMainWindow(), centralWidget(new MWCentralWidget) {
 	optionsMenu = menuBar()->addMenu(tr("&Options"));
 	interfaceLangSubMenu = optionsMenu->addMenu(tr("&Interface language"));
 	dumpedNamesLangSubMenu = optionsMenu->addMenu(tr("&Dumped names language"));
-	ignoreDataCorruptionAction = new QAction(this);
-	ignoreDataCorruptionAction->setCheckable(true);
-	optionsMenu->addAction(ignoreDataCorruptionAction);
 	bugFixesSubMenu = optionsMenu->addMenu(tr("&Bug fixes"));
 	colosseumBugsAffectingPokemonAction = new QAction(this);
 	bugFixesSubMenu->addAction(colosseumBugsAffectingPokemonAction);
+	ignoreDataCorruptionAction = new QAction(this);
+	ignoreDataCorruptionAction->setCheckable(true);
+	optionsMenu->addAction(ignoreDataCorruptionAction);
+	checkForUpdatesAtStartupAction = new QAction(this);
+	checkForUpdatesAtStartupAction->setCheckable(true);
+	optionsMenu->addAction(checkForUpdatesAtStartupAction);
+
 	setCentralWidget(centralWidget);
 
 
@@ -153,6 +212,8 @@ MainWindow::MainWindow() : QMainWindow(), centralWidget(new MWCentralWidget) {
 			"(in \"Options\", \"Bug fixes\"). <b>Do it only once and only once</b> (for each concerned save file).</li>"
 			"<li>If you have imported or exported a Pok\xc3\xa9mon in the GBA format, please check its status alteration, its EVs, and its game of origin.</li></ul>"));
 	}
+	checkForUpdates();
+
 }
 
 void MainWindow::createDumpedNamesLanguageMenu(void) {
@@ -245,6 +306,7 @@ void MainWindow::updateText(void) {
 	bugFixesSubMenu->setTitle(tr("&Bug fixes"));
 	colosseumBugsAffectingPokemonAction->setText(tr("Bugs affecting &Pok\xc3\xa9mon (Colosseum, PkmGCSaveEditor \xe2\x89\xa4 1.1.0)"));
 	ignoreDataCorruptionAction->setText(tr("&Ignore data corruption"));
+	checkForUpdatesAtStartupAction->setText(tr("Check for &updates at startup"));
 }
 
 
@@ -493,6 +555,7 @@ void MainWindow::saveSaveFileAs(void) {
 void MainWindow::loadSettings(void) {
 	settings = new QSettings("PkmGCTools", "PkmGCSaveEditor", this);
 	ignoreDataCorruption = settings->value("IgnoreDataCorruption").toBool();
+	checkForUpdatesAtStartupAction->setChecked(settings->value("CheckForUpdatesAtStartup", true).toBool());
 	interfaceLanguage = settings->value("InterfaceLanguage").toString();
 	dumpedNamesLanguage = (LanguageIndex) settings->value("DumpedNamesLanguage").toInt();
 
@@ -515,6 +578,7 @@ void MainWindow::saveSettings(void) {
 	settings->setValue("LibPkmGCVersion", LIBPKMGC_VERSION);
 
 	settings->setValue("IgnoreDataCorruption", ignoreDataCorruption);
+	settings->setValue("CheckForUpdatesAtStartup", checkForUpdatesAtStartupAction->isChecked());
 	settings->setValue("InterfaceLanguage", interfaceLangGroup->checkedAction()->data());
 	if (dumpedNamesLanguage > Spanish) dumpedNamesLanguage = NoLanguage;
 	settings->setValue("DumpedNamesLanguage", dumpedNamesLanguage);

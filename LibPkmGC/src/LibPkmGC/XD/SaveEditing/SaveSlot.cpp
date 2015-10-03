@@ -158,6 +158,21 @@ SaveSlot& SaveSlot::operator=(SaveSlot const & other) {
 	return *this;
 }
 
+void SaveSlot::swap(GC::SaveEditing::SaveSlot& other) {
+	if (LIBPKMGC_IS_XD(SaveEditing::SaveSlot, &other))
+		swap((SaveSlot&)other);
+	else
+		GC::SaveEditing::SaveSlot::swap(other);
+}
+
+SaveSlot& SaveSlot::operator=(GC::SaveEditing::SaveSlot const& other) {
+	if (LIBPKMGC_IS_XD(SaveEditing::SaveSlot, &other))
+		operator=((SaveSlot const&)other);
+	else
+		GC::SaveEditing::SaveSlot::operator=(other);
+	return *this;
+}
+
 void SaveSlot::loadData(u32 flags) {
 	bool decrypted = (flags & 1) == 1;
 

@@ -21,7 +21,6 @@
 
 #include <Core/DataUI.h>
 #include <Core/UnsignedSpinbox.h>
-#include <QLabel>
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QButtonGroup>
@@ -61,7 +60,7 @@ private:
 	QFormLayout *mainLayout2;
 	QComboBox *speciesSelector;
 
-	QCheckBox *partialInfoCheckBox;
+	QCheckBox *incompleteInfoCheckBox;
 
 	UnsignedSpinbox<16> *firstTIDFld, *firstSIDFld;
 	QVBoxLayout* PIDLayout;

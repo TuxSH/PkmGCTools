@@ -80,7 +80,7 @@ SaveSlot& SaveSlot::operator=(SaveSlot const& other) {
 
 	Base::DataStruct::operator=(other);
 	if (this != &other) {
-		SaveSlot::deleteFields();
+		deleteFields();
 		randomBytes = new u8[nbRandomBytes];
 		CP_ARRAY(randomBytes, nbRandomBytes);
 		CP(magic);

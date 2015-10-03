@@ -16,15 +16,34 @@
 * along with PkmGCSaveEditor.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QApplication>
-#include <MainWindow.h>
+#ifndef _PKMGCSAVEEDITOR_RIBBON_DESCRIPTIONS_UI_H
+#define _PKMGCSAVEEDITOR_RIBBON_DESCRIPTIONS_UI_H
 
-using namespace LibPkmGC;
-int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
+#include <GCUIs/PokemonUI.h>
+
+
+
+namespace GCUIs {
+
+class RibbonDescriptionsUI : public DataUI {
+	Q_OBJECT
+public:
+	RibbonDescriptionsUI(LibPkmGC::GC::RibbonDescriptionsData* inRibbonDescriptions = NULL, QWidget *parent = NULL, Qt::WindowFlags f = Qt::Window);
+	void parseData(void);
+	void saveChanges(void);
+
+
+	LibPkmGC::GC::RibbonDescriptionsData* ribbonDescriptions;
+
+protected:
+	void initWidget(void);
+private:
+	QFormLayout* descriptionsLayout;
+
+	QComboBox* descriptionsFld[11];
 	
-	MainWindow userInterface;
-	userInterface.show();
+};
 
-    return app.exec();
 }
+
+#endif

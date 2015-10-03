@@ -40,6 +40,8 @@ public:
 	
 	void save(void);
 
+	PokemonBox(Base::PokemonBox const& other);
+	PokemonBox(GC::PokemonBox const& other);
 	PokemonBox(XD::PokemonBox const& other);
 protected:
 	void loadFields(void);

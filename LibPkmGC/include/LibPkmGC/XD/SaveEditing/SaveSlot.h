@@ -86,6 +86,9 @@ public:
 	void swap(SaveSlot& other);
 	SaveSlot& operator=(SaveSlot const& other);
 
+	void swap(GC::SaveEditing::SaveSlot& other);
+	SaveSlot& operator=(GC::SaveEditing::SaveSlot const& other);
+
 	void save(void);
 
 	bool checkChecksum(bool fix = false);

@@ -29,7 +29,7 @@ XD::Pokemon
 	0x00: u16 species (cf PokemonInfo.h)
 	0x03: u8 itemHeld (ItemInfo.h)
 	0x04: u16 currentHP
-	0x06: u16 happiness
+	0x06: u16 friendship
 	0x08: u16 locationCaught
 	// 0x09 -- 0xd :: ??
 	0x0a: u16 unk1
@@ -39,9 +39,9 @@ XD::Pokemon
 	0x10: u8  OTGender (00 male 01 female 02 genderless=none)
 	0x11: u8  currentLevel
 	0x12: u8  Contest Luster
-	0x13: u8  pkrsStatus
+	0x13: u8  pokerusStatus
 	0x14: u8  marks (bitfield)
-	0x15: s8 pkrsRemainingDays
+	0x15: s8 pokerusRemainingDays
 	0x16: u16 status (3 psn, 4 psn (toxic ?), 5 par, 6 brn, 7 frzn, 8 slp)
 	0x17: s8 turnsOfBadPoison (max 15.)
 	0x18: s8 turnsOfSleepRemaining (max. 8)
@@ -97,6 +97,8 @@ public:
 	void swap(Pokemon& other);
 	Pokemon& operator=(Pokemon const& other);
 
+	Pokemon(GC::Pokemon const& other);
+	Pokemon(Base::Pokemon const& other);
 	Pokemon(Colosseum::Pokemon const& other);
 	Pokemon(GBA::Pokemon const& other);
 	Pokemon& operator=(GC::Pokemon const& other);

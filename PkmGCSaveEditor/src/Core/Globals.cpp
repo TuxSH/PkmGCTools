@@ -51,3 +51,18 @@ LibPkmGC::LanguageIndex generateDumpedNamesLanguage(void) {
 	if (ret > LibPkmGC::Spanish) ret = LibPkmGC::English;
 	return ret;
 }
+
+void addToolTipTo(QLabel* lbl, QString const& toolTipTxt) {
+	lbl->setText(lbl->text() + "*");
+	lbl->setToolTip(toolTipTxt);
+}
+
+QString replaceSpecialNameCharsIn(QString inStr) {
+	// U+2030 -> U+2025
+	return inStr.replace(QChar(0x2030), QChar(0x2025));
+}
+
+QString replaceSpecialNameCharsOut(QString outStr) {
+	// U+2025 -> U+2030
+	return outStr.replace(QChar(0x2025), QChar(0x2030));
+}

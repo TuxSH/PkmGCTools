@@ -85,7 +85,7 @@ void Pokemon::loadFields(void) {
 	LD_ARRAY(u16, IVs_tmp, 6, 0xa4);
 	for (size_t i = 0; i < 6; ++i) IVs[i] = (u8)((IVs_tmp[i] > 31) ? 31 : IVs_tmp[i]);
 	
-	LD_FIELD_CONV(u16, happiness, 0xb0, u8);
+	LD_FIELD_CONV(u16, friendship, 0xb0, u8);
 
 	LD_ARRAY(u8, contestStats, 5, 0xb2);
 	LD_ARRAY_E_MAX(u8, contestAchievements, 5, 0xb7, ContestAchievementLevel, MasterContestWon);
@@ -94,11 +94,11 @@ void Pokemon::loadFields(void) {
 	LD_ARRAY_B(u8, specialRibbons, 12, 0xbd);
 	LD_FIELD_MAX(u8, unimplementedRibbons, 0xc9, 15);
 
-	LD_FIELD(u8, pkrsStatus, 0xca);
+	LD_FIELD(u8, pokerusStatus, 0xca);
 	LD_ARRAY_B(u8, pkmFlags, 3, 0xcb);
 	LD_FIELD(u8, GCUnk, 0xce);
 	LD_FIELD(u8, marksTmp, 0xcf);
-	LD_FIELD_MAX(s8, partyData.pkrsDaysRemaining, 0xd0, 4);
+	LD_FIELD_MAX(s8, partyData.pokerusDaysRemaining, 0xd0, 4);
 	LD_FIELD(u16, unk2, 0xd2);
 	LD_FIELD(u16, unk1, 0xd4);
 	LD_FIELD(u16, shadowPkmID, 0xd8);
@@ -110,12 +110,12 @@ void Pokemon::loadFields(void) {
 		moves[i].load(data + 0x78 + 4 * i);
 	pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG] = isSecondAbilityDefined() && pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG];
 
-	normalizePkrs();
+	normalizepokerus();
 	normalizeStatus();
 }
 
 void Pokemon::save(void) {
-	normalizePkrs();
+	normalizepokerus();
 	normalizeStatus();
 
 	pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG] = isSecondAbilityDefined() && pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG];
@@ -154,7 +154,7 @@ void Pokemon::save(void) {
 	}
 	SV_ARRAY(u16, IVs_tmp, 6, 0xa4);
 	
-	SV_FIELD(u16, (u16)happiness, 0xb0);
+	SV_FIELD(u16, (u16)friendship, 0xb0);
 	SV_ARRAY(u8, contestStats, 5, 0xb2);
 	SV_ARRAY_E(u8, contestAchievements, 5, 0xb7, ContestAchievementLevel);
 	SV_FIELD(u8, contestLuster, 0xbc);
@@ -163,11 +163,11 @@ void Pokemon::save(void) {
 	SV_FIELD_MAX(u8, unimplementedRibbons, 0xc9, 15);
 
 
-	SV_FIELD(u8, pkrsStatus, 0xca);
+	SV_FIELD(u8, pokerusStatus, 0xca);
 	SV_ARRAY_B(u8, pkmFlags, 3, 0xcb);
 	SV_FIELD_MAX(u8, GCUnk, 0xce, 31);
 	SV_FIELD(u8, markings.save(), 0xcf);
-	SV_FIELD_MAX(s8, partyData.pkrsDaysRemaining, 0xd0, 4);
+	SV_FIELD_MAX(s8, partyData.pokerusDaysRemaining, 0xd0, 4);
 	SV_FIELD(u16, unk2, 0xd2);
 	SV_FIELD(u16, unk1, 0xd4);
 	SV_FIELD(u16, shadowPkmID, 0xd8);

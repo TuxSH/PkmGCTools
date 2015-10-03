@@ -6,6 +6,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
 find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Network REQUIRED)
 find_package(Qt5LinguistTools)
 			
 file(GLOB_RECURSE source_files src/*)
@@ -14,9 +15,9 @@ LIST(APPEND source_files resources/PkmGCSaveEditor.rc)
 include_directories(${LIBPKMGC_INCLUDE_DIRS} src/)
 
 add_executable(PkmGCSaveEditor WIN32 ${source_files})
-target_link_libraries(PkmGCSaveEditor LibPkmGC Qt5::Widgets)
+target_link_libraries(PkmGCSaveEditor LibPkmGC Qt5::Widgets Qt5::Network)
 
-set(PKMGCSAVEEDITOR_SUPPORTED_LANGUAGES en fr CACHE INTERNAL "PkmGCSaveEditor's supported languages" FORCE)
+set(PKMGCSAVEEDITOR_SUPPORTED_LANGUAGES en fr de CACHE INTERNAL "PkmGCSaveEditor's supported languages" FORCE)
 
 get_target_property(QT5_QMAKE_EXECUTABLE Qt5::qmake IMPORTED_LOCATION)
 execute_process(COMMAND ${QT5_QMAKE_EXECUTABLE} -query QT_INSTALL_BINS OUTPUT_VARIABLE QT5_BINARY_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)

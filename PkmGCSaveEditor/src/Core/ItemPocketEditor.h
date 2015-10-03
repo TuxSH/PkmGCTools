@@ -27,7 +27,6 @@
 #include <Core/IDataUI.h>
 #include <QPushButton>
 #include <QTableWidget>
-#include <QLabel>
 #include <QHeaderView>
 #include <QComboBox>
 #include <QShortcut>

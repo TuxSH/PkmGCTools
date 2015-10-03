@@ -42,6 +42,7 @@ public:
 
 	void save(void);
 
+	StrategyMemoData(GC::StrategyMemoData const& other);
 	StrategyMemoData(XD::StrategyMemoData const& other);
 protected:
 	void loadFields(void);

@@ -83,7 +83,7 @@ public:
 	ItemIndex heldItem;
 
 
-	u8 happiness;
+	u8 friendship;
 	u8 locationCaught; // u16 on Colo/XD
 	ItemIndex ballCaughtWith;
 	u8  levelMet;
@@ -91,7 +91,7 @@ public:
 	PokemonString* OTName;
 	PokemonString* name;
 	u8  contestLuster;
-	u8  pkrsStatus;
+	u8  pokerusStatus;
 	PokemonMarkings  markings;
 
 	u32 experience;
@@ -127,7 +127,7 @@ public:
 	virtual void setInvalidPokemonFlag(bool flag) = 0;
 
 	struct PokemonComputedPartyData {
-		s8 pkrsDaysRemaining;
+		s8 pokerusDaysRemaining;
 		u16 currentHP;
 		u8  level;
 		PokemonStatus status;
@@ -137,7 +137,7 @@ public:
 
 	PokemonComputedPartyData partyData;
 
-	void normalizePkrs(void);
+	void normalizepokerus(void);
 	void normalizeStatus(void);
 
 	void resetPartyData(void);

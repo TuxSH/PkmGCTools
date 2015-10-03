@@ -212,14 +212,14 @@ void Pokemon::loadFields(void) {
 	LD_FIELD_E(u16, species, 32, PokemonSpeciesIndex);
 	LD_FIELD_E(u16, heldItem, 34, ItemIndex);
 	LD_FIELD_MAX(u32, experience, 36, getSpeciesExpTable(species)[100]);
-	LD_FIELD(u8, happiness, 41);
+	LD_FIELD(u8, friendship, 41);
 	LD_FIELD(u16, unk2, 42);
 	for (size_t i = 0; i < 6; ++i) EVs[statsOrder[i]] = data[56 + i];
 
 	LD_ARRAY(u8, contestStats, 5, 62);
 	LD_FIELD(u8, contestLuster, 67);
 
-	LD_FIELD(u8, pkrsStatus, 68);
+	LD_FIELD(u8, pokerusStatus, 68);
 	LD_FIELD(u8, locationCaught, 69);
 
 	u16 origins;
@@ -275,7 +275,7 @@ void Pokemon::loadFields(void) {
 	partyData.status = pokemonStatusFromBitField((u16)st, &(partyData.turnsOfBadPoison), &(partyData.turnsOfSleepRemaining));
 
 	LD_FIELD_MAX(u8, partyData.level, 84, 100);
-	LD_FIELD_MAX(s8, partyData.pkrsDaysRemaining, 85, 4);
+	LD_FIELD_MAX(s8, partyData.pokerusDaysRemaining, 85, 4);
 	LD_FIELD(u16, partyData.currentHP, 86);
 	u16 sta[6];
 	LD_ARRAY(u16, sta, 6, 88);
@@ -292,7 +292,7 @@ void Pokemon::loadFields(void) {
 	name = new PokemonString(data + 8, 10, version.language == Japanese);
 	OTName = new PokemonString(data + 20, 7, version.language == Japanese);
 
-	normalizePkrs();
+	normalizepokerus();
 	normalizeStatus();
 
 	if (!checkChecksum(false)) setInvalidPokemonFlag(true);
@@ -319,7 +319,7 @@ void Pokemon::save(void) {
 	data[27] = markings.save();
 	version.save(lg, gm);
 
-	normalizePkrs();
+	normalizepokerus();
 
 	name->save(data + 8, 10);
 	OTName->save(data + 20, 7);
@@ -341,14 +341,14 @@ void Pokemon::save(void) {
 	SV_FIELD_E(u16, species, 32, PokemonSpeciesIndex);
 	SV_FIELD_E(u16, heldItem, 34, ItemIndex);
 	SV_FIELD_MAX(u32, experience, 36, getSpeciesExpTable(species)[100]);
-	SV_FIELD(u8, happiness, 41);
+	SV_FIELD(u8, friendship, 41);
 	SV_FIELD(u16, unk2, 42);
 
 	for (size_t i = 0; i < 6; ++i) data[56 + i] = EVs[statsOrder[i]];
 	SV_ARRAY(u8, contestStats, 5, 62);
 	SV_FIELD(u8, contestLuster, 67);
 
-	SV_FIELD(u8, pkrsStatus, 68);
+	SV_FIELD(u8, pokerusStatus, 68);
 	SV_FIELD(u8, locationCaught, 69);
 
 	u16 origins = 0;
@@ -399,8 +399,8 @@ void Pokemon::save(void) {
 	SV_FIELD(u32, st, 80);
 
 	SV_FIELD_MAX(u8, partyData.level, 84, 100);
-	SV_FIELD_MAX(s8, partyData.pkrsDaysRemaining, 85, 4);
-	if (partyData.pkrsDaysRemaining < -1) partyData.pkrsDaysRemaining = -1;
+	SV_FIELD_MAX(s8, partyData.pokerusDaysRemaining, 85, 4);
+	if (partyData.pokerusDaysRemaining < -1) partyData.pokerusDaysRemaining = -1;
 	SV_FIELD_MAX(u16, partyData.currentHP, 86, partyData.stats[0]);
 	u16 sta[6];
 	for (size_t i = 0; i < 6; ++i) sta[i] = partyData.stats[statsOrder[i]];

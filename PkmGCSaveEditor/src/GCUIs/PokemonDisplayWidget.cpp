@@ -23,10 +23,105 @@
 #include <QFileInfo>
 #include <QMessageBox>
 
+#include <QMenu>
+#include <QAction>
+
 using namespace LibPkmGC;
 using namespace Localization;
 
 namespace GCUIs {
+
+QStringList PokemonBase64InputDialog::formats(void) {
+	return QStringList() << tr("Colosseum") << tr("XD") << tr("GBA (100 bytes)") << tr("GBA (80 bytes)");
+}
+
+PokemonBase64InputDialog::PokemonBase64InputDialog(QWidget* parent) : QDialog(parent), mainLayout(new QVBoxLayout), inputLayout(new QFormLayout),
+format(new QLabel(tr("N/A"))), contents(new QPlainTextEdit), buttons(new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel)){
+	this->setWindowTitle(tr("Base64 input"));
+	contents->setWordWrapMode(QTextOption::WrapAnywhere);
+
+	inputLayout->addRow(tr("Format"), format);
+	inputLayout->addRow(tr("Contents"), contents);
+	mainLayout->addLayout(inputLayout);
+	mainLayout->addWidget(buttons);
+	setLayout(mainLayout);
+	connect(contents, SIGNAL(textChanged()), this, SLOT(update()));
+	connect(buttons, SIGNAL(accepted()), this, SLOT(accept()));
+	connect(buttons, SIGNAL(rejected()), this, SLOT(reject()));
+}
+
+QByteArray const & PokemonBase64InputDialog::result(void) {
+	return data;
+}
+
+void PokemonBase64InputDialog::accept(void) {
+	if (!valid) {
+		QMessageBox::critical(this, tr("Error"), tr("Invalid content size."));
+		return;
+	}
+	QDialog::accept();
+}
+
+void PokemonBase64InputDialog::update(void) {
+	const QStringList fmts = formats();
+	QString str(contents->toPlainText());
+	data = QByteArray::fromBase64(str.toLocal8Bit());
+	valid = true;
+	switch (data.size()) {
+	case 0: format->setText(tr("N/A")); break;
+	case 0x138: format->setText(fmts[0]); break;
+	case 0xc4: format->setText(fmts[1]); break;
+	case 100: format->setText(fmts[2]); break;
+	case 80: format->setText(fmts[3]); break;
+	default: format->setText(tr("Invalid")); valid = false; break;
+	}
+}
+
+
+PokemonBase64OutputDialog::PokemonBase64OutputDialog(GC::Pokemon* inPkm, QWidget * parent) : QDialog(parent), pkm(inPkm), mainLayout(new QVBoxLayout), 
+outputLayout(new QFormLayout), format(new QComboBox), contents(new QPlainTextEdit), buttons(new QDialogButtonBox(QDialogButtonBox::Ok)) {
+	this->setWindowTitle(tr("Base64 output"));
+
+	format->addItems(PokemonBase64InputDialog::formats());
+	contents->setReadOnly(true);
+	contents->setWordWrapMode(QTextOption::WrapAnywhere);
+	outputLayout->addRow(tr("Format"), format);
+	outputLayout->addRow(tr("Contents"), contents);
+
+	mainLayout->addLayout(outputLayout);
+	mainLayout->addWidget(buttons);
+	setLayout(mainLayout);
+
+	format->setCurrentIndex((LIBPKMGC_IS_XD(Pokemon, pkm)) ? 1 : 0);
+
+	connect(format, SIGNAL(currentIndexChanged(int)), this, SLOT(update()));
+
+	connect(buttons, SIGNAL(accepted()), this, SLOT(accept()));
+	connect(buttons, SIGNAL(rejected()), this, SLOT(reject()));
+
+	update();
+}
+
+void PokemonBase64OutputDialog::update(void) {
+	Base::Pokemon* exportedPkm = NULL;
+	bool gba80 = false;
+
+	switch (format->currentIndex()) {
+	case 0: exportedPkm = new Colosseum::Pokemon(*pkm); break;
+	case 1: exportedPkm = new XD::Pokemon(*pkm); break;
+	case 2: exportedPkm = new GBA::Pokemon(*pkm); break;
+	case 3: exportedPkm = new GBA::Pokemon(*pkm); gba80 = true; break;
+	default: break;
+	}
+
+	if (exportedPkm == NULL) return;
+
+	exportedPkm->save();
+	QByteArray data((const char*)exportedPkm->data, (int) ((gba80) ? 80 : exportedPkm->fixedSize));
+
+	QByteArray b64 = data.toBase64();
+	contents->setPlainText(QString(b64.constData()));
+}
 
 PokemonDisplayWidget::PokemonDisplayWidget(GC::Pokemon* inPkm, LibPkmGC::PokemonStorageInfo const& inLocation, QWidget* parent) :
 	QWidget(parent), pkm(inPkm), location(inLocation), pkmBackup(NULL) {
@@ -44,8 +139,23 @@ void PokemonDisplayWidget::initWidget(void) {
 	summary = new QLabel;
 	editButton = new QPushButton(tr("Edit"));
 	deleteButton = new QPushButton(tr("Delete"));
+
 	importButton = new QPushButton(tr("Import"));
 	exportButton = new QPushButton(tr("Export"));
+
+	importMenu = new QMenu;
+	importFileAction = new QAction(tr("&File..."), this);
+	importBase64Action = new QAction(tr("&Base64..."), this);
+	importMenu->addAction(importFileAction);
+	importMenu->addAction(importBase64Action);
+	exportMenu = new QMenu;
+	exportFileAction = new QAction(tr("&File..."), this);
+	exportBase64Action = new QAction(tr("&Base64..."), this);
+	exportMenu->addAction(exportFileAction);
+	exportMenu->addAction(exportBase64Action);
+	
+	importButton->setMenu(importMenu);
+	exportButton->setMenu(exportMenu);
 
 	mainLayout->addWidget(nameFld);
 	mainLayout->addWidget(summary);
@@ -58,8 +168,10 @@ void PokemonDisplayWidget::initWidget(void) {
 	connect(editButton, SIGNAL(clicked()), this, SLOT(openPkmUI()));
 	connect(deleteButton, SIGNAL(clicked()), this, SLOT(deletePkm()));
 
-	connect(importButton, SIGNAL(clicked()), this, SLOT(openImportPkmDialog()));
-	connect(exportButton, SIGNAL(clicked()), this, SLOT(openExportPkmDialog()));
+	connect(importFileAction, SIGNAL(triggered()), this, SLOT(openImportPkmFileDialog()));
+	connect(importBase64Action, SIGNAL(triggered()), this, SLOT(openImportBase64Dialog()));
+	connect(exportFileAction, SIGNAL(triggered()), this, SLOT(openExportPkmFileDialog()));
+	connect(exportBase64Action, SIGNAL(triggered()), this, SLOT(openExportBase64Dialog()));
 	this->setLayout(mainLayout);
 }
 
@@ -80,6 +192,7 @@ void PokemonDisplayWidget::cancelChanges(void) {
 }
 
 void PokemonDisplayWidget::updatePkmNameAndSummary(void) {
+	const QStringList invalidStrs = PokemonUI::invalidPkmStrs();
 	LanguageIndex lg = generateDumpedNamesLanguage();
 	QString s, tt;
 
@@ -89,25 +202,25 @@ void PokemonDisplayWidget::updatePkmNameAndSummary(void) {
 		return;
 	}
 
-	nameFld->setText(pkm->name->toUTF8());
+	nameFld->setText(replaceSpecialNameCharsIn(pkm->name->toUTF8()));
 
 	s = "(";
 	if (!getSpeciesData(pkm->species).isValid || (pkm->species == Bonsly && !LIBPKMGC_IS_XD(Pokemon,pkm))) {
-		tt = tr("Invalid species");
+		tt = invalidStrs[1];
 	}
 	if (pkm->version.isIncomplete()) {
 		if (!tt.isEmpty()) tt += "\n";
-		tt = tr("Invalid version info");
+		tt = invalidStrs[2];
 	}
-	if (pkm->pkmFlags[LIBPKMGC_GC_INVALID_POKEMON_FLAG]) {
+	if (pkm->isMarkedAsInvalid()) {
 		if (!tt.isEmpty()) tt += "\n";
-		tt += tr("\"Invalid Pok\xc3\xa9mon\" flag set");
+		tt += invalidStrs[3];
 	}
 
 	summary->setToolTip(tt);
 	
 	if (!tt.isEmpty()) {
-		s += "<span style='color:red;'>INVALID</span>";
+		s += "<span style = 'color:red;'>" + invalidStrs[0] + "*</span>";
 	}
 	else {
 		s += tr("Lv. %n ", "", (pkm->partyData.level > 100) ? 100 : pkm->partyData.level);
@@ -152,7 +265,7 @@ QString PokemonDisplayWidget::selectFilters(bool op) {
 		(F[0] + ";;" + F[1] + ";;" + F[2] + ";;" + gbaencfilter);
 }
 
-void PokemonDisplayWidget::openImportPkmDialog(void) {
+void PokemonDisplayWidget::openImportPkmFileDialog(void) {
 	QString fileName = QFileDialog::getOpenFileName(this, tr("Open Pok\xc3\xa9mon file"), lastPkmDirectory, selectFilters(true));
 	if (fileName.isEmpty()) return;
 
@@ -168,7 +281,21 @@ void PokemonDisplayWidget::openImportPkmDialog(void) {
 
 }
 
-void PokemonDisplayWidget::openExportPkmDialog(void) {
+void PokemonDisplayWidget::openImportBase64Dialog(void) {
+	PokemonBase64InputDialog dlg(this);
+	if(dlg.exec() == QDialog::Rejected) return;
+	QByteArray const& data = dlg.result();
+	if (data.isEmpty()) return;
+
+	switch (data.size()) {
+	case 0x138: importPkmFromData<Colosseum::Pokemon>(data); break;
+	case 0xc4: importPkmFromData<XD::Pokemon>(data); break;
+	case 100: case 80: importPkmFromData<GBA::Pokemon>(data, data.size()); break;
+	default: break;
+	}
+}
+
+void PokemonDisplayWidget::openExportPkmFileDialog(void) {
 	const QString errmsg = tr("Could not write to file.");
 	const QString errmsg2 = tr("An error occured while writing to the specified Pok\xc3\xa9mon file.");
 	const QString gbaencfilter = tr("Encrypted GBA Pok\xc3\xa9mon files (*.pkm *.3gpkm)");
@@ -219,6 +346,10 @@ void PokemonDisplayWidget::openExportPkmDialog(void) {
 	
 	if (created) delete exportedPkm;
 
+}
+
+void PokemonDisplayWidget::openExportBase64Dialog(void) {
+	PokemonBase64OutputDialog(pkm, this).exec();
 }
 
 }

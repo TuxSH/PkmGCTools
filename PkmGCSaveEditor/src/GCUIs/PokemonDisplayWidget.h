@@ -20,8 +20,47 @@
 #define _PKMGCSAVEEDITOR_POKEMON_DISPLAY_WIDGET_H
 
 #include <GCUIs/PokemonUI.h>
+#include <QPlainTextEdit>
 
 namespace GCUIs {
+
+class PokemonBase64InputDialog : public QDialog {
+	Q_OBJECT
+public:
+	static QStringList formats(void);
+	PokemonBase64InputDialog(QWidget* parent = NULL);
+
+	QByteArray const& result(void);
+
+private:
+	bool valid;
+	QByteArray data;
+	QFormLayout* inputLayout;
+	QVBoxLayout* mainLayout;
+	QLabel* format;
+	QPlainTextEdit* contents;
+	QDialogButtonBox* buttons;
+public slots:
+	void accept(void);
+	void update(void);
+};
+
+class PokemonBase64OutputDialog : public QDialog {
+	Q_OBJECT
+public:
+	PokemonBase64OutputDialog(LibPkmGC::GC::Pokemon* inPkm, QWidget* parent = NULL);
+
+	LibPkmGC::GC::Pokemon* pkm;
+
+private:
+	QFormLayout* outputLayout;
+	QVBoxLayout* mainLayout;
+	QComboBox* format;
+	QPlainTextEdit* contents;
+	QDialogButtonBox* buttons;
+public slots:
+	void update(void);
+};
 
 class PokemonDisplayWidget : public QWidget, IDataUI {
 	Q_OBJECT
@@ -45,8 +84,10 @@ signals:
 
 public slots:
 	void updatePkmNameAndSummary(void);
-	void openImportPkmDialog(void);
-	void openExportPkmDialog(void);
+	void openImportPkmFileDialog(void);
+	void openImportBase64Dialog(void);
+	void openExportPkmFileDialog(void);
+	void openExportBase64Dialog(void);
 	void deletePkm(void);
 	void openPkmUI(void);
 
@@ -60,10 +101,42 @@ private:
 	QPushButton *importButton;
 	QPushButton *exportButton;
 
+	QMenu* importMenu;
+	QAction *importFileAction, *importBase64Action;
+	QMenu* exportMenu;
+	QAction *exportFileAction, *exportBase64Action;
+
+
 	QString selectFilters(bool op = true);
 
 	template<typename P>
-	void readExpected(QString fileName, size_t sz = P::size) {
+	void importPkmFromData(QByteArray const& ba, size_t sz = P::size) {
+		P* importedPkm = NULL;
+		if (sz != 80)
+			importedPkm = new P((const u8*)ba.constData());
+		else {
+			GBA::Pokemon* pk2 = GBA::Pokemon::load80((const u8*)ba.constData());
+			importedPkm = new P(*pk2);
+			delete pk2;
+		}
+
+		if (pkm == NULL) {
+			if (LIBPKMGC_IS_XD(Pokemon, importedPkm) || (currentSaveSlot != NULL && LIBPKMGC_IS_XD(SaveEditing::SaveSlot, currentSaveSlot)))
+				pkm = new XD::Pokemon(*importedPkm);
+			else
+				pkm = new Colosseum::Pokemon(*importedPkm);
+		}
+		else *pkm = *importedPkm;
+
+		if (P::size == 100 && currentSaveSlot != NULL)
+			pkm->version.currentRegion = currentSaveSlot->gameConfig->version.currentRegion;
+
+		delete importedPkm;
+		parseData();
+	}
+
+	template<typename P>
+	void readExpected(QString const& fileName, size_t sz = P::size) {
 		const QString errmsg = tr("Could not open file.");
 		const QString errmsg2 = tr("An error occured while reading the specified Pok\xc3\xa9mon file.");
 		QFile file(fileName);
@@ -78,30 +151,8 @@ private:
 			return;
 		}
 
-		P* importedPkm = NULL; 
-		if (sz != 80)
-			importedPkm = new P((const u8*)ba.data());
-		else {
-			GBA::Pokemon* pk2 = GBA::Pokemon::load80((const u8*)ba.data());
-			importedPkm = new P(*pk2);
-			delete pk2;
-		}
-
-
-		if (pkm == NULL) {
-			if (LIBPKMGC_IS_XD(Pokemon, importedPkm) || (currentSaveSlot != NULL && LIBPKMGC_IS_XD(SaveEditing::SaveSlot, currentSaveSlot))) 
-				pkm = new XD::Pokemon(*importedPkm);
-			else 
-				pkm = new Colosseum::Pokemon(*importedPkm);
-		}
-		else *pkm = *importedPkm;
-
-		if (P::size == 100 && currentSaveSlot != NULL) 
-			pkm->version.currentRegion = currentSaveSlot->gameConfig->version.currentRegion;
-
-		parseData();
+		importPkmFromData<P>(ba, sz);
 		lastPkmDirectory = QFileInfo(fileName).canonicalPath();
-		delete importedPkm;
 	}
 
 

@@ -38,6 +38,7 @@ public:
 	DaycareData* clone(void) const;
 	DaycareData* create(void) const;
 
+	DaycareData(GC::DaycareData const& other);
 	DaycareData(XD::DaycareData const& other);
 protected:
 	void loadFields(void);

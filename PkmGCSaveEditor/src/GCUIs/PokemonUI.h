@@ -26,7 +26,6 @@
 #include <QGroupBox>
 #include <QTabWidget>
 #include <QHBoxLayout>
-#include <QLabel>
 #include <QCheckBox>
 #include <QStackedWidget>
 #include <Core/VersionInfoLayout.h>
@@ -82,6 +81,9 @@ public:
 	
 
 	static QStringList statusNames(void);
+	static QStringList ribbonNames(void);
+	static QString ribbonHasNeverBeenMadeAvailableStr(void);
+	static QStringList invalidPkmStrs(void);
 
 	void parseData(void);
 	void saveChanges(void);
@@ -128,10 +130,10 @@ private:
 	QCheckBox* syncLevelAndExpFldsCheckBox;
 
 	ItemComboBox* heldItemFld;
-	UnsignedSpinbox<8>* happinessFld;
-	QHBoxLayout* pkrsStatusLayout;
-	UnsignedSpinbox<3>* pkrsDaysRemainingFld;
-	UnsignedSpinbox<4>* pkrsStrainFld;
+	UnsignedSpinbox<8>* friendshipFld;
+	QHBoxLayout* pokerusStatusLayout;
+	UnsignedSpinbox<3>* pokerusDaysRemainingFld;
+	UnsignedSpinbox<4>* pokerusStrainFld;
 
 	QComboBox* statusFld;
 	QSpinBox* turnsOfBadPoisonFld;
@@ -210,7 +212,7 @@ public slots:
 	void updateLevelFromExperience(void);
 	void speciesChangeHandler(void);
 	void PIDChangeHandler(void);
-	void updatePkrsDaysRemaining(void);
+	void updatePokerusDaysRemaining(void);
 	void statusChangeHandler(void);
 
 	void updateFlags(void);

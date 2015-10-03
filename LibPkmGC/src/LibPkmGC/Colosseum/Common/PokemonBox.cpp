@@ -45,7 +45,10 @@ PokemonBox* PokemonBox::create(void) const {
 	return new PokemonBox;
 }
 
-
+PokemonBox::PokemonBox(Base::PokemonBox const& other) : GC::PokemonBox(0x24a4) {
+	initWithEmptyData();
+	Base::PokemonBox::operator=(other);
+}
 
 void PokemonBox::loadFields(void) {
 	GC::PokemonBox::loadFields();

@@ -44,11 +44,11 @@ StrategyMemoEntry* StrategyMemoEntry::create(void) const {
 	return new StrategyMemoEntry;
 }
 
-bool StrategyMemoEntry::isInfoPartial(void) const{
+bool StrategyMemoEntry::isInfoIncomplete(void) const{
 	return false;
 }
 
-void StrategyMemoEntry::setInfoCompleteness(bool partial){
+void StrategyMemoEntry::setInfoCompleteness(bool incomplete){
 	flags = (species == NoSpecies) ? 0 : 2;
 }
 

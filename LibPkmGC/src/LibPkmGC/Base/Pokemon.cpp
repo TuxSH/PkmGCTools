@@ -155,19 +155,19 @@ char Pokemon::getUnownForm(void) const {
 	return getUnownForm(PID);
 }
 
-void Pokemon::normalizePkrs(void) {
-	u8 st = pkrsStatus & 0xf, dr = pkrsStatus >> 4;
+void Pokemon::normalizepokerus(void) {
+	u8 st = pokerusStatus & 0xf, dr = pokerusStatus >> 4;
 	if (st == 0) {
 		dr = 0;
-		partyData.pkrsDaysRemaining = -1;
+		partyData.pokerusDaysRemaining = -1;
 	}
 	else {
 		u8 mx = 1 + (st & 0x3);
 		dr = (dr > mx) ? mx : dr;
-		partyData.pkrsDaysRemaining = (partyData.pkrsDaysRemaining > mx) ? mx : partyData.pkrsDaysRemaining;
+		partyData.pokerusDaysRemaining = (partyData.pokerusDaysRemaining > mx) ? mx : partyData.pokerusDaysRemaining;
 	}
 
-	pkrsStatus = (dr << 4) | st;
+	pokerusStatus = (dr << 4) | st;
 }
 
 void Pokemon::normalizeStatus(void) {
@@ -183,7 +183,7 @@ void Pokemon::resetPartyData(void) {
 	updateLevelFromExp();
 	partyData.status = NoStatus;
 	partyData.currentHP = partyData.stats[0];
-	partyData.pkrsDaysRemaining = ((pkrsStatus & 0xf0) != 0) ? pkrsStatus & 0xf : -1;
+	partyData.pokerusDaysRemaining = ((pokerusStatus & 0xf0) != 0) ? pokerusStatus & 0xf : -1;
 }
 Pokemon::Pokemon(Pokemon const & other) : Base::DataStruct(other), OTName(NULL), name(NULL){
 	copyNonVirtual(other);
@@ -211,7 +211,7 @@ void Pokemon::swap(Pokemon& other) {
 	SW(species);
 	SW(heldItem);
 
-	SW(happiness);
+	SW(friendship);
 	SW(locationCaught);
 	SW(ballCaughtWith);
 	SW(levelMet);
@@ -231,7 +231,7 @@ void Pokemon::swap(Pokemon& other) {
 		other.name->fromUTF8(s1.c_str());
 	}
 	SW(contestLuster);
-	SW(pkrsStatus);
+	SW(pokerusStatus);
 	SW(markings);
 
 	SW(experience);
@@ -273,13 +273,13 @@ void Pokemon::copyNonVirtual(Pokemon const& other) {
 	CP(species);
 	CP(heldItem);
 
-	CP(happiness);
+	CP(friendship);
 	CP(locationCaught);
 	CP(ballCaughtWith);
 	CP(levelMet);
 	CP(OTGender);
 	CP(contestLuster);
-	CP(pkrsStatus);
+	CP(pokerusStatus);
 	CP(markings);
 
 	CP(experience);

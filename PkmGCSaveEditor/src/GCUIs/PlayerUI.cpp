@@ -33,16 +33,21 @@ void PlayerUI::initWidget(void){
 	generalTabLayout = new QVBoxLayout;
 	trainerInfoBox = new QGroupBox(tr("Trainer information"));
 	trainerInfoFld = new TrainerInfoLayout;
+	ruisNameFld = new QLineEdit;
+
+	ruisNameFld->setMaxLength(10);
+	trainerInfoFld->addRow(tr("Rui's name"), ruisNameFld);
 
 	trainerInfoBox->setLayout(trainerInfoFld);
 
+
 	currenciesBox = new QGroupBox(tr("Currencies"));
 	currenciesLayout = new QFormLayout;
-	moneyFld = new UnsignedSpinbox<32>;
-	pkCouponsFld = new UnsignedSpinbox<32>;
+	pokeDollarsFld = new UnsignedSpinbox<32>;
+	pokeCouponsFld = new UnsignedSpinbox<32>;
 
-	currenciesLayout->addRow(tr("Money"), moneyFld);
-	currenciesLayout->addRow(tr("Pok""\xc3\xa9""coupons"), pkCouponsFld); // Pokécoupons
+	currenciesLayout->addRow(tr("Pok\xc3\xa9""dollars"), pokeDollarsFld);
+	currenciesLayout->addRow(tr("Pok""\xc3\xa9""Coupons"), pokeCouponsFld); // Pokécoupons
 
 	currenciesBox->setLayout(currenciesLayout);
 
@@ -72,16 +77,22 @@ void PlayerUI::initWidget(void){
 }
 
 PlayerUI::~PlayerUI(void){
-	//for (size_t i = 0; i < 6; ++i) delete partyBackup[i];
 }
 
 void PlayerUI::parseData(void){
 	if (player == NULL) return;
 	isXD = LIBPKMGC_IS_XD(PlayerData, player);
 
+	ruisNameFld->setVisible(!isXD);
+	trainerInfoFld->labelForField(ruisNameFld)->setVisible(!isXD);
+
+	if (!isXD) {
+		ruisNameFld->setText(replaceSpecialNameCharsIn(static_cast<Colosseum::PlayerData*>(player)->ruisName->toUTF8()));
+	}
+
 	trainerInfoFld->set(player->trainer->trainerName, player->trainer->TID, player->trainer->SID, player->trainerGender);
-	moneyFld->setValue((int)player->money);
-	pkCouponsFld->setValue((int)player->pkCoupons);
+	pokeDollarsFld->setValue((int)player->pokeDollars);
+	pokeCouponsFld->setValue((int)player->pokeCoupons);
 
 	bagTab->bag = player->bag;
 	bagTab->parseData();
@@ -96,12 +107,14 @@ void PlayerUI::parseData(void){
 }
 
 void PlayerUI::saveChanges(void) {
+	if (!isXD)
+		static_cast<Colosseum::PlayerData*>(player)->ruisName->fromUTF8(replaceSpecialNameCharsOut(ruisNameFld->text()).toUtf8().data());
 	trainerInfoFld->trainerName(player->trainer->trainerName);
 	player->trainer->TID = trainerInfoFld->TID();
 	player->trainer->SID = trainerInfoFld->SID();
 	player->trainerGender = trainerInfoFld->trainerGender();
-	player->money = moneyFld->unsignedValue();
-	player->pkCoupons = pkCouponsFld->unsignedValue();
+	player->pokeDollars = pokeDollarsFld->unsignedValue();
+	player->pokeCoupons = pokeCouponsFld->unsignedValue();
 
 	for (size_t i = 0; i < 6; ++i) pkmFlds[i]->saveChanges();
 	bagTab->saveChanges();

@@ -64,7 +64,7 @@ void Pokemon::loadFields(void) {
 	LD_FIELD_E(u8, heldItem, 0x03, ItemIndex);
 	LD_FIELD(u16, partyData.currentHP, 0x04);
 	
-	LD_FIELD_CONV(u16, happiness, 0x06, u8);
+	LD_FIELD_CONV(u16, friendship, 0x06, u8);
 
 	LD_FIELD_CONV(u16, locationCaught, 0x08, u8);
 	
@@ -78,10 +78,10 @@ void Pokemon::loadFields(void) {
 	if (partyData.level > 100) partyData.level = 100;
 
 	LD_FIELD(u8, contestLuster, 0x12);
-	LD_FIELD(u8, pkrsStatus, 0x13);
+	LD_FIELD(u8, pokerusStatus, 0x13);
 	LD_FIELD(u8, marksTmp, 0x14);
 
-	LD_FIELD_MAX(s8, partyData.pkrsDaysRemaining, 0x15, 4);
+	LD_FIELD_MAX(s8, partyData.pokerusDaysRemaining, 0x15, 4);
 	LD_FIELD_E(u8, partyData.status, 0x16, PokemonStatus);
 	LD_FIELD(s8, partyData.turnsOfBadPoison, 0x17);
 	LD_FIELD(s8, partyData.turnsOfSleepRemaining, 0x18);
@@ -122,13 +122,13 @@ void Pokemon::loadFields(void) {
 
 	if (partyData.currentHP > partyData.stats[0]) partyData.currentHP = partyData.stats[0];
 	pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG] = isSecondAbilityDefined() && pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG];
-	normalizePkrs();
+	normalizepokerus();
 	normalizeStatus();
 
 }
 
 void Pokemon::save(void) {
-	normalizePkrs();
+	normalizepokerus();
 	normalizeStatus();
 
 	pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG] = isSecondAbilityDefined() && pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG];
@@ -138,7 +138,7 @@ void Pokemon::save(void) {
 	SV_FIELD_E(u16, species, 0x00, PokemonSpeciesIndex);
 	SV_FIELD_E(u8, heldItem, 0x03, ItemIndex);
 	SV_FIELD(u16, partyData.currentHP, 0x04);
-	SV_FIELD_CONV(u16, happiness, 0x06, u8);
+	SV_FIELD_CONV(u16, friendship, 0x06, u8);
 	SV_FIELD_CONV(u16, locationCaught, 0x08, u8);
 	
 	SV_FIELD(u16, unk1, 0xa);
@@ -152,10 +152,10 @@ void Pokemon::save(void) {
 	if (partyData.level > 100) partyData.level = 100;
 	SV_FIELD(u8, partyData.level, 0x11);
 	SV_FIELD(u8, contestLuster, 0x12);
-	SV_FIELD(u8, pkrsStatus, 0x13);
+	SV_FIELD(u8, pokerusStatus, 0x13);
 	SV_FIELD(u8, markings.save(), 0x14);
 
-	SV_FIELD_MAX(s8, partyData.pkrsDaysRemaining, 0x15, 4);
+	SV_FIELD_MAX(s8, partyData.pokerusDaysRemaining, 0x15, 4);
 	SV_FIELD_E(u8, partyData.status, 0x16, PokemonStatus);
 	SV_FIELD(s8, partyData.turnsOfBadPoison, 0x17);
 	SV_FIELD(s8, partyData.turnsOfSleepRemaining, 0x18);

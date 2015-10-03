@@ -113,6 +113,21 @@ QStringList PokemonUI::statusNames(void) {
 		tr("Paralyzed") << tr("Burnt") << tr("Frozen") << tr("Asleep");
 }
 
+QStringList PokemonUI::ribbonNames(void) {
+	return QStringList() << tr("Champion") << tr("Winning") << tr("Victory") << tr("Artist") <<
+		tr("Effort") << tr("Marine") << tr("Land") << tr("Sky") <<
+		tr("Country") << tr("National") << tr("Earth") << tr("World") << 
+		tr("Unimplemented 1") << tr("Unimplemented 2") << tr("Unimplemented 3") << tr("Unimplemented 4");
+}
+
+QString PokemonUI::ribbonHasNeverBeenMadeAvailableStr(void) {
+	return tr("This ribbon has never been made available");
+}
+
+QStringList PokemonUI::invalidPkmStrs(void) {
+	return QStringList() << tr("INVALID") << tr("Invalid species") << tr("Invalid version info") << tr("\"Invalid Pok\xc3\xa9mon\" flag set");
+}
+
 void PokemonUI::initWidget(void){
 	const QStringList contestStatNames = QStringList() << tr("Coolness") << tr("Beauty") << tr("Cuteness")
 		<< tr("Cleverness") << tr("Toughness");
@@ -124,9 +139,7 @@ void PokemonUI::initWidget(void){
 	const QStringList statNames = QStringList() << tr("HP") << tr("Attack") << tr("Defense") <<
 		tr("S. Attack") << tr("S. Defense") << tr("Speed");
 
-	const QStringList srNames = QStringList() << tr("Champion") << tr("Winning") << tr("Victory") << tr("Artist") <<
-		tr("Effort") << tr("Marine") << tr("Land") << tr("Sky") <<
-		tr("Country") << tr("National") << tr("Earth") << tr("World");
+	const QStringList srNames = ribbonNames();
 
 	LanguageIndex lg = generateDumpedNamesLanguage();
 
@@ -168,10 +181,10 @@ void PokemonUI::initWidget(void){
 	syncLevelAndExpFldsCheckBox = new QCheckBox;
 	
 	heldItemFld = new ItemComboBox;
-	happinessFld = new UnsignedSpinbox<8>;
-	pkrsStatusLayout = new QHBoxLayout;
-	pkrsDaysRemainingFld = new UnsignedSpinbox<3>;
-	pkrsStrainFld = new UnsignedSpinbox<4>;
+	friendshipFld = new UnsignedSpinbox<8>;
+	pokerusStatusLayout = new QHBoxLayout;
+	pokerusDaysRemainingFld = new UnsignedSpinbox<3>;
+	pokerusStrainFld = new UnsignedSpinbox<4>;
 	flagsLayout = new QGridLayout;
 	flagsButtonGroup = new QButtonGroup;
 	markingsLayout = new QHBoxLayout;
@@ -190,7 +203,7 @@ void PokemonUI::initWidget(void){
 	levelFld->setRange(1, 100);
 	syncLevelAndExpFldsCheckBox->setChecked(true);
 
-	pkrsDaysRemainingFld->setUnsignedRange(0, 4);
+	pokerusDaysRemainingFld->setUnsignedRange(0, 4);
 
 
 	experienceLevelAndSyncLayout->addWidget(experienceFld,2);
@@ -199,8 +212,8 @@ void PokemonUI::initWidget(void){
 	levelAndSyncLayout->setAlignment(Qt::AlignRight);
 	experienceLevelAndSyncLayout->addLayout(levelAndSyncLayout);
 
-	pkrsStatusLayout->addWidget(pkrsDaysRemainingFld);
-	pkrsStatusLayout->addWidget(pkrsStrainFld);
+	pokerusStatusLayout->addWidget(pokerusDaysRemainingFld);
+	pokerusStatusLayout->addWidget(pokerusStrainFld);
 
 	eggFlagCheckBox = new QCheckBox(tr("Egg")); secondAbilityFlagCheckBox = new QCheckBox(tr("Second ability")); 
 	invalidPokemonCheckBox = new QCheckBox(tr("Invalid Pok\xc3\xa9mon"));
@@ -237,8 +250,8 @@ void PokemonUI::initWidget(void){
 	generalCoreSubTabLayout->addRow(tr("Ability"), abilityFld);
 	generalCoreSubTabLayout->addRow(tr("Experience and level"), experienceLevelAndSyncLayout);
 	generalCoreSubTabLayout->addRow(tr("Held item"), heldItemFld);
-	generalCoreSubTabLayout->addRow(tr("Happiness"), happinessFld);
-	generalCoreSubTabLayout->addRow(tr("Pok\xc3\xa9rus (days remaing and strain)"), pkrsStatusLayout);
+	generalCoreSubTabLayout->addRow(tr("Friendship"), friendshipFld);
+	generalCoreSubTabLayout->addRow(tr("Pok\xc3\xa9rus (days remaing and strain)"), pokerusStatusLayout);
 	generalCoreSubTabLayout->addRow(tr("Flags"), flagsLayout);
 	generalCoreSubTabLayout->addRow(tr("Markings"), markingsLayout);
 
@@ -296,8 +309,8 @@ void PokemonUI::initWidget(void){
 	coreCaptureInfoLayout->addRow(tr("Fateful encounter (obedient)"), obedientFld);
 	coreCaptureInfoLayout->addRow(tr("Ball caught with"), ballCaughtWithFld);
 
-	coreCaptureInfoLayout->labelForField(obedientFld)->setToolTip(tr("Mew and Deoxys need this field to be checked so they can obey.\n"
-		"Pok\xc3\xa9mon caught in XD always have this field checked."));
+	addToolTipTo((QLabel*) coreCaptureInfoLayout->labelForField(obedientFld), tr("Mew and Deoxys need this field to be checked so they can obey.\n"
+		"Pok\xc3\xa9mon caught in XD always have this field checked"));
 	coreCaptureInfoBox->setLayout(coreCaptureInfoLayout);
 	OTBox->setLayout(OTField);
 	versionBox->setLayout(versionFld);
@@ -399,8 +412,14 @@ void PokemonUI::initWidget(void){
 	specialRibbonsFldGroup = new QButtonGroup;
 	specialRibbonsFldGroup->setExclusive(false);
 	
+	const QString rna = ribbonHasNeverBeenMadeAvailableStr();
 	for (size_t i = 0; i < 12; ++i) {
-		specialRibbonsFlds[i] = new QCheckBox(srNames[i]);
+		if (i >= 5 && i <= 11 && i != 9 && i != 10) {
+			specialRibbonsFlds[i] = new QCheckBox(srNames[i] + "*");
+			specialRibbonsFlds[i]->setToolTip(rna);
+		}
+		else 
+			specialRibbonsFlds[i] = new QCheckBox(srNames[i]);
 		specialRibbonsFldGroup->addButton(specialRibbonsFlds[i], (int)i);
 		specialRibbonsLayout->addWidget(specialRibbonsFlds[i], (int)(i % 4), (int)(i / 4));
 	}
@@ -435,7 +454,7 @@ void PokemonUI::initWidget(void){
 	connect(experienceFld, SIGNAL(valueChanged(int)), this, SLOT(updateLevelFromExperience()));
 	connect(levelFld, SIGNAL(valueChanged(int)), this, SLOT(updateExperienceFromLevel()));
 	connect(statusFld, SIGNAL(currentIndexChanged(int)), SLOT(statusChangeHandler()));
-	connect(pkrsStrainFld, SIGNAL(valueChanged(int)), this, SLOT(updatePkrsDaysRemaining()));
+	connect(pokerusStrainFld, SIGNAL(valueChanged(int)), this, SLOT(updatePokerusDaysRemaining()));
 	connect(OTField, SIGNAL(TIDorSIDChanged()), this, SLOT(updatePkmAttributes()));
 	connect(versionFld, SIGNAL(versionChanged()), this, SLOT(versionChangeHandler()));
 	connect(copyInfoFromSaveButton, SIGNAL(clicked()), this, SLOT(copyInfoFromSave()));
@@ -465,7 +484,7 @@ void PokemonUI::parseData(void){
 	heldItemFld->set(GIVABLE_ITEMS_ALLOWED, isXD);
 
 
-	nameFld->setText(pkm->name->toUTF8());
+	nameFld->setText(replaceSpecialNameCharsIn(pkm->name->toUTF8()));
 
 	speciesFld->setCurrentIndex((int)Localization::pkmSpeciesIndexToNameIndex(pkm->species));
 	if (pkm->species == Bonsly && !isXD) speciesFld->setCurrentIndex(0);
@@ -480,7 +499,7 @@ void PokemonUI::parseData(void){
 
 
 	heldItemFld->setCurrentItemIndex(pkm->heldItem);
-	happinessFld->setUnsignedValue(pkm->happiness);
+	friendshipFld->setUnsignedValue(pkm->friendship);
 
 
 	statusFld->disconnect(SIGNAL(currentIndexChanged(int)), this);
@@ -491,13 +510,13 @@ void PokemonUI::parseData(void){
 	connect(statusFld, SIGNAL(currentIndexChanged(int)), SLOT(statusChangeHandler()));
 
 
-	pkrsStrainFld->disconnect(SIGNAL(valueChanged(int)), this);
-	pkrsStrainFld->setUnsignedValue(pkm->pkrsStatus & 0xf);
-	pkrsDaysRemainingFld->setUnsignedValue(pkm->pkrsStatus >> 4);
-	partyPrksDaysRemainingFld->setValue(pkm->pkrsStatus >> 4);
-	updatePkrsDaysRemaining();
+	pokerusStrainFld->disconnect(SIGNAL(valueChanged(int)), this);
+	pokerusStrainFld->setUnsignedValue(pkm->pokerusStatus & 0xf);
+	pokerusDaysRemainingFld->setUnsignedValue(pkm->pokerusStatus >> 4);
+	partyPrksDaysRemainingFld->setValue(pkm->pokerusStatus >> 4);
+	updatePokerusDaysRemaining();
 
-	connect(pkrsStrainFld, SIGNAL(valueChanged(int)), this, SLOT(updatePkrsDaysRemaining()));
+	connect(pokerusStrainFld, SIGNAL(valueChanged(int)), this, SLOT(updatePokerusDaysRemaining()));
 
 
 
@@ -555,7 +574,7 @@ void PokemonUI::parseData(void){
 
 void PokemonUI::saveChanges(void){
 	pkm->species = nameIndexToPkmSpeciesIndex(speciesFld->currentIndex());
-	pkm->name->fromUTF8(nameFld->text().toUtf8().data());
+	pkm->name->fromUTF8(replaceSpecialNameCharsOut(nameFld->text()).toUtf8().data());
 	pkm->PID = PIDFld->unsignedValue();
 
 	pkm->setSecondAbilityFlag(abilityFld->currentIndex() != 0);
@@ -563,9 +582,9 @@ void PokemonUI::saveChanges(void){
 	pkm->partyData.level = (u8)levelFld->unsignedValue();
 
 	pkm->heldItem = heldItemFld->currentItemIndex();
-	pkm->happiness = (u8)happinessFld->unsignedValue();
-	pkm->pkrsStatus = (u8)((pkrsDaysRemainingFld->unsignedValue() << 4) | pkrsStrainFld->unsignedValue());
-	pkm->partyData.pkrsDaysRemaining = (s8)(partyPrksDaysRemainingFld->value());
+	pkm->friendship = (u8)friendshipFld->unsignedValue();
+	pkm->pokerusStatus = (u8)((pokerusDaysRemainingFld->unsignedValue() << 4) | pokerusStrainFld->unsignedValue());
+	pkm->partyData.pokerusDaysRemaining = (s8)(partyPrksDaysRemainingFld->value());
 
 	pkm->partyData.status = (statusFld->currentIndex() == 0) ? NoStatus : (PokemonStatus)(2 + statusFld->currentIndex());
 	pkm->partyData.turnsOfBadPoison = (s8)turnsOfBadPoisonFld->value();
@@ -613,6 +632,8 @@ void PokemonUI::saveChanges(void){
 		pkm->specialRibbons[i] = specialRibbonsFlds[i]->isChecked();
 }
 
+
+
 QString PokemonUI::getShortPkmAttributeText(LibPkmGC::PokemonSpeciesIndex species, LibPkmGC::u32 PID, LibPkmGC::u16 TID, LibPkmGC::u16 SID){
 	QString ret;
 
@@ -658,15 +679,16 @@ QString PokemonUI::getLongPkmAttributeText(LibPkmGC::PokemonSpeciesIndex species
 }
 
 QString PokemonUI::getShortPkmAttributeText(void){
-	const QString invalid = "<span style='color:red;'>INVALID</span>";
+	const QStringList invalidStrs = invalidPkmStrs();
+	const QString invalid = "<span style='color:red;'>"+invalidStrs[0]+"*</span>";
 	QString ret, tt;
 	if (pkm == NULL || speciesFld->currentIndex() == 0) return "";
 	
 	if (versionFld->info().isIncomplete())
-		tt = tr("Invalid version info");
+		tt = invalidStrs[2];
 	if (isXD && invalidPokemonCheckBox->isChecked()) {
 		if (!tt.isEmpty()) tt += "\n";
-		tt += tr("\"Invalid Pok\xc3\xa9mon\" flag set");
+		tt += invalidStrs[3];
 	}
 
 	attributesFld->setToolTip(tt);
@@ -682,15 +704,16 @@ QString PokemonUI::getShortPkmAttributeText(void){
 }
 
 QString PokemonUI::getLongPkmAttributeText(void){
-	const QString invalid = "<span style='color:red;'>INVALID</span>";
+	const QStringList invalidStrs = invalidPkmStrs();
+	const QString invalid = "<span style='color:red;'>" + invalidStrs[0] + "*</span>";
 	QString ret, tt;
 	if (pkm == NULL || speciesFld->currentIndex() == 0) return "";
 
 	if (versionFld->info().isIncomplete())
-		tt = tr("Invalid version info");
+		tt = invalidStrs[2];
 	if (isXD && invalidPokemonCheckBox->isChecked()) {
 		if (!tt.isEmpty()) tt += "\n";
-		tt += tr("\"Invalid Pok\xc3\xa9mon\" flag set");
+		tt += invalidStrs[3];
 	}
 
 	attributesFld->setToolTip(tt);
@@ -798,19 +821,19 @@ void PokemonUI::PIDChangeHandler(void) {
 	updateMainStats();
 }
 
-void PokemonUI::updatePkrsDaysRemaining(void) {
-	if (pkrsStrainFld->unsignedValue() == 0) {
-		pkrsDaysRemainingFld->setValue(0);
-		pkrsDaysRemainingFld->setDisabled(true);
+void PokemonUI::updatePokerusDaysRemaining(void) {
+	if (pokerusStrainFld->unsignedValue() == 0) {
+		pokerusDaysRemainingFld->setValue(0);
+		pokerusDaysRemainingFld->setDisabled(true);
 		partyPrksDaysRemainingFld->setRange(-1, -1);
 		partyPrksDaysRemainingFld->setValue(-1);
 		partyPrksDaysRemainingFld->setDisabled(true);
 	}
 	else {
-		pkrsDaysRemainingFld->setDisabled(false);
+		pokerusDaysRemainingFld->setDisabled(false);
 		partyPrksDaysRemainingFld->setDisabled(false);
-		pkrsDaysRemainingFld->setUnsignedRange(0, (pkrsStrainFld->unsignedValue() & 0x3) + 1);
-		partyPrksDaysRemainingFld->setRange(0, (pkrsStrainFld->unsignedValue() & 0x3) + 1);
+		pokerusDaysRemainingFld->setUnsignedRange(0, (pokerusStrainFld->unsignedValue() & 0x3) + 1);
+		partyPrksDaysRemainingFld->setRange(0, (pokerusStrainFld->unsignedValue() & 0x3) + 1);
 	}
 }
 

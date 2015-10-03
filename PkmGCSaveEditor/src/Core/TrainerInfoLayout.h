@@ -24,10 +24,11 @@
 #include <QButtonGroup>
 #include <QRadioButton>
 #include <QLineEdit>
-#include <algorithm>
 #include <Core/UnsignedSpinbox.h>
 #include <LibPkmGC/Core/PokemonInfo.h>
 #include <LibPkmGC/Base/PokemonString.h>
+#include <Core/Globals.h>
+
 class TrainerInfoLayout : public QFormLayout{
 	Q_OBJECT
 public:

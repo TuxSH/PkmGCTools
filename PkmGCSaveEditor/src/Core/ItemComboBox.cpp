@@ -62,6 +62,7 @@ void ItemComboBox::resetItemList(void){
 }
 
 ItemIndex ItemComboBox::currentItemIndex(void) const{
+	int index = currentIndex();
 	return _indices[this->currentIndex()];
 }
 

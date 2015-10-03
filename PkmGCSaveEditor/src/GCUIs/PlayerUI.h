@@ -51,12 +51,15 @@ private:
 
 	QWidget* generalTab;
 	QVBoxLayout* generalTabLayout;
+
 	QGroupBox* trainerInfoBox;
 	TrainerInfoLayout* trainerInfoFld;
+	QLineEdit* ruisNameFld;
+
 
 	QGroupBox* currenciesBox;
 	QFormLayout* currenciesLayout;
-	UnsignedSpinbox<32> *moneyFld, *pkCouponsFld;
+	UnsignedSpinbox<32> *pokeDollarsFld, *pokeCouponsFld;
 
 	BagEditor* bagTab;
 	

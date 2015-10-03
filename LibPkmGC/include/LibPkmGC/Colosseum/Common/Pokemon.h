@@ -60,12 +60,12 @@ namespace Colosseum {
 	0xbc : u8 contestLuster
 	0xbd : u8 specialRibbons[12]
 	0xc9 : u8 unimplentedRibbons (max. 15)
-	0xca : u8 pkrsStatus
+	0xca : u8 pokerusStatus
 	0xcb : u8 flags[3] : egg, special ability, invalid pkm
 	0xce : u8 GCUnk
 	0xcf : u8 marks
 	// shadow pkm data ?
-	0xd0: s8 pkrsRemainingDays
+	0xd0: s8 pokerusRemainingDays
 	0xd1--0xd7 : ? ?
 	0xd2: u16 unk2
 	0xd4: u16 unk1
@@ -95,6 +95,8 @@ public:
 	void swap(Pokemon& other);
 	Pokemon& operator=(Pokemon const& other);
 
+	Pokemon(GC::Pokemon const& other);
+	Pokemon(Base::Pokemon const& other);
 	Pokemon(XD::Pokemon const& other);
 	Pokemon(GBA::Pokemon const& other);
 	Pokemon& operator=(GC::Pokemon const& other);

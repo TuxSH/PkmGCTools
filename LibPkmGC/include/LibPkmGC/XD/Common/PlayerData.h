@@ -32,8 +32,8 @@ namespace XD {
 	0x4c8: bag
 
 	0x8e0: u8 trainerGender
-	0x8e4: u32 money
-	0x8e8: u32 pkCoupons + copy
+	0x8e4: u32 pokeDollars
+	0x8e8: u32 pokeCoupons + copy
 */
 
 class LIBPKMGC_DECL PlayerData :

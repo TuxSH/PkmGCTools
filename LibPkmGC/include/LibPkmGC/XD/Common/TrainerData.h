@@ -40,6 +40,7 @@ public:
 	TrainerData* clone(void) const;
 	TrainerData* create(void) const;
 
+	TrainerData(GC::TrainerData const& other);
 	TrainerData(Colosseum::TrainerData const& other);
 protected:
 	void loadFields(void);

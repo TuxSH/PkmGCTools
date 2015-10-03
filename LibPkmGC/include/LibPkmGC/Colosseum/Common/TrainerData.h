@@ -38,6 +38,7 @@ public:
 	TrainerData* clone(void) const;
 	TrainerData* create(void) const;
 
+	TrainerData(GC::TrainerData const& other);
 	TrainerData(XD::TrainerData const& other);
 protected:
 	void loadFields(void);

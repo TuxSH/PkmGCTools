@@ -38,8 +38,8 @@ public:
 	StrategyMemoEntry* clone(void) const;
 	StrategyMemoEntry* create(void) const;
 
-	bool isInfoPartial(void) const;
-	void setInfoCompleteness(bool partial);
+	bool isInfoIncomplete(void) const;
+	void setInfoCompleteness(bool incomplete);
 };
 
 }

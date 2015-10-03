@@ -47,7 +47,7 @@ QFormLayout(){
 }
 
 void TrainerInfoLayout::trainerName(LibPkmGC::Base::PokemonString * outName) {
-	outName->fromUTF8(nameFld->text().toUtf8().data());
+	outName->fromUTF8(replaceSpecialNameCharsOut(nameFld->text()).toUtf8().data());
 }
 
 u16 TrainerInfoLayout::TID(void) const {
@@ -63,7 +63,7 @@ Gender TrainerInfoLayout::trainerGender(void) const {
 }
 
 void TrainerInfoLayout::setTrainerName(LibPkmGC::Base::PokemonString* inName) {
-	if(inName != NULL) nameFld->setText(inName->toUTF8());
+	if(inName != NULL) nameFld->setText(replaceSpecialNameCharsIn(inName->toUTF8()));
 }
 
 void TrainerInfoLayout::setTID(LibPkmGC::u16 inTID) {

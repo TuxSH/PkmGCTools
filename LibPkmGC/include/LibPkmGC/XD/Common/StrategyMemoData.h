@@ -44,6 +44,8 @@ public:
 	void save(void);
 
 	StrategyMemoData(Colosseum::StrategyMemoData const& other);
+	StrategyMemoData(GC::StrategyMemoData const& other);
+
 
 protected:
 	void loadFields(void);

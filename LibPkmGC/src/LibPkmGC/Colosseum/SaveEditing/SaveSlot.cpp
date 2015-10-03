@@ -258,10 +258,8 @@ void SaveSlot::loadFields(void) {
 	LD_IMPLEMENTED_SUBSTRUCTURE(MailboxData, mailbox);
 	LD_IMPLEMENTED_SUBSTRUCTURE(DaycareData, daycare);
 	LD_IMPLEMENTED_SUBSTRUCTURE(StrategyMemoData, strategyMemo);
-	//offset += 0x523c;
 	offset = 0xe3e8;
 	LD_IMPLEMENTED_SUBSTRUCTURE(BattleModeData, battleMode);
-	//offset += 0x1448;
 	offset = 0x1c45c;
 	LD_IMPLEMENTED_SUBSTRUCTURE(RibbonDescriptionsData, ribbonDescriptions);
 	// unknown substructures following
@@ -285,17 +283,15 @@ void SaveSlot::save(void) {
 	SV_IMPLEMENTED_SUBSTRUCTURE(MailboxData, mailbox);
 	SV_IMPLEMENTED_SUBSTRUCTURE(DaycareData, daycare);
 	SV_IMPLEMENTED_SUBSTRUCTURE(StrategyMemoData, strategyMemo);
-	//offset += 0x523c;
 	offset = 0xe3e8;
 	SV_IMPLEMENTED_SUBSTRUCTURE(BattleModeData, battleMode);
-	//offset += 0x1448;
 	offset = 0x1c45c;
 	SV_IMPLEMENTED_SUBSTRUCTURE(RibbonDescriptionsData, ribbonDescriptions);
 	// unknown substructures following
 
 
 	checkBothChecksums(true, true); // update checksums
-	offset = 8;
+	offset = 0;
 	SV_IMPLEMENTED_SUBSTRUCTURE(GameConfigData, gameConfig);
 
 	std::copy(randomBytes, randomBytes + 20, data + 0x1dfd8);

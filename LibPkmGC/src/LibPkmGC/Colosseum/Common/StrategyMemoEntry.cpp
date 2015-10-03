@@ -44,12 +44,12 @@ StrategyMemoEntry* StrategyMemoEntry::create(void) const {
 	return new StrategyMemoEntry;
 }
 
-bool StrategyMemoEntry::isInfoPartial(void) const {
+bool StrategyMemoEntry::isInfoIncomplete(void) const {
 	return (flags == 2);
 }
 
-void StrategyMemoEntry::setInfoCompleteness(bool partial) {
-	flags = (partial) ? 2 : 0;
+void StrategyMemoEntry::setInfoCompleteness(bool incomplete) {
+	flags = (incomplete) ? 2 : 0;
 }
 
 

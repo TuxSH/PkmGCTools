@@ -40,11 +40,11 @@ public:
 
 	virtual ~GroupBattleRule(void);
 
-	GroupBattleRule& operator=(GroupBattleRule const& other);
+	virtual GroupBattleRule& operator=(GroupBattleRule const& other);
 	virtual GroupBattleRule* clone(void) const = 0;
 	virtual GroupBattleRule* create(void) const = 0;
 
-	void swap(GroupBattleRule& other);
+	virtual void swap(GroupBattleRule& other);
 	virtual void save(void);
 
 	u16 minLevel, maxLevel;

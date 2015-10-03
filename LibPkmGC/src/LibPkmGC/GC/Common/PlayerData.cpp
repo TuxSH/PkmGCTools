@@ -34,7 +34,7 @@ PlayerData::~PlayerData(void) {
 	PlayerData::deleteFields();
 }
 
-PlayerData::PlayerData(PlayerData const& other) : Base::DataStruct(other), money(other.money), pkCoupons(other.pkCoupons),
+PlayerData::PlayerData(PlayerData const& other) : Base::DataStruct(other), pokeDollars(other.pokeDollars), pokeCoupons(other.pokeCoupons),
 trainerGender(other.trainerGender){
 	CL(trainer);
 	CL(bag);
@@ -45,7 +45,7 @@ PlayerData& PlayerData::operator=(PlayerData const& other) {
 	Base::DataStruct::operator=(other);
 	if (this != &other) {
 		PlayerData::deleteFields();
-		CP(money); CP(pkCoupons);
+		CP(pokeDollars); CP(pokeCoupons);
 		CL(trainer);
 		CL(bag);
 		CP(trainerGender);
@@ -56,7 +56,7 @@ PlayerData& PlayerData::operator=(PlayerData const& other) {
 void PlayerData::swap(PlayerData& other) {
 	if (size != other.size) throw std::invalid_argument("Cannot assign because *this and other are of different types");
 	Base::DataStruct::swap(other);
-	SW(money); SW(pkCoupons);
+	SW(pokeDollars); SW(pokeCoupons);
 	CL(trainer);
 	SW(bag);
 	SW(trainerGender);

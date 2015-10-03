@@ -59,7 +59,7 @@ void StrategyMemoEntryWidget::initWidget(void) {
 	mainLayout2 = new QFormLayout;
 	speciesSelector = new QComboBox;
 
-	partialInfoCheckBox = new QCheckBox;
+	incompleteInfoCheckBox = new QCheckBox;
 
 	firstTIDFld = new UnsignedSpinbox<16>;
 	firstSIDFld = new UnsignedSpinbox<16>;
@@ -79,7 +79,7 @@ void StrategyMemoEntryWidget::initWidget(void) {
 	mainLayout2->addRow(tr("First TID"), firstTIDFld);
 	mainLayout2->addRow(tr("First SID"), firstSIDFld);
 	mainLayout2->addRow(tr("First PID"), PIDLayout);
-	mainLayout2->addRow(tr("Partial information"), partialInfoCheckBox);
+	mainLayout2->addRow(tr("Incomplete information"), incompleteInfoCheckBox);
 	mainLayout->addLayout(mainLayout2);
 	mainLayout->addWidget(generateShinyIDsButton);
 	mainLayout->addWidget(truncateMemoFromHereButton);
@@ -104,8 +104,8 @@ void StrategyMemoEntryWidget::parseData(void) {
 	isXD = LIBPKMGC_IS_XD(StrategyMemoEntry, entry);
 
 	generateShinyIDsButton->setVisible(!isXD);
-	partialInfoCheckBox->setChecked(entry->isInfoPartial());
-	partialInfoCheckBox->setDisabled(isXD);
+	incompleteInfoCheckBox->setChecked(entry->isInfoIncomplete());
+	incompleteInfoCheckBox->setDisabled(isXD);
 
 	speciesSelector->setCurrentIndex(pkmSpeciesIndexToNameIndex(entry->species));
 
@@ -116,7 +116,7 @@ void StrategyMemoEntryWidget::parseData(void) {
 }
 
 void StrategyMemoEntryWidget::saveChanges(void) {
-	entry->setInfoCompleteness(partialInfoCheckBox->isChecked());
+	entry->setInfoCompleteness(incompleteInfoCheckBox->isChecked());
 	entry->species = nameIndexToPkmSpeciesIndex(speciesSelector->currentIndex());
 	entry->firstSID = (u16)firstSIDFld->unsignedValue();
 	entry->firstTID = (u16)firstTIDFld->unsignedValue();
