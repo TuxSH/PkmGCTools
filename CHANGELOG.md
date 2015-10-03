@@ -1,4 +1,4 @@
-###PkmGCToos v1.2:
+###PkmGCTools v1.2:
 * The interface can now be displayed in **German** (thanks [peterpansexuell](http://www.smogon.com/forums/members/peterpansexuell.158307/) !)
 * Updates can now be automatically checked for at startup (this is the default)
 * **New features**:

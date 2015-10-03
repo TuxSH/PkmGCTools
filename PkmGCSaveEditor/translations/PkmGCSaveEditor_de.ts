@@ -878,17 +878,17 @@ Pokémon caught in XD always have this field checked</source>
         <translation>Bänder</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="652"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="654"/>
         <source>Genderless</source>
         <translation>Geschlechtslos</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="668"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="670"/>
         <source>Unown form: </source>
         <translation>Icognito-Form:</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="673"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="675"/>
         <source>will evolve into: </source>
         <translation>entwickelt sich zu:</translation>
     </message>
@@ -903,22 +903,22 @@ Pokémon caught in XD always have this field checked</source>
         <translation>Als „ungültiges Pokémon“ markiert</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="880"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="882"/>
         <source>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(Generation_III)&apos;&gt;here&lt;/a&gt;)</source>
         <translation>Fangort (Details &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(Generation_III)&apos;&gt;hier&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="882"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="884"/>
         <source>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(GCN)&apos;&gt;here&lt;/a&gt;)</source>
         <translation>Fangort (Details &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(GCN)&apos;&gt;hier&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="887"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="889"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="887"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="889"/>
         <source>The version info you specified is invalid. The game will therefore consider this Pokémon invalid.</source>
         <translation>Die angegebene Spielversion ist nicht gültig. Das Spiel wird dieses Pokémon daher für ungültig halten.</translation>
     </message>
