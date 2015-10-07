@@ -22,7 +22,7 @@
 #include <QFormLayout>
 #include <QLineEdit>
 #include <QComboBox>
-#include <LibPkmGC/Core/PokemonInfo.h>
+#include <LibPkmGC/Core/VersionInfo.h>
 #include <Core/IDataUI.h>
 
 

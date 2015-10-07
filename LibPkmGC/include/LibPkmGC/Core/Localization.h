@@ -21,6 +21,7 @@
 
 #include <LibPkmGC/Core/PokemonInfo.h>
 #include <LibPkmGC/Core/ItemInfo.h>
+#include <LibPkmGC/Core/VersionInfo.h>
 #include <LibPkmGC/Core/Detail/SpeciesNames.h>
 #include <LibPkmGC/Core/Detail/NatureNames.h>
 #include <LibPkmGC/Core/Detail/MoveNames.h>

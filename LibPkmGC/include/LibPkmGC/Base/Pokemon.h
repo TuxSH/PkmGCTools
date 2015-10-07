@@ -21,6 +21,7 @@
 
 #include <LibPkmGC/Core/PokemonInfo.h>
 #include <LibPkmGC/Core/ItemInfo.h>
+#include <LibPkmGC/Core/VersionInfo.h>
 #include <LibPkmGC/Base/DataStruct.h>
 #include <LibPkmGC/Base/PokemonString.h>
 

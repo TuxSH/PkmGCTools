@@ -20,6 +20,7 @@
 #define _LIBPKMGC_ITEM_INFO_H
 
 #include <LibPkmGC/Core/IntegerTypes.h>
+#include <LibPkmGC/Core/MoveInfo.h>
 
 namespace LibPkmGC {
 
@@ -453,6 +454,7 @@ enum ItemCategoryIndex {
 };
 
 LIBPKMGC_DECL ItemCategoryIndex getItemCategory(ItemIndex index, bool isXD = false);
+LIBPKMGC_DECL PokemonMoveIndex getMoveForTM(ItemIndex index);
 
 }
 

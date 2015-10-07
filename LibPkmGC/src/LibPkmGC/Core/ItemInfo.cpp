@@ -61,4 +61,63 @@ ItemCategoryIndex getItemCategory(ItemIndex index, bool isXD) {
 	return NoItemCategory;
 }
 
+
+const PokemonMoveIndex TMMoves[50] = {
+	FocusPunch,
+	DragonClaw,
+	WaterPulse,
+	CalmMind,
+	Roar,
+	Toxic,
+	Hail,
+	BulkUp,
+	BulletSeed,
+	HiddenPower,
+	SunnyDay,
+	Taunt,
+	IceBeam,
+	Blizzard,
+	HyperBeam,
+	LightScreen,
+	Protect,
+	RainDance,
+	GigaDrain,
+	Safeguard,
+	Frustration,
+	SolarBeam,
+	IronTail,
+	Thunderbolt,
+	Thunder,
+	Earthquake,
+	Return,
+	Dig,
+	Psychic,
+	ShadowBall,
+	BrickBreak,
+	DoubleTeam,
+	Reflect,
+	ShockWave,
+	Flamethrower,
+	SludgeBomb,
+	Sandstorm,
+	FireBlast,
+	RockTomb,
+	AerialAce,
+	Torment,
+	Facade,
+	SecretPower,
+	Rest,
+	Attract,
+	Thief,
+	SteelWing,
+	SkillSwap,
+	Snatch,
+	Overheat
+};
+
+PokemonMoveIndex getMoveForTM(ItemIndex index) {
+	if (index < TM01 || index > TM50) return NoMove;
+	else return TMMoves[index - TM01];
+}
+
 }

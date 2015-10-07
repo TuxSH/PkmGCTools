@@ -20,7 +20,7 @@
 #define _LIBPKMGC_GC_GAME_CONFIG_DATA_H
 
 #include <LibPkmGC/Base/DataStruct.h>
-#include <LibPkmGC/Core/PokemonInfo.h>
+#include <LibPkmGC/Core/VersionInfo.h>
 
 namespace LibPkmGC {
 

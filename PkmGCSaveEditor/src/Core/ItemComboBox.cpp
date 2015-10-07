@@ -49,11 +49,16 @@ void ItemComboBox::resetItemList(void){
 	fl &= ~1; // since (1 << (getItemCategory(<invalid item index>) )) == 1 ...
 
 	for (int i = 1; i <= (int)BattleCD60; ++i) { // 593 
-		unsigned int ctgFlg = (1U << (int)getItemCategory((ItemIndex)i, _isXD));
+		ItemIndex index = (ItemIndex)i;
+		unsigned int ctgFlg = (1U << (int)getItemCategory(index, _isXD));
 		if ((fl & ctgFlg) != 0) {
-			this->addItem(getItemName(lg, (ItemIndex)i, _isXD));
+			const char* name = getItemName(lg, index, _isXD);
+			this->addItem((index >= TM01 && index <= TM50)
+				? QString("%1 (%2)").arg(name).arg(getPokemonMoveName(lg, getMoveForTM(index)))
+				: name
+			);
 			_reverseIndices[i] = j;
-			_indices[j++] = (ItemIndex)i;
+			_indices[j++] = index;
 		}
 		else {
 			_reverseIndices[i] = -1;

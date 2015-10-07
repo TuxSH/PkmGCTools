@@ -73,7 +73,12 @@ void ItemPocketEditor::setItemAt(int i) {
 
 	QTableWidgetItem *qty = new QTableWidgetItem(QString::number(items[i].quantity));
 	qty->setTextAlignment((int)Qt::AlignRight | (int)Qt::AlignVCenter);
-	tbl->setItem(i, 0, new QTableWidgetItem(getItemName(lg, items[i].index, isXD)));
+
+	const char* name = getItemName(lg, items[i].index, isXD);
+	if(items[i].index >= TM01 && items[i].index <= TM50)
+		tbl->setItem(i, 0, new QTableWidgetItem(QString("%1 (%2)").arg(name).arg(getPokemonMoveName(lg, getMoveForTM(items[i].index)))));
+	else
+		tbl->setItem(i, 0, new QTableWidgetItem(getItemName(lg, items[i].index, isXD)));
 	tbl->setItem(i, 1, qty);
 }
 
