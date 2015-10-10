@@ -135,8 +135,11 @@ public:
 	>::type reverse_generator_type;
 
 
+	static u32 advance32(forward_generator_type rng) {
+		return (rng() & 0xffff) | (rng() << 16);
+	}
 
-	bool buildParallelSeedTable(u32 initialSeed, u32 nbThreads, u32* outSeeds) {
+	static bool buildParallelSeedTable(u32 initialSeed, u32 nbThreads, u32* outSeeds) {
 		if (nbThreads == 0) return false;
 		outSeeds[0] = initialSeed;
 		switch (nbThreads) {

@@ -57,9 +57,10 @@ public:
 
 	size_t recount(void) const;
 
-	void sortedBySpeciesIndex(StrategyMemoEntry* dst[0x19b]); // only entries containing a valid Gen III species index are sorted
-	virtual void fixInvalidEntries(void);
+	void sortedBySpeciesIndex(StrategyMemoEntry* dst[0x19d]); // only entries containing a valid Gen III species index are sorted
+	virtual void fixInvalidEntries(StrategyMemoEntry** dst = NULL);
 
+	void setInfoCompletenessForAll(bool incomplete);
 	u16 nbEntries;
 	StrategyMemoEntry* entries[500];
 
@@ -68,6 +69,41 @@ protected:
 
 	virtual void deleteFields(void);
 	virtual void loadFields(void);
+
+public:
+	template<typename RNGType>
+	void clearMemo(RNGType& rng) {
+		nbEntries = 0;
+		for (size_t i = 0; i < 500; ++i) {
+			entries[i]->species = NoSpecies;
+			entries[i]->flags = 0;
+			entries[i]->generateRandomPID(rng);
+		}
+	}
+
+	template<typename RNGType>
+	void fillMemo(RNGType& rng, bool allShiny = false) {
+		allShiny = allShiny && !isXD();
+		StrategyMemoEntry* bySpecies[0x19d];
+		fixInvalidEntries(bySpecies);
+		for (PokemonSpeciesIndex i = NoSpecies; i <= Chimecho; i = (PokemonSpeciesIndex)(i+1)) {
+			size_t index = (size_t)i;
+			if (!getSpeciesData(i).isValid) continue; 
+			if (bySpecies[i] == NULL) {
+				StrategyMemoEntry *entry = entries[nbEntries++];
+				bySpecies[i] = entry;
+				entry->species = i;
+				entry->firstTID = (u16)((u32)rng() >> 16);
+				entry->firstSID = (u16)((u32)rng() >> 16);
+				entries[nbEntries]->generateRandomPID(rng);
+			}
+			StrategyMemoEntry *entry = bySpecies[i];
+			if (allShiny) entry->firstSID = entry->firstTID ^ (entry->firstPID >> 16) ^ (entry->firstPID & 0xffff);
+		}
+
+		setInfoCompletenessForAll(false);
+	}
+
 
 };
 

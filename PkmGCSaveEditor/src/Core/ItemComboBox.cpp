@@ -21,9 +21,11 @@
 using namespace LibPkmGC;
 using namespace LibPkmGC::Localization;
 
-ItemComboBox::ItemComboBox(unsigned int inFlags, bool isXD, QWidget* parent) : QComboBox(parent), _flags(inFlags), _isXD(isXD){
+ItemComboBox::ItemComboBox(unsigned int inFlags, bool isXD, QWidget* parent) : AutocompletingComboBox(parent), _flags(inFlags), _isXD(isXD){
 	_indices = new ItemIndex[336]; //  245 + 91
 	_reverseIndices = new int[594];
+	setEditable(true);
+	setInsertPolicy(QComboBox::NoInsert);
 	resetItemList();
 }
 

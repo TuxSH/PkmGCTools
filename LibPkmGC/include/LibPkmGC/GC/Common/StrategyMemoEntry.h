@@ -52,9 +52,17 @@ public:
 	void swap(StrategyMemoEntry& other);
 
 	bool isEmpty(void) const;
+	bool isShiny(void) const;
+
+	template<typename RNGType>
+	void generateRandomPID(RNGType& rng) {
+		firstPID = (((u32)rng() >> 16) | (((u32)rng() >> 16) << 16)) % 0xffffffff; // <-- no & 0xffff here
+	}
+
 
 	virtual bool isInfoIncomplete(void) const = 0;
 	virtual void setInfoCompleteness(bool incomplete) = 0;
+
 
 	u16 flags;
 	PokemonSpeciesIndex species;

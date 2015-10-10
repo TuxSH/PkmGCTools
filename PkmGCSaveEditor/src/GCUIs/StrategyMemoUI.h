@@ -20,6 +20,7 @@
 #define _PKMGCSAVEEDITOR_STRATEGY_MEMO_UI_H
 
 #include <GCUIs/StrategyMemoEntryWidget.h>
+#include <Core/AutocompletingComboBox.h>
 
 namespace GCUIs {
 
@@ -38,15 +39,20 @@ public:
 public slots:
 	void updateEntryNameAndNbEntries(int index, size_t nameIndex);
 	void setCurrentEntry(int index);
+	void fillMemo(void);
+	void fillMemoAllShiny(void);
+
 protected:
 	void initWidget(void);
 private:
 	void updateEntryName(int index, size_t nameIndex);
 	QFormLayout *entrySelectorLayout;
 	UnsignedSpinbox<16>* nbEntriesFld;
-	QComboBox *entrySelector;
+	AutocompletingComboBox *entrySelector;
 
 	StrategyMemoEntryWidget* currentEntry; // we cannot use a QStackedWidget here
+
+	QPushButton* fillMemoButton, *fillMemoAllShinyButton;
 };
 
 }

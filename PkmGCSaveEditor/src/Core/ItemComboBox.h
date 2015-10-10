@@ -20,7 +20,7 @@
 #define _PKMGCSAVEEDITOR_ITEM_COMBO_BOX_H
 
 #include <Core/Globals.h>
-#include <QComboBox>
+#include <Core/AutocompletingComboBox.h>
 #include <LibPkmGC/Core/Localization.h>
 
 // (1 << ((int)categoryIndex)
@@ -36,7 +36,7 @@
 
 #define GIVABLE_ITEMS_ALLOWED		30	// (2|4|8|16)
 
-class ItemComboBox : public QComboBox {
+class ItemComboBox : public AutocompletingComboBox {
 public:
 	ItemComboBox(unsigned int inFlags = 0, bool isXD = false, QWidget* parent = NULL);
 	~ItemComboBox(void);

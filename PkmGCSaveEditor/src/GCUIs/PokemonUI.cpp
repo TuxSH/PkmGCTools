@@ -18,6 +18,9 @@
 
 #include <GCUIs/PokemonUI.h>
 #include <QMessageBox>
+#include <QApplication>
+#include <ctime>
+#include <LibPkmGC/Core/LCRNG32.h>
 
 using namespace LibPkmGC; using namespace Localization; using namespace Base;
 
@@ -26,12 +29,14 @@ namespace GCUIs {
 
 PokemonMoveLayout::PokemonMoveLayout(PokemonMove const& inMove) : QHBoxLayout(){
 	LanguageIndex lg = generateDumpedNamesLanguage();
-	moveNameFld = new QComboBox;
+	moveNameFld = new AutocompletingComboBox;
 	currentPPsFld = new UnsignedSpinbox<7>;
 	maxPPsFld = new QLabel(tr("(max. %n)", "", 0));
 	nbPPUpsUsedFld = new UnsignedSpinbox<2>;
 	nbPPUpsUsedText = new QLabel(tr("PP Up(s) used"));
 
+	moveNameFld->setEditable(true);
+	moveNameFld->setInsertPolicy(QComboBox::NoInsert);
 	currentPPsFld->setRange(0, 64);
 
 	QHBoxLayout* w1 = new QHBoxLayout;
@@ -167,7 +172,7 @@ void PokemonUI::initWidget(void){
 	generalStatusSubTab = new QWidget;
 	generalStatusSubTabLayout = new QFormLayout;
 
-	speciesFld = new QComboBox;
+	speciesFld = new AutocompletingComboBox;
 	nameLayout = new QHBoxLayout;
 	nameFld = new QLineEdit;
 	resetNameButton = new QPushButton(tr("Reset"));
@@ -189,7 +194,6 @@ void PokemonUI::initWidget(void){
 	flagsButtonGroup = new QButtonGroup;
 	markingsLayout = new QHBoxLayout;
 	markingsButtonGroup = new QButtonGroup;
-
 
 	for (size_t i = 0; i < 387; ++i)
 		speciesFld->addItem(Localization::getPokemonSpeciesNameByPkdxIndex(lg, i));
@@ -819,6 +823,23 @@ void PokemonUI::speciesChangeHandler(void) {
 void PokemonUI::PIDChangeHandler(void) {
 	updatePkmAttributes();
 	updateMainStats();
+
+	for (size_t i = 0; i < 6; ++i) {
+		PokemonNatureAffinity aff = getNatureStatAffinity(Base::Pokemon::getNature(PIDFld->unsignedValue()), i);
+		if (aff == Beneficial) {
+			QPalette pal = palette();
+			pal.setColor(QPalette::Foreground, Qt::red);
+			mainStatsFormLayout->labelForField(mainStatsFlds[i])->setPalette(pal);
+		}
+		else if (aff == Detrimental) {
+			QPalette pal = palette();
+			pal.setColor(QPalette::Foreground, Qt::blue);
+			mainStatsFormLayout->labelForField(mainStatsFlds[i])->setPalette(pal);
+		}
+		else
+			mainStatsFormLayout->labelForField(mainStatsFlds[i])->setPalette(QApplication::palette(mainStatsFormLayout->labelForField(mainStatsFlds[i])));
+
+	}
 }
 
 void PokemonUI::updatePokerusDaysRemaining(void) {
@@ -902,8 +923,13 @@ void PokemonUI::copyInfoFromSave(void) {
 }
 
 void PokemonUI::generateShinyIDs(void) {
-	OTField->setTID((u16)(PIDFld->unsignedValue() >> 16));
-	OTField->setSID((u16)PIDFld->unsignedValue());
+	static GCRNG::forward_generator_type rng(time(NULL));
+	u32 PID = PIDFld->unsignedValue();
+	u32 TID = rng() >> 16;
+	u32 setUnsignedValue((PID >> 16) ^ (PID & 0xffff) ^ TID);
+
+	OTField->setTID((u16)TID);
+	OTField->setSID((u16)((PID >> 16) ^ (PID & 0xffff) ^ TID));
 }
 
 

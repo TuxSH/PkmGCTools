@@ -61,7 +61,7 @@ public:
 
 private:
 
-	QComboBox *moveNameFld;
+	AutocompletingComboBox *moveNameFld;
 	UnsignedSpinbox<7> *currentPPsFld;
 	QLabel *maxPPsFld;
 	UnsignedSpinbox<2> *nbPPUpsUsedFld;
@@ -113,7 +113,7 @@ private:
 	QWidget *generalCoreSubTab, *generalStatusSubTab;
 	QFormLayout *generalCoreSubTabLayout, *generalStatusSubTabLayout;
 
-	QComboBox *speciesFld;
+	AutocompletingComboBox *speciesFld;
 	QHBoxLayout* nameLayout;
 	QLineEdit* nameFld;
 	QPushButton *resetNameButton;

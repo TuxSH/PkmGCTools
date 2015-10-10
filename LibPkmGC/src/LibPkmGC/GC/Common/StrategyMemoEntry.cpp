@@ -59,9 +59,15 @@ void StrategyMemoEntry::save(void) {
 	SV_FIELD(u32, firstPID, 8);
 }
 
+bool StrategyMemoEntry::isShiny(void) const {
+	return !isXD() && (((firstPID >> 16) ^ (firstPID & 0xffff) ^ firstSID ^ firstTID) < 8);
+}
+
 bool StrategyMemoEntry::isEmpty(void) const {
 	return species == NoSpecies;
 }
+
+
 
 }
 }

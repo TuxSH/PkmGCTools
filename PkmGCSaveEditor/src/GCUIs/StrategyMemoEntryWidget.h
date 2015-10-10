@@ -21,6 +21,7 @@
 
 #include <Core/DataUI.h>
 #include <Core/UnsignedSpinbox.h>
+#include <Core/AutocompletingComboBox.h>
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QButtonGroup>
@@ -58,7 +59,7 @@ private:
 	bool isXD;
 	QVBoxLayout *mainLayout;
 	QFormLayout *mainLayout2;
-	QComboBox *speciesSelector;
+	AutocompletingComboBox *speciesSelector;
 
 	QCheckBox *incompleteInfoCheckBox;
 

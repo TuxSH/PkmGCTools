@@ -17,6 +17,9 @@
 */
 
 #include <GCUIs/StrategyMemoUI.h>
+#include <ctime>
+#include <LibPkmGC/Core/LCRNG32.h>
+#include <QtGlobal>
 
 using namespace LibPkmGC;
 using namespace Localization;
@@ -36,7 +39,13 @@ StrategyMemoUI::~StrategyMemoUI(void) {
 void StrategyMemoUI::initWidget(void) {
 	LanguageIndex lg = generateDumpedNamesLanguage();
 	entrySelectorLayout = new QFormLayout;
-	entrySelector = new QComboBox;
+	entrySelector = new AutocompletingComboBox;
+
+#if QT_VERSION < QT_VERSION_CHECK(5,2,0)
+	entrySelector->setEditable(false);
+#else
+	entrySelector->completer()->setFilterMode(Qt::MatchContains);
+#endif
 
 	nbEntriesFld = new UnsignedSpinbox<16>;
 	nbEntriesFld->setDisabled(true);
@@ -48,15 +57,24 @@ void StrategyMemoUI::initWidget(void) {
 	for (size_t i = 0; i < 500; ++i)
 		entrySelector->addItem(tmpl.arg((int)i).arg(getPokemonSpeciesName(lg, NoSpecies)));
 
+	fillMemoButton = new QPushButton(tr("Fill memo"));
+	fillMemoAllShinyButton = new QPushButton(tr("Fill memo (all shiny)"));
+
 	entrySelectorLayout->addRow(tr("Number of entries"), nbEntriesFld);
 	entrySelectorLayout->addRow(tr("Entry"), entrySelector);
 	mainLayout->addLayout(entrySelectorLayout);
 	mainLayout->addStretch();
 	mainLayout->addWidget(currentEntry);
 	mainLayout->addStretch();
+	mainLayout->addWidget(fillMemoButton);
+	mainLayout->addWidget(fillMemoAllShinyButton);
+
 	DataUI::initWidget();
 
 	connect(entrySelector, SIGNAL(currentIndexChanged(int)), this, SLOT(setCurrentEntry(int)));
+	connect(fillMemoButton, SIGNAL(clicked()), this, SLOT(fillMemo()));
+	connect(fillMemoAllShinyButton, SIGNAL(clicked()), this, SLOT(fillMemoAllShiny()));
+
 }
 
 void StrategyMemoUI::updateEntryName(int index, size_t nameIndex) {
@@ -77,6 +95,8 @@ void StrategyMemoUI::parseData(void) {
 	}
 	updateEntryNameAndNbEntries(0, pkmSpeciesIndexToNameIndex(strategyMemo->entries[0]->species));
 	setCurrentEntry(0);
+
+	fillMemoAllShinyButton->setVisible(!isXD);
 }
 
 void StrategyMemoUI::saveChanges(void) {
@@ -96,6 +116,25 @@ void StrategyMemoUI::setCurrentEntry(int index) {
 	currentEntry->parseData();
 }
 
+void StrategyMemoUI::fillMemo(void) {
+	static GCRNG::forward_generator_type rng(time(NULL));
+
+	currentEntry->saveChanges();
+	strategyMemo->fillMemo(rng);
+	currentEntry->entry = strategyMemo->entries[currentEntry->entryIndex];
+	currentEntry->parseData();
+	parseData();
+}
+
+void StrategyMemoUI::fillMemoAllShiny(void) {
+	static GCRNG::forward_generator_type rng(time(NULL));
+
+	currentEntry->saveChanges();
+	strategyMemo->fillMemo(rng, true);
+	currentEntry->entry = strategyMemo->entries[currentEntry->entryIndex];
+	currentEntry->parseData();
+	parseData();
+}
 
 void StrategyMemoUI::updateEntryNameAndNbEntries(int index, size_t nameIndex) {
 	updateEntryName(index, nameIndex);

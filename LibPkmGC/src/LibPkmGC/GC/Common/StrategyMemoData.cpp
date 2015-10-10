@@ -52,11 +52,9 @@ StrategyMemoData& StrategyMemoData::operator=(StrategyMemoData const& other) {
 
 void StrategyMemoData::loadFields(void) {
 	LD_FIELD(u16, nbEntries, 0);
-	//if (nbEntries > 0x1f4) nbEntries = 0x1f4;
 }
 
 void StrategyMemoData::save(void) {
-	//if (nbEntries > 0x1f4) nbEntries = 0x1f4;
 	SV_FIELD(u16, nbEntries, 0);
 }
 
@@ -101,16 +99,16 @@ size_t StrategyMemoData::recount(void) const {
 	return i;
 }
 
-void StrategyMemoData::sortedBySpeciesIndex(StrategyMemoEntry* dst[0x19b]) {
-	std::fill(dst, dst + 0x19b, (StrategyMemoEntry*)NULL);
+void StrategyMemoData::sortedBySpeciesIndex(StrategyMemoEntry* dst[0x19d]) {
+	std::fill(dst, dst + 0x19d, (StrategyMemoEntry*)NULL);
 	for (size_t i = 0; i < (size_t)nbEntries; ++i) {
 		size_t index = (size_t)entries[i]->species;
-		if ((dst[index] != NULL) && (index <= 0x19b) && (getSpeciesData(entries[i]->species).isValid)) dst[index] = entries[i];
+		if ((dst[index] == NULL) && (index <= 0x19b) && (getSpeciesData(entries[i]->species).isValid)) dst[index] = entries[i];
 	}
 }
 
-void StrategyMemoData::fixInvalidEntries(void) {
-	StrategyMemoEntry* bySpecies[0x19b] = { NULL };
+void StrategyMemoData::fixInvalidEntries(StrategyMemoEntry** dst) {
+	StrategyMemoEntry* bySpecies[0x19d] = { NULL };
 	StrategyMemoEntry* entries2[500] = { NULL };
 
 	StrategyMemoEntry* emptyobj = entries[0]->create();
@@ -118,7 +116,7 @@ void StrategyMemoData::fixInvalidEntries(void) {
 	nbEntries = 0;
 	for (size_t i = 0; i < 500; ++i) {
 		size_t index = (size_t)entries[i]->species;
-		if ((bySpecies[index] != NULL) && (index <= 0x19b) && (getSpeciesData(entries[i]->species).isValid)) {
+		if ((bySpecies[index] == NULL) && (index <= 0x19b) && (getSpeciesData(entries[i]->species).isValid)) {
 			bySpecies[index] = entries[i];
 			entries2[nbEntries++] = entries[i];
 		}
@@ -131,8 +129,13 @@ void StrategyMemoData::fixInvalidEntries(void) {
 		if (entries2[i] == NULL) entries2[i] = emptyobj->clone();
 	}
 
-	std::copy(entries2, entries2 + nbEntries, entries);
+	std::copy(entries2, entries2 + 500, entries);
 	delete emptyobj;
+	if (dst != NULL) std::copy(bySpecies, bySpecies + 0x19d, dst);
+}
+
+void StrategyMemoData::setInfoCompletenessForAll(bool incomplete) {
+	for (size_t i = 0; i < 500; ++i) entries[i]->setInfoCompleteness(incomplete);
 }
 
 }

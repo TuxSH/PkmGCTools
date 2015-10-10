@@ -17,6 +17,8 @@
 */
 
 #include <GCUIs/StrategyMemoEntryWidget.h>
+#include <ctime>
+#include <LibPkmGC/Core/LCRNG32.h>
 
 using namespace LibPkmGC;
 using namespace Localization;
@@ -44,9 +46,11 @@ void StrategyMemoEntryWidget::updatePIDText(void) {
 }
 
 void StrategyMemoEntryWidget::generateShinyIDs(void) {
+	static GCRNG::forward_generator_type rng(time(NULL));
 	u32 PID = firstPIDFld->unsignedValue();
-	firstTIDFld->setUnsignedValue(PID >> 16);
-	firstSIDFld->setUnsignedValue(PID & 0xffff);
+	u32 TID = rng() >> 16;
+	firstTIDFld->setUnsignedValue(TID);
+	firstSIDFld->setUnsignedValue((PID >> 16) ^ (PID & 0xffff) ^ TID);
 }
 
 void StrategyMemoEntryWidget::truncateMemoFromHere(void) {
@@ -57,7 +61,7 @@ void StrategyMemoEntryWidget::initWidget(void) {
 	LanguageIndex lg = generateDumpedNamesLanguage();
 	mainLayout = new QVBoxLayout;
 	mainLayout2 = new QFormLayout;
-	speciesSelector = new QComboBox;
+	speciesSelector = new AutocompletingComboBox;
 
 	incompleteInfoCheckBox = new QCheckBox;
 
