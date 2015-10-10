@@ -16,11 +16,11 @@ PkmGCSaveEditor is a cross-platform, open source (GPLv3) Pokémon Colosseum and 
 * You can edit the description of some ribbons
 * On XD, you can edit your Purifier.
 
-###Additional features *partially* supported by the backend library **only**: 
+###Additional features not in PkmGCSaveEditor, but *partially* supported by the backend library **only**: 
 Editing your Mailbox and your Battle Mode data.
 
 ##Supported languages:
-* Interface: English, French
+* Interface: English, French, German
 * Dumped names (thanks [Tiddlywinks](http://projectpokemon.org/forums/showthread.php?46253-Stars-Pokemon-colosseum-and-XD-hacking-tutorial-part-2-Text-editing&p=205271&viewfull=1#post205271)!): English, French, German, Spanish, Italian, Japanese
 
 ##Special thanks to:

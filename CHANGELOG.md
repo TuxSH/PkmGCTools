@@ -1,9 +1,9 @@
 ###PkmGCTools v1.2.1:
 * Mostly ergonomic changes:
 	* Move names are now displayed next to CTs.
-	* Added autocompletion for Pokémon, item, and move names.
+	* Added autocompletion for Pokémon, item, and move combo boxes.
 	* Added the following buttons to the Strategy Memo editor: 'Fill memo' (for both Colosseum and XD) and 'Fill memo (all shiny)' (for Colosseum only) buttons .
-	* Stats boosted (resp. hindered) by each nature are now displayed in red (resp. blue).
+	* Stats boosted (resp. hindered) by different natures are now displayed in red (resp. blue).
 
 ###PkmGCTools v1.2:
 * The interface can now be displayed in **German** (thanks [peterpansexuell](http://www.smogon.com/forums/members/peterpansexuell.158307/) !)
