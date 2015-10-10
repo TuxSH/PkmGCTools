@@ -36,7 +36,7 @@ else()
 	install(FILES $<TARGET_FILE:LibPkmGC> DESTINATION lib/static COMPONENT Libraries)
 endif()
 
-install(FILES "README.md" "LICENSE" DESTINATION lib CONFIGURATIONS Debug COMPONENT Libraries)
+install(FILES "README.md" "LICENSE" DESTINATION lib COMPONENT Libraries)
 
 
 install(DIRECTORY "include/LibPkmGC" DESTINATION "include" COMPONENT Headers)
