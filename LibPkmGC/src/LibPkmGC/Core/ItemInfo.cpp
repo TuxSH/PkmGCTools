@@ -91,7 +91,7 @@ const PokemonMoveIndex TMMoves[50] = {
 	Earthquake,
 	Return,
 	Dig,
-	Psychic,
+	Psychic_M,
 	ShadowBall,
 	BrickBreak,
 	DoubleTeam,

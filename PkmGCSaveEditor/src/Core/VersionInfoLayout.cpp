@@ -33,7 +33,7 @@ QStringList VersionInfoLayout::languageCodes(void) {
 
 }
 VersionInfoLayout::VersionInfoLayout(LibPkmGC::VersionInfo const& info) : QFormLayout(){
-	const QStringList gameNames = QStringList() << tr("None", "Game name") << tr("Fire Red") << tr("Leaf Green") <<
+	const QStringList gameNames = QStringList() << tr("None/Bonus Disc", "Game name") << tr("Fire Red") << tr("Leaf Green") <<
 		tr("Ruby") << tr("Sapphire") << tr("Emerald") << tr("Colosseum/XD");
 
 	const QStringList regionNames = QStringList() << tr("None", "Region name") << tr("NTSC-J") << tr("NTSC-U") << tr("PAL");

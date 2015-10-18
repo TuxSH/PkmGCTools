@@ -25,6 +25,7 @@ namespace LibPkmGC {
 
 enum GameIndex {
 	NoGame = 0,
+	BonusDisc = 0,
 	FireRed = 1,
 	LeafGreen = 2,
 

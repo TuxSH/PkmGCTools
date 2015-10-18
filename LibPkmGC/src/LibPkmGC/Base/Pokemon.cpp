@@ -135,6 +135,37 @@ char Pokemon::getUnownForm(u32 PID) {
 	return tbl[n % 28];
 }
 
+std::pair<TypeIndex, u8> Pokemon::getHiddenPowerTypeAndPower(const u8 IVs[6]) {
+	const TypeIndex T[] = {
+		Fighting,
+		Flying,
+		Poison,
+		Ground,
+		Rock,
+		Bug,
+		Ghost,
+		Steel,
+		Fire,
+		Water,
+		Grass,
+		Electric,
+		Psychic,
+		Ice,
+		Dragon,
+		Dark,
+	};
+	u32 tval = 0, pval = 0;
+
+	for (size_t i = 0; i < 6; ++i) {
+		tval |= (IVs[GBAStatsOrder[i]] & 1) << i;
+		pval |= ((IVs[GBAStatsOrder[i]] >> 1) & 1) << i;
+	}
+
+	tval = (tval * 15) / 63;
+	pval = ((pval * 40) / 63) + 30;
+	return std::pair<TypeIndex, u8>(T[tval], (u8) pval);
+}
+
 bool Pokemon::isShiny(void) const {
 	return isShiny(PID, TID, SID);
 }
@@ -153,6 +184,10 @@ PokemonSpeciesIndex Pokemon::getWurmpleEvolution(void) const {
 
 char Pokemon::getUnownForm(void) const {
 	return getUnownForm(PID);
+}
+
+std::pair<TypeIndex, u8> Pokemon::getHiddenPowerTypeAndPower(void) const {
+	return getHiddenPowerTypeAndPower(IVs);
 }
 
 void Pokemon::normalizepokerus(void) {

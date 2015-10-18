@@ -19,6 +19,14 @@
 
 #include <LibPkmGC/Core/Localization.h>
 
+#include <LibPkmGC/Core/Detail/SpeciesNames.h>
+#include <LibPkmGC/Core/Detail/NatureNames.h>
+#include <LibPkmGC/Core/Detail/MoveNames.h>
+#include <LibPkmGC/Core/Detail/AbilityNames.h>
+#include <LibPkmGC/Core/Detail/ItemNames.h>
+#include <LibPkmGC/Core/Detail/RibbonDescriptions.h>
+#include <LibPkmGC/Core/Detail/TypeNames.h>
+
 namespace LibPkmGC {
 
 namespace Localization {
@@ -548,6 +556,10 @@ const char* getRibbonDescription(LanguageIndex language, size_t index) {
 	LIBPKMGC_GET_LOCALIZED_NAME(language, index, 65);
 }
 
+const char* getTypeName(LanguageIndex language, TypeIndex index) {
+	using namespace Detail::Types;
+	LIBPKMGC_GET_LOCALIZED_NAME(language, index, UnknownType);
+}
 
 }
 }

@@ -1,5 +1,11 @@
+###PkmGCTools v1.2.2:
+Few changes this week:
+	* The PID of a Pokémon can now displayed either in hexadecimal or in decimal (default: hexadecimal).
+	* When editing the moves of a Pokémon, Hidden Power's type and base power are now displayed.
+I made a guide on how to make legal Pokémon as well. You can find it in the wiki.
+
 ###PkmGCTools v1.2.1:
-* Mostly ergonomic changes:
+Mostly ergonomic changes:
 	* Move names are now displayed next to CTs.
 	* Added autocompletion for Pokémon, item, and move combo boxes.
 	* Added the following buttons to the Strategy Memo editor: 'Fill memo' (for both Colosseum and XD) and 'Fill memo (all shiny)' (for Colosseum only) buttons .

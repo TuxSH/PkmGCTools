@@ -118,7 +118,7 @@ enum PokemonMoveIndex {
 	Dig = 91,
 	Toxic = 92,
 	Confusion = 93,
-	Psychic = 94,
+	Psychic_M = 94,
 	Hypnosis = 95,
 	Meditate = 96,
 	Agility = 97,

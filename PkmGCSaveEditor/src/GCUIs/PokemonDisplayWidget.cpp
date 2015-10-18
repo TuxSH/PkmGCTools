@@ -35,7 +35,8 @@ QStringList PokemonBase64InputDialog::formats(void) {
 	return QStringList() << tr("Colosseum") << tr("XD") << tr("GBA (100 bytes)") << tr("GBA (80 bytes)");
 }
 
-PokemonBase64InputDialog::PokemonBase64InputDialog(QWidget* parent) : QDialog(parent), mainLayout(new QVBoxLayout), inputLayout(new QFormLayout),
+PokemonBase64InputDialog::PokemonBase64InputDialog(QWidget* parent) : QDialog(parent, Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
+mainLayout(new QVBoxLayout), inputLayout(new QFormLayout),
 format(new QLabel(tr("N/A"))), contents(new QPlainTextEdit), buttons(new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel)){
 	this->setWindowTitle(tr("Base64 input"));
 	contents->setWordWrapMode(QTextOption::WrapAnywhere);
@@ -78,7 +79,8 @@ void PokemonBase64InputDialog::update(void) {
 }
 
 
-PokemonBase64OutputDialog::PokemonBase64OutputDialog(GC::Pokemon* inPkm, QWidget * parent) : QDialog(parent), pkm(inPkm), mainLayout(new QVBoxLayout), 
+PokemonBase64OutputDialog::PokemonBase64OutputDialog(GC::Pokemon* inPkm, QWidget * parent) : QDialog(parent, Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
+pkm(inPkm), mainLayout(new QVBoxLayout),
 outputLayout(new QFormLayout), format(new QComboBox), contents(new QPlainTextEdit), buttons(new QDialogButtonBox(QDialogButtonBox::Ok)) {
 	this->setWindowTitle(tr("Base64 output"));
 

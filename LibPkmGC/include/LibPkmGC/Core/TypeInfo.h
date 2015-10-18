@@ -16,25 +16,28 @@
 * along with LibPkmGC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _LIBPKMGC_CONFIG_H
-#define _LIBPKMGC_CONFIG_H
+#ifndef _LIBPKMGC_TYPE_INFO_H
+#define _LIBPKMGC_TYPE_INFO_H
 
-#include <boost/config/warning_disable.hpp>
-#include <boost/config.hpp>
-
-#define LIBPKMGC_VERSION 1002002
-#define LIBPKMGC_VERSION_MAJOR ((LIBPKMGC_VERSION / 1000000) % 1000)
-#define LIBPKMGC_VERSION_MINOR ((LIBPKMGC_VERSION / 1000) % 1000)
-#define LIBPKMGC_VERSION_BUILD (LIBPKMGC_VERSION % 1000)
-
-#if defined(LIBPKMGC_DYN_LIB)
-#	ifdef LIBPKMGC_SOURCE
-#		define LIBPKMGC_DECL BOOST_SYMBOL_EXPORT
-#	else
-#		define LIBPKMGC_DECL BOOST_SYMBOL_IMPORT
-#	endif
-#else
-#	define LIBPKMGC_DECL
-#endif
+enum TypeIndex {
+	Normal = 0,
+	Fire = 1,
+	Water = 2,
+	Electric = 3,
+	Grass = 4,
+	Ice = 5,
+	Fighting = 6,
+	Poison = 7,
+	Ground = 8,
+	Flying = 9,
+	Psychic = 10,
+	Bug = 11,
+	Rock = 12,
+	Ghost = 13,
+	Dragon = 14,
+	Dark = 15,
+	Steel = 16,
+	UnknownType = 17
+};
 
 #endif

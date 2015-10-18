@@ -196,8 +196,6 @@ void Pokemon::loadData(u32 flags) {
 	_flags = 1;
 }
 
-static const size_t statsOrder[] = { 0, 1, 2, 5, 3, 4 };
-
 void Pokemon::loadFields(void) {
 	u8 lg = data[18];
 	markings.load(data[27]);
@@ -214,7 +212,7 @@ void Pokemon::loadFields(void) {
 	LD_FIELD_MAX(u32, experience, 36, getSpeciesExpTable(species)[100]);
 	LD_FIELD(u8, friendship, 41);
 	LD_FIELD(u16, unk2, 42);
-	for (size_t i = 0; i < 6; ++i) EVs[statsOrder[i]] = data[56 + i];
+	for (size_t i = 0; i < 6; ++i) EVs[GBAStatsOrder[i]] = data[56 + i];
 
 	LD_ARRAY(u8, contestStats, 5, 62);
 	LD_FIELD(u8, contestLuster, 67);
@@ -238,7 +236,7 @@ void Pokemon::loadFields(void) {
 	u32 iea;
 	LD_FIELD(u32, iea, 72);
 	for (size_t i = 0; i < 6; ++i) {
-		IVs[statsOrder[i]] = (u8)(iea & 0x1f);
+		IVs[GBAStatsOrder[i]] = (u8)(iea & 0x1f);
 		iea >>= 5;
 	}
 	_egg = (iea & 1) != 0;
@@ -281,7 +279,7 @@ void Pokemon::loadFields(void) {
 	LD_ARRAY(u16, sta, 6, 88);
 	bool regen = true;
 	for (size_t i = 0; i < 6; ++i) {
-		partyData.stats[statsOrder[i]] = sta[i];
+		partyData.stats[GBAStatsOrder[i]] = sta[i];
 		if (sta[i] != 0) regen = false;
 	}
 	if (regen) resetPartyData();
@@ -344,7 +342,7 @@ void Pokemon::save(void) {
 	SV_FIELD(u8, friendship, 41);
 	SV_FIELD(u16, unk2, 42);
 
-	for (size_t i = 0; i < 6; ++i) data[56 + i] = EVs[statsOrder[i]];
+	for (size_t i = 0; i < 6; ++i) data[56 + i] = EVs[GBAStatsOrder[i]];
 	SV_ARRAY(u8, contestStats, 5, 62);
 	SV_FIELD(u8, contestLuster, 67);
 
@@ -363,8 +361,8 @@ void Pokemon::save(void) {
 
 	u32 iea = 0;
 	for (size_t i = 0; i < 6; ++i) {
-		if (IVs[statsOrder[i]] > 31) IVs[statsOrder[i]] = 31;
-		iea |= IVs[statsOrder[i]] << (5 * i);
+		if (IVs[GBAStatsOrder[i]] > 31) IVs[GBAStatsOrder[i]] = 31;
+		iea |= IVs[GBAStatsOrder[i]] << (5 * i);
 	}
 	iea |= ((_egg) ? 1 : 0) << 30;
 	iea |= ((_secondAbility) ? 1 : 0) << 31;
@@ -403,7 +401,7 @@ void Pokemon::save(void) {
 	if (partyData.pokerusDaysRemaining < -1) partyData.pokerusDaysRemaining = -1;
 	SV_FIELD_MAX(u16, partyData.currentHP, 86, partyData.stats[0]);
 	u16 sta[6];
-	for (size_t i = 0; i < 6; ++i) sta[i] = partyData.stats[statsOrder[i]];
+	for (size_t i = 0; i < 6; ++i) sta[i] = partyData.stats[GBAStatsOrder[i]];
 	SV_ARRAY(u16, sta, 6, 88);
 
 

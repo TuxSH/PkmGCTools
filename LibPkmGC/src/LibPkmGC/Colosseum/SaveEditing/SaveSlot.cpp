@@ -219,7 +219,8 @@ inline void doFixBugsAffectingPokemon(Pokemon* pkm) {
 	// LibPkmGC <= 1.1.2 : For Pokémon Colosseum, IVs were loaded/saved as u8's where they were actually u16's. obedient was always set to true, and encounterType to a random value.
 
 	std::copy(pkm->data + 0xa4, pkm->data + 0xa4 + 6, pkm->IVs);
-	pkm->obedient = pkm->species == Mew || pkm->species == Deoxys;
+	pkm->obedient = pkm->species == Mew || pkm->species == Deoxys || pkm->species == Jirachi || pkm->species == Celebi || pkm->species == Lugia || pkm->species == HoOh ||
+		(pkm->version.game == BonusDisc && pkm->species == Pikachu);
 	pkm->encounterType = 0;
 }
 void SaveSlot::fixBugsAffectingPokemon(void) {

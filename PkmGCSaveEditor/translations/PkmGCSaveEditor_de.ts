@@ -200,38 +200,38 @@
         <translation>GBA (80 Bytes)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="39"/>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="71"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="40"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="72"/>
         <source>N/A</source>
         <translation>n.v.</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="40"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="41"/>
         <source>Base64 input</source>
         <translation>Base-64-Input</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="43"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="44"/>
         <source>Format</source>
         <translation>Format</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="44"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="45"/>
         <source>Contents</source>
         <translation>Inhalt</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="59"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="60"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="59"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="60"/>
         <source>Invalid content size.</source>
         <translation>Ungültige Inhaltsgröße.</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="76"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="77"/>
         <source>Invalid</source>
         <translation>Ungültig</translation>
     </message>
@@ -239,17 +239,17 @@
 <context>
     <name>GCUIs::PokemonBase64OutputDialog</name>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="83"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="85"/>
         <source>Base64 output</source>
         <translation>Base 64-Output</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="88"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="90"/>
         <source>Format</source>
         <translation>Format</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="89"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="91"/>
         <source>Contents</source>
         <translation>Inhalt</translation>
     </message>
@@ -282,46 +282,46 @@
     <message>
         <location filename="../src/GCUIs/PokemonDisplayWidget.h" line="144"/>
         <location filename="../src/GCUIs/PokemonDisplayWidget.h" line="150"/>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="279"/>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="309"/>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="343"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="281"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="311"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="345"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="140"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="142"/>
         <source>Edit</source>
         <translation>Bearbeiten</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="141"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="143"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="143"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="145"/>
         <source>Import</source>
         <translation>Importieren</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="144"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="146"/>
         <source>Export</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="147"/>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="152"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="149"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="154"/>
         <source>&amp;File...</source>
         <translation>&amp;Datei …</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="148"/>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="153"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="150"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="155"/>
         <source>&amp;Base64...</source>
         <translation>&amp;Base64 …</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="226"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="228"/>
         <source>Lv. %n </source>
         <translation>
             <numerusform>Lv. %n </numerusform>
@@ -329,58 +329,58 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="253"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="255"/>
         <source>All supported files (*.colopkm *.xdpkm *.pkm *.3gpkm)</source>
         <translation>Alle unterstützten Formate (*.colopkm *.xdpkm *.pkm *.3gpkm)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="254"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="256"/>
         <source>Colosseum Pokémon files (*.colopkm)</source>
         <translation>Colosseum-Pokémon-Dateien (*.colopkm)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="255"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="257"/>
         <source>XD Pokémon files (*.xdpkm)</source>
         <translation>XD-Pokémon-Dateien (*.xdpkm)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="256"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="258"/>
         <source>GBA Pokémon files (*.pkm *.3gpkm)</source>
         <translation>GBA-Pokémon-Dateien (*.pkm *.3gpkm)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="257"/>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="301"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="259"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="303"/>
         <source>Encrypted GBA Pokémon files (*.pkm *.3gpkm)</source>
         <translation>Verschlüsselte GBA-Pokémon-Dateien (*.pkm *.3gpkm)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="258"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="260"/>
         <source>All files (*)</source>
         <translation>Alle Dateien (*)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="269"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="271"/>
         <source>Open Pokémon file</source>
         <translation>Pokémon-Datei öffnen</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="279"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="281"/>
         <source>Invalid file size.</source>
         <translation>Ungültige Dateigröße.</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="299"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="301"/>
         <source>Could not write to file.</source>
         <translation>Datei konnte nicht gespeichert werden.</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="300"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="302"/>
         <source>An error occured while writing to the specified Pokémon file.</source>
         <translation>Beim Speichern der angegebenen Pokémon-Datei ist ein Fehler aufgetreten.</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="304"/>
+        <location filename="../src/GCUIs/PokemonDisplayWidget.cpp" line="306"/>
         <source>Save Pokémon file</source>
         <translation>Pokémon-Datei speichern</translation>
     </message>
@@ -389,7 +389,7 @@
     <name>GCUIs::PokemonMoveLayout</name>
     <message numerus="yes">
         <location filename="../src/GCUIs/PokemonUI.cpp" line="34"/>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="87"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="95"/>
         <source>(max. %n)</source>
         <translation>
             <numerusform>(max. %n)</numerusform>
@@ -405,520 +405,530 @@
 <context>
     <name>GCUIs::PokemonUI</name>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="117"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="125"/>
         <source>None</source>
         <comment>Status</comment>
         <translation>keiner</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="117"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="125"/>
         <source>Poisoned</source>
         <translation>Vergiftet</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="117"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="125"/>
         <source>Badly poisoned</source>
         <translation>Schwer vergiftet</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="118"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="126"/>
         <source>Paralyzed</source>
         <translation>Paralysiert</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="118"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="126"/>
         <source>Burnt</source>
         <translation>Verbrannt</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="118"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="126"/>
         <source>Frozen</source>
         <translation>Eingefroren</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="118"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="126"/>
         <source>Asleep</source>
         <translation>Schlafend</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="129"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="137"/>
         <source>This ribbon has never been made available</source>
         <translation>Dieses Band war nie offiziell verfügbar</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="137"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="145"/>
         <source>Coolness</source>
         <translation>Coolness</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="137"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="145"/>
         <source>Beauty</source>
         <translation>Schönheit</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="137"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="145"/>
         <source>Cuteness</source>
         <translation>Putzigkeit</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="138"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="146"/>
         <source>Cleverness</source>
         <translation>Klugheit</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="138"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="146"/>
         <source>Toughness</source>
         <translation>Stärke</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="140"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="148"/>
         <source>None</source>
         <comment>Contest</comment>
         <translation>keiner</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="140"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="148"/>
         <source>Normal</source>
         <comment>Contest</comment>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="141"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="149"/>
         <source>Super</source>
         <comment>Contest</comment>
         <translation>Super</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="141"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="149"/>
         <source>Hyper</source>
         <comment>Contest</comment>
         <translation>Hyper</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="142"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="150"/>
         <source>Master</source>
         <comment>Contest</comment>
         <translation>Master</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="144"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="152"/>
         <source>HP</source>
         <translation>KP</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="144"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="152"/>
         <source>Attack</source>
         <translation>Angriff</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="144"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="152"/>
         <source>Defense</source>
         <translation>Verteidigung</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="145"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="153"/>
         <source>S. Attack</source>
         <translation>Sp.-Angriff</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="145"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="153"/>
         <source>S. Defense</source>
         <translation>Sp.-Verteidigung</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="145"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="153"/>
         <source>Speed</source>
         <translation>Initiative</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="122"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="130"/>
         <source>Champion</source>
         <translation>Band des Champs</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="122"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="130"/>
         <source>Winning</source>
         <translation>Band des Gewinners</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="122"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="130"/>
         <source>Victory</source>
         <translation>Band des Sieges</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="122"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="130"/>
         <source>Artist</source>
         <translation>Band des Künstlers</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="123"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="131"/>
         <source>Effort</source>
         <translation>Fleiß-Band</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="123"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="131"/>
         <source>Marine</source>
         <translatorcomment>Was never used in the game, so I&apos;m not sure what Nintendo’s translation is for this.</translatorcomment>
         <translation>Meer-Band</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="123"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="131"/>
         <source>Land</source>
         <translatorcomment>Was never used in the game, so I&apos;m not sure what Nintendo’s translation is for this. I didn’t want to put ‘Erd-Band’ or something with ‘Erde’ as the Earth ribbon (Erde-Band) exists.</translatorcomment>
         <translation>Land-Band</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="123"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="131"/>
         <source>Sky</source>
         <translatorcomment>Was never used in the game, so I&apos;m not sure what Nintendo’s translation is for this.</translatorcomment>
         <translation>Himmel-Band</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="124"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="132"/>
         <source>Country</source>
         <translatorcomment>Was never used in the game, so I&apos;m not sure what Nintendo’s translation is for this.</translatorcomment>
         <translation>Landesband</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="124"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="132"/>
         <source>National</source>
         <translation>National-Band</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="124"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="132"/>
         <source>Earth</source>
         <translation>Erde-Band</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="124"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="132"/>
         <source>World</source>
         <translatorcomment>Was never used in the game, so I&apos;m not sure what Nintendo’s translation is for this.</translatorcomment>
         <translation>Welt-Band</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="125"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="133"/>
         <source>Unimplemented 1</source>
         <translation>Nicht implementiert 1</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="125"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="133"/>
         <source>Unimplemented 2</source>
         <translation>Nicht implementiert 2</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="125"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="133"/>
         <source>Unimplemented 3</source>
         <translation>Nicht implementiert 3</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="125"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="133"/>
         <source>Unimplemented 4</source>
         <translation>Nicht implementiert 4</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="133"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="141"/>
         <source>INVALID</source>
         <translation>UNGÜLTIG</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="133"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="141"/>
         <source>Invalid species</source>
         <translation>Ungültige Pokémon-Art</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="178"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="186"/>
         <source>Reset</source>
         <translation>Zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="222"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="191"/>
+        <source>Hex</source>
+        <translation>Hex</translation>
+    </message>
+    <message>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="192"/>
+        <source>Dec</source>
+        <translation>Dez</translation>
+    </message>
+    <message>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="247"/>
         <source>Egg</source>
         <translation>Ei</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="222"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="247"/>
         <source>Second ability</source>
         <translation>Zweite Fähigkeit</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="223"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="248"/>
         <source>Invalid Pokémon</source>
         <translation>Ungültiges Pokémon</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="224"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="249"/>
         <source>Not tradable in-game</source>
         <translation>im Spiel nicht tauschbar</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="224"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="249"/>
         <source>Unknown</source>
         <translation>(unbekannte Eigenschaft)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="225"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="250"/>
         <source>Caught</source>
         <translation>Gefangen</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="250"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="275"/>
         <source>Species</source>
         <translation>Art</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="251"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="276"/>
         <source>Name or nickname</source>
         <translation>Name oder Spitzname</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="252"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="277"/>
         <source>PID</source>
         <translation>PID</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="253"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="278"/>
         <source>Attributes</source>
         <translation>Eigenschaften</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="254"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="279"/>
         <source>Ability</source>
         <translation>Fähigkeit</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="255"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="280"/>
         <source>Experience and level</source>
         <translation>Erfahrungspunkte und Level</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="256"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="281"/>
         <source>Held item</source>
         <translation>Getragenes Item</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="257"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="282"/>
         <source>Friendship</source>
         <translation>Freundschaft</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="258"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="283"/>
         <source>Pokérus (days remaing and strain)</source>
         <translation>Pokérus (übrige Tage und Stamm)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="259"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="284"/>
         <source>Flags</source>
         <translation>Sonstige Eigenschaften (Flags)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="260"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="285"/>
         <source>Markings</source>
         <translation>Markierungen</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="274"/>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="283"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="299"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="308"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="275"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="300"/>
         <source>Pokérus days remaining</source>
         <translation>übrige Pokérus-Tage</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="276"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="301"/>
         <source>Turns of sleep remaining</source>
         <translation>übrige Runden Schlaf</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="277"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="302"/>
         <source>Turns of bad poison</source>
         <translation>Runden schwerer Vergiftung</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="282"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="307"/>
         <source>Core</source>
         <translation>Eigenschaften</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="292"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="317"/>
         <source>Core information</source>
         <translation>Haupt-Info</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="293"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="318"/>
         <source>Original trainer</source>
         <translation>Originaltrainer</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="294"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="319"/>
         <source>Game version</source>
         <translation>Spielversion</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="306"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="331"/>
         <source>Copy info from save</source>
         <translation>Daten von Spielstand kopieren</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="307"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="332"/>
         <source>Generate shiny IDs</source>
         <translation>Shiny-IDs erstellen</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="311"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="336"/>
         <source>Location caught</source>
         <translation>Fangort</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="312"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="337"/>
         <source>Level met</source>
         <translation>Begegnung mit Level</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="313"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="338"/>
         <source>Fateful encounter (obedient)</source>
         <translation>Schicksalhafte Begegnung (folgsam)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="314"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="339"/>
         <source>Ball caught with</source>
         <translation>gefangen mit</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="316"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="341"/>
         <source>Mew and Deoxys need this field to be checked so they can obey.
 Pokémon caught in XD always have this field checked</source>
         <translation>Mew und Deoxys folgen nur, wenn dieses Feld ausgewählt wurde. In XD gefangene Pokémon haben dieses Feld immer ausgewählt</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="345"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="370"/>
         <source>IV</source>
         <translation>IVs</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="346"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="371"/>
         <source>EV</source>
         <translation>EVs (Fleißpunkte)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="347"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="372"/>
         <source>Stat</source>
         <translation>Wert</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="350"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="376"/>
         <source>Current HP</source>
         <translation>Aktuelle KP</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="357"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="385"/>
         <source>Update stats automatically</source>
         <translation>Werte automatisch aktualisieren</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="369"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="397"/>
         <source>Luster</source>
         <translation>Glanz</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="376"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="404"/>
         <source>Main stats</source>
         <translation>Hauptwerte</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="377"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="405"/>
         <source>Contest stats</source>
         <translation>Wettbewerbswerte</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="396"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="424"/>
         <source>Contest ribbons</source>
         <translation>Wettbewerbsbänder</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="409"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="437"/>
         <source>Contest type</source>
         <translation>Wettbewerbstyp</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="410"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="438"/>
         <source>Achievement</source>
         <translation>Klasse</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="414"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="442"/>
         <source>Special ribbons</source>
         <translation>Besondere Bänder</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="445"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="473"/>
         <source>General</source>
         <translation>Allgemein</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="446"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="474"/>
         <source>Met/OT</source>
         <translation>Begegnung/OT</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="447"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="475"/>
         <source>Stats</source>
         <translation>Werte</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="448"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="476"/>
         <source>Moves</source>
         <translation>Attacken</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="449"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="477"/>
         <source>Ribbons</source>
         <translation>Bänder</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="658"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="688"/>
         <source>Genderless</source>
         <translation>Geschlechtslos</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="674"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="704"/>
         <source>Unown form: </source>
         <translation>Icognito-Form:</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="679"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="709"/>
         <source>will evolve into: </source>
         <translation>entwickelt sich zu:</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="133"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="141"/>
         <source>Invalid version info</source>
         <translation>Ungültige Version</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="133"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="141"/>
         <source>&quot;Invalid Pokémon&quot; flag set</source>
         <translation>Als „ungültiges Pokémon“ markiert</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="903"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="950"/>
         <source>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(Generation_III)&apos;&gt;here&lt;/a&gt;)</source>
         <translation>Fangort (Details &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(Generation_III)&apos;&gt;hier&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="905"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="952"/>
         <source>Location caught (see &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(GCN)&apos;&gt;here&lt;/a&gt;)</source>
         <translation>Fangort (Details &lt;a href=&apos;http://bulbapedia.bulbagarden.net/wiki/List_of_locations_by_index_number_(GCN)&apos;&gt;hier&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="910"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="957"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../src/GCUIs/PokemonUI.cpp" line="910"/>
+        <location filename="../src/GCUIs/PokemonUI.cpp" line="957"/>
         <source>The version info you specified is invalid. The game will therefore consider this Pokémon invalid.</source>
         <translation>Die angegebene Spielversion ist nicht gültig. Das Spiel wird dieses Pokémon daher für ungültig halten.</translation>
     </message>
@@ -1342,12 +1352,6 @@ Pokémon caught in XD always have this field checked</source>
     </message>
     <message>
         <location filename="../src/Core/VersionInfoLayout.cpp" line="36"/>
-        <source>None</source>
-        <comment>Game name</comment>
-        <translation>keine</translation>
-    </message>
-    <message>
-        <location filename="../src/Core/VersionInfoLayout.cpp" line="36"/>
         <source>Fire Red</source>
         <translation>Feuerrot</translation>
     </message>
@@ -1355,6 +1359,12 @@ Pokémon caught in XD always have this field checked</source>
         <location filename="../src/Core/VersionInfoLayout.cpp" line="36"/>
         <source>Leaf Green</source>
         <translation>Blattgrün</translation>
+    </message>
+    <message>
+        <location filename="../src/Core/VersionInfoLayout.cpp" line="36"/>
+        <source>None/Bonus Disc</source>
+        <comment>Game name</comment>
+        <translation>keine/Bonus-Disc</translation>
     </message>
     <message>
         <location filename="../src/Core/VersionInfoLayout.cpp" line="37"/>

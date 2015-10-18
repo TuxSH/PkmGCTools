@@ -612,6 +612,8 @@ struct LIBPKMGC_DECL PokemonMarkings {
 	u8 save(void) const;
 };
 
+extern const LIBPKMGC_DECL size_t GBAStatsOrder[];
+
 }
 
 #endif

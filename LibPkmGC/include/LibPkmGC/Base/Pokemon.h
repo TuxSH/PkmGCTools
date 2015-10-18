@@ -22,8 +22,12 @@
 #include <LibPkmGC/Core/PokemonInfo.h>
 #include <LibPkmGC/Core/ItemInfo.h>
 #include <LibPkmGC/Core/VersionInfo.h>
+#include <LibPkmGC/Core/TypeInfo.h>
 #include <LibPkmGC/Base/DataStruct.h>
 #include <LibPkmGC/Base/PokemonString.h>
+
+
+#include <utility>
 
 namespace LibPkmGC {
 
@@ -68,6 +72,7 @@ public:
 	static Gender getGender(PokemonSpeciesIndex species, u32 PID);
 	static PokemonSpeciesIndex getWurmpleEvolution(u32 PID);
 	static char getUnownForm(u32 PID);
+	static std::pair<TypeIndex, u8> getHiddenPowerTypeAndPower(const u8 IVs[6]);
 
 	bool isShiny(void) const;
 	PokemonNatureIndex getNature(void) const;
@@ -75,6 +80,8 @@ public:
 
 	PokemonSpeciesIndex getWurmpleEvolution(void) const;
 	char getUnownForm(void) const;
+	std::pair<TypeIndex, u8> getHiddenPowerTypeAndPower(void) const;
+
 
 	bool isSecondAbilityDefined(void) const;
 	PokemonAbilityIndex getAbility(void) const;

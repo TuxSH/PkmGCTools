@@ -22,12 +22,7 @@
 #include <LibPkmGC/Core/PokemonInfo.h>
 #include <LibPkmGC/Core/ItemInfo.h>
 #include <LibPkmGC/Core/VersionInfo.h>
-#include <LibPkmGC/Core/Detail/SpeciesNames.h>
-#include <LibPkmGC/Core/Detail/NatureNames.h>
-#include <LibPkmGC/Core/Detail/MoveNames.h>
-#include <LibPkmGC/Core/Detail/AbilityNames.h>
-#include <LibPkmGC/Core/Detail/ItemNames.h>
-#include <LibPkmGC/Core/Detail/RibbonDescriptions.h>
+#include <LibPkmGC/Core/TypeInfo.h>
 
 namespace LibPkmGC {
 namespace Localization {
@@ -50,6 +45,7 @@ LIBPKMGC_DECL const char* getItemName(LanguageIndex language, ItemIndex index, b
 LIBPKMGC_DECL const char* getRibbonDescription(LanguageIndex language, size_t index);
 // Ribbons: Marine, Land, Sky, Country, National, Earth, World, Unused 1,2,3,4
 
+LIBPKMGC_DECL const char* getTypeName(LanguageIndex language, TypeIndex index);
 }
 }
 

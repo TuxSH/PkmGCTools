@@ -81,6 +81,14 @@ void PokemonMoveLayout::setMove(PokemonMove const& inMove) {
 	updateFields();
 }
 
+void PokemonMoveLayout::setHiddenPower(TypeIndex t, u8 p) {
+	LanguageIndex lg = generateDumpedNamesLanguage();
+
+	QString hiddenPowerTxt = QString("%1 %2").arg(getTypeName(lg, t)).arg(QString::number(p));
+
+	moveNameFld->setItemText((int)HiddenPower, QString("%1 (%2)").arg(getPokemonMoveName(lg, HiddenPower)).arg(hiddenPowerTxt));
+}
+
 void PokemonMoveLayout::updateFields(void) {
 	PokemonMove _move = move();
 	u8 maxPPs = _move.calculateMaxPP();
@@ -176,8 +184,15 @@ void PokemonUI::initWidget(void){
 	nameLayout = new QHBoxLayout;
 	nameFld = new QLineEdit;
 	resetNameButton = new QPushButton(tr("Reset"));
-	PIDFld = new UnsignedSpinbox<32>;
+
+	PIDLayout = new QHBoxLayout;
+	PIDFld = new UnsignedSpinbox<32>(true);
+	PIDButtonGroup = new QButtonGroup;
+	hexPIDButton = new QRadioButton(tr("Hex"));
+	decPIDButton = new QRadioButton(tr("Dec"));
+
 	attributesFld = new QLabel;
+	
 	abilityFld = new QComboBox;
 	experienceLevelAndSyncLayout = new QHBoxLayout;
 	levelAndSyncLayout = new QHBoxLayout;
@@ -201,6 +216,16 @@ void PokemonUI::initWidget(void){
 	nameFld->setMaxLength(10);
 	nameLayout->addWidget(nameFld);
 	nameLayout->addWidget(resetNameButton);
+
+	PIDButtonGroup->setExclusive(true);
+	PIDButtonGroup->addButton(hexPIDButton, 0);
+	PIDButtonGroup->addButton(decPIDButton, 1);
+	hexPIDButton->setChecked(true);
+	
+	PIDLayout->addWidget(PIDFld, 6);
+	PIDLayout->addWidget(hexPIDButton, 1);
+	PIDLayout->addWidget(decPIDButton, 1);
+
 	abilityFld->addItem(Localization::getPokemonAbilityName(lg, NoAbility));
 	abilityFld->setDisabled(true);
 
@@ -249,7 +274,7 @@ void PokemonUI::initWidget(void){
 
 	generalCoreSubTabLayout->addRow(tr("Species"), speciesFld);
 	generalCoreSubTabLayout->addRow(tr("Name or nickname"), nameLayout);
-	generalCoreSubTabLayout->addRow(tr("PID"), PIDFld);
+	generalCoreSubTabLayout->addRow(tr("PID"), PIDLayout);
 	generalCoreSubTabLayout->addRow(tr("Attributes"), attributesFld);
 	generalCoreSubTabLayout->addRow(tr("Ability"), abilityFld);
 	generalCoreSubTabLayout->addRow(tr("Experience and level"), experienceLevelAndSyncLayout);
@@ -347,13 +372,16 @@ void PokemonUI::initWidget(void){
 	mainStatsTitleLayout->addWidget(new QLabel(tr("Stat")));
 
 	currentHPFld = new UnsignedSpinbox<16>;
+
 	mainStatsFormLayout->addRow(tr("Current HP"), currentHPFld);
 	mainStatsFormLayout->addRow("", mainStatsTitleLayout);
 	for (size_t i = 0; i < 6; ++i) {
 		mainStatsFlds[i] = new PokemonStatLayout;
 		mainStatsFormLayout->addRow(statNames[i], mainStatsFlds[i]);
 		connect(mainStatsFlds[i], SIGNAL(IVOrEVChanged()), this, SLOT(updateMainStats()));
+		connect(mainStatsFlds[i], SIGNAL(IVOrEVChanged()), this, SLOT(updateHiddenPowerText()));
 	}
+
 	autoUpdateMainStatsCheckBox = new QCheckBox(tr("Update stats automatically"));
 	autoUpdateMainStatsCheckBox->setChecked(true);
 
@@ -453,6 +481,7 @@ void PokemonUI::initWidget(void){
 
 	connect(speciesFld, SIGNAL(currentIndexChanged(int)), this, SLOT(speciesChangeHandler()));
 	connect(resetNameButton, SIGNAL(clicked()), this, SLOT(resetName()));
+	connect(PIDButtonGroup, SIGNAL(buttonClicked(int)), this, SLOT(updatePIDDisplay(int)));
 	connect(PIDFld, SIGNAL(valueChanged(int)), this, SLOT(PIDChangeHandler()));
 	connect(abilityFld, SIGNAL(currentIndexChanged(int)), this, SLOT(updateFlags()));
 	connect(experienceFld, SIGNAL(valueChanged(int)), this, SLOT(updateLevelFromExperience()));
@@ -570,6 +599,7 @@ void PokemonUI::parseData(void){
 	autoUpdateMainStatsCheckBox->setChecked(true);
 	autoUpdateStatsStateChangeHandler();
 	versionChangeHandler();
+	updateHiddenPowerText();
 
 	abilityFld->setCurrentIndex((pkm->hasSecondAbility()) ? 1 : 0);
 
@@ -750,6 +780,10 @@ void PokemonUI::updateMainStats(void) {
 
 }
 
+void PokemonUI::updatePIDDisplay(int i) {
+	PIDFld->setHex(i == 0);
+}
+
 void PokemonUI::updatePkmAttributes(void) {
 	attributesFld->setText(getLongPkmAttributeText());
 }
@@ -888,7 +922,20 @@ void PokemonUI::flagsStateChangeHandler(void) {
 	updatePkmAttributes();
 }
 
-void PokemonUI::autoUpdateStatsStateChangeHandler(void) {
+void PokemonUI::updateHiddenPowerText(void) {
+	LanguageIndex lg = generateDumpedNamesLanguage();
+	
+	u8 IVs[6] = { 0 };
+	for (size_t i = 0; i < 6; ++i)
+		IVs[i] = (u8) mainStatsFlds[i]->IVFld->unsignedValue();
+	std::pair<TypeIndex, u8> hiddenPower = Base::Pokemon::getHiddenPowerTypeAndPower(IVs);
+
+	for (size_t i = 0; i < 4; ++i)
+		moveLayouts[i]->setHiddenPower(hiddenPower.first, hiddenPower.second);
+}
+
+
+	void PokemonUI::autoUpdateStatsStateChangeHandler(void) {
 	bool checked = autoUpdateMainStatsCheckBox->isChecked();
 	if (checked) updateMainStats();
 	currentHPFld->setDisabled(checked);

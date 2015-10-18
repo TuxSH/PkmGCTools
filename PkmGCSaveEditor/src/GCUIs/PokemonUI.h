@@ -59,9 +59,10 @@ public:
 	LibPkmGC::PokemonMove move(void) const;
 	void setMove(LibPkmGC::PokemonMove const& inMove);
 
-private:
+	void setHiddenPower(TypeIndex t, LibPkmGC::u8 p);
 
-	AutocompletingComboBox *moveNameFld;
+private:
+	AutocompletingComboBox* moveNameFld;
 	UnsignedSpinbox<7> *currentPPsFld;
 	QLabel *maxPPsFld;
 	UnsignedSpinbox<2> *nbPPUpsUsedFld;
@@ -118,7 +119,10 @@ private:
 	QLineEdit* nameFld;
 	QPushButton *resetNameButton;
 
+	QHBoxLayout* PIDLayout;
 	UnsignedSpinbox<32>* PIDFld;
+	QButtonGroup* PIDButtonGroup;
+	QRadioButton *hexPIDButton, *decPIDButton;
 	QLabel *attributesFld;
 
 	QComboBox* abilityFld;
@@ -206,6 +210,7 @@ private:
 	LibPkmGC::PokemonSpeciesIndex oldSpecies;
 public slots:
 	void updateMainStats(void);
+	void updatePIDDisplay(int i);
 	void updatePkmAttributes(void);
 	void updateAbilityList(void);
 	void updateExperienceFromLevel(bool proportionally = false);
@@ -218,6 +223,7 @@ public slots:
 	void updateFlags(void);
 	void flagsStateChangeHandler(void);
 
+	void updateHiddenPowerText(void);
 	void autoUpdateStatsStateChangeHandler(void);
 
 	void versionChangeHandler(void);

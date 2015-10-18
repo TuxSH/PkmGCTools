@@ -21,6 +21,8 @@
 
 namespace LibPkmGC{
 
+const size_t GBAStatsOrder[6] = { 0, 1, 2, 5, 3, 4 };
+
 void PokemonMarkings::load(u8 m) {
 	circle = (m & 1) != 0;
 	square = (m & 2) != 0;

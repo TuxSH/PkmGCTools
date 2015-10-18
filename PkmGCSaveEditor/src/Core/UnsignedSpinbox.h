@@ -33,11 +33,24 @@ namespace{
 
 template<unsigned int nb_bits = 32> // nb_bits must be <= 32
 class UnsignedSpinbox : public QSpinBox{
+private:
+	uint m, M;
+	bool hex;
+
+protected:
+	QString textFromValue(int val) const {
+		return QString::number((uint)val, (hex) ? 16 : 10);
+	}
+
+	int valueFromText(const QString& txt) const {
+		return ((int)txt.toUInt(NULL, (hex) ? 16 : 10));
+	}
+
 public:
 	static const unsigned int nbBits = nb_bits;
 	static const int bitmask = BMask<nb_bits>::bitmask;
 
-	UnsignedSpinbox(QWidget* parent = 0) : QSpinBox(parent){
+	UnsignedSpinbox(bool inHex = false, QWidget* parent = 0) : QSpinBox(parent), hex(inHex){
 			setRange(0, bitmask);
 	}
 	
@@ -46,15 +59,22 @@ public:
 		if (stripped.isEmpty()) return QValidator::Intermediate;
 
 		bool ok;
-		uint num = input.toUInt(&ok);
+		uint num = input.toUInt(&ok, (hex) ? 16 : 10);
 		if (!ok) return QValidator::Invalid;
 		else if (num < m) return QValidator::Intermediate;
 		else if (num > M) return QValidator::Invalid;
 		else return QValidator::Acceptable;
 	}
 	
-
+	bool isHex(void) const {
+		return hex;
+	}
 	
+	void setHex(bool in_Hex) {
+		hex = in_Hex;
+		setUnsignedValue(unsignedValue());
+	}
+
 	int minimum(void) const {
 		return (int)m;
 	}
@@ -116,16 +136,7 @@ public:
 		if ((step < 0) && (uval + step) > uval) return; // underflow
 		setUnsignedValue(uval + step);
 	}
-protected:
-	QString textFromValue(int val) const{
-		return QString::number((uint)val );
-	}
 
-	int valueFromText(const QString& txt) const {
-		return ((int)txt.toUInt());
-	}
-private:
-	uint m, M;
 };
 
 #endif
