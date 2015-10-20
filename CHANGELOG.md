@@ -1,7 +1,8 @@
 ###PkmGCTools v1.2.2:
 Few changes this week:
-	* The PID of a Pokémon can now be displayed either in hexadecimal or in decimal (default: hexadecimal).
-	* When editing the moves of a Pokémon, Hidden Power's type and base power are now displayed.
+* The PID of a Pokémon can now be displayed either in hexadecimal or in decimal (default: hexadecimal).
+* When editing the moves of a Pokémon, Hidden Power's type and base power are now displayed.
+
 I made a guide on how to make legal Pokémon as well. You can find it in the wiki.
 
 ###PkmGCTools v1.2.1:
