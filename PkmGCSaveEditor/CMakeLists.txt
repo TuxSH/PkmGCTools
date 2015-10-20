@@ -28,7 +28,6 @@ if(Qt5LinguistTools_FOUND)
 	foreach(language ${PKMGCSAVEEDITOR_SUPPORTED_LANGUAGES})
 		list(APPEND PKMGCSAVEEDITOR_TRANSLATION_FILES translations/PkmGCSaveEditor_${language}.ts)
 	endforeach(language)
-	list(REMOVE_DUPLICATES QT5_TRANSLATION_QM)
 	
 	set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM 1) # prevent make clean from removing TS files
 
