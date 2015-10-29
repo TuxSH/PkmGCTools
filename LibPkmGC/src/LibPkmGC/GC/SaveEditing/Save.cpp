@@ -82,7 +82,11 @@ void Save::reload(const u8* inData, u32 flags) {
 	else Base::DataStruct::reload(inData, 0);
 }
 
-void Save::saveEncrypted(u8* outBuf, bool exportGCIData) {
+void Save::save(void) {
+	save_impl(true);
+}
+
+void Save::saveEncrypted(u8* outBuf, bool exportGCIData, bool saveAll) {
 	if (hasGCIData && exportGCIData) {
 		std::copy(GCIData, GCIData + 0x40, outBuf);
 		outBuf += 0x40;
@@ -90,7 +94,7 @@ void Save::saveEncrypted(u8* outBuf, bool exportGCIData) {
 	std::copy(data, data + 0x6000, outBuf);
 	size_t sz = saveSlots[0]->fixedSize;
 	for (size_t i = 0; i < nbSlots; ++i)
-		saveSlots[i]->saveEncrypted(outBuf + 0x6000 + sz*i);
+		saveSlots[i]->saveEncrypted(outBuf + 0x6000 + sz*i, saveAll);
 }
 
 inline bool date_comparison(SaveSlot* a, SaveSlot* b) {

@@ -55,8 +55,11 @@ void Save::loadFields(void) {
 
 }
 
-void Save::save(void) {
-	SV_SUBSTRUCTURE_ARRAY(SaveSlot, saveSlots, 3, 0x6000);
+void Save::save_impl(bool saveAll) {
+	for (size_t i = 0; i < 3; ++i) {
+		saveSlots[i]->save_impl(saveAll);
+		std::copy(saveSlots[i]->data, saveSlots[i]->data + SaveSlot::size, data + 0x6000 * i);
+	}
 }
 
 void Save::fixBugsAffectingPokemon(void) {

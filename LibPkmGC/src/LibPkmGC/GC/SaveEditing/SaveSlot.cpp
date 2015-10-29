@@ -104,6 +104,10 @@ void SaveSlot::reload(const u8* inData, u32 flags) {
 	else Base::DataStruct::reload(inData, flags);
 }
 
+void SaveSlot::save(void) {
+	save_impl(true);
+}
+
 
 }
 }

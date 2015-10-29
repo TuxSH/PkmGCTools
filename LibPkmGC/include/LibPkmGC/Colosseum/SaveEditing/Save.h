@@ -40,7 +40,7 @@ public:
 	Save* clone(void) const;
 	Save* create(void) const;
 
-	void save(void);
+	void save_impl(bool saveAll);
 
 	void fixBugsAffectingPokemon(void);
 

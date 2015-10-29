@@ -268,7 +268,7 @@ void SaveSlot::loadFields(void) {
 	std::copy(data + 0x1dfd8, data + 0x1dfec, randomBytes);
 }
 
-void SaveSlot::save(void) {
+void SaveSlot::save_impl(bool saveAll) {
 	magic = ColosseumMagic;
 	SV_FIELD_E(u32, ColosseumMagic, 0, SaveMagic);
 	SV_FIELD(u32, saveCount, 4);
@@ -276,20 +276,22 @@ void SaveSlot::save(void) {
 	size_t offset = 0;
 
 
+
 #define SV_IMPLEMENTED_SUBSTRUCTURE(type, field) SV_SUBSTRUCTURE(type, field, 8 + offset); offset += type::size;
 
 	SV_IMPLEMENTED_SUBSTRUCTURE(GameConfigData, gameConfig);
-	SV_IMPLEMENTED_SUBSTRUCTURE(PlayerData, player);
-	SV_IMPLEMENTED_SUBSTRUCTURE(PCData, PC);
-	SV_IMPLEMENTED_SUBSTRUCTURE(MailboxData, mailbox);
-	SV_IMPLEMENTED_SUBSTRUCTURE(DaycareData, daycare);
-	SV_IMPLEMENTED_SUBSTRUCTURE(StrategyMemoData, strategyMemo);
-	offset = 0xe3e8;
-	SV_IMPLEMENTED_SUBSTRUCTURE(BattleModeData, battleMode);
-	offset = 0x1c45c;
-	SV_IMPLEMENTED_SUBSTRUCTURE(RibbonDescriptionsData, ribbonDescriptions);
-	// unknown substructures following
-
+	if (saveAll) {
+		SV_IMPLEMENTED_SUBSTRUCTURE(PlayerData, player);
+		SV_IMPLEMENTED_SUBSTRUCTURE(PCData, PC);
+		SV_IMPLEMENTED_SUBSTRUCTURE(MailboxData, mailbox);
+		SV_IMPLEMENTED_SUBSTRUCTURE(DaycareData, daycare);
+		SV_IMPLEMENTED_SUBSTRUCTURE(StrategyMemoData, strategyMemo);
+		offset = 0xe3e8;
+		SV_IMPLEMENTED_SUBSTRUCTURE(BattleModeData, battleMode);
+		offset = 0x1c45c;
+		SV_IMPLEMENTED_SUBSTRUCTURE(RibbonDescriptionsData, ribbonDescriptions);
+		// unknown substructures following
+	}
 
 	checkBothChecksums(true, true); // update checksums
 	offset = 0;
@@ -300,8 +302,8 @@ void SaveSlot::save(void) {
 
 }
 
-void SaveSlot::saveEncrypted(u8* outBuf) {
-	save();
+void SaveSlot::saveEncrypted(u8* outBuf, bool saveAll) {
+	save_impl(saveAll);
 	std::copy(data, data + 0x18, outBuf);
 	std::copy(data + 0x1dfd8, data + 0x1e000, outBuf + 0x1dfd8);
 	encrypt_impl(data, outBuf, checksum);

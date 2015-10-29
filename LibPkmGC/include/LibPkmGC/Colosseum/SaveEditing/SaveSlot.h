@@ -62,14 +62,14 @@ public:
 	void swap(SaveSlot& other);
 	SaveSlot& operator=(SaveSlot const& other);
 
-	void save(void);
+	void save_impl(bool saveAll);
 
 	bool checkChecksum(bool fix = false);
 	bool checkHeaderChecksum(bool fix = false);
 	std::pair<bool, bool> checkBothChecksums(bool fixGlobalChecksum = false, bool fixHeaderChecksum = false);
 	bool isCorrupt(void);
 
-	void saveEncrypted(u8* outBuf);
+	void saveEncrypted(u8* outBuf, bool saveAll = true);
 
 	u8 checksum[20]; // digest
 

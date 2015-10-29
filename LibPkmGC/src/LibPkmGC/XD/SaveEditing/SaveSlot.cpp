@@ -326,7 +326,7 @@ bool SaveSlot::isCorrupt(void) {
 	return !chk.first || !chk.second;
 }
 
-void SaveSlot::save(void) {
+void SaveSlot::save_impl(bool saveAll) {
 	magic = XDMagic;
 
 	u8* start = data + 8 + 0xa0;
@@ -338,9 +338,10 @@ void SaveSlot::save(void) {
 	std::copy(randomBytes, randomBytes + 40, data + size - 40);
 
 
-	std::fill(start, data + size - 40, 0); // clean the filler bytes
+	if(saveAll) std::fill(start, data + size - 40, 0); // clean the filler bytes
 
 	std::copy(substructureMaxSizes, substructureMaxSizes + 16, substructureSizes);
+
 
 	{ // flags
 		u16 sz = 0;
@@ -358,16 +359,17 @@ void SaveSlot::save(void) {
 #define SV_IMPLEMENTED_SUBSTRUCTURE(type, field, id) field->save(); std::copy(field->data, field->data + substructureMaxSizes[id], start + substructureOffsets[id]);
 
 	SV_IMPLEMENTED_SUBSTRUCTURE(GameConfigData, gameConfig, 0);
-	SV_IMPLEMENTED_SUBSTRUCTURE(PlayerData, player, 1);
-	SV_IMPLEMENTED_SUBSTRUCTURE(PCData, PC, 2);
-	SV_IMPLEMENTED_SUBSTRUCTURE(MailboxData, mailbox, 3);
-	SV_IMPLEMENTED_SUBSTRUCTURE(DaycareData, daycare, 4);
-	SV_IMPLEMENTED_SUBSTRUCTURE(StrategyMemoData, strategyMemo, 5);
-	SV_IMPLEMENTED_SUBSTRUCTURE(BattleModeData, battleMode, 6);
-	SV_IMPLEMENTED_SUBSTRUCTURE(RibbonDescriptionsData, ribbonDescriptions, 9);
-	SV_IMPLEMENTED_SUBSTRUCTURE(PurifierData, purifier, 14);
 
-
+	if (saveAll) {
+		SV_IMPLEMENTED_SUBSTRUCTURE(PlayerData, player, 1);
+		SV_IMPLEMENTED_SUBSTRUCTURE(PCData, PC, 2);
+		SV_IMPLEMENTED_SUBSTRUCTURE(MailboxData, mailbox, 3);
+		SV_IMPLEMENTED_SUBSTRUCTURE(DaycareData, daycare, 4);
+		SV_IMPLEMENTED_SUBSTRUCTURE(StrategyMemoData, strategyMemo, 5);
+		SV_IMPLEMENTED_SUBSTRUCTURE(BattleModeData, battleMode, 6);
+		SV_IMPLEMENTED_SUBSTRUCTURE(RibbonDescriptionsData, ribbonDescriptions, 9);
+		SV_IMPLEMENTED_SUBSTRUCTURE(PurifierData, purifier, 14);
+	}
 
 	u16 substructureOffsetsTmp[32]; // the upper 16 bits of each offset are stored AFTER the lower ones
 	std::copy(substructureMaxSizes, substructureMaxSizes + 16, substructureSizes);
@@ -420,8 +422,8 @@ void SaveSlot::saveUnshuffled(void) {
 	save();
 }
 
-void SaveSlot::saveEncrypted(u8* outBuf) {
-	save();
+void SaveSlot::saveEncrypted(u8* outBuf, bool saveAll) {
+	save_impl(saveAll);
 	std::copy(data, data + 0x10, outBuf);
 	std::copy(data + 0x28000 - 40, data + 0x28000, outBuf + 0x28000 - 40);
 	encrypt_impl(data, outBuf, encryptionKeys);

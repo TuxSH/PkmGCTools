@@ -60,7 +60,10 @@ public:
 	virtual std::pair<bool, bool> checkBothChecksums(bool fixGlobalChecksum = false, bool fixHeaderChecksum = false) = 0;
 
 	virtual bool isCorrupt(void) = 0;
-	virtual void saveEncrypted(u8* outBuf) = 0;
+
+	virtual void save_impl(bool saveAll) = 0;
+	void save(void);
+	virtual void saveEncrypted(u8* outBuf, bool saveAll = true) = 0;
 
 
 	SaveMagic magic;

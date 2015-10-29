@@ -89,7 +89,7 @@ public:
 	void swap(GC::SaveEditing::SaveSlot& other);
 	SaveSlot& operator=(GC::SaveEditing::SaveSlot const& other);
 
-	void save(void);
+	void save_impl(bool saveAll);
 
 	bool checkChecksum(bool fix = false);
 	bool checkHeaderChecksum(bool fix = false);
@@ -99,7 +99,7 @@ public:
 	void reorderSubstructures(void);
 	void saveUnshuffled(void);
 
-	void saveEncrypted(u8* outBuf);
+	void saveEncrypted(u8* outBuf, bool saveAll = true);
 
 	PurifierData* purifier;
 

@@ -50,18 +50,18 @@ void Save::loadFields(void) {
 
 	saveSlots = new GC::SaveEditing::SaveSlot*[2];
 	u8* start = data + 0x6000;
-	/*delete saveSlots[0];
-	delete saveSlots[1];*/
 	saveSlots[0] = new SaveSlot(start, _is_decrypted);
 	saveSlots[1] = new SaveSlot(start + 0x28000, _is_decrypted);
 }
 
-void Save::save(void) {
-	SV_SUBSTRUCTURE_ARRAY(SaveSlot, saveSlots, 2, 0x6000);
+void Save::save_impl(bool saveAll) {
+	for (size_t i = 0; i < 2; ++i) {
+		saveSlots[i]->save_impl(saveAll);
+		std::copy(saveSlots[i]->data, saveSlots[i]->data + SaveSlot::size, data + 0x6000 * i);
+	}
 }
 
 void Save::saveUnshuffled(void) {
-	//nb_saveSlots = 2;
 	for (size_t i = 0; i < 2; ++i) {
 		SaveSlot* slot = (SaveSlot*)saveSlots[i];
 		slot->saveUnshuffled();

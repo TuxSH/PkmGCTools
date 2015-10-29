@@ -52,7 +52,10 @@ public:
 
 	virtual void reload(const u8* inData = NULL, u32 flags = 0);
 
-	void saveEncrypted(u8* outBuf, bool exportGCIData = true);
+	virtual void save_impl(bool saveAll) = 0;
+
+	void save(void);
+	void saveEncrypted(u8* outBuf, bool exportGCIData = true, bool saveAll = true);
 	SaveSlot* getMostRecentSlot(size_t index = 0) const;
 	SaveSlot* getMostRecentValidSlot(size_t index = 0, size_t *outIndex = NULL);
 
