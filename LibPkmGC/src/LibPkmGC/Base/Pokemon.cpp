@@ -24,6 +24,11 @@ namespace LibPkmGC {
 
 namespace Base {
 
+void Pokemon::updateNamesLanguage(void) {
+	OTName->setCharset(version.language == Japanese);
+	name->setCharset(version.language == Japanese);
+}
+
 u16 Pokemon::calculateStat(size_t statIndex, PokemonSpeciesIndex species, PokemonNatureIndex natureIndex, u8 level, u8 IV, u8 EV){
 	static const u16 n[3] = { 110, 100, 90 };
 
@@ -251,6 +256,10 @@ void Pokemon::swap(Pokemon& other) {
 	SW(ballCaughtWith);
 	SW(levelMet);
 	SW(OTGender);
+
+	SW(version);
+	updateNamesLanguage();
+	other.updateNamesLanguage();
 	if (OTName->isGBA() == other.OTName->isGBA())
 		SW(OTName);
 	else {
@@ -275,7 +284,7 @@ void Pokemon::swap(Pokemon& other) {
 	SW(PID);
 
 	SW(GCUnk);
-	SW(version);
+
 
 	SW(partyData);
 
@@ -301,6 +310,8 @@ void Pokemon::swap(Pokemon& other) {
 
 	bool i1 = isMarkedAsInvalid(), i2 = other.isMarkedAsInvalid();
 	setInvalidPokemonFlag(i2); setInvalidPokemonFlag(i1);
+
+
 }
 
 void Pokemon::copyNonVirtual(Pokemon const& other) {
@@ -345,6 +356,7 @@ Pokemon & Pokemon::operator=(Pokemon const & other){
 	if (this != &other) {
 		Base::DataStruct::operator=(other);
 		copyNonVirtual(other);
+		updateNamesLanguage();
 		*OTName = *(other.OTName);
 		*name = *(other.name);
 		setEggFlag(other.isEgg());

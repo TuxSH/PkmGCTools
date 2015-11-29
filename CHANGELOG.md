@@ -1,3 +1,6 @@
+###PkmGCTools v1.2.3:
+Fixing a problem with japanese characters.
+
 ###PkmGCTools v1.2.2:
 Few changes this week:
 * The PID of a Pokémon can now be displayed either in hexadecimal or in decimal (default: hexadecimal).

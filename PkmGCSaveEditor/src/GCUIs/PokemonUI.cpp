@@ -643,12 +643,14 @@ void PokemonUI::saveChanges(void){
 	pkm->ballCaughtWith = ballCaughtWithFld->currentItemIndex();
 	pkm->obedient = obedientFld->isChecked();
 
+	pkm->version = versionFld->info();
+	pkm->updateNamesLanguage();
+
 	OTField->trainerName(pkm->OTName);
 	pkm->TID = OTField->TID();
 	pkm->SID = OTField->SID();
 	pkm->OTGender = OTField->trainerGender();
 	
-	pkm->version = versionFld->info();
 
 	pkm->partyData.currentHP = currentHPFld->unsignedValue();
 	for (size_t i = 0; i < 6; ++i) {

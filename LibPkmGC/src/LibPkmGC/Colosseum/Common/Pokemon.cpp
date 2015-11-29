@@ -112,6 +112,8 @@ void Pokemon::loadFields(void) {
 
 	normalizepokerus();
 	normalizeStatus();
+	updateNamesLanguage();
+
 }
 
 void Pokemon::save(void) {
@@ -130,9 +132,13 @@ void Pokemon::save(void) {
 	SV_FIELD_E_MAX(u8, OTGender, 0x10, Gender, Female);
 	SV_FIELD(u16, SID, 0x14);
 	SV_FIELD(u16, TID, 0x16);
+
+	updateNamesLanguage();
+
 	OTName->save(data + 0x18, 10);
 	name->save(data + 0x2e, 10);
 	name->save(data + 0x44, 10);
+
 	SV_FIELD_MAX(u32, experience, 0x5c, getSpeciesExpTable(species)[100]);
 
 	if (partyData.level > 100) partyData.level = 100;

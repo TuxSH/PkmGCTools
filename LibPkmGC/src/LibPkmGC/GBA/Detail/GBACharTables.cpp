@@ -393,7 +393,7 @@ inline chartable_t initJapCharTable(void) {
 	tbl.insert(charset_t(0xAB, 0xFF01));
 	tbl.insert(charset_t(0xAC, 0xFF1F));
 	tbl.insert(charset_t(0xAD, 0x3002));
-	tbl.insert(charset_t(0xAE, 0xFF0D));
+	tbl.insert(charset_t(0xAE, 0x30FC));
 	tbl.insert(charset_t(0xAF, 0x30FB));
 	tbl.insert(charset_t(0xB0, 0x2025));
 	tbl.insert(charset_t(0xB1, 0x300E));

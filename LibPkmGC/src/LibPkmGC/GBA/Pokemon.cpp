@@ -53,6 +53,7 @@ Pokemon::Pokemon(Pokemon const& other) : Base::Pokemon(other) {
 	setEggFlag(other.isEgg());
 	setSecondAbilityFlag(other.hasSecondAbility());
 	setInvalidPokemonFlag(other.isMarkedAsInvalid());
+	updateNamesLanguage();
 }
 void Pokemon::swap(Pokemon& other) {
 	Base::Pokemon::swap(other);
@@ -294,6 +295,9 @@ void Pokemon::loadFields(void) {
 	normalizeStatus();
 
 	if (!checkChecksum(false)) setInvalidPokemonFlag(true);
+
+	updateNamesLanguage();
+
 }
 
 
@@ -318,6 +322,7 @@ void Pokemon::save(void) {
 	version.save(lg, gm);
 
 	normalizepokerus();
+	updateNamesLanguage();
 
 	name->save(data + 8, 10);
 	OTName->save(data + 20, 7);

@@ -49,6 +49,8 @@ public:
 	virtual Pokemon* clone(void) const = 0;
 	virtual Pokemon* create(void) const = 0;
 
+	void updateNamesLanguage(void);
+
 	static u16 calculateStat(size_t statIndex, PokemonSpeciesIndex species, PokemonNatureIndex natureIndex, u8 level, u8 IV, u8 EV);
 	static void calculateStats(PokemonSpeciesIndex species, PokemonNatureIndex natureIndex, u8 level, const u8 IVs[6], const u8 EVs[6], u16 outStats[6]);
 	static u8 calculateLevelFromExp(PokemonSpeciesIndex species, u32 experience);

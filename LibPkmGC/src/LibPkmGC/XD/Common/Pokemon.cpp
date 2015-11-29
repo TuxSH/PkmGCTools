@@ -124,6 +124,7 @@ void Pokemon::loadFields(void) {
 	pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG] = isSecondAbilityDefined() && pkmFlags[LIBPKMGC_GC_SECOND_ABILITY_FLAG];
 	normalizepokerus();
 	normalizeStatus();
+	updateNamesLanguage();
 
 }
 
@@ -171,6 +172,10 @@ void Pokemon::save(void) {
 	SV_FIELD(u32, st, 0x2c);
 	SV_FIELD_B(u8, obedient, 0x30);
 	SV_FIELD(u8, encounterType, 0x33);
+	
+	version.save(data + 0x34);
+	updateNamesLanguage();
+
 	OTName->save(data + 0x38, 10);
 	name->save(data + 0x4e, 10);
 	name->save(data + 0x64, 10);
@@ -191,7 +196,6 @@ void Pokemon::save(void) {
 
 	SV_FIELD(u16, shadowPkmID, 0xba);
 
-	version.save(data + 0x34);
 	for (size_t i = 0; i < 4; ++i)
 		moves[i].save(data + 0x80 + 4 * i);
 
