@@ -53,7 +53,7 @@ MWCentralWidget::MWCentralWidget(QWidget* parent, Qt::WindowFlags f) : QWidget(p
 
 	for (int i = 0; i < 7; ++i)
 		mainLayout->addWidget(lst[i]);
-	
+
 	this->setLayout(mainLayout);
 	connect(gameConfigButton, SIGNAL(clicked()), this, SLOT(openGameConfigUI()));
 	connect(playerButton, SIGNAL(clicked()), this, SLOT(openPlayerUI()));
@@ -62,7 +62,7 @@ MWCentralWidget::MWCentralWidget(QWidget* parent, Qt::WindowFlags f) : QWidget(p
 	connect(strategyMemoButton, SIGNAL(clicked()), this, SLOT(openStrategyMemoUI()));
 	connect(ribbonDescriptionsButton, SIGNAL(clicked()), this, SLOT(openRibbonDescriptionsUI()));
 	connect(purifierButton, SIGNAL(clicked()), this, SLOT(openPurifierUI()));
-	
+
 	currentSaveSlotChangeHandler();
 }
 
@@ -113,14 +113,15 @@ void MainWindow::checkForUpdates(void) {
 
 	QNetworkAccessManager *networkAccessManager = new QNetworkAccessManager(this);
 	QUrl url("https://api.github.com/repos/TuxSH/PkmGCTools/releases/latest");
-	
-	connect(timer, SIGNAL(timeout()), networkAccessManager, SLOT(abort()));
+
 	connect(timer, SIGNAL(timeout()), &loop, SLOT(quit()));
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), &loop, SLOT(quit()));
-	timer->start(1500);
 
 	QNetworkReply *reply = NULL;
 	reply = networkAccessManager->get(QNetworkRequest(url));
+	connect(timer, SIGNAL(timeout()), reply, SLOT(abort()));
+
+	timer->start(1500);
 	loop.exec();
 	if (reply == NULL) return;
 
@@ -162,13 +163,13 @@ MainWindow::MainWindow() : QMainWindow(), centralWidget(new MWCentralWidget) {
 	saveFileAsAction->setShortcut(QKeySequence::SaveAs);
 	exitAction = new QAction(this);
 	exitAction->setShortcut(QKeySequence::Quit);
-	
+
 	fileMenu->addAction(openFileAction);
 	fileMenu->addAction(saveFileAction);
 	fileMenu->addAction(saveFileAsAction);
 	fileMenu->addSeparator();
 	fileMenu->addAction(exitAction);
-	
+
 	optionsMenu = menuBar()->addMenu(tr("&Options"));
 	interfaceLangSubMenu = optionsMenu->addMenu(tr("&Interface language"));
 	dumpedNamesLangSubMenu = optionsMenu->addMenu(tr("&Dumped names language"));
@@ -234,7 +235,7 @@ void MainWindow::createDumpedNamesLanguageMenu(void) {
 		action->setCheckable(true);
 		action->setData(i);
 		dumpedNamesLangGroup->addAction(action);
-		dumpedNamesLangSubMenu->addAction(action);	
+		dumpedNamesLangSubMenu->addAction(action);
 	}
 
 	dumpedNamesLangGroup->actions()[(size_t)dumpedNamesLanguage]->setChecked(true);
@@ -282,7 +283,7 @@ void MainWindow::createInterfaceLanguageMenu(void) {
 void MainWindow::updateText(void) {
 	centralWidget->updateText();
 	fileMenu->setTitle(tr("&File"));
-	
+
 	openFileAction->setText(tr("&Open..."));
 	saveFileAction->setText(tr("&Save"));
 	saveFileAsAction->setText(tr("Save &as..."));
@@ -291,7 +292,7 @@ void MainWindow::updateText(void) {
 	optionsMenu->setTitle(tr("&Options"));
 	interfaceLangSubMenu->setTitle(tr("&Interface language"));
 	dumpedNamesLangSubMenu->setTitle(tr("&Dumped names language"));
-	
+
 	QList<QAction*> actions = interfaceLangGroup->actions(), actions2 = dumpedNamesLangGroup->actions();
 
 	actions[0]->setText(tr("Select &automatically"));
@@ -338,7 +339,7 @@ QString MainWindow::loadInterfaceLanguage(QString const& language) {
 
 	QLocale locale = QLocale(lg);
 	QLocale::setDefault(locale);
-	
+
 	switchTranslator(translator, fileName);
 	switchTranslator(translatorQt, langPath + QString("qt_%1.qm").arg(lg)); // Note that qt_en.qm does not exist, which is normal :)
 
