@@ -21,6 +21,8 @@
 
 #include <GCUIs/PokemonUI.h>
 #include <QPlainTextEdit>
+#include <QMessageBox>
+#include <QFileInfo>
 
 namespace GCUIs {
 
@@ -111,6 +113,7 @@ private:
 
 	template<typename P>
 	void importPkmFromData(QByteArray const& ba, size_t sz = P::size) {
+		using namespace LibPkmGC;
 		P* importedPkm = NULL;
 		if (sz != 80)
 			importedPkm = new P((const u8*)ba.constData());
